@@ -1,3 +1,6 @@
+#ifndef __VECTOR_H__
+#define __VECTOR_H__
+
 class Vector {
 public:
 
@@ -39,3 +42,5 @@ public:
 
    Vector & operator /= (double const s);
 };
+
+#endif

@@ -1,3 +1,4 @@
+#include <math.h>
 #include "Vector.h"
 
 Vector Vector::crossProduct(Vector const & v) const {
