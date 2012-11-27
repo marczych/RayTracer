@@ -8,7 +8,7 @@ public:
    bool didIntersect;
    Vector intersection;
 
-   Intersection(Vector intersection_) : didIntersect(false), intersection(intersection_) {}
+   Intersection(Vector intersection_) : didIntersect(true), intersection(intersection_) {}
    Intersection(bool didIntersect_) : didIntersect(didIntersect_), intersection(Vector(0, 0, 0)) {}
 };
 

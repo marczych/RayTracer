@@ -38,11 +38,5 @@ Intersection Sphere::intersect(Ray ray) {
       return Intersection(false);  // No intersection.
    }
 
-   /**
-    * Just return true for now.
-    *
-    * TODO: Construct the actual Intersection object like this:
-    * return Intersection(this, ray, ray.getOrigin() + ray.getVector() * distance);
-    */
-   return Intersection(true);
+   return Intersection(ray.origin + (ray.direction * distance));
 }
