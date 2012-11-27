@@ -1,6 +1,7 @@
 #ifndef __SPHERE_H__
 #define __SPHERE_H__
 
+#include <math.h>
 #include "Vector.h"
 #include "Ray.h"
 #include "Intersection.h"

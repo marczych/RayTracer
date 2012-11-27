@@ -17,7 +17,7 @@ public:
    vector<Sphere> spheres;
 
    RayTracer(int width_, int height_) : width(width_), height(height_) {
-      spheres.push_back(Sphere(Vector(250, 250, 250), 100));
+      spheres.push_back(Sphere(Vector(0, 0, 0), 250));
    }
 
    void traceRays(string);
@@ -37,7 +37,9 @@ void RayTracer::traceRays(string fileName) {
 }
 
 Color RayTracer::castRay(int x, int y) {
-   Ray ray(Vector(x, y, -100), Vector(x, y, -99));
+   int rayX = x - width / 2;
+   int rayY = y - height / 2;
+   Ray ray(Vector(rayX, rayY, -100), Vector(rayX, rayY, -99));
 
    for (vector<Sphere>::iterator itr = spheres.begin(); itr < spheres.end(); itr++) {
       Intersection intersection = itr->intersect(ray);

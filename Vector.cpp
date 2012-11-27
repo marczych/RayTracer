@@ -5,7 +5,7 @@ Vector Vector::crossProduct(Vector const & v) const {
    return Vector(y*v.z - v.y*z, v.x*z - x*v.z, x*v.y - v.x*y);
 }
 
-float Vector::dotProduct(Vector const & v) const {
+float Vector::dot(Vector const & v) const {
    return x*v.x + y*v.y + z*v.z;
 }
 
