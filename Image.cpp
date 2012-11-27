@@ -13,13 +13,13 @@ Image::Image(int width, int height)
     _height = height;
     _max = 1.0;
 
-    // allocate the first dimension, "width" number of color_t pointers...
-    _pixmap = (color_t **)malloc(sizeof(color_t *) * _width);
+    // allocate the first dimension, "width" number of Color pointers...
+    _pixmap = (Color **)malloc(sizeof(Color *) * _width);
 
-    // allocate the second dimension, "height" number of color_t structs...
+    // allocate the second dimension, "height" number of Color structs...
     for (int i = 0; i < _width; i++)
     {
-        _pixmap[i] = (color_t *)malloc(sizeof(color_t) * _height);
+        _pixmap[i] = (Color *)malloc(sizeof(Color) * _height);
     }
 }
 
@@ -106,7 +106,7 @@ void Image::WriteTga(char *outfile, bool scale_color)
 
 void Image::GenTestPattern()
 {
-    color_t pxl = {0.0, 0.0, 0.0, 0.0};
+    Color pxl(0.0, 0.0, 0.0, 0.0);
     int i, j, color;
     float radius, dist;
     
@@ -173,7 +173,7 @@ void Image::GenTestPattern()
     }
 }
 
-color_t Image::pixel(int x, int y)
+Color Image::pixel(int x, int y)
 {
     if (x < 0 || x > _width - 1 ||
         y < 0 || y > _height - 1)
@@ -186,7 +186,7 @@ color_t Image::pixel(int x, int y)
     return _pixmap[x][y];
 }
 
-void Image::pixel(int x, int y, color_t pxl)
+void Image::pixel(int x, int y, Color pxl)
 {
     if (x < 0 || x > _width - 1 ||
         y < 0 || y > _height - 1)

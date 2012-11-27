@@ -12,7 +12,15 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "types.h"
+class Color {
+public:
+   double r;
+   double g;
+   double b;
+   double f; // "filter" or "alpha"
+
+   Color(double r_, double g_, double b_, double f_) : r(r_), g(g_), b(b_), f(f_) {}
+};
 
 class Image {
 public:
@@ -26,8 +34,8 @@ public:
     void GenTestPattern();
 
     // property accessors
-    color_t pixel(int x, int y);
-    void pixel(int x, int y, color_t pxl);
+    Color pixel(int x, int y);
+    void pixel(int x, int y, Color pxl);
     int width() const { return _width; }
     int height() const { return _height; }
     double max() const { return _max; }
@@ -35,7 +43,7 @@ public:
 private:
     int _width;
     int _height;
-    color_t **_pixmap;
+    Color **_pixmap;
     double _max;
 };
 
