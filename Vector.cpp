@@ -2,85 +2,85 @@
 #include "Vector.h"
 
 Vector Vector::crossProduct(Vector const & v) const {
-   return Vector(Y*v.Z - v.Y*Z, v.X*Z - X*v.Z, X*v.Y - v.X*Y);
+   return Vector(y*v.z - v.y*z, v.x*z - x*v.z, x*v.y - v.x*y);
 }
 
 float Vector::dotProduct(Vector const & v) const {
-   return X*v.X + Y*v.Y + Z*v.Z;
+   return x*v.x + y*v.y + z*v.z;
 }
 
 double Vector::length() const {
-   return sqrtf(X*X + Y*Y + Z*Z);
+   return sqrtf(x*x + y*y + z*z);
 }
 
 Vector Vector::operator + (Vector const & v) const {
-   return Vector(X+v.X, Y+v.Y, Z+v.Z);
+   return Vector(x+v.x, y+v.y, z+v.z);
 }
 
 Vector & Vector::operator += (Vector const & v) {
-   X += v.X;
-   Y += v.Y;
-   Z += v.Z;
+   x += v.x;
+   y += v.y;
+   z += v.z;
 
    return * this;
 }
 
 Vector Vector::operator - (Vector const & v) const {
-   return Vector(X-v.X, Y-v.Y, Z-v.Z);
+   return Vector(x-v.x, y-v.y, z-v.z);
 }
 
 Vector & Vector::operator -= (Vector const & v) {
-   X -= v.X;
-   Y -= v.Y;
-   Z -= v.Z;
+   x -= v.x;
+   y -= v.y;
+   z -= v.z;
 
    return * this;
 }
 
 Vector Vector::operator * (Vector const & v) const {
-   return Vector(X*v.X, Y*v.Y, Z*v.Z);
+   return Vector(x*v.x, y*v.y, z*v.z);
 }
 
 Vector & Vector::operator *= (Vector const & v) {
-   X *= v.X;
-   Y *= v.Y;
-   Z *= v.Z;
+   x *= v.x;
+   y *= v.y;
+   z *= v.z;
 
    return * this;
 }
 
 Vector Vector::operator / (Vector const & v) const {
-   return Vector(X/v.X, Y/v.Y, Z/v.Z);
+   return Vector(x/v.x, y/v.y, z/v.z);
 }
 
 Vector & Vector::operator /= (Vector const & v) {
-   X /= v.X;
-   Y /= v.Y;
-   Z /= v.Z;
+   x /= v.x;
+   y /= v.y;
+   z /= v.z;
 
    return * this;
 }
 
 Vector Vector::operator * (double const s) const {
-   return Vector(X*s, Y*s, Z*s);
+   return Vector(x*s, y*s, z*s);
 }
 
 Vector & Vector::operator *= (double const s) {
-   X *= s;
-   Y *= s;
-   Z *= s;
+   x *= s;
+   y *= s;
+   z *= s;
 
    return * this;
 }
 
 Vector Vector::operator / (double const s) const {
-   return Vector(X/s, Y/s, Z/s);
+   return Vector(x/s, y/s, z/s);
 }
 
 Vector & Vector::operator /= (double const s) {
-   X /= s;
-   Y /= s;
-   Z /= s;
+   x /= s;
+   y /= s;
+   z /= s;
 
    return * this;
 }

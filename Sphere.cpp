@@ -5,7 +5,7 @@ Intersection Sphere::intersect(Ray ray) {
    /**
     * TODO: Actually perform intersection.
     */
-   if (ray.origin.X > 250) {
+   if (ray.origin.x > 250) {
       return Intersection(true);
    } else {
       return Intersection(Vector(0, 0, 0));
