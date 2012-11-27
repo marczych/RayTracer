@@ -17,7 +17,8 @@ public:
    vector<Sphere> spheres;
 
    RayTracer(int width_, int height_) : width(width_), height(height_) {
-      spheres.push_back(Sphere(Vector(0, 0, 0), 250));
+      spheres.push_back(Sphere(Vector(-100, 0, 0), 150));
+      spheres.push_back(Sphere(Vector(100, 0, 0), 150));
    }
 
    void traceRays(string);
