@@ -35,7 +35,7 @@ Image::~Image()
     free(_pixmap);
 }
 
-void Image::WriteTga(char *outfile, bool scale_color)
+void Image::WriteTga(const char *outfile, bool scale_color)
 {
     FILE *fp = fopen(outfile, "w");
     if (fp == NULL)
