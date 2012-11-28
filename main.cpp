@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Image.h"
+#include "Object.h"
 #include "Sphere.h"
 #include "Intersection.h"
 
@@ -14,11 +15,11 @@ public:
    int width;
    int height;
 
-   vector<Sphere> spheres;
+   vector<Object*> objects;
 
    RayTracer(int width_, int height_) : width(width_), height(height_) {
-      spheres.push_back(Sphere(Vector(-100, 0, 0), 150));
-      spheres.push_back(Sphere(Vector(100, 0, 0), 150));
+      objects.push_back(new Sphere(Vector(-100, 0, 0), 150));
+      objects.push_back(new Sphere(Vector(100, 0, 0), 150));
    }
 
    void traceRays(string);
@@ -42,8 +43,8 @@ Color RayTracer::castRay(int x, int y) {
    int rayY = y - height / 2;
    Ray ray(Vector(rayX, rayY, -100), Vector(rayX, rayY, -99));
 
-   for (vector<Sphere>::iterator itr = spheres.begin(); itr < spheres.end(); itr++) {
-      Intersection intersection = itr->intersect(ray);
+   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
+      Intersection intersection = (*itr)->intersect(ray);
 
       if (intersection.didIntersect) {
          return Color(1.0, 1.0, 1.0);

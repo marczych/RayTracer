@@ -7,7 +7,7 @@
 #include "Intersection.h"
 #include "Object.h"
 
-class Sphere : Object {
+class Sphere : public Object {
 public:
    Vector center;
    double radius;
