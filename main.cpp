@@ -118,6 +118,16 @@ Color RayTracer::getDiffuseLighting(Intersection intersection) {
        * Intersection is facing light.
        */
       if (dotProduct >= 0.0f) {
+         Ray shadowRay = Ray(intersection.intersection + lightDirection, lightDirection);
+         Intersection shadowIntersection = getClosestIntersection(shadowRay);
+
+         if (shadowIntersection.didIntersect) {
+            /**
+             * Position is in shadow of another object - continue with other lights.
+             */
+            continue;
+         }
+
          diffuseColor = diffuseColor + (intersection.color * dotProduct);
       }
    }
@@ -132,10 +142,10 @@ int main(void) {
    RayTracer rayTracer(500, 500);
    string fileName = "awesome.tga";
 
-   rayTracer.addObject(new Sphere(Vector(-150, 0, 0), 150, Color(1.0, 0.0, 0.0)));
-   rayTracer.addObject(new Sphere(Vector(150, 0, 0), 100, Color(0.0, 1.0, 0.0)));
+   rayTracer.addObject(new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0)));
+   rayTracer.addObject(new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0)));
 
-   rayTracer.addLight(new Light(Vector(300, 100, 0)));
+   rayTracer.addLight(new Light(Vector(300, 100, 150)));
 
    rayTracer.traceRays(fileName);
 
