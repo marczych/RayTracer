@@ -36,6 +36,8 @@ public:
    Color castRay(int, int);
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);
+   Color getAmbientLighting(Intersection);
+   Color getDiffuseLighting(Intersection);
 };
 
 RayTracer::~RayTracer() {
@@ -90,6 +92,17 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
 }
 
 Color RayTracer::performLighting(Intersection intersection) {
+   Color diffuseColor = getDiffuseLighting(intersection);
+   Color ambientColor = getAmbientLighting(intersection);
+
+   return diffuseColor + ambientColor;
+}
+
+Color RayTracer::getAmbientLighting(Intersection intersection) {
+   return intersection.color * 0.2;
+}
+
+Color RayTracer::getDiffuseLighting(Intersection intersection) {
    Color diffuseColor(0.0, 0.0, 0.0);
 
    for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
@@ -109,11 +122,7 @@ Color RayTracer::performLighting(Intersection intersection) {
       }
    }
 
-   Color ambientColor = intersection.color * 0.2;
-
-   Color finalColor = diffuseColor + ambientColor;
-
-   return finalColor;
+   return diffuseColor;
 }
 
 /**
