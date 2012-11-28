@@ -1,4 +1,5 @@
 #include "Sphere.h"
+#include <math.h>
 
 Intersection Sphere::intersect(Ray ray) {
    Vector deltap = ray.origin - center;
@@ -34,12 +35,13 @@ Intersection Sphere::intersect(Ray ray) {
       distance = r2;
    }
 
-   if (distance < 0) {
+   if (distance < 0 || isnan(distance)) {
       return Intersection(false); // No intersection.
    }
 
    Vector point = ray.origin + (ray.direction * distance);
    Vector normal = (point - center).normalize();
 
-   return Intersection(point, normal, Color(fabs(normal.x), fabs(normal.y), fabs(normal.z)), this);
+   return Intersection(point, distance, normal, Color(fabs(normal.x), fabs(normal.y), fabs(normal.z)), this);
+   /* return Intersection(point, distance, normal, color, this); */
 }

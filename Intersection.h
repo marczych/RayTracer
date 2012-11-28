@@ -10,14 +10,18 @@ class Intersection {
 public:
    bool didIntersect;
    Vector intersection;
+   double distance;
    Vector normal;
    Color color;
    Object* object;
 
-   Intersection(Vector intersection_, Vector normal_, Color color_, Object* object_) :
-    didIntersect(true), intersection(intersection_), normal(normal_), color(color_), object(object_) {}
+   Intersection(Vector intersection_, double distance_, Vector normal_, Color color_, Object* object_) :
+    didIntersect(true), intersection(intersection_), distance(distance_), normal(normal_), color(color_),
+    object(object_) {}
+
    Intersection(bool didIntersect_) :
-    didIntersect(didIntersect_), intersection(Vector()), normal(Vector()), color(Color()), object(NULL) {}
+    didIntersect(didIntersect_), intersection(Vector()), distance(0.0), normal(Vector()), color(Color()),
+    object(NULL) {}
 };
 
 #endif

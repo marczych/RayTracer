@@ -8,7 +8,9 @@ public:
    Vector origin;
    Vector direction;
 
-   Ray(Vector origin_, Vector direction_) : origin(origin_), direction(direction_) {}
+   Ray(Vector origin_, Vector direction_) : origin(origin_) {
+      direction = direction_.normalize();
+   }
 };
 
 #endif
