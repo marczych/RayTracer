@@ -16,7 +16,7 @@ Ray.o: Ray.cpp Ray.h Vector.h
 Vector.o: Vector.cpp Vector.h
 	$(CC) $(CFLAGS) Vector.cpp -c -o Vector.o
 
-Sphere.o: Sphere.cpp Sphere.h Ray.h Vector.h
+Sphere.o: Sphere.cpp Sphere.h Ray.h Vector.h Object.h Intersection.h
 	$(CC) $(CFLAGS) Sphere.cpp -c -o Sphere.o
 
 Intersection.o: Intersection.cpp Intersection.h Vector.h
