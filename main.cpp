@@ -18,12 +18,13 @@ public:
 
    vector<Object*> objects;
 
-   RayTracer(int width_, int height_) : width(width_), height(height_) {
-      objects.push_back(new Sphere(Vector(0, 0, -1000), 200, Color(1.0, 0.0, 0.0)));
-      objects.push_back(new Sphere(Vector(-200, 0, -200), 100, Color(0.0, 1.0, 0.0)));
-   }
+   RayTracer(int width_, int height_) : width(width_), height(height_) {}
 
    ~RayTracer();
+
+   void addObject(Object* object) {
+      objects.push_back(object);
+   }
 
    void traceRays(string);
    Color castRay(int, int);
@@ -71,6 +72,9 @@ Color RayTracer::castRay(int x, int y) {
 int main(void) {
    RayTracer rayTracer(500, 500);
    string fileName = "awesome.tga";
+
+   rayTracer.addObject(new Sphere(Vector(0, 0, -1000), 200, Color(1.0, 0.0, 0.0)));
+   rayTracer.addObject(new Sphere(Vector(-200, 0, -200), 100, Color(0.0, 1.0, 0.0)));
 
    rayTracer.traceRays(fileName);
 
