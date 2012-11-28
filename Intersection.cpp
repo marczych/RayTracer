@@ -1,5 +1,5 @@
 #include "Intersection.h"
 
 /**
- * Put Intersection code here!.
+ * Put Intersection code here!
  */

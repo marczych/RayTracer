@@ -1,5 +1,5 @@
 #include "Object.h"
 
 /**
- * Put Object code here!.
+ * Put Object code here!
  */

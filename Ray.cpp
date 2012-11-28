@@ -1,5 +1,5 @@
 #include "Ray.h"
 
 /**
- * Put Ray code here!.
+ * Put Ray code here!
  */
