@@ -41,5 +41,5 @@ Intersection Sphere::intersect(Ray ray) {
    Vector point = ray.origin + (ray.direction * distance);
    Vector normal = (point - center).normalize();
 
-   return Intersection(point, normal, Color(normal.x, normal.y, normal.z), this);
+   return Intersection(point, normal, Color(fabs(normal.x), fabs(normal.y), fabs(normal.z)), this);
 }
