@@ -35,6 +35,7 @@ public:
    void traceRays(string);
    Color castRay(int, int);
    Intersection getClosestIntersection(Ray);
+   Color performLighting(Intersection);
 };
 
 RayTracer::~RayTracer() {
@@ -66,7 +67,11 @@ Color RayTracer::castRay(int x, int y) {
 
    Intersection intersection = getClosestIntersection(ray);
 
-   return intersection.color;
+   if (intersection.didIntersect) {
+      return performLighting(intersection);
+   } else {
+      return Color();
+   }
 }
 
 Intersection RayTracer::getClosestIntersection(Ray ray) {
@@ -84,6 +89,33 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
    return closestIntersection;
 }
 
+Color RayTracer::performLighting(Intersection intersection) {
+   Color diffuseColor(0.0, 0.0, 0.0);
+
+   for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
+      Light* light = *itr;
+      Vector lightOffset = light->position - intersection.intersection;
+      /**
+       * TODO: Be careful about normalizing lightOffset too.
+       */
+      Vector lightDirection = lightOffset.normalize();
+      double dotProduct = intersection.normal.dot(lightDirection);
+
+      /**
+       * Intersection is facing light.
+       */
+      if (dotProduct >= 0.0f) {
+         diffuseColor = diffuseColor + (intersection.color * dotProduct);
+      }
+   }
+
+   Color ambientColor = intersection.color * 0.2;
+
+   Color finalColor = diffuseColor + ambientColor;
+
+   return finalColor;
+}
+
 /**
  * RayTracer main.
  */
@@ -92,9 +124,9 @@ int main(void) {
    string fileName = "awesome.tga";
 
    rayTracer.addObject(new Sphere(Vector(-150, 0, 0), 150, Color(1.0, 0.0, 0.0)));
-   rayTracer.addObject(new Sphere(Vector(100, 10, 150), 100, Color(0.0, 1.0, 0.0)));
+   rayTracer.addObject(new Sphere(Vector(150, 0, 0), 100, Color(0.0, 1.0, 0.0)));
 
-   rayTracer.addLight(new Light(Vector(150, 50, 100)));
+   rayTracer.addLight(new Light(Vector(300, 100, 0)));
 
    rayTracer.traceRays(fileName);
 

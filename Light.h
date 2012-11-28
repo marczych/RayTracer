@@ -7,7 +7,7 @@ class Light {
 public:
    Vector position;
 
-   Light(Vector position_) : position(position) {}
+   Light(Vector position_) : position(position_) {}
 };
 
 #endif
