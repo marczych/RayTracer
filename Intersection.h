@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "Vector.h"
 #include "Object.h"
+#include "Color.h"
 
 class Intersection {
 public:
