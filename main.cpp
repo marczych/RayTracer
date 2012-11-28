@@ -34,6 +34,7 @@ public:
 
    void traceRays(string);
    Color castRay(int, int);
+   Intersection getClosestIntersection(Ray);
 };
 
 RayTracer::~RayTracer() {
@@ -62,6 +63,13 @@ Color RayTracer::castRay(int x, int y) {
    int rayX = x - width / 2;
    int rayY = y - height / 2;
    Ray ray(Vector(rayX, rayY, 100), Vector(0, 0, -1));
+
+   Intersection intersection = getClosestIntersection(ray);
+
+   return intersection.color;
+}
+
+Intersection RayTracer::getClosestIntersection(Ray ray) {
    Intersection closestIntersection(false);
    closestIntersection.distance = numeric_limits<double>::max();
 
@@ -73,7 +81,7 @@ Color RayTracer::castRay(int x, int y) {
       }
    }
 
-   return closestIntersection.color;
+   return closestIntersection;
 }
 
 /**
