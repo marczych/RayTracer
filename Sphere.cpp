@@ -8,7 +8,7 @@ Intersection Sphere::intersect(Ray ray) {
 
    double disc = b * b - 4 * a * c;
    if (disc < 0) {
-      return Intersection(false);  // No intersection.
+      return Intersection(false); // No intersection.
    }
 
    disc = sqrt(disc);
@@ -35,10 +35,11 @@ Intersection Sphere::intersect(Ray ray) {
    }
 
    if (distance < 0) {
-      return Intersection(false);  // No intersection.
+      return Intersection(false); // No intersection.
    }
 
    Vector point = ray.origin + (ray.direction * distance);
+   Vector normal = (point - center).normalize();
 
-   return Intersection(point, (point - center).normalize(), color, this);
+   return Intersection(point, normal, Color(normal.x, normal.y, normal.z), this);
 }
