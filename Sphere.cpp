@@ -38,5 +38,5 @@ Intersection Sphere::intersect(Ray ray) {
       return Intersection(false);  // No intersection.
    }
 
-   return Intersection(ray.origin + (ray.direction * distance), this);
+   return Intersection(ray.origin + (ray.direction * distance), Vector(), Color(1.0, 0.0, 0.0), this);
 }
