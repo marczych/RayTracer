@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -O2 -Wall
 
-RayTracer: main.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o
-	$(CC) $(CFLAGS) main.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o -o RayTracer
+RayTracer: main.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o
+	$(CC) $(CFLAGS) main.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o -o RayTracer
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp -c -o main.o
@@ -27,6 +27,9 @@ Object.o: Object.cpp Object.h
 
 Color.o: Color.cpp Color.h
 	$(CC) $(CFLAGS) Color.cpp -c -o Color.o
+
+Light.o: Light.cpp Light.h Vector.h
+	$(CC) $(CFLAGS) Light.cpp -c -o Light.o
 
 clean:
 	rm -rf *.o
