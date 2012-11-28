@@ -11,8 +11,9 @@ class Sphere : public Object {
 public:
    Vector center;
    double radius;
+   Color color;
 
-   Sphere(Vector center_, double radius_) : center(center_), radius(radius_) {}
+   Sphere(Vector center_, double radius_, Color color_) : center(center_), radius(radius_), color(color_) {}
 
    virtual Intersection intersect(Ray);
 };
