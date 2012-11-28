@@ -12,6 +12,8 @@ public:
 
    Vector(double in_x, double in_y, double in_z) : x(in_x), y(in_y), z(in_z) {}
 
+   Vector normalize();
+
    Vector crossProduct(Vector const & v) const;
 
    float dot(Vector const & v) const;
