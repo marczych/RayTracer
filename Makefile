@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -O2 -Wall
 
-RayTracer: main.o Image.o Ray.o Vector.o Sphere.o Intersection.o
-	$(CC) $(CFLAGS) main.o Image.o Ray.o Vector.o Sphere.o Intersection.o -o RayTracer
+RayTracer: main.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o
+	$(CC) $(CFLAGS) main.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o -o RayTracer
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp -c -o main.o
@@ -21,6 +21,9 @@ Sphere.o: Sphere.cpp Sphere.h Ray.h Vector.h
 
 Intersection.o: Intersection.cpp Intersection.h Vector.h
 	$(CC) $(CFLAGS) Intersection.cpp -c -o Intersection.o
+
+Object.o: Object.cpp Object.h
+	$(CC) $(CFLAGS) Object.cpp -c -o Object.o
 
 clean:
 	rm -rf *.o

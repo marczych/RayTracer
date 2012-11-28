@@ -5,15 +5,16 @@
 #include "Vector.h"
 #include "Ray.h"
 #include "Intersection.h"
+#include "Object.h"
 
-class Sphere {
+class Sphere : Object {
 public:
    Vector center;
    double radius;
 
    Sphere(Vector center_, double radius_) : center(center_), radius(radius_) {}
 
-   Intersection intersect(Ray);
+   virtual Intersection intersect(Ray);
 };
 
 #endif
