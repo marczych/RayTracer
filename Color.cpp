@@ -3,9 +3,9 @@
 Color Color::operator+ (Color const &c) const {
    Color other;
 
-   other.r = c.r + r;
-   other.g = c.g + g;
-   other.b = c.b + b;
+   other.r = NTZ(c.r) + NTZ(r);
+   other.g = NTZ(c.g) + NTZ(g);
+   other.b = NTZ(c.b) + NTZ(b);
 
    return other;
 }

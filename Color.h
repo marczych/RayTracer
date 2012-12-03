@@ -1,6 +1,15 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
 
+/**
+ * "NaN To Zero"
+ * Converts a NaN value to zero. Otherwise adding values to NaN results in NaN.
+ * When adding colors together we usually want to ignore it and use 0 instead.
+ */
+#define NTZ(X) (isnan((X)) ? 0.0 : (X))
+
+#include <math.h>
+
 class Color {
 public:
    double r;

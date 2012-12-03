@@ -14,6 +14,9 @@ public:
    Ray(Vector origin_, Vector direction_, int reflections) :
     origin(origin_), reflectionsRemaining(reflections) {
       direction = direction_.normalize();
+
+      /* Move intersection slightly forward to avoid intersecting with itself. */
+      origin += (direction / 1000);
    }
 };
 

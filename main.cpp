@@ -91,7 +91,8 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
       Intersection intersection = (*itr)->intersect(ray);
 
-      if (intersection.didIntersect && intersection.distance < closestIntersection.distance) {
+      if (intersection.didIntersect && intersection.distance <
+       closestIntersection.distance) {
          closestIntersection = intersection;
       }
    }
@@ -104,8 +105,7 @@ Color RayTracer::performLighting(Intersection intersection) {
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection);
    Color reflectedColor = getReflectiveLighting(intersection);
 
-   /* return ambientColor + diffuseAndSpecularColor + reflectedColor; */
-   return ambientColor + reflectedColor;
+   return ambientColor + diffuseAndSpecularColor + reflectedColor;
 }
 
 Color RayTracer::getAmbientLighting(Intersection intersection) {
@@ -129,8 +129,7 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
        * Intersection is facing light.
        */
       if (dotProduct >= 0.0f) {
-         Ray shadowRay = Ray(intersection.intersection + lightDirection,
-          lightDirection, 1);
+         Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
          Intersection shadowIntersection = getClosestIntersection(shadowRay);
 
          if (shadowIntersection.didIntersect) {
@@ -177,15 +176,17 @@ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
 }
 
 Color RayTracer::getReflectiveLighting(Intersection intersection) {
-   Color reflectedColor;
-
    double reflectivity = intersection.object->getReflectivity();
+   int reflectionsRemaining = intersection.ray.reflectionsRemaining;
 
-   if (reflectivity != NOT_REFLECTIVE) {
-      /* reflectedColor.b = 0.5; */
+   if (reflectivity == NOT_REFLECTIVE || reflectionsRemaining <= 0) {
+      return Color();
+   } else {
+      Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
+      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
+
+      return castRay(reflectedRay) * reflectivity;
    }
-
-   return reflectedColor;
 }
 
 Vector RayTracer::reflectVector(Vector vector, Vector normal) {
@@ -199,10 +200,19 @@ int main(void) {
    RayTracer rayTracer(600, 600, 10);
    string fileName = "awesome.tga";
 
+   /* Two spheres with a shadow. */
+   /* rayTracer.addObject( */
+   /*  new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0), 10, 0.5)); */
+   /* rayTracer.addObject( */
+   /*  new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 10, 0.5)); */
+
+   /* Two spheres next to each other for reflections. */
    rayTracer.addObject(
-    new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0), 10, 0.5));
+    new Sphere(Vector(-105, -75, -150), 100, Color(1.0, 0.0, 0.0), 100, 0.5));
    rayTracer.addObject(
-    new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 10, 0.5));
+    new Sphere(Vector(105, -75, -150), 100, Color(0.0, 1.0, 0.0), 5, 0.8));
+   rayTracer.addObject(
+    new Sphere(Vector(0, 100, -150), 100, Color(0.0, 0.0, 1.0), 100, 0.5));
 
    rayTracer.addLight(new Light(Vector(300, 100, 150)));
    rayTracer.addLight(new Light(Vector(-300, 100, 150)));
