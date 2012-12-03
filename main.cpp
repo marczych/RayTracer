@@ -267,23 +267,6 @@ int main(int argc, char** argv) {
       outFile = "out.tga";
    }
 
-   /* Two spheres with a shadow. */
-   /* rayTracer.addObject( */
-   /*  new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0), 10, 0.5)); */
-   /* rayTracer.addObject( */
-   /*  new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 10, 0.5)); */
-
-   /* Two spheres next to each other for reflections. */
-   /* rayTracer.addObject( */
-   /*  new Sphere(Vector(-105, -75, -150), 100, Color(1.0, 0.0, 0.0), 100, 0.5)); */
-   /* rayTracer.addObject( */
-   /*  new Sphere(Vector(105, -75, -150), 100, Color(0.0, 1.0, 0.0), 5, 0.8)); */
-   /* rayTracer.addObject( */
-   /*  new Sphere(Vector(0, 100, -150), 100, Color(0.0, 0.0, 1.0), 100, 0.5)); */
-
-   /* rayTracer.addLight(new Light(Vector(300, 100, 150))); */
-   /* rayTracer.addLight(new Light(Vector(-300, 100, 150))); */
-
    rayTracer.traceRays(outFile);
 
    exit(EXIT_SUCCESS);
