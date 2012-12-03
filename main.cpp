@@ -46,7 +46,7 @@ public:
    Color getSpecularLighting(Intersection, Light*);
    Color getReflectiveLighting(Intersection);
    Vector reflectVector(Vector, Vector);
-   void readScene(ifstream&);
+   void readScene(istream&);
 };
 
 RayTracer::~RayTracer() {
@@ -196,12 +196,20 @@ Vector RayTracer::reflectVector(Vector vector, Vector normal) {
    return normal * 2 * vector.dot(normal) - vector;
 }
 
-void RayTracer::readScene(ifstream& in) {
-   double some;
+void RayTracer::readScene(istream& in) {
+   string type;
 
-   in >> some;
+   while (in.good()) {
+      in >> type;
 
-   cout << some << endl;
+      if (type.compare("sphere") == 0) {
+         cout << "sphere!" << endl;
+      } else if (type.compare("light") == 0) {
+         cout << "light!" << endl;
+      } else {
+         cout << "Nope" << endl;
+      }
+   }
 }
 
 /**
@@ -215,17 +223,22 @@ int main(int argc, char** argv) {
    }
 
    RayTracer rayTracer(600, 600, 10);
-   char* inFile = argv[1];
-   ifstream inFileStream;
-   inFileStream.open(inFile, ifstream::in);
 
-   if (inFileStream.fail()) {
-      cerr << "Failed opening file" << endl;
-      exit(EXIT_FAILURE);
+   if (strcmp(argv[1], "-") == 0) {
+      rayTracer.readScene(cin);
+   } else {
+      char* inFile = argv[1];
+      ifstream inFileStream;
+      inFileStream.open(inFile, ifstream::in);
+
+      if (inFileStream.fail()) {
+         cerr << "Failed opening file" << endl;
+         exit(EXIT_FAILURE);
+      }
+
+      rayTracer.readScene(inFileStream);
+      inFileStream.close();
    }
-
-   rayTracer.readScene(inFileStream);
-   inFileStream.close();
 
    string outFile;
    if (argc > 2) {
@@ -242,12 +255,12 @@ int main(int argc, char** argv) {
    /*  new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 10, 0.5)); */
 
    /* Two spheres next to each other for reflections. */
-   rayTracer.addObject(
-    new Sphere(Vector(-105, -75, -150), 100, Color(1.0, 0.0, 0.0), 100, 0.5));
-   rayTracer.addObject(
-    new Sphere(Vector(105, -75, -150), 100, Color(0.0, 1.0, 0.0), 5, 0.8));
-   rayTracer.addObject(
-    new Sphere(Vector(0, 100, -150), 100, Color(0.0, 0.0, 1.0), 100, 0.5));
+   /* rayTracer.addObject( */
+   /*  new Sphere(Vector(-105, -75, -150), 100, Color(1.0, 0.0, 0.0), 100, 0.5)); */
+   /* rayTracer.addObject( */
+   /*  new Sphere(Vector(105, -75, -150), 100, Color(0.0, 1.0, 0.0), 5, 0.8)); */
+   /* rayTracer.addObject( */
+   /*  new Sphere(Vector(0, 100, -150), 100, Color(0.0, 0.0, 1.0), 100, 0.5)); */
 
    rayTracer.addLight(new Light(Vector(300, 100, 150)));
    rayTracer.addLight(new Light(Vector(-300, 100, 150)));
