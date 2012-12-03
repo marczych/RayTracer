@@ -1,5 +1,5 @@
 #include "Object.h"
 
-/**
- * Put Object code here!
- */
+double Object::getShininess() {
+   return NOT_SHINY;
+}

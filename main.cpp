@@ -37,8 +37,8 @@ public:
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);
    Color getAmbientLighting(Intersection);
-   Color getDiffuseLighting(Intersection);
-   Color getSpecularLighting(Intersection);
+   Color getDiffuseAndSpecularLighting(Intersection);
+   Color getSpecularLighting(Intersection, Light*);
 };
 
 RayTracer::~RayTracer() {
@@ -93,19 +93,19 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
 }
 
 Color RayTracer::performLighting(Intersection intersection) {
-   Color diffuseColor = getDiffuseLighting(intersection);
    Color ambientColor = getAmbientLighting(intersection);
-   Color specularColor = getSpecularLighting(intersection);
+   Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection);
 
-   return diffuseColor + ambientColor + specularColor;
+   return ambientColor + diffuseAndSpecularColor;
 }
 
 Color RayTracer::getAmbientLighting(Intersection intersection) {
    return intersection.color * 0.2;
 }
 
-Color RayTracer::getDiffuseLighting(Intersection intersection) {
+Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
    Color diffuseColor(0.0, 0.0, 0.0);
+   Color specularColor(0.0, 0.0, 0.0);
 
    for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
       Light* light = *itr;
@@ -131,14 +131,43 @@ Color RayTracer::getDiffuseLighting(Intersection intersection) {
          }
 
          diffuseColor = diffuseColor + (intersection.color * dotProduct);
+         specularColor = specularColor + getSpecularLighting(intersection, light);
       }
    }
 
-   return diffuseColor;
+   return diffuseColor + specularColor;
 }
 
-Color RayTracer::getSpecularLighting(Intersection intersection) {
-   return Color(0.0, 0.0, 0.0);
+Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
+   Color specularColor(0.0, 0.0, 0.0);
+   double shininess = intersection.object->getShininess();
+
+   if (shininess == NOT_SHINY) {
+      /* Don't perform specular lighting on non shiny objects. */
+      return specularColor;
+   }
+
+   Vector view = (intersection.ray.origin - intersection.intersection).normalize();
+   Vector lightOffset = light->position - intersection.intersection;
+   Vector L = lightOffset.normalize();
+   Vector N = intersection.normal;
+
+   /* R = -L + 2(L dot N)N = 2 * N * (L dot N) - L */
+   Vector R = N * 2 * L.dot(N) - L;
+
+   double dot = view.dot(R);
+
+   if (dot <= 0) {
+      return specularColor;
+   }
+
+   double specularAmount = pow(dot, shininess);
+
+   specularColor.r = specularAmount;
+   specularColor.g = specularAmount;
+   specularColor.b = specularAmount;
+
+   return specularColor;
 }
 
 /**
@@ -148,8 +177,8 @@ int main(void) {
    RayTracer rayTracer(600, 600);
    string fileName = "awesome.tga";
 
-   rayTracer.addObject(new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0), 0.5));
-   rayTracer.addObject(new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 0.5));
+   rayTracer.addObject(new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0), 10));
+   rayTracer.addObject(new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 10));
 
    rayTracer.addLight(new Light(Vector(300, 100, 150)));
    rayTracer.addLight(new Light(Vector(-300, 100, 150)));
