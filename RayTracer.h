@@ -41,6 +41,7 @@ public:
    Color castRayForPixel(int, int);
    Color castRay(Ray);
    Ray getRayAtPoint(Vector);
+   Vector getRandomCameraPosition();
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);
    Color getAmbientLighting(Intersection);

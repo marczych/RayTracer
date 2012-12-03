@@ -12,7 +12,7 @@ RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamp
  superSamples(superSamples_) {
    cameraPosition = Vector(0.0, 0.0, 1000.0);
    cameraDirection = Vector(0.0, 0.0, -1.0);
-   focalPointLength = 800.0;
+   focalPointLength = 1000.0;
 }
 
 RayTracer::~RayTracer() {
@@ -29,10 +29,17 @@ void RayTracer::traceRays(string fileName) {
    Image image(width, height);
 
    for (int x = 0; x < width; x++) {
+      // Update percent complete.
+      float percentage = x/(float)width * 100;
+      cout << '\r' << (int)percentage << '%';
+      fflush(stdout);
+
       for (int y = 0; y < height; y++) {
          image.pixel(x, y, castRayForPixel(x, y));
       }
    }
+
+   cout << "\rDone!" << endl;
 
    image.WriteTga(fileName.c_str(), true);
 }
@@ -65,10 +72,23 @@ Color RayTracer::castRayForPixel(int x, int y) {
 }
 
 Ray RayTracer::getRayAtPoint(Vector imagePlanePoint) {
+   Vector camera = getRandomCameraPosition();
    Vector focalPlanePoint = imagePlanePoint + cameraPosition +
     (cameraDirection * focalPointLength);
-   // TODO: Slightly randomize cameraPosition.
-   return Ray(cameraPosition, focalPlanePoint - cameraPosition, maxReflections);
+   return Ray(camera, focalPlanePoint - camera, maxReflections);
+}
+
+/**
+ * Returns a slightly randomized camera position.
+ */
+Vector RayTracer::getRandomCameraPosition() {
+   double randX = (double)rand()/(double)RAND_MAX;
+   double randY = (double)rand()/(double)RAND_MAX;
+
+   randX = (randX - 0.5) * 0.25;
+   randY = (randY - 0.5) * 0.25;
+
+   return cameraPosition + Vector(randX, randY, 0);
 }
 
 Color RayTracer::castRay(Ray ray) {

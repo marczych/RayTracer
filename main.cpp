@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <ctime>
 #include "RayTracer.h"
 
 using namespace std;
@@ -14,7 +15,8 @@ int main(int argc, char** argv) {
       exit(EXIT_FAILURE);
    }
 
-   RayTracer rayTracer(1024, 768, 10, 1);
+   srand((unsigned)time(0));
+   RayTracer rayTracer(1280, 768, 10, 10);
 
    if (strcmp(argv[1], "-") == 0) {
       rayTracer.readScene(cin);
