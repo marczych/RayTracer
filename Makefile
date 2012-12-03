@@ -4,7 +4,7 @@ CFLAGS = -O2 -Wall
 RayTracer: main.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o
 	$(CC) $(CFLAGS) main.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o -o RayTracer
 
-main.o: main.cpp
+main.o: main.cpp Image.h Ray.h Vector.h Sphere.h Intersection.h Object.h Color.h Light.h
 	$(CC) $(CFLAGS) main.cpp -c -o main.o
 
 Image.o: Image.cpp Image.h Color.h

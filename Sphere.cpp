@@ -49,3 +49,7 @@ Intersection Sphere::intersect(Ray ray) {
 double Sphere::getShininess() {
    return shininess;
 }
+
+double Sphere::getReflectivity() {
+   return reflectivity;
+}

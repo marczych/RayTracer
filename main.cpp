@@ -177,8 +177,10 @@ int main(void) {
    RayTracer rayTracer(600, 600);
    string fileName = "awesome.tga";
 
-   rayTracer.addObject(new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0), 10));
-   rayTracer.addObject(new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 10));
+   rayTracer.addObject(
+    new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0), 10, 0.5));
+   rayTracer.addObject(
+    new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 10, 0.5));
 
    rayTracer.addLight(new Light(Vector(300, 100, 150)));
    rayTracer.addLight(new Light(Vector(-300, 100, 150)));
