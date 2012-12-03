@@ -42,6 +42,7 @@ public:
    Color getAmbientLighting(Intersection);
    Color getDiffuseAndSpecularLighting(Intersection);
    Color getSpecularLighting(Intersection, Light*);
+   Color getReflectiveLighting(Intersection);
 };
 
 RayTracer::~RayTracer() {
@@ -100,8 +101,10 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
 Color RayTracer::performLighting(Intersection intersection) {
    Color ambientColor = getAmbientLighting(intersection);
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection);
+   Color reflectedColor = getReflectiveLighting(intersection);
 
-   return ambientColor + diffuseAndSpecularColor;
+   /* return ambientColor + diffuseAndSpecularColor + getReflectiveColor(intersection); */
+   return ambientColor + reflectedColor;
 }
 
 Color RayTracer::getAmbientLighting(Intersection intersection) {
@@ -174,6 +177,18 @@ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
    specularColor.b = specularAmount;
 
    return specularColor;
+}
+
+Color RayTracer::getReflectiveLighting(Intersection intersection) {
+   Color reflectedColor;
+
+   double reflectivity = intersection.object->getReflectivity();
+
+   if (reflectivity != NOT_REFLECTIVE) {
+      reflectedColor.b = 0.5;
+   }
+
+   return reflectedColor;
 }
 
 /**
