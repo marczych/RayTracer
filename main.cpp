@@ -43,6 +43,7 @@ public:
    Color getDiffuseAndSpecularLighting(Intersection);
    Color getSpecularLighting(Intersection, Light*);
    Color getReflectiveLighting(Intersection);
+   Vector reflectVector(Vector, Vector);
 };
 
 RayTracer::~RayTracer() {
@@ -103,7 +104,7 @@ Color RayTracer::performLighting(Intersection intersection) {
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection);
    Color reflectedColor = getReflectiveLighting(intersection);
 
-   /* return ambientColor + diffuseAndSpecularColor + getReflectiveColor(intersection); */
+   /* return ambientColor + diffuseAndSpecularColor + reflectedColor; */
    return ambientColor + reflectedColor;
 }
 
@@ -158,13 +159,9 @@ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
 
    Vector view = (intersection.ray.origin - intersection.intersection).normalize();
    Vector lightOffset = light->position - intersection.intersection;
-   Vector L = lightOffset.normalize();
-   Vector N = intersection.normal;
+   Vector reflected = reflectVector(lightOffset.normalize(), intersection.normal);
 
-   /* R = -L + 2(L dot N)N = 2 * N * (L dot N) - L */
-   Vector R = N * 2 * L.dot(N) - L;
-
-   double dot = view.dot(R);
+   double dot = view.dot(reflected);
 
    if (dot <= 0) {
       return specularColor;
@@ -185,10 +182,14 @@ Color RayTracer::getReflectiveLighting(Intersection intersection) {
    double reflectivity = intersection.object->getReflectivity();
 
    if (reflectivity != NOT_REFLECTIVE) {
-      reflectedColor.b = 0.5;
+      /* reflectedColor.b = 0.5; */
    }
 
    return reflectedColor;
+}
+
+Vector RayTracer::reflectVector(Vector vector, Vector normal) {
+   return normal * 2 * vector.dot(normal) - vector;
 }
 
 /**
