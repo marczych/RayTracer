@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
       exit(EXIT_FAILURE);
    }
 
-   RayTracer rayTracer(1024, 768, 10);
+   RayTracer rayTracer(1024, 768, 10, 1);
 
    if (strcmp(argv[1], "-") == 0) {
       rayTracer.readScene(cin);

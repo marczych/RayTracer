@@ -22,17 +22,33 @@ void RayTracer::traceRays(string fileName) {
 
    for (int x = 0; x < width; x++) {
       for (int y = 0; y < height; y++) {
-         image.pixel(x, y, castRay(getRay(x, y)));
+         image.pixel(x, y, castRayForPixel(x, y));
       }
    }
 
    image.WriteTga(fileName.c_str(), true);
 }
 
-Ray RayTracer::getRay(int x, int y) {
+Color RayTracer::castRayForPixel(int x, int y) {
    double rayX = (x - width / 2)/2.0;
    double rayY = (y - height / 2)/2.0;
-   return Ray(Vector(rayX, rayY, 100), Vector(0, 0, -1), maxReflections);
+   double pixelWidth = rayX - (x + 1 - width / 2)/2.0;
+   double sampleWidth = pixelWidth / superSamples;
+   double sampleStartX = rayX - pixelWidth/2.0;
+   double sampleStartY = rayY - pixelWidth/2.0;
+   double sampleWeight = 1.0 / (superSamples * superSamples);
+   Color color;
+
+   for (int x = 0; x < superSamples; x++) {
+      for (int y = 0; y < superSamples; y++) {
+         Ray ray(Vector(sampleStartX + (x * sampleWidth),
+          sampleStartY + (y * sampleWidth), 100), Vector(0, 0, -1),
+          maxReflections);
+         color = color + (castRay(ray) * sampleWeight);
+      }
+   }
+
+   return color;
 }
 
 Color RayTracer::castRay(Ray ray) {

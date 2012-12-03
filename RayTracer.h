@@ -17,12 +17,14 @@ public:
    int width;
    int height;
    int maxReflections;
+   int superSamples; // Square root of number of samples to use for each pixel.
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;
 
-   RayTracer(int width_, int height_, int maxReflections_) :
-    width(width_), height(height_), maxReflections(maxReflections_) {}
+   RayTracer(int width_, int height_, int maxReflections_, int superSamples_) :
+    width(width_), height(height_), maxReflections(maxReflections_),
+    superSamples(superSamples_) {}
 
    ~RayTracer();
 
@@ -35,7 +37,7 @@ public:
    }
 
    void traceRays(std::string);
-   Ray getRay(int, int);
+   Color castRayForPixel(int, int);
    Color castRay(Ray);
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);
