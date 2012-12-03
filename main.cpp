@@ -16,11 +16,13 @@ class RayTracer {
 public:
    int width;
    int height;
+   int maxReflections;
 
    vector<Object*> objects;
    vector<Light*> lights;
 
-   RayTracer(int width_, int height_) : width(width_), height(height_) {}
+   RayTracer(int width_, int height_, int maxReflections_) :
+    width(width_), height(height_), maxReflections(maxReflections_) {}
 
    ~RayTracer();
 
@@ -66,7 +68,7 @@ void RayTracer::traceRays(string fileName) {
 Color RayTracer::castRay(int x, int y) {
    int rayX = x - width / 2;
    int rayY = y - height / 2;
-   Ray ray(Vector(rayX, rayY, 100), Vector(0, 0, -1));
+   Ray ray(Vector(rayX, rayY, 100), Vector(0, 0, -1), maxReflections);
 
    Intersection intersection = getClosestIntersection(ray);
 
@@ -120,7 +122,8 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
        * Intersection is facing light.
        */
       if (dotProduct >= 0.0f) {
-         Ray shadowRay = Ray(intersection.intersection + lightDirection, lightDirection);
+         Ray shadowRay = Ray(intersection.intersection + lightDirection,
+          lightDirection, 1);
          Intersection shadowIntersection = getClosestIntersection(shadowRay);
 
          if (shadowIntersection.didIntersect) {
@@ -174,7 +177,7 @@ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
  * RayTracer main.
  */
 int main(void) {
-   RayTracer rayTracer(600, 600);
+   RayTracer rayTracer(600, 600, 10);
    string fileName = "awesome.tga";
 
    rayTracer.addObject(

@@ -7,10 +7,12 @@ class Ray {
 public:
    Vector origin;
    Vector direction;
+   int reflectionsRemaining;
 
-   Ray() : origin(Vector()), direction(Vector()) {}
+   Ray() : origin(Vector()), direction(Vector()), reflectionsRemaining(-1) {}
 
-   Ray(Vector origin_, Vector direction_) : origin(origin_) {
+   Ray(Vector origin_, Vector direction_, int reflections) :
+    origin(origin_), reflectionsRemaining(reflections) {
       direction = direction_.normalize();
    }
 };
