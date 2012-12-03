@@ -72,8 +72,8 @@ void RayTracer::traceRays(string fileName) {
 }
 
 Ray RayTracer::getRay(int x, int y) {
-   int rayX = x - width / 2;
-   int rayY = y - height / 2;
+   double rayX = (x - width / 2)/2.0;
+   double rayY = (y - height / 2)/2.0;
    return Ray(Vector(rayX, rayY, 100), Vector(0, 0, -1), maxReflections);
 }
 
@@ -241,7 +241,7 @@ int main(int argc, char** argv) {
       exit(EXIT_FAILURE);
    }
 
-   RayTracer rayTracer(600, 600, 10);
+   RayTracer rayTracer(1024, 768, 10);
 
    if (strcmp(argv[1], "-") == 0) {
       rayTracer.readScene(cin);
