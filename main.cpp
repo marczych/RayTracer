@@ -35,7 +35,8 @@ public:
    }
 
    void traceRays(string);
-   Color castRay(int, int);
+   Ray getRay(int, int);
+   Color castRay(Ray);
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);
    Color getAmbientLighting(Intersection);
@@ -58,18 +59,20 @@ void RayTracer::traceRays(string fileName) {
 
    for (int x = 0; x < width; x++) {
       for (int y = 0; y < height; y++) {
-         image.pixel(x, y, castRay(x, y));
+         image.pixel(x, y, castRay(getRay(x, y)));
       }
    }
 
    image.WriteTga(fileName.c_str(), true);
 }
 
-Color RayTracer::castRay(int x, int y) {
+Ray RayTracer::getRay(int x, int y) {
    int rayX = x - width / 2;
    int rayY = y - height / 2;
-   Ray ray(Vector(rayX, rayY, 100), Vector(0, 0, -1), maxReflections);
+   return Ray(Vector(rayX, rayY, 100), Vector(0, 0, -1), maxReflections);
+}
 
+Color RayTracer::castRay(Ray ray) {
    Intersection intersection = getClosestIntersection(ray);
 
    if (intersection.didIntersect) {
