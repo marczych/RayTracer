@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <math.h>
 #include <string>
@@ -44,6 +46,7 @@ public:
    Color getSpecularLighting(Intersection, Light*);
    Color getReflectiveLighting(Intersection);
    Vector reflectVector(Vector, Vector);
+   void readScene(ifstream&);
 };
 
 RayTracer::~RayTracer() {
@@ -193,12 +196,44 @@ Vector RayTracer::reflectVector(Vector vector, Vector normal) {
    return normal * 2 * vector.dot(normal) - vector;
 }
 
+void RayTracer::readScene(ifstream& in) {
+   double some;
+
+   in >> some;
+
+   cout << some << endl;
+}
+
 /**
  * RayTracer main.
  */
-int main(void) {
+int main(int argc, char** argv) {
+   if (argc < 2) {
+      cerr << "No scene file provided!" << endl;
+      cerr << "Usage: " << argv[0] << " sceneFile [outFile]" << endl;
+      exit(EXIT_FAILURE);
+   }
+
    RayTracer rayTracer(600, 600, 10);
-   string fileName = "awesome.tga";
+   char* inFile = argv[1];
+   ifstream inFileStream;
+   inFileStream.open(inFile, ifstream::in);
+
+   if (inFileStream.fail()) {
+      cerr << "Failed opening file" << endl;
+      exit(EXIT_FAILURE);
+   }
+
+   rayTracer.readScene(inFileStream);
+   inFileStream.close();
+
+   string outFile;
+   if (argc > 2) {
+      outFile = argv[2];
+   } else {
+      cerr << "No outFile specified - writing to out.tga" << endl;
+      outFile = "out.tga";
+   }
 
    /* Two spheres with a shadow. */
    /* rayTracer.addObject( */
@@ -217,7 +252,7 @@ int main(void) {
    rayTracer.addLight(new Light(Vector(300, 100, 150)));
    rayTracer.addLight(new Light(Vector(-300, 100, 150)));
 
-   rayTracer.traceRays(fileName);
+   rayTracer.traceRays(outFile);
 
-   return 0;
+   exit(EXIT_SUCCESS);
 }
