@@ -7,6 +7,14 @@
 
 using namespace std;
 
+RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_) :
+ width(width_), height(height_), maxReflections(maxReflections_),
+ superSamples(superSamples_) {
+   cameraPosition = Vector(0.0, 0.0, 1000.0);
+   cameraDirection = Vector(0.0, 0.0, -1.0);
+   focalPointLength = 1500.0;
+}
+
 RayTracer::~RayTracer() {
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
       delete *itr;
@@ -30,6 +38,11 @@ void RayTracer::traceRays(string fileName) {
 }
 
 Color RayTracer::castRayForPixel(int x, int y) {
+   /**
+    * All of these values are "on the focal plane." That is to say rays will
+    * be cast from the camera position towards points created from these
+    * values.
+    */
    double rayX = (x - width / 2)/2.0;
    double rayY = (y - height / 2)/2.0;
    double pixelWidth = rayX - (x + 1 - width / 2)/2.0;
@@ -41,14 +54,21 @@ Color RayTracer::castRayForPixel(int x, int y) {
 
    for (int x = 0; x < superSamples; x++) {
       for (int y = 0; y < superSamples; y++) {
-         Ray ray(Vector(sampleStartX + (x * sampleWidth),
-          sampleStartY + (y * sampleWidth), 100), Vector(0, 0, -1),
-          maxReflections);
-         color = color + (castRay(ray) * sampleWeight);
+         Vector imagePlanePoint = Vector(sampleStartX + (x * sampleWidth),
+          sampleStartY + (y * sampleWidth), 0);
+
+         color = color + (castRay(getRayAtPoint(imagePlanePoint)) * sampleWeight);
       }
    }
 
    return color;
+}
+
+Ray RayTracer::getRayAtPoint(Vector imagePlanePoint) {
+   Vector focalPlanePoint = imagePlanePoint + cameraPosition +
+    (cameraDirection * focalPointLength);
+   // TODO: Slightly randomize cameraPosition.
+   return Ray(cameraPosition, focalPlanePoint, maxReflections);
 }
 
 Color RayTracer::castRay(Ray ray) {

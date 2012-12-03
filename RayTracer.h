@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "Vector.h"
 
 class Ray;
 class Color;
 class Intersection;
-class Vector;
 class Object;
 class Light;
 
@@ -18,13 +18,14 @@ public:
    int height;
    int maxReflections;
    int superSamples; // Square root of number of samples to use for each pixel.
+   Vector cameraPosition;
+   Vector cameraDirection;
+   double focalPointLength; // Shortest length to focal plane.
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;
 
-   RayTracer(int width_, int height_, int maxReflections_, int superSamples_) :
-    width(width_), height(height_), maxReflections(maxReflections_),
-    superSamples(superSamples_) {}
+   RayTracer(int, int, int, int);
 
    ~RayTracer();
 
@@ -39,6 +40,7 @@ public:
    void traceRays(std::string);
    Color castRayForPixel(int, int);
    Color castRay(Ray);
+   Ray getRayAtPoint(Vector);
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);
    Color getAmbientLighting(Intersection);
