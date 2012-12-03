@@ -199,16 +199,35 @@ Vector RayTracer::reflectVector(Vector vector, Vector normal) {
 void RayTracer::readScene(istream& in) {
    string type;
 
-   while (in.good()) {
-      in >> type;
+   in >> type;
 
+   while (in.good()) {
       if (type.compare("sphere") == 0) {
-         cout << "sphere!" << endl;
+         Vector center;
+         double radius;
+         Color color;
+         double shininess;
+         double reflectivity;
+
+         in >> center.x >> center.y >> center.z;
+         in >> radius;
+         in >> color.r >> color.g >> color.b;
+         in >> shininess;
+         in >> reflectivity;
+
+         addObject(new Sphere(center, radius, color, shininess, reflectivity));
       } else if (type.compare("light") == 0) {
-         cout << "light!" << endl;
+         Vector position;
+
+         in >> position.x >> position.y >> position.z;
+
+         addLight(new Light(position));
       } else {
-         cout << "Nope" << endl;
+         cerr << "Type not found: " << type << endl;
+         exit(EXIT_FAILURE);
       }
+
+      in >> type;
    }
 }
 
@@ -262,8 +281,8 @@ int main(int argc, char** argv) {
    /* rayTracer.addObject( */
    /*  new Sphere(Vector(0, 100, -150), 100, Color(0.0, 0.0, 1.0), 100, 0.5)); */
 
-   rayTracer.addLight(new Light(Vector(300, 100, 150)));
-   rayTracer.addLight(new Light(Vector(-300, 100, 150)));
+   /* rayTracer.addLight(new Light(Vector(300, 100, 150))); */
+   /* rayTracer.addLight(new Light(Vector(-300, 100, 150))); */
 
    rayTracer.traceRays(outFile);
 
