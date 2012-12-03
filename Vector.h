@@ -16,7 +16,7 @@ public:
 
    Vector crossProduct(Vector const & v) const;
 
-   float dot(Vector const & v) const;
+   double dot(Vector const & v) const;
 
    double length() const;
 
