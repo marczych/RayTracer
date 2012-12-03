@@ -7,7 +7,7 @@ RayTracer: main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Obj
 RayTracer.o: RayTracer.cpp RayTracer.h Vector.h Image.h Object.h Sphere.h Intersection.h Light.h
 	$(CC) $(CFLAGS) RayTracer.cpp -c -o RayTracer.o
 
-main.o: main.cpp Image.h Ray.h Vector.h Sphere.h Intersection.h Object.h Color.h Light.h
+main.o: main.cpp RayTracer.h
 	$(CC) $(CFLAGS) main.cpp -c -o main.o
 
 Image.o: Image.cpp Image.h Color.h
