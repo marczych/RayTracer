@@ -12,7 +12,7 @@ RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamp
  superSamples(superSamples_) {
    cameraPosition = Vector(0.0, 0.0, 1000.0);
    cameraDirection = Vector(0.0, 0.0, -1.0);
-   focalPointLength = 1500.0;
+   focalPointLength = 800.0;
 }
 
 RayTracer::~RayTracer() {
@@ -68,7 +68,7 @@ Ray RayTracer::getRayAtPoint(Vector imagePlanePoint) {
    Vector focalPlanePoint = imagePlanePoint + cameraPosition +
     (cameraDirection * focalPointLength);
    // TODO: Slightly randomize cameraPosition.
-   return Ray(cameraPosition, focalPlanePoint, maxReflections);
+   return Ray(cameraPosition, focalPlanePoint - cameraPosition, maxReflections);
 }
 
 Color RayTracer::castRay(Ray ray) {
