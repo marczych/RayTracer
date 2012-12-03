@@ -10,6 +10,7 @@ class Ray;
 class Object {
 public:
    virtual Intersection intersect(Ray) = 0;
+   virtual double getShininess() = 0;
 };
 
 #endif

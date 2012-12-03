@@ -38,6 +38,7 @@ public:
    Color performLighting(Intersection);
    Color getAmbientLighting(Intersection);
    Color getDiffuseLighting(Intersection);
+   Color getSpecularLighting(Intersection);
 };
 
 RayTracer::~RayTracer() {
@@ -94,8 +95,9 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
 Color RayTracer::performLighting(Intersection intersection) {
    Color diffuseColor = getDiffuseLighting(intersection);
    Color ambientColor = getAmbientLighting(intersection);
+   Color specularColor = getSpecularLighting(intersection);
 
-   return diffuseColor + ambientColor;
+   return diffuseColor + ambientColor + specularColor;
 }
 
 Color RayTracer::getAmbientLighting(Intersection intersection) {
@@ -135,6 +137,10 @@ Color RayTracer::getDiffuseLighting(Intersection intersection) {
    return diffuseColor;
 }
 
+Color RayTracer::getSpecularLighting(Intersection intersection) {
+   return Color(0.0, 0.0, 0.0);
+}
+
 /**
  * RayTracer main.
  */
@@ -142,8 +148,8 @@ int main(void) {
    RayTracer rayTracer(600, 600);
    string fileName = "awesome.tga";
 
-   rayTracer.addObject(new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0)));
-   rayTracer.addObject(new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0)));
+   rayTracer.addObject(new Sphere(Vector(-150, 0, -150), 150, Color(1.0, 0.0, 0.0), 0.5));
+   rayTracer.addObject(new Sphere(Vector(50, 50, 25), 25, Color(0.0, 1.0, 0.0), 0.5));
 
    rayTracer.addLight(new Light(Vector(300, 100, 150)));
    rayTracer.addLight(new Light(Vector(-300, 100, 150)));

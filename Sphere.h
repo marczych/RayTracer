@@ -12,10 +12,13 @@ public:
    Vector center;
    double radius;
    Color color;
+   double shininess;
 
-   Sphere(Vector center_, double radius_, Color color_) : center(center_), radius(radius_), color(color_) {}
+   Sphere(Vector center_, double radius_, Color color_, double shininess_) :
+    center(center_), radius(radius_), color(color_), shininess(shininess_) {}
 
    virtual Intersection intersect(Ray);
+   virtual double getShininess();
 };
 
 #endif
