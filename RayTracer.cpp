@@ -43,7 +43,7 @@ void RayTracer::traceRays(string fileName) {
 
    cout << "\rDone!" << endl;
 
-   image.WriteTga(fileName.c_str(), true);
+   image.WriteTga(fileName.c_str(), false);
 }
 
 Color RayTracer::castRayForPixel(int x, int y) {
@@ -250,9 +250,12 @@ void RayTracer::readScene(istream& in) {
          addLight(new Light(position));
       } else if (type.compare("dispersion") == 0) {
          in >> dispersion;
+      } else if (type.compare("maxReflections") == 0) {
+         in >> maxReflections;
+      } else if (type.compare("cameraPosition") == 0) {
+         in >> cameraPosition.z;
       } else if (type.compare("focus") == 0) {
          in >> focalPointLength;
-         cameraPosition.z = focalPointLength;
       } else {
          cerr << "Type not found: " << type << endl;
          exit(EXIT_FAILURE);
