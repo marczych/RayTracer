@@ -4,12 +4,19 @@
 
 make
 
+SUPER_SAMPLES=2
+DEPTH_COMPLEXITY=10
+
 scenes=`ls scenes`
 for scene in $scenes
 do
-   outFile=`echo $scene | sed 's/\..*/.tga'/`
+   sceneName=`echo $scene | sed 's/\..*//'`
+   outFile=$sceneName
+   outFile+="_$SUPER_SAMPLES"
+   outFile+="_$DEPTH_COMPLEXITY"
+   outFile+=".tga"
 
-   ./RayTracer scenes/$scene $outFile
-   open $outFile
+   ./RayTracer scenes/$scene $SUPER_SAMPLES $DEPTH_COMPLEXITY $outFile
+   echo $outFile # So you can easily get output files in a list.
 done
 
