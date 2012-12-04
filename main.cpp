@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
    int maxReflections = 10;
    int superSamples = atoi(argv[2]);
    int depthComplexity = atoi(argv[3]);
-   RayTracer rayTracer(1024, 768, maxReflections, superSamples, depthComplexity);
+   RayTracer rayTracer(1920, 1080, maxReflections, superSamples, depthComplexity);
 
    if (strcmp(argv[1], "-") == 0) {
       rayTracer.readScene(cin);

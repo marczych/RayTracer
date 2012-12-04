@@ -86,7 +86,7 @@ Color RayTracer::castRayWithXY(Vector direction) {
    for (int i = 0; i < depthComplexity; i++) {
       Ray viewRay(cameraPosition, direction, maxReflections);
 
-      if (depthComplexity > 1) {
+      if (depthComplexity > 1 && dispersion > 0) {
          Vector disturbance(
           (dispersion / RAND_MAX) * (1.0f * rand()),
           (dispersion / RAND_MAX) * (1.0f * rand()),
@@ -248,6 +248,11 @@ void RayTracer::readScene(istream& in) {
          in >> position.x >> position.y >> position.z;
 
          addLight(new Light(position));
+      } else if (type.compare("dispersion") == 0) {
+         in >> dispersion;
+      } else if (type.compare("focus") == 0) {
+         in >> focalPointLength;
+         cameraPosition.z = focalPointLength;
       } else {
          cerr << "Type not found: " << type << endl;
          exit(EXIT_FAILURE);
