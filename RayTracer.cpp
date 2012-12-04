@@ -30,6 +30,11 @@ RayTracer::~RayTracer() {
 void RayTracer::traceRays(string fileName) {
    Image image(width, height);
 
+   // Reset depthComplexity to avoid unnecessary loops.
+   if (dispersion < 0) {
+      depthComplexity = 1;
+   }
+
    for (int x = 0; x < width; x++) {
       // Update percent complete.
       float percentage = x/(float)width * 100;
@@ -86,7 +91,7 @@ Color RayTracer::castRayWithXY(Vector direction) {
    for (int i = 0; i < depthComplexity; i++) {
       Ray viewRay(cameraPosition, direction, maxReflections);
 
-      if (depthComplexity > 1 && dispersion > 0) {
+      if (depthComplexity > 1) {
          Vector disturbance(
           (dispersion / RAND_MAX) * (1.0f * rand()),
           (dispersion / RAND_MAX) * (1.0f * rand()),
