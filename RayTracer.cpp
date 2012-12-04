@@ -1,3 +1,4 @@
+#include <limits>
 #include "RayTracer.h"
 #include "Image.h"
 #include "Object.h"
