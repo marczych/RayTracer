@@ -6,8 +6,10 @@
 class Light {
 public:
    Vector position;
+   double intensity;
 
-   Light(Vector position_) : position(position_) {}
+   Light(Vector position_, double intensity_) :
+    position(position_), intensity(intensity_) {}
 };
 
 #endif

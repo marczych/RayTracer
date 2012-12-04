@@ -168,7 +168,8 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
             continue;
          }
 
-         diffuseColor = diffuseColor + (intersection.color * dotProduct);
+         diffuseColor = (diffuseColor + (intersection.color * dotProduct)) *
+          light->intensity;
          specularColor = specularColor + getSpecularLighting(intersection, light);
       }
    }
@@ -195,7 +196,7 @@ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
       return specularColor;
    }
 
-   double specularAmount = pow(dot, shininess);
+   double specularAmount = pow(dot, shininess) * light->intensity;
 
    specularColor.r = specularAmount;
    specularColor.g = specularAmount;
@@ -244,10 +245,12 @@ void RayTracer::readScene(istream& in) {
          addObject(new Sphere(center, radius, color, shininess, reflectivity));
       } else if (type.compare("light") == 0) {
          Vector position;
+         double intensity;
 
          in >> position.x >> position.y >> position.z;
+         in >> intensity;
 
-         addLight(new Light(position));
+         addLight(new Light(position, intensity));
       } else if (type.compare("dispersion") == 0) {
          in >> dispersion;
       } else if (type.compare("maxReflections") == 0) {
