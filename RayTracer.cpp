@@ -85,14 +85,17 @@ Color RayTracer::castRayWithXY(Vector direction) {
 
    for (int i = 0; i < depthComplexity; i++) {
       Ray viewRay(cameraPosition, direction, maxReflections);
-      Vector disturbance(
-       (dispersion / RAND_MAX) * (1.0f * rand()),
-       (dispersion / RAND_MAX) * (1.0f * rand()),
-       0.0f);
 
-      viewRay.origin = viewRay.origin + disturbance;
-      viewRay.direction = aimed - viewRay.origin;
-      viewRay.direction = viewRay.direction.normalize();
+      if (depthComplexity > 1) {
+         Vector disturbance(
+          (dispersion / RAND_MAX) * (1.0f * rand()),
+          (dispersion / RAND_MAX) * (1.0f * rand()),
+          0.0f);
+
+         viewRay.origin = viewRay.origin + disturbance;
+         viewRay.direction = aimed - viewRay.origin;
+         viewRay.direction = viewRay.direction.normalize();
+      }
 
       color = color + (castRay(viewRay) * (1 / (float)depthComplexity));
    }
