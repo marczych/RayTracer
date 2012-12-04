@@ -7,11 +7,13 @@
 
 using namespace std;
 
-RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_) :
- width(width_), height(height_), maxReflections(maxReflections_),
- superSamples(superSamples_) {
+RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
+ int depthComplexity_) : width(width_), height(height_),
+ maxReflections(maxReflections_), superSamples(superSamples_),
+ depthComplexity(depthComplexity_) {
    cameraPosition = Vector(0.0, 0.0, 100.0);
    focalPointLength = 100.0;
+   dispersion = 5.0f;
 }
 
 RayTracer::~RayTracer() {
@@ -80,20 +82,18 @@ Color RayTracer::castRayWithXY(Vector direction) {
    direction = direction.normalize();
    Vector aimed = cameraPosition + (direction * focalPointLength);
 
-   // Complexity.
-   int complexity = 23;
-   for (int i = 0; i < complexity; i++) {
+   for (int i = 0; i < depthComplexity; i++) {
       Ray viewRay(cameraPosition, direction, maxReflections);
       Vector disturbance(
-       (5.0f / RAND_MAX) * (1.0f * rand()),
-       (5.0f / RAND_MAX) * (1.0f * rand()),
+       (dispersion / RAND_MAX) * (1.0f * rand()),
+       (dispersion / RAND_MAX) * (1.0f * rand()),
        0.0f);
 
       viewRay.origin = viewRay.origin + disturbance;
       viewRay.direction = aimed - viewRay.origin;
       viewRay.direction = viewRay.direction.normalize();
 
-      color = color + (castRay(viewRay) * (1 / (float)complexity));
+      color = color + (castRay(viewRay) * (1 / (float)depthComplexity));
    }
 
    return color;

@@ -19,12 +19,14 @@ public:
    int maxReflections;
    int superSamples; // Square root of number of samples to use for each pixel.
    Vector cameraPosition;
-   double focalPointLength; // Shortest length to focal plane.
+   double focalPointLength;
+   int depthComplexity;
+   double dispersion;
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;
 
-   RayTracer(int, int, int, int);
+   RayTracer(int, int, int, int, int);
 
    ~RayTracer();
 

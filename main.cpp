@@ -9,14 +9,18 @@ using namespace std;
  * RayTracer main.
  */
 int main(int argc, char** argv) {
-   if (argc < 2) {
+   if (argc < 4) {
       cerr << "No scene file provided!" << endl;
-      cerr << "Usage: " << argv[0] << " sceneFile [outFile]" << endl;
+      cerr << "Usage: " << argv[0] << " sceneFile superSamples " <<
+       "depthComplexity [outFile]" << endl;
       exit(EXIT_FAILURE);
    }
 
    srand((unsigned)time(0));
-   RayTracer rayTracer(1024, 768, 10, 3);
+   int maxReflections = 10;
+   int superSamples = atoi(argv[2]);
+   int depthComplexity = atoi(argv[3]);
+   RayTracer rayTracer(1024, 768, maxReflections, superSamples, depthComplexity);
 
    if (strcmp(argv[1], "-") == 0) {
       rayTracer.readScene(cin);
@@ -34,9 +38,11 @@ int main(int argc, char** argv) {
       inFileStream.close();
    }
 
+
+
    string outFile;
-   if (argc > 2) {
-      outFile = argv[2];
+   if (argc > 4) {
+      outFile = argv[4];
    } else {
       cerr << "No outFile specified - writing to out.tga" << endl;
       outFile = "out.tga";
