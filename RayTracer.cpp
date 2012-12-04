@@ -10,9 +10,8 @@ using namespace std;
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_) :
  width(width_), height(height_), maxReflections(maxReflections_),
  superSamples(superSamples_) {
-   cameraPosition = Vector(0.0, 0.0, 1000.0);
-   cameraDirection = Vector(0.0, 0.0, -1.0);
-   focalPointLength = 1000.0;
+   cameraPosition = Vector(0.0, 0.0, 100.0);
+   focalPointLength = 100.0;
 }
 
 RayTracer::~RayTracer() {
@@ -64,31 +63,40 @@ Color RayTracer::castRayForPixel(int x, int y) {
          Vector imagePlanePoint = Vector(sampleStartX + (x * sampleWidth),
           sampleStartY + (y * sampleWidth), 0);
 
-         color = color + (castRay(getRayAtPoint(imagePlanePoint)) * sampleWeight);
+         color = color + (castRayWithXY(imagePlanePoint) * sampleWeight);
       }
    }
 
    return color;
 }
 
-Ray RayTracer::getRayAtPoint(Vector imagePlanePoint) {
-   Vector camera = getRandomCameraPosition();
-   Vector focalPlanePoint = imagePlanePoint + cameraPosition +
-    (cameraDirection * focalPointLength);
-   return Ray(camera, focalPlanePoint - camera, maxReflections);
-}
+Color RayTracer::castRayWithXY(Vector direction) {
+   Color color;
+   // Divide by projection distance.
+   direction.x /= 500.0;
+   direction.y /= 500.0;
+   direction.z = -1;
 
-/**
- * Returns a slightly randomized camera position.
- */
-Vector RayTracer::getRandomCameraPosition() {
-   double randX = (double)rand()/(double)RAND_MAX;
-   double randY = (double)rand()/(double)RAND_MAX;
+   direction = direction.normalize();
+   Vector aimed = cameraPosition + (direction * focalPointLength);
 
-   randX = (randX - 0.5) * 0.25;
-   randY = (randY - 0.5) * 0.25;
+   // Complexity.
+   int complexity = 23;
+   for (int i = 0; i < complexity; i++) {
+      Ray viewRay(cameraPosition, direction, maxReflections);
+      Vector disturbance(
+       (5.0f / RAND_MAX) * (1.0f * rand()),
+       (5.0f / RAND_MAX) * (1.0f * rand()),
+       0.0f);
 
-   return cameraPosition + Vector(randX, randY, 0);
+      viewRay.origin = viewRay.origin + disturbance;
+      viewRay.direction = aimed - viewRay.origin;
+      viewRay.direction = viewRay.direction.normalize();
+
+      color = color + (castRay(viewRay) * (1 / (float)complexity));
+   }
+
+   return color;
 }
 
 Color RayTracer::castRay(Ray ray) {

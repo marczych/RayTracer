@@ -19,7 +19,6 @@ public:
    int maxReflections;
    int superSamples; // Square root of number of samples to use for each pixel.
    Vector cameraPosition;
-   Vector cameraDirection;
    double focalPointLength; // Shortest length to focal plane.
 
    std::vector<Object*> objects;
@@ -39,9 +38,8 @@ public:
 
    void traceRays(std::string);
    Color castRayForPixel(int, int);
+   Color castRayWithXY(Vector);
    Color castRay(Ray);
-   Ray getRayAtPoint(Vector);
-   Vector getRandomCameraPosition();
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);
    Color getAmbientLighting(Intersection);

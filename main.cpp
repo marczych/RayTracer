@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
    }
 
    srand((unsigned)time(0));
-   RayTracer rayTracer(1280, 768, 10, 10);
+   RayTracer rayTracer(1024, 768, 10, 3);
 
    if (strcmp(argv[1], "-") == 0) {
       rayTracer.readScene(cin);
