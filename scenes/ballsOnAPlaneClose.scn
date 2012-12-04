@@ -1,8 +1,13 @@
-dispersion 4.0
-focus 20
+dispersion 0
+focus 16
 cameraPosition 25
 sphere 0 0 -10000  10000  0.7 0.3 0.4  -1  0.4
-light 0 40 40  0.9
+light -20 60 40  0.5
+light 0 60 40  0.5
+light -20 60 40  0.5
+light -20 60 40  0.5
+light 0 60 40  0.5
+light -20 60 40  0.5
 sphere -150 -148 3  3  0.986 0.714 0.744  116 0.5
 sphere -151 -127 5  5  0.122 0.587 0.969  34 0.03
 sphere -151 -115 4  4  0.03 0.941 0.541  48 0.38
