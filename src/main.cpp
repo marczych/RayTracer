@@ -12,7 +12,6 @@ using namespace std;
  */
 int main(int argc, char** argv) {
    if (argc < 4) {
-      cerr << "No scene file provided!" << endl;
       cerr << "Usage: " << argv[0] << " sceneFile superSamples " <<
        "depthComplexity [outFile]" << endl;
       exit(EXIT_FAILURE);
