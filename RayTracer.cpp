@@ -153,6 +153,7 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
    for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
       Light* light = *itr;
       Vector lightOffset = light->position - intersection.intersection;
+      double lightDistance = lightOffset.length();
       /**
        * TODO: Be careful about normalizing lightOffset too.
        */
@@ -166,7 +167,8 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
          Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
          Intersection shadowIntersection = getClosestIntersection(shadowRay);
 
-         if (shadowIntersection.didIntersect) {
+         if (shadowIntersection.didIntersect &&
+          shadowIntersection.distance < lightDistance) {
             /**
              * Position is in shadow of another object - continue with other lights.
              */
