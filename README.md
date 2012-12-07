@@ -13,6 +13,7 @@ In our case each ray represents a pixel in the output image and the resulting co
 ## Intersections
 Each ray performs an intersection test with all objects in the scene to determine the closest intersection.
 The closest intersection is used to determine the resulting color.
+
 ![Intersection](https://raw.github.com/marczych/RayTracer/master/samples/timeline/intersection_thumb.jpeg)
 
 ## Lighting
@@ -29,12 +30,14 @@ The intensity determines how much of the object's color to contribute.
 Shadows are incorporated into lighting.
 To determine if a light source should contribute to the lighting at an intersection point a shadow ray is cast from the intersection point to the light source.
 If there is an intersection before the light source then this point is in the shadow of that light source.
+
 ![Shadows](https://raw.github.com/marczych/RayTracer/master/samples/timeline/shadows_thumb.jpeg)
 
 ### Specular
 Specular lighting is calculated by computing a reflection ray by reflecting the light vector about the normal at the intersection point.
 The view ray is compared to the reflection ray to determine how much specular lighting to contribute.
 The more parallel the vectors are the more specular lighting will be added.
+
 ![Specular](https://raw.github.com/marczych/RayTracer/master/samples/timeline/specular_thumb.jpeg)
 
 ## Super Sampling (Anti-aliasing)
@@ -43,6 +46,7 @@ Super sampling is an anti-aliasing technique to smooth out jagged edges.
 My super sampling algorithm works by casting more initial rays and averaging neighboring samples together.
 For example, 2x super sampling involves calculating 4 sub points for each pixel.
 The following images have 1, 2, and 3 time super sampling, respectively.
+
 ![Super sampling x1](https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx1_thumb.jpeg)
 ![Super sampling x2](https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx2_thumb.jpeg)
 ![Super sampling x3](https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx3_thumb.jpeg)
@@ -52,6 +56,7 @@ Reflections are performed by casting rays originating from the intersection poin
 A portion of the reflected ray's color will be contributed to the original intersection point based on how reflective the surface is.
 Fortunately this is fairly easy given the a recursive approach for casting rays.
 There is an arbitrary limit on how many reflections a ray can perform before stopping to improve performance and eliminate potential infinite loops.
+
 ![Reflections](https://raw.github.com/marczych/RayTracer/master/samples/timeline/reflections_thumb.jpeg)
 
 ## Depth of Field
@@ -63,6 +68,7 @@ Slightly randomizing the originating point from the camera makes objects not on 
 Casting many randomized rays and averaging their results creates a blurred effect.
 If few rays are cast then the resulting image will be grainy and noisy.
 The images below were rendered by casting hundreds of rays per pixel to reduce this effect.
+
 ![Line close](https://raw.github.com/marczych/RayTracer/master/samples/line_4_300_thumb.jpeg)
 ![Line far](https://raw.github.com/marczych/RayTracer/master/samples/lineFar_4_300_thumb.jpeg)
 
