@@ -7,7 +7,7 @@ make
 SUPER_SAMPLES=2
 DEPTH_COMPLEXITY=10
 
-scenes=`ls scenes`
+scenes=`ls ../scenes`
 for scene in $scenes
 do
    sceneName=`echo $scene | sed 's/\..*//'`
