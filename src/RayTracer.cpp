@@ -238,7 +238,10 @@ void RayTracer::readScene(istream& in) {
    in >> type;
 
    while (in.good()) {
-      if (type.compare("sphere") == 0) {
+      if (type[0] == '#') {
+         // Ignore comment lines.
+         getline(in, type);
+      } else if (type.compare("sphere") == 0) {
          Vector center;
          double radius;
          Color color;
