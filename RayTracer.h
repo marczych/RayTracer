@@ -22,6 +22,7 @@ public:
    double focalPointLength;
    int depthComplexity;
    double dispersion;
+   unsigned long long raysCast;
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;

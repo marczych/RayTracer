@@ -11,7 +11,7 @@ using namespace std;
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
  maxReflections(maxReflections_), superSamples(superSamples_),
- depthComplexity(depthComplexity_) {
+ depthComplexity(depthComplexity_), raysCast(0) {
    cameraPosition = Vector(0.0, 0.0, 100.0);
    focalPointLength = 100.0;
    dispersion = 5.0f;
@@ -47,6 +47,7 @@ void RayTracer::traceRays(string fileName) {
    }
 
    cout << "\rDone!" << endl;
+   cout << "Rays cast: " << raysCast << endl;
 
    image.WriteTga(fileName.c_str(), false);
 }
@@ -109,6 +110,7 @@ Color RayTracer::castRayWithXY(Vector direction) {
 }
 
 Color RayTracer::castRay(Ray ray) {
+   raysCast++;
    Intersection intersection = getClosestIntersection(ray);
 
    if (intersection.didIntersect) {
