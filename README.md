@@ -40,6 +40,14 @@ The more parallel the vectors are the more specular lighting will be added.
 
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/timeline/specular_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/timeline/specular.jpeg)
 
+## Reflections
+Reflections are performed by casting rays originating from the intersection point directed along the reflection vector.
+A portion of the reflected ray's color will be contributed to the original intersection point based on how reflective the surface is.
+Fortunately this is fairly easy given the a recursive approach for casting rays.
+There is an arbitrary limit on how many reflections a ray can perform before stopping to improve performance and eliminate potential infinite loops.
+
+[<img src="https://raw.github.com/marczych/RayTracer/master/samples/timeline/reflections_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/timeline/reflections.jpeg)
+
 ## Super Sampling (Anti-aliasing)
 Aliasing is an artifact of images that have sharp, jagged edges.
 Super sampling is an anti-aliasing technique to smooth out jagged edges.
@@ -50,14 +58,6 @@ The following images have 1, 2, and 3 time super sampling, respectively.
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx1_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx1.jpeg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx2_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx2.jpeg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx3_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/timeline/superSamplingx3.jpeg)
-
-## Reflections
-Reflections are performed by casting rays originating from the intersection point directed along the reflection vector.
-A portion of the reflected ray's color will be contributed to the original intersection point based on how reflective the surface is.
-Fortunately this is fairly easy given the a recursive approach for casting rays.
-There is an arbitrary limit on how many reflections a ray can perform before stopping to improve performance and eliminate potential infinite loops.
-
-[<img src="https://raw.github.com/marczych/RayTracer/master/samples/timeline/reflections_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/timeline/reflections.jpeg)
 
 ## Depth of Field
 Depth of field is simulated by defining a sharp plane where all objects will be in focus.
