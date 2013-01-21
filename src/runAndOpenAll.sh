@@ -4,10 +4,11 @@
 
 make
 
-SUPER_SAMPLES=2
-DEPTH_COMPLEXITY=10
+SUPER_SAMPLES=1
+DEPTH_COMPLEXITY=1
 
-scenes=`ls ../scenes`
+cd ../scenes
+scenes=`ls *.scn`
 for scene in $scenes
 do
    sceneName=`echo $scene | sed 's/\..*//'`
@@ -16,7 +17,7 @@ do
    outFile+="_$DEPTH_COMPLEXITY"
    outFile+=".tga"
 
-   ./RayTracer scenes/$scene $SUPER_SAMPLES $DEPTH_COMPLEXITY $outFile
+   ../src/RayTracer $scene $SUPER_SAMPLES $DEPTH_COMPLEXITY $outFile
    echo $outFile # So you can easily get output files in a list.
 done
 
