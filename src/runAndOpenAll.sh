@@ -5,7 +5,7 @@
 make
 
 SUPER_SAMPLES=1
-DEPTH_COMPLEXITY=1
+DEPTH_COMPLEXITY=5
 
 cd ../scenes
 scenes=`ls *.scn`

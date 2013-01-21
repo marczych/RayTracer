@@ -1,5 +1,7 @@
-focus 700
-cameraPosition 700
+cameraPosition 0.0 0.0 700.0
+cameraUp 0.0 1.0 0.0
+cameraLookAt 0.0 0.0 0.0
+imageScale 1
 dispersion 5.0
 maxReflections 20
 sphere 0 0 0  250  0.937 0.874 0.733  100  0.8

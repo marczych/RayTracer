@@ -1,6 +1,8 @@
 dispersion 0
-focus 16
-cameraPosition 25
+cameraPosition 0.0 0.0 25.0
+cameraUp 0.0 1.0 0.0
+cameraLookAt 0.0 0.0 9.0
+imageScale 0.05
 sphere 0 0 -10000  10000  0.7 0.3 0.4  -1  0.4
 light -20 60 40  0.5
 light 0 60 40  0.5
