@@ -21,6 +21,7 @@ public:
    Vector cameraPosition;
    Vector cameraUp;
    Vector cameraLookAt;
+   double imageScale;
    int depthComplexity;
    double dispersion;
    unsigned long long raysCast;

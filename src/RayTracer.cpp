@@ -11,11 +11,10 @@ using namespace std;
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
  maxReflections(maxReflections_), superSamples(superSamples_),
- depthComplexity(depthComplexity_), raysCast(0) {
+ imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {
    cameraPosition = Vector(0.0, 0.0, 100.0);
    cameraUp = Vector(0.0, 1.0, 0.0);
    cameraLookAt = Vector(0.0, 0.0, 0.0);
-   dispersion = 5.0f;
 }
 
 RayTracer::~RayTracer() {
@@ -70,8 +69,8 @@ Color RayTracer::castRayForPixel(int x, int y) {
    for (int x = 0; x < superSamples; x++) {
       for (int y = 0; y < superSamples; y++) {
          Vector imagePlanePoint = cameraLookAt -
-          (u * (sampleStartX + (x * sampleWidth))) +
-          (v * (sampleStartY + (y * sampleWidth)));
+          (u * (sampleStartX + (x * sampleWidth)) * imageScale) +
+          (v * (sampleStartY + (y * sampleWidth)) * imageScale);
 
          color = color + (castRayAtPoint(imagePlanePoint) * sampleWeight);
       }
@@ -273,6 +272,8 @@ void RayTracer::readScene(istream& in) {
          in >> cameraLookAt.x;
          in >> cameraLookAt.y;
          in >> cameraLookAt.z;
+      } else if (type.compare("imageScale") == 0) {
+         in >> imageScale;
       } else {
          cerr << "Type not found: " << type << endl;
          exit(EXIT_FAILURE);
