@@ -5,7 +5,7 @@ Vector Vector::normalize() {
    return (*this) /= this->length();
 }
 
-Vector Vector::crossProduct(Vector const & v) const {
+Vector Vector::cross(Vector const & v) const {
    return Vector(y*v.z - v.y*z, v.x*z - x*v.z, x*v.y - v.x*y);
 }
 

@@ -19,7 +19,8 @@ public:
    int maxReflections;
    int superSamples; // Square root of number of samples to use for each pixel.
    Vector cameraPosition;
-   double focalPointLength;
+   Vector cameraUp;
+   Vector cameraLookAt;
    int depthComplexity;
    double dispersion;
    unsigned long long raysCast;
@@ -41,7 +42,7 @@ public:
 
    void traceRays(std::string);
    Color castRayForPixel(int, int);
-   Color castRayWithXY(Vector);
+   Color castRayAtPoint(Vector);
    Color castRay(Ray);
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);

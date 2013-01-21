@@ -14,7 +14,7 @@ public:
 
    Vector normalize();
 
-   Vector crossProduct(Vector const & v) const;
+   Vector cross(Vector const & v) const;
 
    double dot(Vector const & v) const;
 

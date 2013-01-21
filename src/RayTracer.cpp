@@ -13,7 +13,8 @@ RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamp
  maxReflections(maxReflections_), superSamples(superSamples_),
  depthComplexity(depthComplexity_), raysCast(0) {
    cameraPosition = Vector(0.0, 0.0, 100.0);
-   focalPointLength = 100.0;
+   cameraUp = Vector(0.0, 1.0, 0.0);
+   cameraLookAt = Vector(0.0, 0.0, 0.0);
    dispersion = 5.0f;
 }
 
@@ -53,11 +54,6 @@ void RayTracer::traceRays(string fileName) {
 }
 
 Color RayTracer::castRayForPixel(int x, int y) {
-   /**
-    * All of these values are "on the focal plane." That is to say rays will
-    * be cast from the camera position towards points created from these
-    * values.
-    */
    double rayX = (x - width / 2)/2.0;
    double rayY = (y - height / 2)/2.0;
    double pixelWidth = rayX - (x + 1 - width / 2)/2.0;
@@ -67,30 +63,28 @@ Color RayTracer::castRayForPixel(int x, int y) {
    double sampleWeight = 1.0 / (superSamples * superSamples);
    Color color;
 
+   Vector w = (cameraLookAt - cameraPosition).normalize();
+   Vector u = cameraUp.cross(w).normalize();
+   Vector v = w.cross(u);
+
    for (int x = 0; x < superSamples; x++) {
       for (int y = 0; y < superSamples; y++) {
-         Vector imagePlanePoint = Vector(sampleStartX + (x * sampleWidth),
-          sampleStartY + (y * sampleWidth), 0);
+         Vector imagePlanePoint = cameraLookAt -
+          (u * (sampleStartX + (x * sampleWidth))) +
+          (v * (sampleStartY + (y * sampleWidth)));
 
-         color = color + (castRayWithXY(imagePlanePoint) * sampleWeight);
+         color = color + (castRayAtPoint(imagePlanePoint) * sampleWeight);
       }
    }
 
    return color;
 }
 
-Color RayTracer::castRayWithXY(Vector direction) {
+Color RayTracer::castRayAtPoint(Vector point) {
    Color color;
-   // Divide by projection distance.
-   direction.x /= 500.0;
-   direction.y /= 500.0;
-   direction.z = -1;
-
-   direction = direction.normalize();
-   Vector aimed = cameraPosition + (direction * focalPointLength);
 
    for (int i = 0; i < depthComplexity; i++) {
-      Ray viewRay(cameraPosition, direction, maxReflections);
+      Ray viewRay(cameraPosition, point - cameraPosition, maxReflections);
 
       if (depthComplexity > 1) {
          Vector disturbance(
@@ -99,7 +93,7 @@ Color RayTracer::castRayWithXY(Vector direction) {
           0.0f);
 
          viewRay.origin = viewRay.origin + disturbance;
-         viewRay.direction = aimed - viewRay.origin;
+         viewRay.direction = point - viewRay.origin;
          viewRay.direction = viewRay.direction.normalize();
       }
 
@@ -267,10 +261,18 @@ void RayTracer::readScene(istream& in) {
          in >> dispersion;
       } else if (type.compare("maxReflections") == 0) {
          in >> maxReflections;
+      } else if (type.compare("cameraUp") == 0) {
+         in >> cameraUp.x;
+         in >> cameraUp.y;
+         in >> cameraUp.z;
       } else if (type.compare("cameraPosition") == 0) {
+         in >> cameraPosition.x;
+         in >> cameraPosition.y;
          in >> cameraPosition.z;
-      } else if (type.compare("focus") == 0) {
-         in >> focalPointLength;
+      } else if (type.compare("cameraLookAt") == 0) {
+         in >> cameraLookAt.x;
+         in >> cameraLookAt.y;
+         in >> cameraLookAt.z;
       } else {
          cerr << "Type not found: " << type << endl;
          exit(EXIT_FAILURE);
