@@ -30,6 +30,11 @@ RayTracer::~RayTracer() {
 void RayTracer::traceRays(string fileName) {
    Image image(width, height);
 
+   // Calculate w, u, and v once.
+   w = (cameraLookAt - cameraPosition).normalize();
+   u = cameraUp.cross(w).normalize();
+   v = w.cross(u);
+
    // Reset depthComplexity to avoid unnecessary loops.
    if (dispersion < 0) {
       depthComplexity = 1;
@@ -61,10 +66,6 @@ Color RayTracer::castRayForPixel(int x, int y) {
    double sampleStartY = rayY - pixelWidth/2.0;
    double sampleWeight = 1.0 / (superSamples * superSamples);
    Color color;
-
-   Vector w = (cameraLookAt - cameraPosition).normalize();
-   Vector u = cameraUp.cross(w).normalize();
-   Vector v = w.cross(u);
 
    for (int x = 0; x < superSamples; x++) {
       for (int y = 0; y < superSamples; y++) {
