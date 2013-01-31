@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "Vector.h"
+#include "Camera.h"
 
 class Ray;
 class Color;
@@ -18,10 +19,7 @@ public:
    int height;
    int maxReflections;
    int superSamples; // Square root of number of samples to use for each pixel.
-   Vector cameraPosition;
-   Vector cameraUp;
-   Vector cameraLookAt;
-   Vector w, u, v;
+   Camera camera;
    double imageScale;
    int depthComplexity;
    double dispersion;

@@ -10,12 +10,8 @@ using namespace std;
 
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
- maxReflections(maxReflections_), superSamples(superSamples_),
- imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {
-   cameraPosition = Vector(0.0, 0.0, 100.0);
-   cameraUp = Vector(0.0, 1.0, 0.0);
-   cameraLookAt = Vector(0.0, 0.0, 0.0);
-}
+ maxReflections(maxReflections_), superSamples(superSamples_), camera(Camera()),
+ imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {}
 
 RayTracer::~RayTracer() {
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
@@ -30,11 +26,6 @@ RayTracer::~RayTracer() {
 void RayTracer::traceRays(string fileName) {
    int columnsCompleted = 0;
    Image image(width, height);
-
-   // Calculate w, u, and v once.
-   w = (cameraLookAt - cameraPosition).normalize();
-   u = cameraUp.cross(w).normalize();
-   v = w.cross(u);
 
    // Reset depthComplexity to avoid unnecessary loops.
    if (dispersion < 0) {
@@ -72,9 +63,9 @@ Color RayTracer::castRayForPixel(int x, int y) {
 
    for (int x = 0; x < superSamples; x++) {
       for (int y = 0; y < superSamples; y++) {
-         Vector imagePlanePoint = cameraLookAt -
-          (u * (sampleStartX + (x * sampleWidth)) * imageScale) +
-          (v * (sampleStartY + (y * sampleWidth)) * imageScale);
+         Vector imagePlanePoint = camera.lookAt -
+          (camera.u * (sampleStartX + (x * sampleWidth)) * imageScale) +
+          (camera.v * (sampleStartY + (y * sampleWidth)) * imageScale);
 
          color = color + (castRayAtPoint(imagePlanePoint) * sampleWeight);
       }
@@ -87,7 +78,7 @@ Color RayTracer::castRayAtPoint(Vector point) {
    Color color;
 
    for (int i = 0; i < depthComplexity; i++) {
-      Ray viewRay(cameraPosition, point - cameraPosition, maxReflections);
+      Ray viewRay(camera.position, point - camera.position, maxReflections);
 
       if (depthComplexity > 1) {
          Vector disturbance(
@@ -265,17 +256,17 @@ void RayTracer::readScene(istream& in) {
       } else if (type.compare("maxReflections") == 0) {
          in >> maxReflections;
       } else if (type.compare("cameraUp") == 0) {
-         in >> cameraUp.x;
-         in >> cameraUp.y;
-         in >> cameraUp.z;
+         in >> camera.up.x;
+         in >> camera.up.y;
+         in >> camera.up.z;
       } else if (type.compare("cameraPosition") == 0) {
-         in >> cameraPosition.x;
-         in >> cameraPosition.y;
-         in >> cameraPosition.z;
+         in >> camera.position.x;
+         in >> camera.position.y;
+         in >> camera.position.z;
       } else if (type.compare("cameraLookAt") == 0) {
-         in >> cameraLookAt.x;
-         in >> cameraLookAt.y;
-         in >> cameraLookAt.z;
+         in >> camera.lookAt.x;
+         in >> camera.lookAt.y;
+         in >> camera.lookAt.z;
       } else if (type.compare("imageScale") == 0) {
          in >> imageScale;
       } else {
