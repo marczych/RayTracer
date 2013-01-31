@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -O2 -Wall
+CFLAGS = -O2 -Wall -fopenmp
 
 RayTracer: main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o
 	$(CC) $(CFLAGS) main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o -o RayTracer

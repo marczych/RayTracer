@@ -28,6 +28,7 @@ RayTracer::~RayTracer() {
 }
 
 void RayTracer::traceRays(string fileName) {
+   int columnsCompleted = 0;
    Image image(width, height);
 
    // Calculate w, u, and v once.
@@ -40,9 +41,11 @@ void RayTracer::traceRays(string fileName) {
       depthComplexity = 1;
    }
 
+   #pragma omp parallel for
    for (int x = 0; x < width; x++) {
       // Update percent complete.
-      float percentage = x/(float)width * 100;
+      columnsCompleted++;
+      float percentage = columnsCompleted/(float)width * 100;
       cout << '\r' << (int)percentage << '%';
       fflush(stdout);
 
