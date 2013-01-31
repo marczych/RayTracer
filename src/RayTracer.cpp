@@ -32,7 +32,6 @@ void RayTracer::traceRays(string fileName) {
       depthComplexity = 1;
    }
 
-   #pragma omp parallel for
    for (int x = 0; x < width; x++) {
       // Update percent complete.
       columnsCompleted++;
