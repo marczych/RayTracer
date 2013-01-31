@@ -3,11 +3,11 @@
 
 #include <math.h>
 #include "Vector.h"
+#include "Color.h"
 #include "Ray.h"
 #include "Intersection.h"
-#include "Object.h"
 
-class Sphere : public Object {
+class Sphere {
 public:
    Vector center;
    double radius;
@@ -19,9 +19,9 @@ public:
     double reflectivity_) : center(center_), radius(radius_), color(color_),
     shininess(shininess_), reflectivity(reflectivity_) {}
 
-   virtual Intersection intersect(Ray);
-   virtual double getShininess();
-   virtual double getReflectivity();
+   Intersection intersect(Ray);
+   double getShininess();
+   double getReflectivity();
 };
 
 #endif

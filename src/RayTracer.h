@@ -10,7 +10,7 @@
 class Ray;
 class Color;
 class Intersection;
-class Object;
+class Sphere;
 class Light;
 
 class RayTracer {
@@ -25,14 +25,14 @@ public:
    double dispersion;
    unsigned long long raysCast;
 
-   std::vector<Object*> objects;
+   std::vector<Sphere*> objects;
    std::vector<Light*> lights;
 
    RayTracer(int, int, int, int, int);
 
    ~RayTracer();
 
-   void addObject(Object* object) {
+   void addObject(Sphere* object) {
       objects.push_back(object);
    }
 

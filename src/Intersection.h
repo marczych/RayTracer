@@ -3,9 +3,10 @@
 
 #include <stdlib.h>
 #include "Vector.h"
-#include "Object.h"
 #include "Color.h"
 #include "Ray.h"
+
+class Sphere;
 
 class Intersection {
 public:
@@ -15,10 +16,10 @@ public:
    double distance;
    Vector normal;
    Color color;
-   Object* object;
+   Sphere* object;
 
    Intersection(Ray ray_, Vector intersection_, double distance_, Vector normal_,
-    Color color_, Object* object_) : ray(ray_), didIntersect(true),
+    Color color_, Sphere* object_) : ray(ray_), didIntersect(true),
     intersection(intersection_), distance(distance_), normal(normal_), color(color_),
     object(object_) {}
 

@@ -14,7 +14,7 @@ RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamp
  imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {}
 
 RayTracer::~RayTracer() {
-   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
+   for (vector<Sphere*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
       delete *itr;
    }
 
@@ -111,7 +111,7 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
    Intersection closestIntersection(false);
    closestIntersection.distance = numeric_limits<double>::max();
 
-   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
+   for (vector<Sphere*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
       Intersection intersection = (*itr)->intersect(ray);
 
       if (intersection.didIntersect && intersection.distance <
