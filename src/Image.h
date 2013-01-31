@@ -35,7 +35,7 @@ public:
 private:
     int _width;
     int _height;
-    Color **_pixmap;
+    Color *_pixmap;
     double _max;
 };
 

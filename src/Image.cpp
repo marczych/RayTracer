@@ -13,25 +13,11 @@ Image::Image(int width, int height)
     _height = height;
     _max = 1.0;
 
-    // allocate the first dimension, "width" number of Color pointers...
-    _pixmap = (Color **)malloc(sizeof(Color *) * _width);
-
-    // allocate the second dimension, "height" number of Color structs...
-    for (int i = 0; i < _width; i++)
-    {
-        _pixmap[i] = (Color *)malloc(sizeof(Color) * _height);
-    }
+    _pixmap = (Color*)malloc(sizeof(Color) * _width * _height);
 }
 
 Image::~Image()
 {
-    // free each column of pixels first...
-    for (int i = 0; i < _width; i++)
-    {
-        free(_pixmap[i]);
-    }
-
-    // free the rows of pixels second...
     free(_pixmap);
 }
 
@@ -80,17 +66,18 @@ void Image::WriteTga(const char *outfile, bool scale_color)
         {
             // if color scaling is on, scale 0.0 -> _max as a 0 -> 255 unsigned byte
             unsigned char rbyte, gbyte, bbyte;
+            Color* color = _pixmap + (x * _width + y);
             if (scale_color)
             {
-                rbyte = (unsigned char)((_pixmap[x][y].r / _max) * 255);
-                gbyte = (unsigned char)((_pixmap[x][y].g / _max) * 255);
-                bbyte = (unsigned char)((_pixmap[x][y].b / _max) * 255);
+                rbyte = (unsigned char)((color->r / _max) * 255);
+                gbyte = (unsigned char)((color->g / _max) * 255);
+                bbyte = (unsigned char)((color->b / _max) * 255);
             }
             else
             {
-                double r = (_pixmap[x][y].r > 1.0) ? 1.0 : _pixmap[x][y].r;
-                double g = (_pixmap[x][y].g > 1.0) ? 1.0 : _pixmap[x][y].g;
-                double b = (_pixmap[x][y].b > 1.0) ? 1.0 : _pixmap[x][y].b;
+                double r = (color->r > 1.0) ? 1.0 : color->r;
+                double g = (color->g > 1.0) ? 1.0 : color->g;
+                double b = (color->b > 1.0) ? 1.0 : color->b;
                 rbyte = (unsigned char)(r * 255);
                 gbyte = (unsigned char)(g * 255);
                 bbyte = (unsigned char)(b * 255);
@@ -183,7 +170,7 @@ Color Image::pixel(int x, int y)
         exit(EXIT_FAILURE);
     }
     
-    return _pixmap[x][y];
+    return _pixmap[x * _width + y];
 }
 
 void Image::pixel(int x, int y, Color pxl)
@@ -196,7 +183,7 @@ void Image::pixel(int x, int y, Color pxl)
         exit(EXIT_FAILURE);
     }
     
-    _pixmap[x][y] = pxl;
+    _pixmap[x * _width + y] = pxl;
 
     // update the max color if necessary
     _max = (pxl.r > _max) ? pxl.r : _max;
