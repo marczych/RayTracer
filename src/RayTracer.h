@@ -6,12 +6,12 @@
 #include <iostream>
 #include "Vector.h"
 #include "Camera.h"
+#include "Sphere.h"
+#include "Light.h"
 
 class Ray;
 class Color;
 class Intersection;
-class Sphere;
-class Light;
 
 class RayTracer {
 public:
@@ -25,19 +25,19 @@ public:
    double dispersion;
    unsigned long long raysCast;
 
-   std::vector<Sphere*> objects;
-   std::vector<Light*> lights;
+   std::vector<Sphere> spheres;
+   std::vector<Light> lights;
 
    RayTracer(int, int, int, int, int);
 
    ~RayTracer();
 
    void addObject(Sphere* object) {
-      objects.push_back(object);
+      spheres.push_back(*object);
    }
 
    void addLight(Light* light) {
-      lights.push_back(light);
+      lights.push_back(*light);
    }
 
    void traceRays(std::string);

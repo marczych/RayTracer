@@ -1,3 +1,5 @@
+#include <cuda_runtime_api.h>
+#include <cuda.h>
 #include <limits>
 #include "RayTracer.h"
 #include "Image.h"
@@ -8,22 +10,27 @@
 
 using namespace std;
 
+#define ERROR_HANDLER(x) ErrorHandler(x, __FILE__, __LINE__)
+
+static void ErrorHandler(cudaError_t err, const char *file, int line) {
+   if (err != cudaSuccess) {
+      fprintf(stderr, "%s in line %d: %s\n", file, line, cudaGetErrorString(err));
+      exit(EXIT_FAILURE);
+   }
+}
+
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
  maxReflections(maxReflections_), superSamples(superSamples_), camera(Camera()),
  imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {}
 
 RayTracer::~RayTracer() {
-   for (vector<Sphere*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
-      delete *itr;
-   }
-
-   for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
-      delete *itr;
-   }
 }
 
 void RayTracer::traceRays(string fileName) {
+   Color* devImage;
+   Sphere* devSpheres;
+   Light* devLights;
    int columnsCompleted = 0;
    Image image(width, height);
 
@@ -31,6 +38,16 @@ void RayTracer::traceRays(string fileName) {
    if (dispersion < 0) {
       depthComplexity = 1;
    }
+
+   ERROR_HANDLER(cudaMalloc((void**)&devSpheres, spheres.size() * sizeof(Sphere)));
+   ERROR_HANDLER(cudaMemcpy(devSpheres, &spheres.front(),
+    spheres.size() * sizeof(Sphere), cudaMemcpyHostToDevice));
+
+   ERROR_HANDLER(cudaMalloc((void**)&devLights, lights.size() * sizeof(Light)));
+   ERROR_HANDLER(cudaMemcpy(devLights, &lights.front(),
+    lights.size() * sizeof(Light), cudaMemcpyHostToDevice));
+
+   ERROR_HANDLER(cudaMalloc((void**)&devImage, width * height * sizeof(Light)));
 
    for (int x = 0; x < width; x++) {
       // Update percent complete.
@@ -111,8 +128,8 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
    Intersection closestIntersection(false);
    closestIntersection.distance = numeric_limits<double>::max();
 
-   for (vector<Sphere*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
-      Intersection intersection = (*itr)->intersect(ray);
+   for (vector<Sphere>::iterator itr = spheres.begin(); itr < spheres.end(); itr++) {
+      Intersection intersection = (*itr).intersect(ray);
 
       if (intersection.didIntersect && intersection.distance <
        closestIntersection.distance) {
@@ -139,8 +156,8 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
 
-   for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
-      Light* light = *itr;
+   for (vector<Light>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
+      Light* light = &(*itr);
       Vector lightOffset = light->position - intersection.intersection;
       double lightDistance = lightOffset.length();
       /**

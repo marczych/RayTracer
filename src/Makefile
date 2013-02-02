@@ -1,5 +1,5 @@
-CC = g++
-CFLAGS = -O2 -Wall
+CC = nvcc
+CFLAGS = -O2
 
 RayTracer: main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o
 	$(CC) $(CFLAGS) main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o -o RayTracer
@@ -7,8 +7,8 @@ RayTracer: main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Obj
 RayTracer.o: RayTracer.cpp RayTracer.h Vector.h Image.h Object.h Sphere.h Intersection.h Light.h
 	$(CC) $(CFLAGS) RayTracer.cpp -c -o RayTracer.o
 
-main.o: main.cpp RayTracer.h
-	$(CC) $(CFLAGS) main.cpp -c -o main.o
+main.o: main.cu RayTracer.h
+	$(CC) $(CFLAGS) main.cu -c -o main.o
 
 Image.o: Image.cpp Image.h Color.h
 	$(CC) $(CFLAGS) Image.cpp -c -o Image.o
