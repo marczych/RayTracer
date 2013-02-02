@@ -66,7 +66,7 @@ void Image::WriteTga(const char *outfile, bool scale_color)
         {
             // if color scaling is on, scale 0.0 -> _max as a 0 -> 255 unsigned byte
             unsigned char rbyte, gbyte, bbyte;
-            Color* color = _pixmap + (x * _width + y);
+            Color* color = _pixmap + (x * _height + y);
             if (scale_color)
             {
                 rbyte = (unsigned char)((color->r / _max) * 255);
@@ -170,7 +170,7 @@ Color Image::pixel(int x, int y)
         exit(EXIT_FAILURE);
     }
     
-    return _pixmap[x * _width + y];
+    return _pixmap[x * _height + y];
 }
 
 void Image::pixel(int x, int y, Color pxl)
@@ -183,7 +183,7 @@ void Image::pixel(int x, int y, Color pxl)
         exit(EXIT_FAILURE);
     }
     
-    _pixmap[x * _width + y] = pxl;
+    _pixmap[x * _height + y] = pxl;
 
     // update the max color if necessary
     _max = (pxl.r > _max) ? pxl.r : _max;
