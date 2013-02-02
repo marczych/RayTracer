@@ -31,6 +31,8 @@ public:
     int width() const { return _width; }
     int height() const { return _height; }
     double max() const { return _max; }
+    Color* getPixmap() { return _pixmap; }
+    void setPixmap(Color* pixmap);
 
 private:
     int _width;

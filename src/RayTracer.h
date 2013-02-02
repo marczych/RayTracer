@@ -1,6 +1,8 @@
 #ifndef __RAY_TRACER_H__
 #define __RAY_TRACER_H__
 
+#include <cuda_runtime_api.h>
+#include <cuda.h>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -53,5 +55,8 @@ public:
    Vector reflectVector(Vector, Vector);
    void readScene(std::istream&);
 };
+
+__global__ void cudaTraceRays(Sphere* spheres, Light* lights,
+ Color* image, RayTracer* rayTracer);
 
 #endif

@@ -191,3 +191,6 @@ void Image::pixel(int x, int y, Color pxl)
     _max = (pxl.b > _max) ? pxl.b : _max;
 }
 
+void Image::setPixmap(Color* pixmap) {
+   _pixmap = pixmap;
+}

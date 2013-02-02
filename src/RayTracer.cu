@@ -1,5 +1,3 @@
-#include <cuda_runtime_api.h>
-#include <cuda.h>
 #include <limits>
 #include "RayTracer.h"
 #include "Image.h"
@@ -11,6 +9,7 @@
 using namespace std;
 
 #define ERROR_HANDLER(x) ErrorHandler(x, __FILE__, __LINE__)
+#define TILE_WIDTH 32
 
 static void ErrorHandler(cudaError_t err, const char *file, int line) {
    if (err != cudaSuccess) {
@@ -31,6 +30,7 @@ void RayTracer::traceRays(string fileName) {
    Color* devImage;
    Sphere* devSpheres;
    Light* devLights;
+   RayTracer* devRayTracer;
    int columnsCompleted = 0;
    Image image(width, height);
 
@@ -47,24 +47,57 @@ void RayTracer::traceRays(string fileName) {
    ERROR_HANDLER(cudaMemcpy(devLights, &lights.front(),
     lights.size() * sizeof(Light), cudaMemcpyHostToDevice));
 
-   ERROR_HANDLER(cudaMalloc((void**)&devImage, width * height * sizeof(Light)));
+   ERROR_HANDLER(cudaMalloc((void**)&devImage, width * height * sizeof(Color)));
 
-   for (int x = 0; x < width; x++) {
-      // Update percent complete.
-      columnsCompleted++;
-      float percentage = columnsCompleted/(float)width * 100;
-      cout << '\r' << (int)percentage << '%';
-      fflush(stdout);
+   ERROR_HANDLER(cudaMalloc((void**)&devRayTracer, sizeof(RayTracer)));
+   ERROR_HANDLER(cudaMemcpy(devRayTracer, this, sizeof(RayTracer), cudaMemcpyHostToDevice));
 
-      for (int y = 0; y < height; y++) {
-         image.pixel(x, y, castRayForPixel(x, y));
-      }
-   }
+   int gridWidth = ceil((float)width/TILE_WIDTH);
+   int gridHeight = ceil((float)height/TILE_WIDTH);
 
-   cout << "\rDone!" << endl;
-   cout << "Rays cast: " << raysCast << endl;
+   dim3 dimGrid(gridWidth, gridHeight);
+   dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
+
+   cudaTraceRays<<<dimGrid, dimBlock>>>(devSpheres, devLights, devImage,
+    devRayTracer);
+
+   ERROR_HANDLER(cudaMemcpy(image.getPixmap(), devImage,
+    width * height * sizeof(Color), cudaMemcpyDeviceToHost));
+
+   ERROR_HANDLER(cudaFree(devImage));
+   ERROR_HANDLER(cudaFree(devSpheres));
+   ERROR_HANDLER(cudaFree(devLights));
+   ERROR_HANDLER(cudaFree(devRayTracer));
 
    image.WriteTga(fileName.c_str(), false);
+}
+
+__global__ void cudaTraceRays(Sphere* spheres, Light* lights,
+ Color* image, RayTracer* rayTracer) {
+   int x = blockIdx.x * TILE_WIDTH + threadIdx.x;
+   int y = blockIdx.y * TILE_WIDTH + threadIdx.y;
+
+   if (x < rayTracer->width && y < rayTracer->height) {
+      Color* color = image + (x * rayTracer->height + y);
+      color->r = 0.5;
+      color->g = 0.5;
+      color->b = 0.5;
+   }
+
+   //for (int x = 0; x < width; x++) {
+   //   // Update percent complete.
+   //   columnsCompleted++;
+   //   float percentage = columnsCompleted/(float)width * 100;
+   //   cout << '\r' << (int)percentage << '%';
+   //   fflush(stdout);
+
+   //   for (int y = 0; y < height; y++) {
+   //      image.pixel(x, y, castRayForPixel(x, y));
+   //   }
+   //}
+
+   //cout << "\rDone!" << endl;
+   //cout << "Rays cast: " << raysCast << endl;
 }
 
 Color RayTracer::castRayForPixel(int x, int y) {
