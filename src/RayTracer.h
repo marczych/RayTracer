@@ -26,6 +26,8 @@ public:
    int depthComplexity;
    double dispersion;
    unsigned long long raysCast;
+   unsigned long numSpheres;
+   unsigned long numLights;
 
    std::vector<Sphere> spheres;
    std::vector<Light> lights;

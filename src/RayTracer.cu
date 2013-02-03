@@ -36,6 +36,10 @@ void RayTracer::traceRays(string fileName) {
    RayTracer* devRayTracer;
    Image image(width, height);
 
+   // Calculate these on the CPU so they can be accessed on the GPU.
+   numSpheres = spheres.size();
+   numLights = lights.size();
+
    // Reset depthComplexity to avoid unnecessary loops.
    if (dispersion < 0) {
       depthComplexity = 1;
@@ -176,7 +180,6 @@ __device__ Intersection RayTracer::getClosestIntersection(Ray ray,
  Sphere* spheres) {
    Intersection closestIntersection(false);
    closestIntersection.distance = 983487438;
-   int numSpheres = 250; // TODO
 
    for (int i = 0; i < numSpheres; i++) {
       Sphere* sphere = spheres + i;
@@ -209,7 +212,6 @@ __device__ Color RayTracer::getDiffuseAndSpecularLighting(
  Intersection intersection, Light* lights, Sphere* spheres) {
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
-   int numLights = 1; // TODO
 
    for (int i = 0; i < numLights; i++) {
       Light* light = lights + i;
