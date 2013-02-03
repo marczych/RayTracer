@@ -18,12 +18,12 @@ public:
    Color color;
    Sphere* object;
 
-   Intersection(Ray ray_, Vector intersection_, double distance_, Vector normal_,
+   __device__ Intersection(Ray ray_, Vector intersection_, double distance_, Vector normal_,
     Color color_, Sphere* object_) : ray(ray_), didIntersect(true),
     intersection(intersection_), distance(distance_), normal(normal_), color(color_),
     object(object_) {}
 
-   Intersection(bool didIntersect_) : ray(Ray()), didIntersect(didIntersect_),
+   __device__ Intersection(bool didIntersect_) : ray(Ray()), didIntersect(didIntersect_),
     intersection(Vector()), distance(0.0), normal(Vector()), color(Color()),
     object(NULL) {}
 };

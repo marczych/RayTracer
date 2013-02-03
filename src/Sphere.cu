@@ -1,7 +1,7 @@
 #include "Sphere.h"
 #include <math.h>
 
-Intersection Sphere::intersect(Ray ray) {
+__device__ Intersection Sphere::intersect(Ray ray) {
    Vector deltap = ray.origin - center;
    double a = ray.direction.dot(ray.direction);
    double b = deltap.dot(ray.direction) * 2;
@@ -46,10 +46,10 @@ Intersection Sphere::intersect(Ray ray) {
    return Intersection(ray, point, distance, normal, color, this);
 }
 
-double Sphere::getShininess() {
+__device__ double Sphere::getShininess() {
    return shininess;
 }
 
-double Sphere::getReflectivity() {
+__device__ double Sphere::getReflectivity() {
    return reflectivity;
 }

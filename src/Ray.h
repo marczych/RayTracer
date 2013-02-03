@@ -9,9 +9,9 @@ public:
    Vector direction;
    int reflectionsRemaining;
 
-   Ray() : origin(Vector()), direction(Vector()), reflectionsRemaining(-1) {}
+   __device__ Ray() : origin(Vector()), direction(Vector()), reflectionsRemaining(-1) {}
 
-   Ray(Vector origin_, Vector direction_, int reflections) :
+   __device__ Ray(Vector origin_, Vector direction_, int reflections) :
     origin(origin_), reflectionsRemaining(reflections) {
       direction = direction_.normalize();
 

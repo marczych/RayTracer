@@ -1,6 +1,6 @@
 #include "Color.h"
 
-Color Color::operator+ (Color const &c) const {
+__device__ Color Color::operator+ (Color const &c) const {
    Color other;
 
    other.r = NTZ(c.r) + NTZ(r);
@@ -10,7 +10,7 @@ Color Color::operator+ (Color const &c) const {
    return other;
 }
 
-Color Color::operator* (double amount) const {
+__device__ Color Color::operator* (double amount) const {
    Color other;
 
    other.r = r * amount;

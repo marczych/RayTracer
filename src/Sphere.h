@@ -15,13 +15,13 @@ public:
    double shininess;
    double reflectivity;
 
-   Sphere(Vector center_, double radius_, Color color_, double shininess_,
+   __device__ Sphere(Vector center_, double radius_, Color color_, double shininess_,
     double reflectivity_) : center(center_), radius(radius_), color(color_),
     shininess(shininess_), reflectivity(reflectivity_) {}
 
-   Intersection intersect(Ray);
-   double getShininess();
-   double getReflectivity();
+   __device__ Intersection intersect(Ray);
+   __device__ double getShininess();
+   __device__ double getReflectivity();
 };
 
 #endif
