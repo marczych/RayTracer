@@ -27,6 +27,9 @@ RayTracer::~RayTracer() {
 }
 
 void RayTracer::traceRays(string fileName) {
+   float elapsedTime;
+   cudaEvent_t startEvent;
+   cudaEvent_t stopEvent;
    Sphere* devSpheres;
    Light* devLights;
    Color* devImage;
@@ -57,6 +60,10 @@ void RayTracer::traceRays(string fileName) {
    dim3 dimGrid(gridWidth, gridHeight);
    dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
 
+   ERROR_HANDLER(cudaEventCreate(&startEvent));
+   ERROR_HANDLER(cudaEventCreate(&stopEvent));
+   ERROR_HANDLER(cudaEventRecord(startEvent, 0));
+
    cudaTraceRays<<<dimGrid, dimBlock>>>(devSpheres, devLights, devImage,
     devRayTracer);
 
@@ -65,6 +72,15 @@ void RayTracer::traceRays(string fileName) {
       printf("Error: %s\n", cudaGetErrorString(err));
       exit(EXIT_FAILURE);
    }
+
+   ERROR_HANDLER(cudaEventRecord(stopEvent, 0));
+   ERROR_HANDLER(cudaEventSynchronize(stopEvent));
+   ERROR_HANDLER(cudaEventElapsedTime(&elapsedTime, startEvent, stopEvent));
+   printf("GPU computation complete\n");
+   printf("Time to generate:  %.1f ms\n", elapsedTime);
+
+   ERROR_HANDLER(cudaEventDestroy(startEvent));
+   ERROR_HANDLER(cudaEventDestroy(stopEvent));
 
    ERROR_HANDLER(cudaMemcpy(image.getPixmap(), devImage,
     width * height * sizeof(Color), cudaMemcpyDeviceToHost));
