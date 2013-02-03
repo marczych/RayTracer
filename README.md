@@ -1,3 +1,26 @@
+Edgar Villarreal
+Marc Zych
+Steve Choo
+
+Ray Tracer Lab Write-Up
+
+The purpose of this write up is to discuss our implementation of a Ray Tracer using CUDA. We began this by "CUDA-izing" each original function that was written originally for the CPU. This involved a few basic steps:
+
+1. cudaMalloc-ing the appropriate memory on the device for the spheres, lights, and ray tracer.
+2. cudaMemcpy-ing from host to device.
+3. Adding necessary __device__, __global__, and __host__ constructs around all our calling functions to allow the code to run on the GPU.
+4. Performing the parallel computing steps on the device by calling one function: cudaTraceRays();
+5. Finally, we copy the results back to the host CPU from the device.
+
+The time for the Ray Tracer to run on the CPU was exactly 55.04 seconds to generate 105 ray traced spheres. Our parallelized CUDA version rendered the same scene in 31.5 ms. That adds up to about 185x speedup. The scene file we used for performance comparisons was ./scenes/ballsToTheWall.scn.
+
+To run:
+cd src
+make
+./RayTracer ../scenes/ballsToTheWall.scn 1 1 test.tga
+# Open test.tga
+
+
 #Ray Tracer!
 
 This is a simple ray tracer developed as a final project for CSC 471 Introduction to Graphics at Cal Poly.
