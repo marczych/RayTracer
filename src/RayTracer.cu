@@ -150,7 +150,7 @@ __device__ Color RayTracer::castRay(Ray ray, Sphere* spheres, Light* lights) {
    Intersection intersection = getClosestIntersection(ray, spheres);
 
    if (intersection.didIntersect) {
-      return performLighting(intersection, lights);
+      return performLighting(intersection, lights, spheres);
    } else {
       return Color();
    }
@@ -176,10 +176,10 @@ __device__ Intersection RayTracer::getClosestIntersection(Ray ray,
 }
 
 __device__ Color RayTracer::performLighting(Intersection intersection,
- Light* lights) {
+ Light* lights, Sphere* spheres) {
    Color ambientColor = getAmbientLighting(intersection);
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(
-    intersection, lights);
+    intersection, lights, spheres);
    //Color reflectedColor = getReflectiveLighting(intersection);
 
    return ambientColor + diffuseAndSpecularColor;// + reflectedColor;
@@ -190,7 +190,7 @@ __device__ Color RayTracer::getAmbientLighting(Intersection intersection) {
 }
 
 __device__ Color RayTracer::getDiffuseAndSpecularLighting(
- Intersection intersection, Light* lights) {
+ Intersection intersection, Light* lights, Sphere* spheres) {
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
    int numLights = 1; // TODO
@@ -209,16 +209,17 @@ __device__ Color RayTracer::getDiffuseAndSpecularLighting(
        * Intersection is facing light.
        */
       if (dotProduct >= 0.0f) {
-         //Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
-         //Intersection shadowIntersection = getClosestIntersection(shadowRay);
+         Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
+         Intersection shadowIntersection = getClosestIntersection(shadowRay,
+          spheres);
 
-         //if (shadowIntersection.didIntersect &&
-         // shadowIntersection.distance < lightDistance) {
-         //   /**
-         //    * Position is in shadow of another object - continue with other lights.
-         //    */
-         //   continue;
-         //}
+         if (shadowIntersection.didIntersect &&
+          shadowIntersection.distance < lightDistance) {
+            /**
+             * Position is in shadow of another object - continue with other lights.
+             */
+            continue;
+         }
 
          diffuseColor = (diffuseColor + (intersection.color * dotProduct)) *
           light->intensity;
