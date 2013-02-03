@@ -10,7 +10,7 @@ public:
    Vector lookAt;
    Vector w, u, v;
 
-   __device__ Camera() {
+   Camera() {
       position = Vector(0.0, 0.0, 100.0);
       up = Vector(0.0, 1.0, 0.0);
       lookAt = Vector(0.0, 0.0, 0.0);
@@ -18,13 +18,13 @@ public:
       calculateWUV();
    }
 
-   __device__ Camera(Vector position_, Vector up_, Vector lookAt_) : position(position_),
+   Camera(Vector position_, Vector up_, Vector lookAt_) : position(position_),
     up(up_), lookAt(lookAt_) {
        calculateWUV();
    }
 
 private:
-   __device__ void calculateWUV();
+   void calculateWUV();
 };
 
 #endif

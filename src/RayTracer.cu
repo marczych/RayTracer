@@ -9,7 +9,7 @@
 using namespace std;
 
 #define ERROR_HANDLER(x) ErrorHandler(x, __FILE__, __LINE__)
-#define TILE_WIDTH 32
+#define TILE_WIDTH 16
 
 static void ErrorHandler(cudaError_t err, const char *file, int line) {
    if (err != cudaSuccess) {
@@ -20,7 +20,7 @@ static void ErrorHandler(cudaError_t err, const char *file, int line) {
 
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
- maxReflections(maxReflections_), superSamples(superSamples_), camera(Camera()),
+ maxReflections(maxReflections_), superSamples(superSamples_),
  imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {}
 
 RayTracer::~RayTracer() {
@@ -60,6 +60,12 @@ void RayTracer::traceRays(string fileName) {
    cudaTraceRays<<<dimGrid, dimBlock>>>(devSpheres, devLights, devImage,
     devRayTracer);
 
+   cudaError_t err = cudaGetLastError();
+   if (err != cudaSuccess) {
+      printf("Error: %s\n", cudaGetErrorString(err));
+      exit(EXIT_FAILURE);
+   }
+
    ERROR_HANDLER(cudaMemcpy(image.getPixmap(), devImage,
     width * height * sizeof(Color), cudaMemcpyDeviceToHost));
 
@@ -69,6 +75,7 @@ void RayTracer::traceRays(string fileName) {
    ERROR_HANDLER(cudaFree(devRayTracer));
 
    image.WriteTga(fileName.c_str(), false);
+   cout << "Writing image file" << endl;
 }
 
 __global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image,
@@ -77,16 +84,17 @@ __global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image,
    int y = blockIdx.y * TILE_WIDTH + threadIdx.y;
 
    if (x < rayTracer->width && y < rayTracer->height) {
-      Color color = rayTracer->castRayForPixel(x, y);
+      Color color = rayTracer->castRayForPixel(x, y, spheres, lights);
       Color* imageColor = image + (x * rayTracer->height + y);
 
-      imageColor->r = 1.0f;//color.r;
-      imageColor->g = 1.0f;//color.g;
-      imageColor->b = 1.0f;//color.b;
+      imageColor->r = color.r;
+      imageColor->g = color.g;
+      imageColor->b = color.b;
    }
 }
 
-__device__ Color RayTracer::castRayForPixel(int x, int y) {
+__device__ Color RayTracer::castRayForPixel(int x, int y, Sphere* spheres,
+ Light* lights) {
    double rayX = (x - width / 2)/2.0;
    double rayY = (y - height / 2)/2.0;
    double pixelWidth = rayX - (x + 1 - width / 2)/2.0;
@@ -102,14 +110,16 @@ __device__ Color RayTracer::castRayForPixel(int x, int y) {
           (camera.u * (sampleStartX + (x * sampleWidth)) * imageScale) +
           (camera.v * (sampleStartY + (y * sampleWidth)) * imageScale);
 
-         color = color + (castRayAtPoint(imagePlanePoint) * sampleWeight);
+         color = color + (castRayAtPoint(imagePlanePoint, spheres, lights) *
+          sampleWeight);
       }
    }
 
    return color;
 }
 
-__device__ Color RayTracer::castRayAtPoint(Vector point) {
+__device__ Color RayTracer::castRayAtPoint(Vector point, Sphere* spheres,
+ Light* lights) {
    Color color;
 
    for (int i = 0; i < depthComplexity; i++) {
@@ -126,30 +136,34 @@ __device__ Color RayTracer::castRayAtPoint(Vector point) {
       //   viewRay.direction = viewRay.direction.normalize();
       //}
 
-      color = color + (castRay(viewRay) * (1 / (float)depthComplexity));
+      color = color + (castRay(viewRay, spheres, lights) *
+       (1 / (float)depthComplexity));
    }
 
    return color;
 }
 
-__device__ Color RayTracer::castRay(Ray ray) {
+__device__ Color RayTracer::castRay(Ray ray, Sphere* spheres, Light* lights) {
+
+
    raysCast++;
-   Intersection intersection = getClosestIntersection(ray);
+   Intersection intersection = getClosestIntersection(ray, spheres);
 
    if (intersection.didIntersect) {
-      return performLighting(intersection);
+      return performLighting(intersection, lights);
    } else {
       return Color();
    }
 }
 
-__device__ Intersection RayTracer::getClosestIntersection(Ray ray) {
+__device__ Intersection RayTracer::getClosestIntersection(Ray ray,
+ Sphere* spheres) {
    Intersection closestIntersection(false);
    closestIntersection.distance = 983487438;
-   int numSpheres = 20; // TODO
+   int numSpheres = 250; // TODO
 
    for (int i = 0; i < numSpheres; i++) {
-      Sphere* sphere = conSpheres + i;
+      Sphere* sphere = spheres + i;
       Intersection intersection = sphere->intersect(ray);
 
       if (intersection.didIntersect && intersection.distance <
@@ -161,9 +175,11 @@ __device__ Intersection RayTracer::getClosestIntersection(Ray ray) {
    return closestIntersection;
 }
 
-__device__ Color RayTracer::performLighting(Intersection intersection) {
+__device__ Color RayTracer::performLighting(Intersection intersection,
+ Light* lights) {
    Color ambientColor = getAmbientLighting(intersection);
-   Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection);
+   Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(
+    intersection, lights);
    //Color reflectedColor = getReflectiveLighting(intersection);
 
    return ambientColor + diffuseAndSpecularColor;// + reflectedColor;
@@ -173,13 +189,14 @@ __device__ Color RayTracer::getAmbientLighting(Intersection intersection) {
    return intersection.color * 0.2;
 }
 
-__device__ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
+__device__ Color RayTracer::getDiffuseAndSpecularLighting(
+ Intersection intersection, Light* lights) {
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
    int numLights = 1; // TODO
 
    for (int i = 0; i < numLights; i++) {
-      Light* light = conLights + i;
+      Light* light = lights + i;
       Vector lightOffset = light->position - intersection.intersection;
       double lightDistance = lightOffset.length();
       /**
@@ -192,16 +209,16 @@ __device__ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersect
        * Intersection is facing light.
        */
       if (dotProduct >= 0.0f) {
-         Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
-         Intersection shadowIntersection = getClosestIntersection(shadowRay);
+         //Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
+         //Intersection shadowIntersection = getClosestIntersection(shadowRay);
 
-         if (shadowIntersection.didIntersect &&
-          shadowIntersection.distance < lightDistance) {
-            /**
-             * Position is in shadow of another object - continue with other lights.
-             */
-            continue;
-         }
+         //if (shadowIntersection.didIntersect &&
+         // shadowIntersection.distance < lightDistance) {
+         //   /**
+         //    * Position is in shadow of another object - continue with other lights.
+         //    */
+         //   continue;
+         //}
 
          diffuseColor = (diffuseColor + (intersection.color * dotProduct)) *
           light->intensity;
@@ -240,19 +257,19 @@ __device__ Color RayTracer::getSpecularLighting(Intersection intersection, Light
    return specularColor;
 }
 
-__device__ Color RayTracer::getReflectiveLighting(Intersection intersection) {
-   double reflectivity = intersection.object->getReflectivity();
-   int reflectionsRemaining = intersection.ray.reflectionsRemaining;
-
-   if (reflectivity == NOT_REFLECTIVE || reflectionsRemaining <= 0) {
-      return Color();
-   } else {
-      Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
-      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
-
-      return castRay(reflectedRay) * reflectivity;
-   }
-}
+//__device__ Color RayTracer::getReflectiveLighting(Intersection intersection) {
+//   double reflectivity = intersection.object->getReflectivity();
+//   int reflectionsRemaining = intersection.ray.reflectionsRemaining;
+//
+//   if (reflectivity == NOT_REFLECTIVE || reflectionsRemaining <= 0) {
+//      return Color();
+//   } else {
+//      Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
+//      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
+//
+//      return castRay(reflectedRay) * reflectivity;
+//   }
+//}
 
 __device__ Vector RayTracer::reflectVector(Vector vector, Vector normal) {
    return normal * 2 * vector.dot(normal) - vector;
@@ -317,11 +334,12 @@ void RayTracer::readScene(istream& in) {
 }
 
 
-__device__ Vector Vector::normalize() {
-   return (*this) /= this->length();
+__host__ __device__ Vector Vector::normalize() {
+   float len = this->length();
+   return (*this) / len;
 }
 
-__device__ Vector Vector::cross(Vector const & v) const {
+__host__ __device__ Vector Vector::cross(Vector const & v) const {
    return Vector(y*v.z - v.y*z, v.x*z - x*v.z, x*v.y - v.x*y);
 }
 
@@ -329,7 +347,7 @@ __device__ double Vector::dot(Vector const & v) const {
    return x*v.x + y*v.y + z*v.z;
 }
 
-__device__ double Vector::length() const {
+__host__ __device__ double Vector::length() const {
    return sqrtf(x*x + y*y + z*z);
 }
 
@@ -345,7 +363,7 @@ __device__ Vector & Vector::operator += (Vector const & v) {
    return * this;
 }
 
-__device__ Vector Vector::operator - (Vector const & v) const {
+__host__ __device__ Vector Vector::operator - (Vector const & v) const {
    return Vector(x-v.x, y-v.y, z-v.z);
 }
 
@@ -369,11 +387,11 @@ __device__ Vector & Vector::operator *= (Vector const & v) {
    return * this;
 }
 
-__device__ Vector Vector::operator / (Vector const & v) const {
+__host__ __device__ Vector Vector::operator / (Vector const & v) const {
    return Vector(x/v.x, y/v.y, z/v.z);
 }
 
-__device__ Vector & Vector::operator /= (Vector const & v) {
+__host__ __device__ Vector & Vector::operator /= (Vector const & v) {
    x /= v.x;
    y /= v.y;
    z /= v.z;
@@ -393,7 +411,7 @@ __device__ Vector & Vector::operator *= (double const s) {
    return * this;
 }
 
-__device__ Vector Vector::operator / (double const s) const {
+__host__ __device__ Vector Vector::operator / (double const s) const {
    return Vector(x/s, y/s, z/s);
 }
 
@@ -458,7 +476,7 @@ __device__ double Sphere::getReflectivity() {
    return reflectivity;
 }
 
-__device__ void Camera::calculateWUV() {
+void Camera::calculateWUV() {
    w = (lookAt - position).normalize();
    u = up.cross(w).normalize();
    v = w.cross(u);

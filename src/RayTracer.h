@@ -43,13 +43,13 @@ public:
    }
 
    void traceRays(std::string);
-   __device__ Color castRayForPixel(int, int);
-   __device__ Color castRayAtPoint(Vector);
-   __device__ Color castRay(Ray);
-   __device__ Intersection getClosestIntersection(Ray);
-   __device__ Color performLighting(Intersection);
+   __device__ Color castRayForPixel(int, int, Sphere*, Light*);
+   __device__ Color castRayAtPoint(Vector, Sphere*, Light*);
+   __device__ Color castRay(Ray, Sphere*, Light*);
+   __device__ Intersection getClosestIntersection(Ray, Sphere*);
+   __device__ Color performLighting(Intersection, Light*);
    __device__ Color getAmbientLighting(Intersection);
-   __device__ Color getDiffuseAndSpecularLighting(Intersection);
+   __device__ Color getDiffuseAndSpecularLighting(Intersection, Light*);
    __device__ Color getSpecularLighting(Intersection, Light*);
    __device__ Color getReflectiveLighting(Intersection);
    __device__ Vector reflectVector(Vector, Vector);
@@ -57,7 +57,5 @@ public:
 };
 
 __global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image, RayTracer* rayTracer);
-__constant__ Sphere* conSpheres;
-__constant__ Light* conLights;
 
 #endif
