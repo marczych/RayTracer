@@ -1,10 +1,10 @@
 CC = nvcc
-CFLAGS = -O2 -g -G
+CFLAGS = -O2
 
-main:
-	$(CC) $(CFLAGS) RayTracer.cu main.cu
+RayTracer: RayTracer.cu main.cu
+	$(CC) $(CFLAGS) RayTracer.cu main.cu -o RayTracer
 
-RayTracer: main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o
+RayTracerOld: main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o
 	$(CC) $(CFLAGS) main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o -o RayTracer
 
 RayTracer.o: RayTracer.cu RayTracer.h Vector.h Image.h Object.h Sphere.h Intersection.h Light.h

@@ -27,9 +27,10 @@ RayTracer::~RayTracer() {
 }
 
 void RayTracer::traceRays(string fileName) {
+   Sphere* devSpheres;
+   Light* devLights;
    Color* devImage;
    RayTracer* devRayTracer;
-   int columnsCompleted = 0;
    Image image(width, height);
 
    // Reset depthComplexity to avoid unnecessary loops.
@@ -37,12 +38,12 @@ void RayTracer::traceRays(string fileName) {
       depthComplexity = 1;
    }
 
-   ERROR_HANDLER(cudaMalloc((void**)&conSpheres, spheres.size() * sizeof(Sphere)));
-   ERROR_HANDLER(cudaMemcpy(conSpheres, &spheres.front(),
+   ERROR_HANDLER(cudaMalloc((void**)&devSpheres, spheres.size() * sizeof(Sphere)));
+   ERROR_HANDLER(cudaMemcpy(devSpheres, &spheres.front(),
     spheres.size() * sizeof(Sphere), cudaMemcpyHostToDevice));
 
-   ERROR_HANDLER(cudaMalloc((void**)&conLights, lights.size() * sizeof(Light)));
-   ERROR_HANDLER(cudaMemcpy(conLights, &lights.front(),
+   ERROR_HANDLER(cudaMalloc((void**)&devLights, lights.size() * sizeof(Light)));
+   ERROR_HANDLER(cudaMemcpy(devLights, &lights.front(),
     lights.size() * sizeof(Light), cudaMemcpyHostToDevice));
 
    ERROR_HANDLER(cudaMalloc((void**)&devImage, width * height * sizeof(Color)));
@@ -56,36 +57,32 @@ void RayTracer::traceRays(string fileName) {
    dim3 dimGrid(gridWidth, gridHeight);
    dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
 
-   cudaTraceRays<<<dimGrid, dimBlock>>>(devImage, devRayTracer);
+   cudaTraceRays<<<dimGrid, dimBlock>>>(devSpheres, devLights, devImage,
+    devRayTracer);
 
    ERROR_HANDLER(cudaMemcpy(image.getPixmap(), devImage,
     width * height * sizeof(Color), cudaMemcpyDeviceToHost));
 
    ERROR_HANDLER(cudaFree(devImage));
-   ERROR_HANDLER(cudaFree(conSpheres));
-   ERROR_HANDLER(cudaFree(conLights));
+   ERROR_HANDLER(cudaFree(devSpheres));
+   ERROR_HANDLER(cudaFree(devLights));
    ERROR_HANDLER(cudaFree(devRayTracer));
 
    image.WriteTga(fileName.c_str(), false);
 }
 
-__global__ void cudaTraceRays(Color* image, RayTracer* rayTracer) {
+__global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image,
+ RayTracer* rayTracer) {
    int x = blockIdx.x * TILE_WIDTH + threadIdx.x;
    int y = blockIdx.y * TILE_WIDTH + threadIdx.y;
 
    if (x < rayTracer->width && y < rayTracer->height) {
-      //Color color;// = rayTracer->castRayForPixel(x, y);
-      //color.r = 0.5;
-      //color.g = 0.5;
-      //color.b = 0.5;
+      Color color = rayTracer->castRayForPixel(x, y);
       Color* imageColor = image + (x * rayTracer->height + y);
 
-      imageColor->r = 0.5;//color.r;
-      imageColor->g = 0.5;//color.g;
-      imageColor->b = 0.5;//color.b;
-
-      //Color* current
-      //image.pixel(x, y, castRayForPixel(x, y));
+      imageColor->r = 1.0f;//color.r;
+      imageColor->g = 1.0f;//color.g;
+      imageColor->b = 1.0f;//color.b;
    }
 }
 

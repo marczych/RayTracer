@@ -56,7 +56,7 @@ public:
    void readScene(std::istream&);
 };
 
-__global__ void cudaTraceRays(Color* image, RayTracer* rayTracer);
+__global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image, RayTracer* rayTracer);
 __constant__ Sphere* conSpheres;
 __constant__ Light* conLights;
 
