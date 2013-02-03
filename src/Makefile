@@ -1,5 +1,8 @@
 CC = nvcc
-CFLAGS = -O2
+CFLAGS = -O2 -g -G
+
+main:
+	$(CC) $(CFLAGS) RayTracer.cu main.cu
 
 RayTracer: main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o
 	$(CC) $(CFLAGS) main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o -o RayTracer

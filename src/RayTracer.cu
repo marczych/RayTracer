@@ -74,7 +74,16 @@ __global__ void cudaTraceRays(Color* image, RayTracer* rayTracer) {
    int y = blockIdx.y * TILE_WIDTH + threadIdx.y;
 
    if (x < rayTracer->width && y < rayTracer->height) {
-      Color color = rayTracer->castRayForPixel(x, y);
+      //Color color;// = rayTracer->castRayForPixel(x, y);
+      //color.r = 0.5;
+      //color.g = 0.5;
+      //color.b = 0.5;
+      Color* imageColor = image + (x * rayTracer->height + y);
+
+      imageColor->r = 0.5;//color.r;
+      imageColor->g = 0.5;//color.g;
+      imageColor->b = 0.5;//color.b;
+
       //Color* current
       //image.pixel(x, y, castRayForPixel(x, y));
    }
@@ -92,11 +101,11 @@ __device__ Color RayTracer::castRayForPixel(int x, int y) {
 
    for (int x = 0; x < superSamples; x++) {
       for (int y = 0; y < superSamples; y++) {
-         //Vector imagePlanePoint = camera.lookAt -
-         // (camera.u * (sampleStartX + (x * sampleWidth)) * imageScale) +
-         // (camera.v * (sampleStartY + (y * sampleWidth)) * imageScale);
+         Vector imagePlanePoint = camera.lookAt -
+          (camera.u * (sampleStartX + (x * sampleWidth)) * imageScale) +
+          (camera.v * (sampleStartY + (y * sampleWidth)) * imageScale);
 
-         //color = color + (castRayAtPoint(imagePlanePoint) * sampleWeight);
+         color = color + (castRayAtPoint(imagePlanePoint) * sampleWeight);
       }
    }
 
@@ -310,3 +319,358 @@ void RayTracer::readScene(istream& in) {
    }
 }
 
+
+__device__ Vector Vector::normalize() {
+   return (*this) /= this->length();
+}
+
+__device__ Vector Vector::cross(Vector const & v) const {
+   return Vector(y*v.z - v.y*z, v.x*z - x*v.z, x*v.y - v.x*y);
+}
+
+__device__ double Vector::dot(Vector const & v) const {
+   return x*v.x + y*v.y + z*v.z;
+}
+
+__device__ double Vector::length() const {
+   return sqrtf(x*x + y*y + z*z);
+}
+
+__device__ Vector Vector::operator + (Vector const & v) const {
+   return Vector(x+v.x, y+v.y, z+v.z);
+}
+
+__device__ Vector & Vector::operator += (Vector const & v) {
+   x += v.x;
+   y += v.y;
+   z += v.z;
+
+   return * this;
+}
+
+__device__ Vector Vector::operator - (Vector const & v) const {
+   return Vector(x-v.x, y-v.y, z-v.z);
+}
+
+__device__ Vector & Vector::operator -= (Vector const & v) {
+   x -= v.x;
+   y -= v.y;
+   z -= v.z;
+
+   return * this;
+}
+
+__device__ Vector Vector::operator * (Vector const & v) const {
+   return Vector(x*v.x, y*v.y, z*v.z);
+}
+
+__device__ Vector & Vector::operator *= (Vector const & v) {
+   x *= v.x;
+   y *= v.y;
+   z *= v.z;
+
+   return * this;
+}
+
+__device__ Vector Vector::operator / (Vector const & v) const {
+   return Vector(x/v.x, y/v.y, z/v.z);
+}
+
+__device__ Vector & Vector::operator /= (Vector const & v) {
+   x /= v.x;
+   y /= v.y;
+   z /= v.z;
+
+   return * this;
+}
+
+__device__ Vector Vector::operator * (double const s) const {
+   return Vector(x*s, y*s, z*s);
+}
+
+__device__ Vector & Vector::operator *= (double const s) {
+   x *= s;
+   y *= s;
+   z *= s;
+
+   return * this;
+}
+
+__device__ Vector Vector::operator / (double const s) const {
+   return Vector(x/s, y/s, z/s);
+}
+
+__device__ Vector & Vector::operator /= (double const s) {
+   x /= s;
+   y /= s;
+   z /= s;
+
+   return * this;
+}
+
+__device__ Intersection Sphere::intersect(Ray ray) {
+   Vector deltap = ray.origin - center;
+   double a = ray.direction.dot(ray.direction);
+   double b = deltap.dot(ray.direction) * 2;
+   double c = deltap.dot(deltap) - (radius * radius);
+
+   double disc = b * b - 4 * a * c;
+   if (disc < 0) {
+      return Intersection(false); // No intersection.
+   }
+
+   disc = sqrt(disc);
+
+   double q;
+   if (b < 0) {
+      q = (-b - disc) * 0.5;
+   } else {
+      q = (-b + disc) * 0.5;
+   }
+
+   double r1 = q / a;
+   double r2 = c / q;
+
+   if (r1 > r2) {
+      double tmp = r1;
+      r1 = r2;
+      r2 = tmp;
+   }
+
+   double distance = r1;
+   if (distance < 0) {
+      distance = r2;
+   }
+
+   if (distance < 0 || isnan(distance)) {
+      return Intersection(false); // No intersection.
+   }
+
+   Vector point = ray.origin + (ray.direction * distance);
+   Vector normal = (point - center).normalize();
+
+   /* return Intersection(point, distance, normal, Color(fabs(normal.x), fabs(normal.y), fabs(normal.z)), this); */
+   return Intersection(ray, point, distance, normal, color, this);
+}
+
+__device__ double Sphere::getShininess() {
+   return shininess;
+}
+
+__device__ double Sphere::getReflectivity() {
+   return reflectivity;
+}
+
+__device__ void Camera::calculateWUV() {
+   w = (lookAt - position).normalize();
+   u = up.cross(w).normalize();
+   v = w.cross(u);
+}
+
+__device__ Color Color::operator+ (Color const &c) const {
+   Color other;
+
+   other.r = NTZ(c.r) + NTZ(r);
+   other.g = NTZ(c.g) + NTZ(g);
+   other.b = NTZ(c.b) + NTZ(b);
+
+   return other;
+}
+
+__device__ Color Color::operator* (double amount) const {
+   Color other;
+
+   other.r = r * amount;
+   other.g = g * amount;
+   other.b = b * amount;
+
+   return other;
+}
+
+Image::Image(int width, int height)
+{
+    _width = width;
+    _height = height;
+    _max = 1.0;
+
+    _pixmap = (Color*)malloc(sizeof(Color) * _width * _height);
+}
+
+Image::~Image()
+{
+    free(_pixmap);
+}
+
+void Image::WriteTga(const char *outfile, bool scale_color)
+{
+    FILE *fp = fopen(outfile, "w");
+    if (fp == NULL)
+    {
+        perror("ERROR: Image::WriteTga() failed to open file for writing!\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    // write 24-bit uncompressed targa header
+    // thanks to Paul Bourke (http://local.wasp.uwa.edu.au/~pbourke/dataformats/tga/)
+    putc(0, fp);
+    putc(0, fp);
+    
+    putc(2, fp); // type is uncompressed RGB
+    
+    putc(0, fp);
+    putc(0, fp);
+    putc(0, fp);
+    putc(0, fp);
+    putc(0, fp);
+    
+    putc(0, fp); // x origin, low byte
+    putc(0, fp); // x origin, high byte
+    
+    putc(0, fp); // y origin, low byte
+    putc(0, fp); // y origin, high byte
+
+    putc(_width & 0xff, fp); // width, low byte
+    putc((_width & 0xff00) >> 8, fp); // width, high byte
+
+    putc(_height & 0xff, fp); // height, low byte
+    putc((_height & 0xff00) >> 8, fp); // height, high byte
+
+    putc(24, fp); // 24-bit color depth
+
+    putc(0, fp);
+
+    // write the raw pixel data in groups of 3 bytes (BGR order)
+    for (int y = 0; y < _height; y++)
+    {
+        for (int x = 0; x < _width; x++)
+        {
+            // if color scaling is on, scale 0.0 -> _max as a 0 -> 255 unsigned byte
+            unsigned char rbyte, gbyte, bbyte;
+            Color* color = _pixmap + (x * _height + y);
+            if (scale_color)
+            {
+                rbyte = (unsigned char)((color->r / _max) * 255);
+                gbyte = (unsigned char)((color->g / _max) * 255);
+                bbyte = (unsigned char)((color->b / _max) * 255);
+            }
+            else
+            {
+                double r = (color->r > 1.0) ? 1.0 : color->r;
+                double g = (color->g > 1.0) ? 1.0 : color->g;
+                double b = (color->b > 1.0) ? 1.0 : color->b;
+                rbyte = (unsigned char)(r * 255);
+                gbyte = (unsigned char)(g * 255);
+                bbyte = (unsigned char)(b * 255);
+            }
+            putc(bbyte, fp);
+            putc(gbyte, fp);
+            putc(rbyte, fp);
+        }
+    }
+
+    fclose(fp);
+}
+
+void Image::GenTestPattern()
+{
+    Color pxl(0.0, 0.0, 0.0, 0.0);
+    int i, j, color;
+    float radius, dist;
+    
+    // draw a rotating color checkerboard (RGB) in a 25x25 pixel grid
+    for (int x = 0; x < _width; x++)
+    {
+        for (int y = 0; y < _height; y++)
+        {
+            i = x / 25;
+            j = y / 25;
+            color = (i + j) % 3;
+            
+            switch (color)
+            {
+                case 0: // red
+                    pxl.r = 1.0; pxl.g = 0.0; pxl.b = 0.0;
+                    break;
+
+                case 1: // green
+                    pxl.r = 0.0; pxl.g = 1.0; pxl.b = 0.0;
+                    break;
+
+                case 2: // blue
+                    pxl.r = 0.0; pxl.g = 0.0; pxl.b = 1.0;
+                    break;
+            }
+
+            pixel(x, y, pxl);
+        } 
+    }
+
+    // draw a black circle in the top left quadrant (centered at (i, j))
+    pxl.r = 0.0; pxl.g = 0.0; pxl.b = 0.0;
+    i = _width / 4;
+    j = 3 * _height / 4;
+    radius = (((float)_width / 4.0) < ((float)_height / 4.0)) ? (float)_width / 4.0 : (float)_height / 4.0;
+    for (int x = 0; x < _width; x++)
+    {
+        for (int y = 0; y < _height; y++)
+        {
+            dist = sqrtf((float)((x - i) * (x - i)) + (float)((y - j) * (y - j)));
+            if (dist <= (float)radius)
+            {
+                pixel(x, y, pxl);
+            }
+        }
+    }
+    
+    // draw a white circle in the lower right quadrant (centered at (i, j))
+    pxl.r = 1.0; pxl.g = 1.0; pxl.b = 1.0;
+    i = 3 * _width / 4;
+    j = _height / 4;
+    radius = (((float)_width / 4.0) < ((float)_height / 4.0)) ? (float)_width / 4.0 : (float)_height / 4.0;
+    for (int x = 0; x < _width; x++)
+    {
+        for (int y = 0; y < _height; y++)
+        {
+            dist = sqrtf((float)((x - i) * (x - i)) + (float)((y - j) * (y - j)));
+            if (dist <= (float)radius)
+            {
+                pixel(x, y, pxl);
+            }
+        }
+    }
+}
+
+Color Image::pixel(int x, int y)
+{
+    if (x < 0 || x > _width - 1 ||
+        y < 0 || y > _height - 1)
+    {
+        // catostrophically fail
+        fprintf(stderr, "ERROR: Image::pixel(%d, %d) outside range of the image!\n", x, y);
+        exit(EXIT_FAILURE);
+    }
+    
+    return _pixmap[x * _height + y];
+}
+
+void Image::pixel(int x, int y, Color pxl)
+{
+    if (x < 0 || x > _width - 1 ||
+        y < 0 || y > _height - 1)
+    {
+        // catostrophically fail
+        fprintf(stderr, "ERROR: Image::pixel(%d, %d, pixel) outside range of the image!\n", x, y);
+        exit(EXIT_FAILURE);
+    }
+    
+    _pixmap[x * _height + y] = pxl;
+
+    // update the max color if necessary
+    _max = (pxl.r > _max) ? pxl.r : _max;
+    _max = (pxl.g > _max) ? pxl.g : _max;
+    _max = (pxl.b > _max) ? pxl.b : _max;
+}
+
+void Image::setPixmap(Color* pixmap) {
+   _pixmap = pixmap;
+}
