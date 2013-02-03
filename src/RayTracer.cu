@@ -95,7 +95,6 @@ void RayTracer::traceRays(string fileName) {
    ERROR_HANDLER(cudaFree(devRayTracer));
 
    image.WriteTga(fileName.c_str(), false);
-   cout << "Writing image file" << endl;
 }
 
 __global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image,
