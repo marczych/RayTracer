@@ -163,9 +163,6 @@ __device__ Color RayTracer::castRayAtPoint(Vector point, Sphere* spheres,
 }
 
 __device__ Color RayTracer::castRay(Ray ray, Sphere* spheres, Light* lights) {
-
-
-   raysCast++;
    Intersection intersection = getClosestIntersection(ray, spheres);
 
    if (intersection.didIntersect) {
