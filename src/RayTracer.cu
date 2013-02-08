@@ -193,6 +193,25 @@ __device__ Intersection RayTracer::getClosestIntersection(Ray ray,
    return closestIntersection;
 }
 
+/**
+ * Basically same code as getClosestIntersection but short circuits if an
+ * intersection closer to the given light distance is found.
+ */
+__device__ bool RayTracer::isInShadow(Ray ray, Sphere* spheres,
+ double lightDistance) {
+   for (int i = 0; i < numSpheres; i++) {
+      Sphere* sphere = spheres + i;
+      Intersection intersection = sphere->intersect(ray);
+
+      if (intersection.didIntersect && intersection.distance <
+       lightDistance) {
+         return true;
+      }
+   }
+
+   return false;
+}
+
 __device__ Color RayTracer::performLighting(Intersection intersection,
  Light* lights, Sphere* spheres) {
    Color ambientColor = getAmbientLighting(intersection);
@@ -227,11 +246,7 @@ __device__ Color RayTracer::getDiffuseAndSpecularLighting(
        */
       if (dotProduct >= 0.0f) {
          Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
-         Intersection shadowIntersection = getClosestIntersection(shadowRay,
-          spheres);
-
-         if (shadowIntersection.didIntersect &&
-          shadowIntersection.distance < lightDistance) {
+         if (isInShadow(shadowRay, spheres, lightDistance)) {
             /**
              * Position is in shadow of another object - continue with other lights.
              */

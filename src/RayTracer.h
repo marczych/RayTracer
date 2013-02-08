@@ -49,6 +49,7 @@ public:
    __device__ Color castRayAtPoint(Vector, Sphere*, Light*);
    __device__ Color castRay(Ray, Sphere*, Light*);
    __device__ Intersection getClosestIntersection(Ray, Sphere*);
+   __device__ bool isInShadow(Ray, Sphere*, double distance);
    __device__ Color performLighting(Intersection, Light*, Sphere*);
    __device__ Color getAmbientLighting(Intersection);
    __device__ Color getDiffuseAndSpecularLighting(Intersection, Light*, Sphere*);
