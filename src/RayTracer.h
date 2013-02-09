@@ -44,7 +44,7 @@ public:
       lights.push_back(*light);
    }
 
-   void traceRays(std::string);
+   void traceRays();
    __device__ Color castRayForPixel(int, int, Sphere*, Light*);
    __device__ Color castRayAtPoint(Vector, Sphere*, Light*);
    __device__ Color castRay(Ray, Sphere*, Light*);

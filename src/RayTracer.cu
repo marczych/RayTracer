@@ -26,8 +26,7 @@ RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamp
 RayTracer::~RayTracer() {
 }
 
-void RayTracer::traceRays(string fileName) {
-   Sphere* devSpheres;
+void RayTracer::traceRays() {
    Color* devImage;
    Light* devLights;
    RayTracer* devRayTracer;
