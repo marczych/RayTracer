@@ -6,10 +6,18 @@
 #include <stdlib.h>
 #include "RayTracer.h"
 
+const double PI = atan(1.0)*4;
 // variables for keyboard control
 int animFlag=1;
 float animTime=0.0f;
 float animInc=0.1f;
+int m_startX;
+int m_startY;
+float m_angleX;
+float m_angleY;
+
+void calcLookAtPosition();
+float degreesToRadians(float);
 
 //external variables
 extern GLuint pbo;
@@ -100,10 +108,54 @@ void keyboard(unsigned char key, int x, int y)
 }
 
 // No mouse event handlers defined
-void mouse(int button, int state, int x, int y)
-{
+void mouse(int button, int state, int x, int y) {
+   if (button != GLUT_LEFT_BUTTON) {
+      return;
+   }
+
+   bool down = state == GLUT_DOWN;
+   y = g_rayTracer->height - y - 1;
+
+   if (down) {
+      m_startX = x;
+      m_startY = y;
+   }
+
+   glutPostRedisplay();
 }
 
-void motion(int x, int y)
-{
+void motion(int x, int y) {
+   y = g_rayTracer->height - y - 1;
+
+   int diffX = m_startX - x;
+   int diffY = m_startY - y;
+
+   /* One to one pixels for degrees. */
+   float angleChangeX = diffX * 180.0f / g_rayTracer->width;
+   float angleChangeY = diffY * 180.0f / g_rayTracer->height;
+
+   m_angleX += angleChangeX;
+   m_angleY = fmin(fmax(m_angleY + angleChangeY, -50.0f), 50.0f);
+
+   m_startX = x;
+   m_startY = y;
+
+   calcLookAtPosition();
+   glutPostRedisplay();
+}
+
+void calcLookAtPosition() {
+   float theta = degreesToRadians(-m_angleX);
+   float phi = degreesToRadians(-m_angleY);
+
+   g_rayTracer->camera.lookAt.x = sin(phi);
+   g_rayTracer->camera.lookAt.y = cos(phi) * cos(theta);
+   g_rayTracer->camera.lookAt.z = cos(phi) * cos(degreesToRadians(90) - theta);
+
+   g_rayTracer->camera.lookAt = g_rayTracer->camera.lookAt.normalize() *
+    g_rayTracer->camera.lookAtLength + g_rayTracer->camera.position;
+}
+
+float degreesToRadians(float degrees) {
+   return degrees * PI / 180;
 }

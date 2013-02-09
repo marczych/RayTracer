@@ -9,6 +9,7 @@ public:
    Vector up;
    Vector lookAt;
    Vector w, u, v;
+   double lookAtLength;
 
    Camera() {
       position = Vector(0.0, 0.0, 100.0);
@@ -24,6 +25,7 @@ public:
    }
 
    void calculateWUV();
+   void calculateLookAtLength();
 };
 
 #endif

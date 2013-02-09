@@ -324,6 +324,8 @@ void RayTracer::readScene(istream& in) {
 
       in >> type;
    }
+
+   camera.calculateLookAtLength();
 }
 
 
@@ -473,6 +475,10 @@ void Camera::calculateWUV() {
    w = (position - lookAt).normalize();
    u = up.cross(w).normalize();
    v = w.cross(u);
+}
+
+void Camera::calculateLookAtLength() {
+   lookAtLength = (lookAt - position).length();
 }
 
 __device__ Color Color::operator+ (Color const &c) const {
