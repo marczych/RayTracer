@@ -11,10 +11,10 @@ const double PI = atan(1.0)*4;
 int animFlag=1;
 float animTime=0.0f;
 float animInc=0.1f;
-int m_startX;
-int m_startY;
-float m_angleX;
-float m_angleY;
+int m_startX = 0.0f;
+int m_startY = 0.0f;
+float m_angleX = 0.0f;
+float m_angleY = 0.0f;
 
 void calcLookAtPosition();
 float degreesToRadians(float);
@@ -141,6 +141,7 @@ void motion(int x, int y) {
    m_startY = y;
 
    calcLookAtPosition();
+   g_rayTracer->camera.calculateWUV();
    glutPostRedisplay();
 }
 
