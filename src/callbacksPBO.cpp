@@ -70,10 +70,30 @@ void display()
 void keyboard(unsigned char key, int x, int y)
 {
    switch(key) {
+   case 'w':
+      g_rayTracer->camera.position -= g_rayTracer->camera.w;
+      g_rayTracer->camera.lookAt -= g_rayTracer->camera.w;
+      break;
+   case 's':
+      g_rayTracer->camera.position += g_rayTracer->camera.w;
+      g_rayTracer->camera.lookAt += g_rayTracer->camera.w;
+      break;
+
+      // Strafe movement.
+   case 'a':
+      g_rayTracer->camera.position -= g_rayTracer->camera.v;
+      g_rayTracer->camera.lookAt -= g_rayTracer->camera.v;
+      break;
+   case 'd':
+      g_rayTracer->camera.position += g_rayTracer->camera.v;
+      g_rayTracer->camera.lookAt += g_rayTracer->camera.v;
+      break;
    case(27) :
       exit(0);
       break;
    }
+
+   g_rayTracer->camera.calculateWUV();
 
    // indicate the display must be redrawn
    glutPostRedisplay();

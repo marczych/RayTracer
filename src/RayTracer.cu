@@ -336,7 +336,7 @@ __host__ __device__ Vector Vector::cross(Vector const & v) const {
    return Vector(y*v.z - v.y*z, v.x*z - x*v.z, x*v.y - v.x*y);
 }
 
-__device__ double Vector::dot(Vector const & v) const {
+__host__ __device__ double Vector::dot(Vector const & v) const {
    return x*v.x + y*v.y + z*v.z;
 }
 
@@ -344,11 +344,11 @@ __host__ __device__ double Vector::length() const {
    return sqrtf(x*x + y*y + z*z);
 }
 
-__device__ Vector Vector::operator + (Vector const & v) const {
+__host__ __device__ Vector Vector::operator + (Vector const & v) const {
    return Vector(x+v.x, y+v.y, z+v.z);
 }
 
-__device__ Vector & Vector::operator += (Vector const & v) {
+__host__ __device__ Vector & Vector::operator += (Vector const & v) {
    x += v.x;
    y += v.y;
    z += v.z;
@@ -360,7 +360,7 @@ __host__ __device__ Vector Vector::operator - (Vector const & v) const {
    return Vector(x-v.x, y-v.y, z-v.z);
 }
 
-__device__ Vector & Vector::operator -= (Vector const & v) {
+__host__ __device__ Vector & Vector::operator -= (Vector const & v) {
    x -= v.x;
    y -= v.y;
    z -= v.z;
@@ -368,11 +368,11 @@ __device__ Vector & Vector::operator -= (Vector const & v) {
    return * this;
 }
 
-__device__ Vector Vector::operator * (Vector const & v) const {
+__host__ __device__ Vector Vector::operator * (Vector const & v) const {
    return Vector(x*v.x, y*v.y, z*v.z);
 }
 
-__device__ Vector & Vector::operator *= (Vector const & v) {
+__host__ __device__ Vector & Vector::operator *= (Vector const & v) {
    x *= v.x;
    y *= v.y;
    z *= v.z;
@@ -392,11 +392,11 @@ __host__ __device__ Vector & Vector::operator /= (Vector const & v) {
    return * this;
 }
 
-__device__ Vector Vector::operator * (double const s) const {
+__host__ __device__ Vector Vector::operator * (double const s) const {
    return Vector(x*s, y*s, z*s);
 }
 
-__device__ Vector & Vector::operator *= (double const s) {
+__host__ __device__ Vector & Vector::operator *= (double const s) {
    x *= s;
    y *= s;
    z *= s;
@@ -408,7 +408,7 @@ __host__ __device__ Vector Vector::operator / (double const s) const {
    return Vector(x/s, y/s, z/s);
 }
 
-__device__ Vector & Vector::operator /= (double const s) {
+__host__ __device__ Vector & Vector::operator /= (double const s) {
    x /= s;
    y /= s;
    z /= s;
@@ -470,7 +470,7 @@ __device__ double Sphere::getReflectivity() {
 }
 
 void Camera::calculateWUV() {
-   w = (lookAt - position).normalize();
+   w = (position - lookAt).normalize();
    u = up.cross(w).normalize();
    v = w.cross(u);
 }
