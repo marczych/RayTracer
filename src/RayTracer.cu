@@ -67,9 +67,9 @@ __global__ void cudaTraceRays(Sphere* spheres, Light* lights, uchar4* image,
       Color color = rayTracer->castRayForPixel(x, y, spheres, lights);
       uchar4* imageColor = image + (x * rayTracer->height + y);
 
-      imageColor->x = color.r;
-      imageColor->y = color.g;
-      imageColor->z = color.b;
+      imageColor->x = fmin(color.r, 1) * 255;
+      imageColor->y = fmin(color.g, 1) * 255;
+      imageColor->z = fmin(color.b, 1) * 255;
       imageColor->w = 255;
    }
 }
@@ -290,6 +290,7 @@ void RayTracer::readScene(istream& in) {
          in >> reflectivity;
 
          addObject(new Sphere(center, radius, color, shininess, reflectivity));
+
       } else if (type.compare("light") == 0) {
          Vector position;
          double intensity;
