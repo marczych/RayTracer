@@ -6,6 +6,14 @@
 #include <sys/time.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+#include <fstream>
+#include <ctime>
+#include "RayTracer.h"
+
+using namespace std;
 
 // The user must create the following routines:
 // CUDA methods
@@ -63,16 +71,30 @@ void fpsDisplay()
 // Main program
 int main(int argc, char** argv)
 {
-   if( argc > 1 )
-   {
-      int width = atoi(argv[1]);
-      int height = atoi(argv[2]);
-      if( width > 100 && height > 100 )
-      {
-         window_width = width;
-         window_height = height;
-      }
+   //if (argc < 4) {
+   //   cerr << "Usage: " << argv[0] << " sceneFile superSamples " <<
+   //    "depthComplexity [outFile]" << endl;
+   //   exit(EXIT_FAILURE);
+   //}
+
+   //srand((unsigned)time(0));
+   int maxReflections = 10;
+   int superSamples = 1;//atoi(argv[2]);
+   int depthComplexity = 0;//atoi(argv[3]);
+   RayTracer rayTracer(1024, 1024, maxReflections, superSamples, depthComplexity);
+
+   char* inFile = argv[1];
+   ifstream inFileStream;
+   inFileStream.open(inFile, ifstream::in);
+
+   if (inFileStream.fail()) {
+      cerr << "Failed opening file" << endl;
+      exit(EXIT_FAILURE);
    }
+
+   rayTracer.readScene(inFileStream);
+   inFileStream.close();
+
    if (false == initGL(argc, argv)) {
       return false;
    }
