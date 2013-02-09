@@ -27,14 +27,10 @@ RayTracer::~RayTracer() {
 }
 
 void RayTracer::traceRays(string fileName) {
-   float elapsedTime;
-   cudaEvent_t startEvent;
-   cudaEvent_t stopEvent;
    Sphere* devSpheres;
-   Light* devLights;
    Color* devImage;
+   Light* devLights;
    RayTracer* devRayTracer;
-   Image image(width, height);
 
    // Calculate these on the CPU so they can be accessed on the GPU.
    numSpheres = spheres.size();
@@ -53,8 +49,6 @@ void RayTracer::traceRays(string fileName) {
    ERROR_HANDLER(cudaMemcpy(devLights, &lights.front(),
     lights.size() * sizeof(Light), cudaMemcpyHostToDevice));
 
-   ERROR_HANDLER(cudaMalloc((void**)&devImage, width * height * sizeof(Color)));
-
    ERROR_HANDLER(cudaMalloc((void**)&devRayTracer, sizeof(RayTracer)));
    ERROR_HANDLER(cudaMemcpy(devRayTracer, this, sizeof(RayTracer), cudaMemcpyHostToDevice));
 
@@ -63,10 +57,6 @@ void RayTracer::traceRays(string fileName) {
 
    dim3 dimGrid(gridWidth, gridHeight);
    dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
-
-   ERROR_HANDLER(cudaEventCreate(&startEvent));
-   ERROR_HANDLER(cudaEventCreate(&stopEvent));
-   ERROR_HANDLER(cudaEventRecord(startEvent, 0));
 
    cudaTraceRays<<<dimGrid, dimBlock>>>(devSpheres, devLights, devImage,
     devRayTracer);
@@ -77,24 +67,9 @@ void RayTracer::traceRays(string fileName) {
       exit(EXIT_FAILURE);
    }
 
-   ERROR_HANDLER(cudaEventRecord(stopEvent, 0));
-   ERROR_HANDLER(cudaEventSynchronize(stopEvent));
-   ERROR_HANDLER(cudaEventElapsedTime(&elapsedTime, startEvent, stopEvent));
-   printf("GPU computation complete\n");
-   printf("Time to generate:  %.1f ms\n", elapsedTime);
-
-   ERROR_HANDLER(cudaEventDestroy(startEvent));
-   ERROR_HANDLER(cudaEventDestroy(stopEvent));
-
-   ERROR_HANDLER(cudaMemcpy(image.getPixmap(), devImage,
-    width * height * sizeof(Color), cudaMemcpyDeviceToHost));
-
-   ERROR_HANDLER(cudaFree(devImage));
    ERROR_HANDLER(cudaFree(devSpheres));
    ERROR_HANDLER(cudaFree(devLights));
    ERROR_HANDLER(cudaFree(devRayTracer));
-
-   image.WriteTga(fileName.c_str(), false);
 }
 
 __global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image,
