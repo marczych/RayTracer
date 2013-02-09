@@ -1,8 +1,10 @@
 CC = nvcc
-CFLAGS = -O2 -arch=compute_20 -code=sm_20
+CFLAGS = -O2 -arch=compute_20 -code=sm_20 -lGL -lglut -DGL_GLEXT_PROTOTYPES -lGLU
 
-RayTracer: RayTracer.cu main.cu
-	$(CC) $(CFLAGS) RayTracer.cu main.cu -o RayTracer
+ALL = RayTracer.cu callbacksPBO.cpp kernelPBO.cu simpleGLmain.cpp simplePBO.cpp
+
+RayTracer: $(ALL)
+	$(CC) $(CFLAGS) $(ALL) -o RayTracer
 
 clean:
 	rm -rf RayTracer
