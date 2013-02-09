@@ -17,7 +17,7 @@ using namespace std;
 
 // The user must create the following routines:
 // CUDA methods
-extern void initCuda();
+extern void initCuda(RayTracer*);
 extern void runCuda();
 extern void renderCuda(int);
 
@@ -27,13 +27,8 @@ extern void keyboard(unsigned char key, int x, int y);
 extern void mouse(int button, int state, int x, int y);
 extern void motion(int x, int y);
 
-// GLUT specific variables
-unsigned int window_width = 1024;
-unsigned int window_height = 1024;
-
-
 // Forward declarations of GL functionality
-bool initGL(int argc, char** argv);
+bool initGL(int argc, char** argv, RayTracer*);
 struct timeval start, end;
 
 // Simple method to display the Frames Per Second in the window title
@@ -80,7 +75,7 @@ int main(int argc, char** argv)
    //srand((unsigned)time(0));
    int maxReflections = 10;
    int superSamples = 1;//atoi(argv[2]);
-   int depthComplexity = 0;//atoi(argv[3]);
+   int depthComplexity = 1;//atoi(argv[3]);
    RayTracer rayTracer(1024, 1024, maxReflections, superSamples, depthComplexity);
 
    char* inFile = argv[1];
@@ -95,11 +90,11 @@ int main(int argc, char** argv)
    rayTracer.readScene(inFileStream);
    inFileStream.close();
 
-   if (false == initGL(argc, argv)) {
+   if (false == initGL(argc, argv, &rayTracer)) {
       return false;
    }
 
-   initCuda();
+   initCuda(&rayTracer);
 
    // register callbacks
    glutDisplayFunc(fpsDisplay);
@@ -111,19 +106,19 @@ int main(int argc, char** argv)
    glutMainLoop();
 }
 
-bool initGL(int argc, char **argv)
+bool initGL(int argc, char **argv, RayTracer* rayTracer)
 {
    //Steps 1-2: create a window and GL context (also register callbacks)
    glutInit(&argc, argv);
    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-   glutInitWindowSize(window_width, window_height);
+   glutInitWindowSize(rayTracer->width, rayTracer->height);
    glutCreateWindow("Cuda GL Interop Demo (adapted from NVIDIA's simpleGL");
    glutDisplayFunc(fpsDisplay);
    glutKeyboardFunc(keyboard);
    glutMotionFunc(motion);
 
    // Step 3: Setup our viewport and viewing modes
-   glViewport(0, 0, window_width, window_height);
+   glViewport(0, 0, rayTracer->width, rayTracer->height);
 
    glClearColor(0.0, 0.0, 0.0, 1.0);
    glDisable(GL_DEPTH_TEST);

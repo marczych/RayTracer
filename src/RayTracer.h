@@ -44,7 +44,7 @@ public:
       lights.push_back(*light);
    }
 
-   void traceRays();
+   void traceRays(uchar4*, Sphere*, Light*);
    __device__ Color castRayForPixel(int, int, Sphere*, Light*);
    __device__ Color castRayAtPoint(Vector, Sphere*, Light*);
    __device__ Color castRay(Ray, Sphere*, Light*);
@@ -59,6 +59,6 @@ public:
    void readScene(std::istream&);
 };
 
-__global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image, RayTracer* rayTracer);
+__global__ void cudaTraceRays(Sphere* spheres, Light* lights, uchar4* image, RayTracer* rayTracer);
 
 #endif

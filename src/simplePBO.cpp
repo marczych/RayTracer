@@ -9,15 +9,22 @@
 #include <cuda.h>
 #include <cuda_runtime_api.h>
 #include <cuda_gl_interop.h>
+#include "RayTracer.h"
+
+#define ERROR_HANDLER(x) ErrorHandler(x, __FILE__, __LINE__)
+static void ErrorHandler(cudaError_t err, const char *file, int line) {
+   if (err != cudaSuccess) {
+      fprintf(stderr, "%s in line %d: %s\n", file, line, cudaGetErrorString(err));
+      exit(EXIT_FAILURE);
+   }
+}
  
 // external variables
 extern float animTime;
-extern unsigned int window_width;
-extern unsigned int window_height;
- 
-// constants (the following should be a const in a header file)
-unsigned int image_width = window_width;
-unsigned int image_height = window_height;
+RayTracer* g_rayTracer;
+
+Sphere* devSpheres;
+Light* devLights;
  
 extern "C" void launch_kernel(void* pos, unsigned int, unsigned int, float);
  
@@ -30,7 +37,7 @@ void createPBO(GLuint* pbo)
  
   if (pbo) {
     // set up vertex data parameter
-    int num_texels = image_width * image_height;
+    int num_texels = g_rayTracer->width * g_rayTracer->height;
     int num_values = num_texels * 4;
     int size_tex_data = sizeof(GLubyte) * num_values;
      
@@ -70,7 +77,7 @@ void createTexture(GLuint* textureID, unsigned int size_x, unsigned int size_y)
  
   // Allocate the texture memory. The last parameter is NULL since we only
   // want to allocate memory, not initialize it
-  glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA8, image_width, image_height, 0,
+  glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA8, g_rayTracer->width, g_rayTracer->height, 0,
             GL_BGRA,GL_UNSIGNED_BYTE, NULL);
  
   // Must set the filter mode, GL_LINEAR enables interpolation when scaling
@@ -107,14 +114,16 @@ void runCuda()
   cudaGLMapBufferObject((void**)&dptr, pbo);
  
   // execute the kernel
-  launch_kernel(dptr, image_width, image_height, animTime);
+  //launch_kernel(dptr, image_width, image_height, animTime);
+  g_rayTracer->traceRays(dptr, devSpheres, devLights);
  
   // unmap buffer object
   cudaGLUnmapBufferObject(pbo);
 }
  
-void initCuda()
+void initCuda(RayTracer* rayTracer)
 {
+  g_rayTracer = rayTracer;
   // First initialize OpenGL context, so we can properly set the GL
   // for CUDA.  NVIDIA notes this is necessary in order to achieve
   // optimal performance with OpenGL/CUDA interop.  use command-line
@@ -129,10 +138,18 @@ void initCuda()
   cudaGLSetGLDevice( 0 );
    
   createPBO(&pbo);
-  createTexture(&textureID,image_width,image_height);
+  createTexture(&textureID,rayTracer->width,rayTracer->height);
  
   // Clean up on program exit
   atexit(cleanupCuda);
+
+  ERROR_HANDLER(cudaMalloc((void**)&devSpheres, rayTracer->spheres.size() * sizeof(Sphere)));
+  ERROR_HANDLER(cudaMemcpy(devSpheres, &rayTracer->spheres.front(),
+   rayTracer->spheres.size() * sizeof(Sphere), cudaMemcpyHostToDevice));
+
+  ERROR_HANDLER(cudaMalloc((void**)&devLights, rayTracer->lights.size() * sizeof(Light)));
+  ERROR_HANDLER(cudaMemcpy(devLights, &rayTracer->lights.front(),
+   rayTracer->lights.size() * sizeof(Light), cudaMemcpyHostToDevice));
  
   runCuda();
 }

@@ -26,11 +26,8 @@ RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamp
 RayTracer::~RayTracer() {
 }
 
-void RayTracer::traceRays() {
-   Color* devImage;
-   Light* devLights;
+void RayTracer::traceRays(uchar4* devImage, Sphere* devSpheres, Light* devLights) {
    RayTracer* devRayTracer;
-
    // Calculate these on the CPU so they can be accessed on the GPU.
    numSpheres = spheres.size();
    numLights = lights.size();
@@ -39,14 +36,6 @@ void RayTracer::traceRays() {
    if (dispersion < 0) {
       depthComplexity = 1;
    }
-
-   ERROR_HANDLER(cudaMalloc((void**)&devSpheres, spheres.size() * sizeof(Sphere)));
-   ERROR_HANDLER(cudaMemcpy(devSpheres, &spheres.front(),
-    spheres.size() * sizeof(Sphere), cudaMemcpyHostToDevice));
-
-   ERROR_HANDLER(cudaMalloc((void**)&devLights, lights.size() * sizeof(Light)));
-   ERROR_HANDLER(cudaMemcpy(devLights, &lights.front(),
-    lights.size() * sizeof(Light), cudaMemcpyHostToDevice));
 
    ERROR_HANDLER(cudaMalloc((void**)&devRayTracer, sizeof(RayTracer)));
    ERROR_HANDLER(cudaMemcpy(devRayTracer, this, sizeof(RayTracer), cudaMemcpyHostToDevice));
@@ -66,23 +55,22 @@ void RayTracer::traceRays() {
       exit(EXIT_FAILURE);
    }
 
-   ERROR_HANDLER(cudaFree(devSpheres));
-   ERROR_HANDLER(cudaFree(devLights));
    ERROR_HANDLER(cudaFree(devRayTracer));
 }
 
-__global__ void cudaTraceRays(Sphere* spheres, Light* lights, Color* image,
+__global__ void cudaTraceRays(Sphere* spheres, Light* lights, uchar4* image,
  RayTracer* rayTracer) {
    int x = blockIdx.x * TILE_WIDTH + threadIdx.x;
    int y = blockIdx.y * TILE_WIDTH + threadIdx.y;
 
    if (x < rayTracer->width && y < rayTracer->height) {
       Color color = rayTracer->castRayForPixel(x, y, spheres, lights);
-      Color* imageColor = image + (x * rayTracer->height + y);
+      uchar4* imageColor = image + (x * rayTracer->height + y);
 
-      imageColor->r = color.r;
-      imageColor->g = color.g;
-      imageColor->b = color.b;
+      imageColor->x = color.r;
+      imageColor->y = color.g;
+      imageColor->z = color.b;
+      imageColor->w = 255;
    }
 }
 
