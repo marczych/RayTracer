@@ -96,6 +96,17 @@ void keyboard(unsigned char key, int x, int y)
       g_rayTracer->camera.position += g_rayTracer->camera.v;
       g_rayTracer->camera.lookAt += g_rayTracer->camera.v;
       break;
+
+      // Super sampling.
+   case 'u':
+      g_rayTracer->superSamples = g_rayTracer->superSamples + 1;
+      printf("Super samples: %d\n", g_rayTracer->superSamples);
+      break;
+   case 'p':
+      g_rayTracer->superSamples = fmax(1, g_rayTracer->superSamples - 1);
+      printf("Super samples: %d\n", g_rayTracer->superSamples);
+      break;
+
    case(27) :
       exit(0);
       break;
