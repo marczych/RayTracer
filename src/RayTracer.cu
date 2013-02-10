@@ -28,14 +28,6 @@ RayTracer::~RayTracer() {
 
 void RayTracer::traceRays(uchar4* devImage, Sphere* devSpheres, Light* devLights) {
    RayTracer* devRayTracer;
-   // Calculate these on the CPU so they can be accessed on the GPU.
-   numSpheres = spheres.size();
-   numLights = lights.size();
-
-   // Reset depthComplexity to avoid unnecessary loops.
-   if (dispersion < 0) {
-      depthComplexity = 1;
-   }
 
    ERROR_HANDLER(cudaMalloc((void**)&devRayTracer, sizeof(RayTracer)));
    ERROR_HANDLER(cudaMemcpy(devRayTracer, this, sizeof(RayTracer), cudaMemcpyHostToDevice));
@@ -326,6 +318,15 @@ void RayTracer::readScene(istream& in) {
    }
 
    camera.calculateLookAtLength();
+
+   // Calculate these on the CPU so they can be accessed on the GPU.
+   numSpheres = spheres.size();
+   numLights = lights.size();
+
+   // Reset depthComplexity to avoid unnecessary loops.
+   if (dispersion < 0) {
+      depthComplexity = 1;
+   }
 }
 
 
