@@ -11,6 +11,9 @@ using namespace std;
 #define ERROR_HANDLER(x) ErrorHandler(x, __FILE__, __LINE__)
 #define TILE_WIDTH 16
 
+__constant__ Sphere* constantSpheres;
+__constant__ Light* constantLights;
+
 static void ErrorHandler(cudaError_t err, const char *file, int line) {
    if (err != cudaSuccess) {
       fprintf(stderr, "%s in line %d: %s\n", file, line, cudaGetErrorString(err));
@@ -32,14 +35,16 @@ void RayTracer::traceRays(uchar4* devImage, Sphere* devSpheres, Light* devLights
    ERROR_HANDLER(cudaMalloc((void**)&devRayTracer, sizeof(RayTracer)));
    ERROR_HANDLER(cudaMemcpy(devRayTracer, this, sizeof(RayTracer), cudaMemcpyHostToDevice));
 
+   ERROR_HANDLER(cudaMemcpyToSymbol("constantSpheres", &devSpheres, sizeof(Sphere *)));
+   ERROR_HANDLER(cudaMemcpyToSymbol("constantLights", &devLights, sizeof(Light *)));
+
    int gridWidth = ceil((float)width/TILE_WIDTH);
    int gridHeight = ceil((float)height/TILE_WIDTH);
 
    dim3 dimGrid(gridWidth, gridHeight);
    dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
 
-   cudaTraceRays<<<dimGrid, dimBlock>>>(devSpheres, devLights, devImage,
-    devRayTracer);
+   cudaTraceRays<<<dimGrid, dimBlock>>>(devImage, devRayTracer);
 
    cudaError_t err = cudaGetLastError();
    if (err != cudaSuccess) {
@@ -50,13 +55,12 @@ void RayTracer::traceRays(uchar4* devImage, Sphere* devSpheres, Light* devLights
    ERROR_HANDLER(cudaFree(devRayTracer));
 }
 
-__global__ void cudaTraceRays(Sphere* spheres, Light* lights, uchar4* image,
- RayTracer* rayTracer) {
+__global__ void cudaTraceRays(uchar4* image, RayTracer* rayTracer) {
    int x = blockIdx.x * TILE_WIDTH + threadIdx.x;
    int y = blockIdx.y * TILE_WIDTH + threadIdx.y;
 
    if (x < rayTracer->width && y < rayTracer->height) {
-      Color color = rayTracer->castRayForPixel(x, y, spheres, lights);
+      Color color = rayTracer->castRayForPixel(x, y);
       uchar4* imageColor = image + (x * rayTracer->height + y);
 
       imageColor->x = fmin(color.r, 1) * 255;
@@ -66,8 +70,7 @@ __global__ void cudaTraceRays(Sphere* spheres, Light* lights, uchar4* image,
    }
 }
 
-__device__ Color RayTracer::castRayForPixel(int x, int y, Sphere* spheres,
- Light* lights) {
+__device__ Color RayTracer::castRayForPixel(int x, int y) {
    double rayX = (x - width / 2)/2.0;
    double rayY = (y - height / 2)/2.0;
    double pixelWidth = rayX - (x + 1 - width / 2)/2.0;
@@ -83,16 +86,14 @@ __device__ Color RayTracer::castRayForPixel(int x, int y, Sphere* spheres,
           (camera.u * (sampleStartX + (x * sampleWidth)) * imageScale) +
           (camera.v * (sampleStartY + (y * sampleWidth)) * imageScale);
 
-         color = color + (castRayAtPoint(imagePlanePoint, spheres, lights) *
-          sampleWeight);
+         color = color + (castRayAtPoint(imagePlanePoint) * sampleWeight);
       }
    }
 
    return color;
 }
 
-__device__ Color RayTracer::castRayAtPoint(Vector point, Sphere* spheres,
- Light* lights) {
+__device__ Color RayTracer::castRayAtPoint(Vector point) {
    Color color;
 
    for (int i = 0; i < depthComplexity; i++) {
@@ -109,31 +110,29 @@ __device__ Color RayTracer::castRayAtPoint(Vector point, Sphere* spheres,
       //   viewRay.direction = viewRay.direction.normalize();
       //}
 
-      color = color + (castRay(viewRay, spheres, lights) *
+      color = color + (castRay(viewRay) *
        (1 / (float)depthComplexity));
    }
 
    return color;
 }
 
-__device__ Color RayTracer::castRay(Ray ray, Sphere* spheres, Light* lights) {
-   Intersection intersection = getClosestIntersection(ray, spheres);
+__device__ Color RayTracer::castRay(Ray ray) {
+   Intersection intersection = getClosestIntersection(ray);
 
    if (intersection.didIntersect) {
-      return performLighting(intersection, lights, spheres);
+      return performLighting(intersection);
    } else {
       return Color();
    }
 }
 
-__device__ Intersection RayTracer::getClosestIntersection(Ray ray,
- Sphere* spheres) {
+__device__ Intersection RayTracer::getClosestIntersection(Ray ray) {
    Intersection closestIntersection(false);
    closestIntersection.distance = 983487438;
 
    for (int i = 0; i < numSpheres; i++) {
-      Sphere* sphere = spheres + i;
-      Intersection intersection = sphere->intersect(ray);
+      Intersection intersection = (constantSpheres + i)->intersect(ray);
 
       if (intersection.didIntersect && intersection.distance <
        closestIntersection.distance) {
@@ -148,11 +147,9 @@ __device__ Intersection RayTracer::getClosestIntersection(Ray ray,
  * Basically same code as getClosestIntersection but short circuits if an
  * intersection closer to the given light distance is found.
  */
-__device__ bool RayTracer::isInShadow(Ray ray, Sphere* spheres,
- double lightDistance) {
+__device__ bool RayTracer::isInShadow(Ray ray, double lightDistance) {
    for (int i = 0; i < numSpheres; i++) {
-      Sphere* sphere = spheres + i;
-      Intersection intersection = sphere->intersect(ray);
+      Intersection intersection = (constantSpheres + i)->intersect(ray);
 
       if (intersection.didIntersect && intersection.distance <
        lightDistance) {
@@ -163,11 +160,10 @@ __device__ bool RayTracer::isInShadow(Ray ray, Sphere* spheres,
    return false;
 }
 
-__device__ Color RayTracer::performLighting(Intersection intersection,
- Light* lights, Sphere* spheres) {
+__device__ Color RayTracer::performLighting(Intersection intersection) {
    Color ambientColor = getAmbientLighting(intersection);
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(
-    intersection, lights, spheres);
+    intersection);
    //Color reflectedColor = getReflectiveLighting(intersection);
 
    return ambientColor + diffuseAndSpecularColor;// + reflectedColor;
@@ -178,13 +174,12 @@ __device__ Color RayTracer::getAmbientLighting(Intersection intersection) {
 }
 
 __device__ Color RayTracer::getDiffuseAndSpecularLighting(
- Intersection intersection, Light* lights, Sphere* spheres) {
+ Intersection intersection) {
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
 
    for (int i = 0; i < numLights; i++) {
-      Light* light = lights + i;
-      Vector lightOffset = light->position - intersection.intersection;
+      Vector lightOffset = (constantLights + i)->position - intersection.intersection;
       double lightDistance = lightOffset.length();
       /**
        * TODO: Be careful about normalizing lightOffset too.
@@ -197,7 +192,7 @@ __device__ Color RayTracer::getDiffuseAndSpecularLighting(
        */
       if (dotProduct >= 0.0f) {
          Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
-         if (isInShadow(shadowRay, spheres, lightDistance)) {
+         if (isInShadow(shadowRay, lightDistance)) {
             /**
              * Position is in shadow of another object - continue with other lights.
              */
@@ -205,15 +200,17 @@ __device__ Color RayTracer::getDiffuseAndSpecularLighting(
          }
 
          diffuseColor = (diffuseColor + (intersection.color * dotProduct)) *
-          light->intensity;
-         specularColor = specularColor + getSpecularLighting(intersection, light);
+          constantLights->intensity;
+         specularColor = specularColor + getSpecularLighting(intersection,
+          (constantLights + i));
       }
    }
 
    return diffuseColor + specularColor;
 }
 
-__device__ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
+__device__ Color RayTracer::getSpecularLighting(Intersection intersection,
+ Light* light) {
    Color specularColor(0.0, 0.0, 0.0);
    double shininess = intersection.object->getShininess();
 
