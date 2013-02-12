@@ -4,21 +4,26 @@ Steve Choo
 
 Ray Tracer Lab Write-Up
 
-The purpose of this write up is to discuss our implementation of a Ray Tracer using CUDA. We began this by "CUDA-izing" each original function that was written originally for the CPU. This involved a few basic steps:
+Average FPS for 100 sphere scene: 33
 
-1. cudaMalloc-ing the appropriate memory on the device for the spheres, lights, and ray tracer.
-2. cudaMemcpy-ing from host to device.
-3. Adding necessary __device__, __global__, and __host__ constructs around all our calling functions to allow the code to run on the GPU.
-4. Performing the parallel computing steps on the device by calling one function: cudaTraceRays();
-5. Finally, we copy the results back to the host CPU from the device.
+Making the CUDA version of the raytracer run in real time was actually very straightforward. We started with the base code that was provided and replaced the setup and draw functions with the setup and draw functions needed for our raytracer.
 
-The time for the Ray Tracer to run on the CPU was exactly 55.04 seconds to generate 105 ray traced spheres. Our parallelized CUDA version rendered the same scene in 31.5 ms. That adds up to about 185x speedup. The scene file we used for performance comparisons was ./scenes/ballsToTheWall.scn.
+Example render: ./exampleRender.png
 
 To run:
-cd src
+cd src/
 make
-./RayTracer ../scenes/ballsToTheWall.scn 1 1 test.tga
-# Open test.tga
+./RayTracer ../scenes/<scene file>
+
+Controls:
+WASD to move
+Click and drag mouse to look around
+u: increase super sampling
+p: decrease super sampling
+
+A few notes:
+* The first time you move the camera it jumps to a different location. This is because the starting values for the camera look at state are different from what the camera starts looking at. These starting values change depending on the scene file that is read in so they would have to be computed on the fly (future work).
+* Changing super sampling changes how many primary rays are cast and averaged together for each output pixel. Super sampling of 1 means 1 ray per pixel, 2 means 4 rays per pixel, 3 means 9 rays per pixel, and so on. The current value is printed each time it is changed.
 
 
 #Ray Tracer!
