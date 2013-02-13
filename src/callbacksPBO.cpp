@@ -13,7 +13,7 @@ float animTime=0.0f;
 float animInc=0.1f;
 int m_startX = 0.0f;
 int m_startY = 0.0f;
-float m_angleX = 0.0f;
+float m_angleX = 90.0f;
 float m_angleY = 0.0f;
 
 void calcLookAtPosition();
