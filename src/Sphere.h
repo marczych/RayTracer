@@ -6,17 +6,18 @@
 #include "Ray.h"
 #include "Intersection.h"
 #include "Object.h"
+#include "Material.h"
 
 class Sphere : public Object {
 public:
    Vector center;
    double radius;
-   Color color;
+   Material* material;
    double shininess;
    double reflectivity;
 
-   Sphere(Vector center_, double radius_, Color color_, double shininess_,
-    double reflectivity_) : center(center_), radius(radius_), color(color_),
+   Sphere(Vector center_, double radius_, Material* material_, double shininess_,
+    double reflectivity_) : center(center_), radius(radius_), material(material_),
     shininess(shininess_), reflectivity(reflectivity_) {}
 
    virtual Intersection intersect(Ray);

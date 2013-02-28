@@ -5,6 +5,7 @@
 #include "Sphere.h"
 #include "Intersection.h"
 #include "Light.h"
+#include "FlatColor.h"
 
 using namespace std;
 
@@ -125,18 +126,19 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
 }
 
 Color RayTracer::performLighting(Intersection intersection) {
-   Color ambientColor = getAmbientLighting(intersection);
-   Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection);
+   Color color = intersection.getColor();
+   Color ambientColor = getAmbientLighting(intersection, color);
+   Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection, color);
    Color reflectedColor = getReflectiveLighting(intersection);
 
    return ambientColor + diffuseAndSpecularColor + reflectedColor;
 }
 
-Color RayTracer::getAmbientLighting(Intersection intersection) {
-   return intersection.color * 0.2;
+Color RayTracer::getAmbientLighting(Intersection intersection, Color color) {
+   return color * 0.2;
 }
 
-Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
+Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection, Color color) {
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
 
@@ -165,7 +167,7 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
             continue;
          }
 
-         diffuseColor = (diffuseColor + (intersection.color * dotProduct)) *
+         diffuseColor = (diffuseColor + (color * dotProduct)) *
           light->intensity;
          specularColor = specularColor + getSpecularLighting(intersection, light);
       }
@@ -221,6 +223,7 @@ Vector RayTracer::reflectVector(Vector vector, Vector normal) {
 }
 
 void RayTracer::readScene(istream& in) {
+   Material* material = new FlatColor();
    string type;
 
    in >> type;
@@ -242,7 +245,7 @@ void RayTracer::readScene(istream& in) {
          in >> shininess;
          in >> reflectivity;
 
-         addObject(new Sphere(center, radius, color, shininess, reflectivity));
+         addObject(new Sphere(center, radius, material, shininess, reflectivity));
       } else if (type.compare("light") == 0) {
          Vector position;
          double intensity;

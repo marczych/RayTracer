@@ -41,17 +41,19 @@ public:
    }
 
    void traceRays(std::string);
+   void readScene(std::istream&);
+
+private:
    Color castRayForPixel(int, int);
    Color castRayAtPoint(Vector);
    Color castRay(Ray);
    Intersection getClosestIntersection(Ray);
    Color performLighting(Intersection);
-   Color getAmbientLighting(Intersection);
-   Color getDiffuseAndSpecularLighting(Intersection);
+   Color getAmbientLighting(Intersection, Color);
+   Color getDiffuseAndSpecularLighting(Intersection, Color);
    Color getSpecularLighting(Intersection, Light*);
    Color getReflectiveLighting(Intersection);
    Vector reflectVector(Vector, Vector);
-   void readScene(std::istream&);
 };
 
 #endif

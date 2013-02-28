@@ -43,7 +43,7 @@ Intersection Sphere::intersect(Ray ray) {
    Vector normal = (point - center).normalize();
 
    /* return Intersection(point, distance, normal, Color(fabs(normal.x), fabs(normal.y), fabs(normal.z)), this); */
-   return Intersection(ray, point, distance, normal, color, this);
+   return Intersection(ray, point, distance, normal, material, this);
 }
 
 double Sphere::getShininess() {
