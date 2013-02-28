@@ -23,6 +23,9 @@ public:
    virtual Intersection intersect(Ray);
    virtual double getShininess();
    virtual double getReflectivity();
+
+private:
+   Color getColor(Vector);
 };
 
 #endif

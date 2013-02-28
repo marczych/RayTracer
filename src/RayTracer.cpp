@@ -5,7 +5,7 @@
 #include "Sphere.h"
 #include "Intersection.h"
 #include "Light.h"
-#include "FlatColor.h"
+#include "Checkerboard.h"
 
 using namespace std;
 
@@ -223,7 +223,7 @@ Vector RayTracer::reflectVector(Vector vector, Vector normal) {
 }
 
 void RayTracer::readScene(istream& in) {
-   Material* material = new FlatColor();
+   Material* material = new Checkerboard();
    string type;
 
    in >> type;
