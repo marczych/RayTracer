@@ -1,16 +1,26 @@
 #include "Checkerboard.h"
 
 #include "Vector.h"
-#include "Color.h"
+
+// Offset points to move the origin which makes an ugly seam.
+#define POINT_OFFSET 3893343
 
 Color Checkerboard::getColor(Vector point) {
-   bool x = (int)(point.x * 0.1) % 2 == 0;
-   bool y = (int)(point.y * 0.1) % 2 == 0;
-   bool z = (int)(point.z * 0.1) % 2 == 0;
+   bool x = (int)((point.x + POINT_OFFSET) / scale) % 2 == 0;
+   bool y = (int)((point.y + POINT_OFFSET) / scale) % 2 == 0;
+   bool z = (int)((point.z + POINT_OFFSET) / scale) % 2 == 0;
 
    if (x xor y xor z) {
-      return Color(0.4980f, 0.2980f, 0.8f);
+      return color1;
    } else {
-      return Color(0.8313f, 0.6352f, 0.3921f);
+      return color2;
    }
+}
+
+double Checkerboard::getShininess() {
+   return shininess;
+}
+
+double Checkerboard::getReflectivity() {
+   return reflectivity;
 }

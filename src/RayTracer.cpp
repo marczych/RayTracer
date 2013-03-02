@@ -295,6 +295,16 @@ Material* RayTracer::readMaterial(istream& in) {
       in >> material->reflectivity;
 
       return material;
+   } else if (type.compare("Checkerboard") == 0) {
+      Checkerboard* material = new Checkerboard();
+
+      in >> material->color1.r >> material->color1.g >> material->color1.b;
+      in >> material->color2.r >> material->color2.g >> material->color2.b;
+      in >> material->scale;
+      in >> material->shininess;
+      in >> material->reflectivity;
+
+      return material;
    } else if (materials.count(type) > 0) {
       return materials[type];
    } else {
