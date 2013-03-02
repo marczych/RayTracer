@@ -232,6 +232,8 @@ void RayTracer::readScene(istream& in) {
       if (type[0] == '#') {
          // Ignore comment lines.
          getline(in, type);
+      } else if (type.compare("material") == 0) {
+         addMaterial(in);
       } else if (type.compare("sphere") == 0) {
          Vector center;
          double radius;
@@ -278,6 +280,9 @@ void RayTracer::readScene(istream& in) {
    }
 }
 
+/**
+ * Parses the input stream and makes a new Material.
+ */
 Material* RayTracer::readMaterial(istream& in) {
    string type;
    in >> type;
@@ -290,8 +295,26 @@ Material* RayTracer::readMaterial(istream& in) {
       in >> material->reflectivity;
 
       return material;
+   } else if (materials.count(type) > 0) {
+      return materials[type];
    } else {
       cerr << "Type not found: " << type << endl;
       exit(EXIT_FAILURE);
    }
+}
+
+void RayTracer::addMaterial(istream& in) {
+   string materialName;
+
+   in >> materialName;
+
+   // TODO: Disallow material names with capital letters.
+
+   if (materials.count(materialName) > 0) {
+      cerr << "Duplicate material name: " << materialName << endl;
+      exit(EXIT_FAILURE);
+   }
+
+   Material* material = readMaterial(in);
+   materials.insert(pair<string, Material*>(materialName, material));
 }

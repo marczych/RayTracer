@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <iostream>
 #include "Vector.h"
 #include "Camera.h"
@@ -28,6 +29,7 @@ public:
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;
+   std::map<std::string, Material*> materials;
 
    RayTracer(int, int, int, int, int);
 
@@ -43,7 +45,6 @@ public:
 
    void traceRays(std::string);
    void readScene(std::istream&);
-   Material* readMaterial(std::istream&);
 
 private:
    Color castRayForPixel(int, int);
@@ -56,6 +57,8 @@ private:
    Color getSpecularLighting(Intersection, Light*);
    Color getReflectiveLighting(Intersection);
    Vector reflectVector(Vector, Vector);
+   Material* readMaterial(std::istream&);
+   void addMaterial(std::istream&);
 };
 
 #endif
