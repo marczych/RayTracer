@@ -308,7 +308,12 @@ void RayTracer::addMaterial(istream& in) {
 
    in >> materialName;
 
-   // TODO: Disallow material names with capital letters.
+   for (string::iterator itr = materialName.begin(); itr < materialName.end(); itr++) {
+      if (isupper(*itr)) {
+         cerr << "Invalid material name: " << materialName << endl;
+         exit(EXIT_FAILURE);
+      }
+   }
 
    if (materials.count(materialName) > 0) {
       cerr << "Duplicate material name: " << materialName << endl;
