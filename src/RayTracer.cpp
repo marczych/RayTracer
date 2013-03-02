@@ -76,7 +76,7 @@ Color RayTracer::castRayForPixel(int x, int y) {
    return color;
 }
 
-Color RayTracer::castRayAtPoint(Vector point) {
+Color RayTracer::castRayAtPoint(const Vector& point) {
    Color color;
 
    for (int i = 0; i < depthComplexity; i++) {
@@ -99,7 +99,7 @@ Color RayTracer::castRayAtPoint(Vector point) {
    return color;
 }
 
-Color RayTracer::castRay(Ray ray) {
+Color RayTracer::castRay(const Ray& ray) {
    raysCast++;
    Intersection intersection = getClosestIntersection(ray);
 
@@ -114,7 +114,7 @@ Color RayTracer::castRay(Ray ray) {
  * Basically same code as getClosestIntersection but short circuits if an
  * intersection closer to the given light distance is found.
  */
-bool RayTracer::isInShadow(Ray ray, double lightDistance) {
+bool RayTracer::isInShadow(const Ray& ray, double lightDistance) {
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
       Intersection intersection = (*itr)->intersect(ray);
 
@@ -126,7 +126,7 @@ bool RayTracer::isInShadow(Ray ray, double lightDistance) {
    return false;
 }
 
-Intersection RayTracer::getClosestIntersection(Ray ray) {
+Intersection RayTracer::getClosestIntersection(const Ray& ray) {
    Intersection closestIntersection(false);
    closestIntersection.distance = numeric_limits<double>::max();
 
@@ -142,7 +142,7 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
    return closestIntersection;
 }
 
-Color RayTracer::performLighting(Intersection intersection) {
+Color RayTracer::performLighting(const Intersection& intersection) {
    Color color = intersection.getColor();
    Color ambientColor = getAmbientLighting(intersection, color);
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection, color);
@@ -151,11 +151,12 @@ Color RayTracer::performLighting(Intersection intersection) {
    return ambientColor + diffuseAndSpecularColor + reflectedColor;
 }
 
-Color RayTracer::getAmbientLighting(Intersection intersection, Color color) {
+Color RayTracer::getAmbientLighting(const Intersection& intersection, const Color& color) {
    return color * 0.2;
 }
 
-Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection, Color color) {
+Color RayTracer::getDiffuseAndSpecularLighting(const Intersection& intersection,
+ const Color& color) {
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
 
@@ -191,7 +192,8 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection, Color 
    return diffuseColor + specularColor;
 }
 
-Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
+Color RayTracer::getSpecularLighting(const Intersection& intersection,
+ Light* light) {
    Color specularColor(0.0, 0.0, 0.0);
    double shininess = intersection.material->getShininess();
 
@@ -219,7 +221,7 @@ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
    return specularColor;
 }
 
-Color RayTracer::getReflectiveLighting(Intersection intersection) {
+Color RayTracer::getReflectiveLighting(const Intersection& intersection) {
    double reflectivity = intersection.material->getReflectivity();
    int reflectionsRemaining = intersection.ray.reflectionsRemaining;
 

@@ -27,7 +27,7 @@ public:
     intersection(Vector()), distance(0.0), normal(Vector()), material(NULL),
     object(NULL) {}
 
-   Color getColor();
+   Color getColor() const;
 };
 
 #endif

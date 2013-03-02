@@ -48,15 +48,15 @@ public:
 
 private:
    Color castRayForPixel(int, int);
-   Color castRayAtPoint(Vector);
-   Color castRay(Ray);
-   Intersection getClosestIntersection(Ray);
-   bool isInShadow(Ray, double);
-   Color performLighting(Intersection);
-   Color getAmbientLighting(Intersection, Color);
-   Color getDiffuseAndSpecularLighting(Intersection, Color);
-   Color getSpecularLighting(Intersection, Light*);
-   Color getReflectiveLighting(Intersection);
+   Color castRayAtPoint(const Vector&);
+   Color castRay(const Ray&);
+   bool isInShadow(const Ray&, double);
+   Intersection getClosestIntersection(const Ray&);
+   Color performLighting(const Intersection&);
+   Color getAmbientLighting(const Intersection&, const Color&);
+   Color getDiffuseAndSpecularLighting(const Intersection&, const Color&);
+   Color getSpecularLighting(const Intersection&, Light*);
+   Color getReflectiveLighting(const Intersection&);
    Vector reflectVector(Vector, Vector);
    Material* readMaterial(std::istream&);
    void addMaterial(std::istream&);
