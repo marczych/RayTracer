@@ -51,6 +51,7 @@ private:
    Color castRayAtPoint(Vector);
    Color castRay(Ray);
    Intersection getClosestIntersection(Ray);
+   bool isInShadow(Ray, double);
    Color performLighting(Intersection);
    Color getAmbientLighting(Intersection, Color);
    Color getDiffuseAndSpecularLighting(Intersection, Color);

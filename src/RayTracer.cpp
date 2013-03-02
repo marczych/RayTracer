@@ -110,6 +110,22 @@ Color RayTracer::castRay(Ray ray) {
    }
 }
 
+/**
+ * Basically same code as getClosestIntersection but short circuits if an
+ * intersection closer to the given light distance is found.
+ */
+bool RayTracer::isInShadow(Ray ray, double lightDistance) {
+   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
+      Intersection intersection = (*itr)->intersect(ray);
+
+      if (intersection.didIntersect && intersection.distance < lightDistance) {
+         return true;
+      }
+   }
+
+   return false;
+}
+
 Intersection RayTracer::getClosestIntersection(Ray ray) {
    Intersection closestIntersection(false);
    closestIntersection.distance = numeric_limits<double>::max();
@@ -158,10 +174,8 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection, Color 
        */
       if (dotProduct >= 0.0f) {
          Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
-         Intersection shadowIntersection = getClosestIntersection(shadowRay);
 
-         if (shadowIntersection.didIntersect &&
-          shadowIntersection.distance < lightDistance) {
+         if (isInShadow(shadowRay, lightDistance)) {
             /**
              * Position is in shadow of another object - continue with other lights.
              */
