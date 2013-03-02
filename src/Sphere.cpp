@@ -42,14 +42,5 @@ Intersection Sphere::intersect(Ray ray) {
    Vector point = ray.origin + (ray.direction * distance);
    Vector normal = (point - center).normalize();
 
-   /* return Intersection(point, distance, normal, Color(fabs(normal.x), fabs(normal.y), fabs(normal.z)), this); */
    return Intersection(ray, point, distance, normal, material, this);
-}
-
-double Sphere::getShininess() {
-   return shininess;
-}
-
-double Sphere::getReflectivity() {
-   return reflectivity;
 }

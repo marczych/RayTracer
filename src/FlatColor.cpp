@@ -4,5 +4,13 @@
 #include "Color.h"
 
 Color FlatColor::getColor(Vector point) {
-   return Color(0.5f, 0.3f, 0.8f);
+   return color;
+}
+
+double FlatColor::getShininess() {
+   return shininess;
+}
+
+double FlatColor::getReflectivity() {
+   return reflectivity;
 }

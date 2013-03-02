@@ -12,6 +12,7 @@ class Color;
 class Intersection;
 class Object;
 class Light;
+class Material;
 
 class RayTracer {
 public:
@@ -42,6 +43,7 @@ public:
 
    void traceRays(std::string);
    void readScene(std::istream&);
+   Material* readMaterial(std::istream&);
 
 private:
    Color castRayForPixel(int, int);

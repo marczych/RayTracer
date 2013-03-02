@@ -3,8 +3,8 @@ cameraPosition 0.0 0.0 100.0
 cameraUp 0.0 1.0 0.0
 cameraLookAt 0.0 0.0 0.0
 imageScale 0.2
-sphere 10 0 0  30  0.949 0.219 0.352  100  0.4
-sphere -40 10 -20  30  0.7 0.7 0.0  50  0.2
-sphere 3400 0 -10000  2800  0.960 0.647 0.011  -1  -1
-sphere -7 -0.5 90  2  0.211 0.694 0.749  -1  -1
+sphere 10 0 0  30  FlatColor  0.949 0.219 0.352  100  0.4
+sphere -40 10 -20 30  FlatColor  0.7 0.7 0.0  50  0.2
+sphere 3400 0 -10000  2800  FlatColor  0.960 0.647 0.011  -1  -1
+sphere -7 -0.5 90  2  FlatColor  0.211 0.694 0.749  -1  -1
 light 50 50 1000 0.9

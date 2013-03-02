@@ -5,6 +5,7 @@
 #include "Sphere.h"
 #include "Intersection.h"
 #include "Light.h"
+#include "FlatColor.h"
 #include "Checkerboard.h"
 
 using namespace std;
@@ -178,7 +179,7 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection, Color 
 
 Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
    Color specularColor(0.0, 0.0, 0.0);
-   double shininess = intersection.object->getShininess();
+   double shininess = intersection.material->getShininess();
 
    if (shininess == NOT_SHINY) {
       /* Don't perform specular lighting on non shiny objects. */
@@ -205,7 +206,7 @@ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
 }
 
 Color RayTracer::getReflectiveLighting(Intersection intersection) {
-   double reflectivity = intersection.object->getReflectivity();
+   double reflectivity = intersection.material->getReflectivity();
    int reflectionsRemaining = intersection.ray.reflectionsRemaining;
 
    if (reflectivity == NOT_REFLECTIVE || reflectionsRemaining <= 0) {
@@ -223,7 +224,6 @@ Vector RayTracer::reflectVector(Vector vector, Vector normal) {
 }
 
 void RayTracer::readScene(istream& in) {
-   Material* material = new Checkerboard();
    string type;
 
    in >> type;
@@ -236,16 +236,13 @@ void RayTracer::readScene(istream& in) {
          Vector center;
          double radius;
          Color color;
-         double shininess;
-         double reflectivity;
+         Material* material;
 
          in >> center.x >> center.y >> center.z;
          in >> radius;
-         in >> color.r >> color.g >> color.b;
-         in >> shininess;
-         in >> reflectivity;
+         material = readMaterial(in);
 
-         addObject(new Sphere(center, radius, material, shininess, reflectivity));
+         addObject(new Sphere(center, radius, material));
       } else if (type.compare("light") == 0) {
          Vector position;
          double intensity;
@@ -281,3 +278,20 @@ void RayTracer::readScene(istream& in) {
    }
 }
 
+Material* RayTracer::readMaterial(istream& in) {
+   string type;
+   in >> type;
+
+   if (type.compare("FlatColor") == 0) {
+      FlatColor* material = new FlatColor();
+
+      in >> material->color.r >> material->color.g >> material->color.b;
+      in >> material->shininess;
+      in >> material->reflectivity;
+
+      return material;
+   } else {
+      cerr << "Type not found: " << type << endl;
+      exit(EXIT_FAILURE);
+   }
+}
