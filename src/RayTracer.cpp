@@ -80,7 +80,8 @@ Color RayTracer::castRayAtPoint(const Vector& point) {
    Color color;
 
    for (int i = 0; i < depthComplexity; i++) {
-      Ray viewRay(camera.position, point - camera.position, maxReflections);
+      Ray viewRay(camera.position, point - camera.position, maxReflections,
+       AIR_REFRACTIVE_INDEX);
 
       if (depthComplexity > 1) {
          Vector disturbance(
@@ -174,7 +175,8 @@ Color RayTracer::getDiffuseAndSpecularLighting(const Intersection& intersection,
        * Intersection is facing light.
        */
       if (dotProduct >= 0.0f) {
-         Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
+         Ray shadowRay = Ray(intersection.intersection, lightDirection, 1,
+          intersection.ray.refractiveIndex);
 
          if (isInShadow(shadowRay, lightDistance)) {
             /**
@@ -258,30 +260,30 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
    if (reflectivePercentage > 0) {
       Vector reflected = reflectVector(intersection.ray.origin,
        intersection.normal);
-      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
+      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1,
+       intersection.ray.refractiveIndex);
       reflectiveColor = castRay(reflectedRay) * reflectivity;
    }
 
    if (refractivePercentage > 0) {
-      Object* object = intersection.object;
-      Vector refracted = refractVector(intersection.normal,
-       intersection.ray.direction, AIR_REFRACTIVE_INDEX, refractiveIndex);
-      Ray refractedRay = Ray(intersection.intersection, refracted, 1);
+      /* Vector refracted = refractVector(intersection.normal, */
+      /*  intersection.ray.direction, AIR_REFRACTIVE_INDEX, refractiveIndex); */
+      /* Ray refractedRay = Ray(intersection.intersection, refracted, 1); */
 
-      // Intersection on the same object but on the way out.
-      Intersection refractedIntersection = object->intersect(refractedRay);
+      /* // Intersection on the same object but on the way out. */
+      /* Intersection refractedIntersection = object->intersect(refractedRay); */
 
-      if (!refractedIntersection.didIntersect) {
-         cerr << "Ruh roh" << endl;
-         exit(EXIT_FAILURE);
-      }
+      /* if (!refractedIntersection.didIntersect) { */
+      /*    cerr << "Ruh roh" << endl; */
+      /*    exit(EXIT_FAILURE); */
+      /* } */
 
-      Vector exitRefracted = refractVector(refractedIntersection.normal,
-       refractedIntersection.ray.direction, refractiveIndex, AIR_REFRACTIVE_INDEX);
+      /* Vector exitRefracted = refractVector(refractedIntersection.normal, */
+      /*  refractedIntersection.ray.direction, refractiveIndex, AIR_REFRACTIVE_INDEX); */
 
-      Ray exitRefractedRay = Ray(refractedIntersection.intersection, exitRefracted,
-       maxReflections);
-      refractiveColor = castRay(exitRefractedRay) * refractivePercentage;
+      /* Ray exitRefractedRay = Ray(refractedIntersection.intersection, exitRefracted, */
+      /*  maxReflections); */
+      /* refractiveColor = castRay(exitRefractedRay) * refractivePercentage; */
    }
 
    /* return refractiveColor; */
