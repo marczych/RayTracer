@@ -314,7 +314,7 @@ Vector RayTracer::refractVector(const Vector& normal, const Vector& incident,
    double sinT2 = n * n * (1.0 - cosI * cosI);
 
    if (sinT2 > 1.0) {
-      cerr << "ruh roh" << endl;
+      cerr << "Bad refraction vector!" << endl;
       exit(EXIT_FAILURE);
    }
 
