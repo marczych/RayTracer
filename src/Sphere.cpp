@@ -42,5 +42,10 @@ Intersection Sphere::intersect(Ray ray) {
    Vector point = ray.origin + (ray.direction * distance);
    Vector normal = (point - center).normalize();
 
+   // Normal needs to be flipped if this is a refractive ray.
+   if (ray.direction.dot(normal) > 0) {
+      normal = normal * -1;
+   }
+
    return Intersection(ray, point, distance, normal, material, this);
 }
