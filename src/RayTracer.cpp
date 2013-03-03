@@ -148,7 +148,8 @@ Color RayTracer::performLighting(const Intersection& intersection) {
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection, color);
    Color reflectedColor = getReflectiveRefractiveLighting(intersection);
 
-   return ambientColor + diffuseAndSpecularColor + reflectedColor;
+   return reflectedColor;
+   /* return ambientColor + diffuseAndSpecularColor + reflectedColor; */
 }
 
 Color RayTracer::getAmbientLighting(const Intersection& intersection, const Color& color) {
@@ -235,10 +236,34 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
       return Color();
    }
 
-   Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
-   Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
+   double reflectivePercentage;
+   double refractivePercentage;
 
-   return castRay(reflectedRay) * reflectivity;
+   // Refractive index overrides the reflective property.
+   if (refractiveIndex != NOT_REFRACTIVE) {
+      refractivePercentage = 1.0;
+      reflectivePercentage = 0.8;
+   } else {
+      refractivePercentage = 0;
+      reflectivePercentage = reflectivity;
+   }
+
+   Color reflectiveColor;
+   Color refractiveColor;
+
+   if (reflectivePercentage > 0) {
+      Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
+      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
+      /* reflectiveColor = castRay(reflectedRay) * reflectivity; */
+      reflectiveColor = Color(1.0, 0.0, 0.0) * reflectivePercentage;
+   }
+
+   if (refractivePercentage > 0) {
+      // TODO: Actually do refractive lighting.
+      refractiveColor = Color(0.0, 1.0, 0.0) * refractivePercentage;
+   }
+
+   return reflectiveColor + refractiveColor;
 }
 
 Vector RayTracer::reflectVector(Vector vector, Vector normal) {
