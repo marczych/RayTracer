@@ -1,12 +1,15 @@
-material checker  Checkerboard  0.0 0.0 0.0  1.0 1.0 1.0  10 1000  1
-
 dispersion 5.0
 cameraPosition 0.0 0.0 100.0
 cameraUp 0.0 1.0 0.0
 cameraLookAt 0.0 0.0 0.0
 imageScale 0.2
-sphere 10 0 0  30  checker
-sphere -40 10 -20 30  checker
-sphere 3400 0 -10000  2800  FlatColor  0.960 0.647 0.011  -1  -1 1.5
-sphere -7 -0.5 90  2  FlatColor  0.211 0.694 0.749  -1  -1 -1
+#sphere 10 0 0  30  FlatColor  0.0 0.0 0.0  -1  0.5 -1
+sphere 0 0 0 50  FlatColor  0.0 0.0 0.0  -1  -1 2.0
+sphere 0 35 -70 30  FlatColor  1.0 0.0 0.0  -1  -1 -1
+#sphere 0 -35 -70 30  FlatColor  0.0 1.0 0.0  -1  -1 -1
+#sphere 30 40 40 30  FlatColor  0.0 1.0 0.0  -1  -1 -1
+#sphere 0 20 0 20  FlatColor  0.0 0.0 1.0  -1  -1 -1
 light 50 50 1000 0.9
+
+#sphere -1580 0 175 50  FlatColor 1.0 0.0 0.0 -1 -1 -1
+#sphere 0 0 -210 150  FlatColor 0.0 0.0 0.0 -1 0.9 -1

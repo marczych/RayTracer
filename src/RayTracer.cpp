@@ -148,8 +148,7 @@ Color RayTracer::performLighting(const Intersection& intersection) {
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection, color);
    Color reflectedColor = getReflectiveRefractiveLighting(intersection);
 
-   return reflectedColor;
-   /* return ambientColor + diffuseAndSpecularColor + reflectedColor; */
+   return ambientColor + diffuseAndSpecularColor + reflectedColor;
 }
 
 Color RayTracer::getAmbientLighting(const Intersection& intersection, const Color& color) {
@@ -257,17 +256,35 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
    Color refractiveColor;
 
    if (reflectivePercentage > 0) {
-      Vector reflected = reflectVector(intersection.ray.direction,
+      Vector reflected = reflectVector(intersection.ray.origin,
        intersection.normal);
       Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
       reflectiveColor = castRay(reflectedRay) * reflectivity;
    }
 
    if (refractivePercentage > 0) {
-      // TODO: Actually do refractive lighting.
-      refractiveColor = Color(0.0, 1.0, 0.0) * refractivePercentage;
+      Object* object = intersection.object;
+      Vector refracted = refractVector(intersection.normal,
+       intersection.ray.direction, AIR_REFRACTIVE_INDEX, refractiveIndex);
+      Ray refractedRay = Ray(intersection.intersection, refracted, 1);
+
+      // Intersection on the same object but on the way out.
+      Intersection refractedIntersection = object->intersect(refractedRay);
+
+      if (!refractedIntersection.didIntersect) {
+         cerr << "Ruh roh" << endl;
+         exit(EXIT_FAILURE);
+      }
+
+      Vector exitRefracted = refractVector(refractedIntersection.normal,
+       refractedIntersection.ray.direction, refractiveIndex, AIR_REFRACTIVE_INDEX);
+
+      Ray exitRefractedRay = Ray(refractedIntersection.intersection, exitRefracted,
+       maxReflections);
+      refractiveColor = castRay(exitRefractedRay) * refractivePercentage;
    }
 
+   /* return refractiveColor; */
    return reflectiveColor + refractiveColor;
 }
 
@@ -286,6 +303,21 @@ double RayTracer::getReflectance(const Vector& normal, const Vector& incident,
    double r0rth = (n1 * cosI - n2 * cosT) / (n1 * cosI + n2 * cosT);
    double rPar = (n2 * cosI - n1 * cosT) / (n2 * cosI + n1 * cosT);
    return (r0rth * r0rth + rPar * rPar) / 2.0;
+}
+
+Vector RayTracer::refractVector(const Vector& normal, const Vector& incident,
+ double n1, double n2) {
+   double n = n1 / n2;
+   double cosI = -normal.dot(incident);
+   double sinT2 = n * n * (1.0 - cosI * cosI);
+
+   if (sinT2 > 1.0) {
+      cerr << "ruh roh" << endl;
+      exit(EXIT_FAILURE);
+   }
+
+   double cosT = sqrt(1.0 - sinT2);
+   return incident * n + normal * (n * cosI - cosT);
 }
 
 Vector RayTracer::reflectVector(Vector vector, Vector normal) {

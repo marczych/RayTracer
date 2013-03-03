@@ -145,7 +145,7 @@ sphere -3 -62 7  7  FlatColor  0.603 0.125 0.643  149 0.56 -1
 sphere 3 -51 3  3  FlatColor  0.146 0.316 0.219  105 0 -1
 sphere -5 -32 3  3  FlatColor  0.278 0.283 0.832  12 0.33 -1
 sphere 2 -20 4  4  FlatColor  0.655 0.069 0.417  47 0.04 -1
-sphere -6 -7 3  3  FlatColor  0.067 0.196 0.369  45 0.63 -1
+sphere 0 0 75  20  FlatColor  0.0 0.0 0.0  45 -1 2.0
 sphere -3 15 7  7  FlatColor  0.449 0.791 0.24  44 0.6 -1
 sphere 0 33 7  7  FlatColor  0.888 0.106 0.95  48 0.28 -1
 sphere 3 41 5  5  FlatColor  0.922 0.087 0.768  45 0.26 -1
