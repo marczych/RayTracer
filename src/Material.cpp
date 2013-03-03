@@ -11,3 +11,7 @@ double Material::getShininess() {
 double Material::getReflectivity() {
    return NOT_REFLECTIVE;
 }
+
+double Material::getRefractiveIndex() {
+   return NOT_REFRACTIVE;
+}

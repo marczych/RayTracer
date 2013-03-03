@@ -14,3 +14,7 @@ double FlatColor::getShininess() {
 double FlatColor::getReflectivity() {
    return reflectivity;
 }
+
+double FlatColor::getRefractiveIndex() {
+   return refractiveIndex;
+}

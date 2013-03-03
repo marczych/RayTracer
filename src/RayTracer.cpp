@@ -146,7 +146,7 @@ Color RayTracer::performLighting(const Intersection& intersection) {
    Color color = intersection.getColor();
    Color ambientColor = getAmbientLighting(intersection, color);
    Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection, color);
-   Color reflectedColor = getReflectiveLighting(intersection);
+   Color reflectedColor = getReflectiveRefractiveLighting(intersection);
 
    return ambientColor + diffuseAndSpecularColor + reflectedColor;
 }
@@ -221,18 +221,24 @@ Color RayTracer::getSpecularLighting(const Intersection& intersection,
    return specularColor;
 }
 
-Color RayTracer::getReflectiveLighting(const Intersection& intersection) {
+Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersection) {
    double reflectivity = intersection.material->getReflectivity();
+   double refractiveIndex = intersection.material->getRefractiveIndex();
    int reflectionsRemaining = intersection.ray.reflectionsRemaining;
 
-   if (reflectivity == NOT_REFLECTIVE || reflectionsRemaining <= 0) {
+   /**
+    * Don't perform lighting if the object is not reflective or refractive or we have
+    * hit our recursion limit.
+    */
+   if (reflectivity == NOT_REFLECTIVE && refractiveIndex == NOT_REFRACTIVE ||
+    reflectionsRemaining <= 0) {
       return Color();
-   } else {
-      Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
-      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
-
-      return castRay(reflectedRay) * reflectivity;
    }
+
+   Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
+   Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
+
+   return castRay(reflectedRay) * reflectivity;
 }
 
 Vector RayTracer::reflectVector(Vector vector, Vector normal) {
@@ -309,6 +315,7 @@ Material* RayTracer::readMaterial(istream& in) {
       in >> material->color.r >> material->color.g >> material->color.b;
       in >> material->shininess;
       in >> material->reflectivity;
+      in >> material->refractiveIndex;
 
       return material;
    } else if (type.compare("Checkerboard") == 0) {

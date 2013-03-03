@@ -9,10 +9,12 @@ public:
    Color color;
    double shininess;
    double reflectivity;
+   double refractiveIndex;
 
    virtual Color getColor(Vector);
    virtual double getShininess();
    virtual double getReflectivity();
+   virtual double getRefractiveIndex();
 };
 
 #endif

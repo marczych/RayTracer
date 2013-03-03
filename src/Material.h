@@ -3,6 +3,7 @@
 
 #define NOT_SHINY -1
 #define NOT_REFLECTIVE -1
+#define NOT_REFRACTIVE -1
 
 class Vector;
 class Color;
@@ -12,6 +13,7 @@ public:
    virtual Color getColor(Vector) = 0;
    virtual double getShininess();
    virtual double getReflectivity();
+   virtual double getRefractiveIndex();
 };
 
 #endif
