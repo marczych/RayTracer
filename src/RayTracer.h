@@ -57,6 +57,7 @@ private:
    Color getDiffuseAndSpecularLighting(const Intersection&, const Color&);
    Color getSpecularLighting(const Intersection&, Light*);
    Color getReflectiveRefractiveLighting(const Intersection&);
+   double getReflectance(const Vector&, const Vector&, double, double);
    Vector reflectVector(Vector, Vector);
    Material* readMaterial(std::istream&);
    void addMaterial(std::istream&);

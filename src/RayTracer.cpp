@@ -236,26 +236,31 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
       return Color();
    }
 
-   double reflectivePercentage;
-   double refractivePercentage;
+   // Default to exclusively reflective values.
+   double reflectivePercentage = reflectivity;
+   double refractivePercentage = 0;
 
    // Refractive index overrides the reflective property.
    if (refractiveIndex != NOT_REFRACTIVE) {
-      refractivePercentage = 1.0;
-      reflectivePercentage = 0.8;
-   } else {
-      refractivePercentage = 0;
-      reflectivePercentage = reflectivity;
+      reflectivePercentage = getReflectance(intersection.normal,
+       intersection.ray.direction, AIR_REFRACTIVE_INDEX, refractiveIndex);
+
+      refractivePercentage = 1 - reflectivePercentage;
+   }
+
+   // No ref{ra,le}ctive properties - bail early.
+   if (refractivePercentage <= 0 && reflectivePercentage <= 0) {
+      return Color();
    }
 
    Color reflectiveColor;
    Color refractiveColor;
 
    if (reflectivePercentage > 0) {
-      Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
+      Vector reflected = reflectVector(intersection.ray.direction,
+       intersection.normal);
       Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
-      /* reflectiveColor = castRay(reflectedRay) * reflectivity; */
-      reflectiveColor = Color(1.0, 0.0, 0.0) * reflectivePercentage;
+      reflectiveColor = castRay(reflectedRay) * reflectivity;
    }
 
    if (refractivePercentage > 0) {
@@ -264,6 +269,23 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
    }
 
    return reflectiveColor + refractiveColor;
+}
+
+double RayTracer::getReflectance(const Vector& normal, const Vector& incident,
+ double n1, double n2) {
+   double n = n1 / n2;
+   double cosI = -normal.dot(incident);
+   double sinT2 = n * n * (1.0 - cosI * cosI);
+
+   if (sinT2 > 1.0) {
+      // Total Internal Reflection.
+      return 1.0;
+   }
+
+   double cosT = sqrt(1.0 - sinT2);
+   double r0rth = (n1 * cosI - n2 * cosT) / (n1 * cosI + n2 * cosT);
+   double rPar = (n2 * cosI - n1 * cosT) / (n2 * cosI + n1 * cosT);
+   return (r0rth * r0rth + rPar * rPar) / 2.0;
 }
 
 Vector RayTracer::reflectVector(Vector vector, Vector normal) {

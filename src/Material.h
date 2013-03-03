@@ -4,6 +4,7 @@
 #define NOT_SHINY -1
 #define NOT_REFLECTIVE -1
 #define NOT_REFRACTIVE -1
+#define AIR_REFRACTIVE_INDEX 1
 
 class Vector;
 class Color;
