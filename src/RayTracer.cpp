@@ -13,7 +13,15 @@ using namespace std;
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
  maxReflections(maxReflections_), superSamples(superSamples_), camera(Camera()),
- imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {}
+ imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {
+   FlatColor* flatColor = new FlatColor();
+   flatColor->color = Color();
+   flatColor->shininess = NOT_SHINY;
+   flatColor->reflectivity = NOT_REFLECTIVE;
+   flatColor->refractiveIndex = AIR_REFRACTIVE_INDEX;
+
+   airMaterial = flatColor;
+}
 
 RayTracer::~RayTracer() {
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
@@ -23,6 +31,8 @@ RayTracer::~RayTracer() {
    for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
       delete *itr;
    }
+
+   delete airMaterial;
 }
 
 void RayTracer::traceRays(string fileName) {
@@ -81,7 +91,7 @@ Color RayTracer::castRayAtPoint(const Vector& point) {
 
    for (int i = 0; i < depthComplexity; i++) {
       Ray viewRay(camera.position, point - camera.position, maxReflections,
-       AIR_REFRACTIVE_INDEX);
+       airMaterial);
 
       if (depthComplexity > 1) {
          Vector disturbance(
@@ -176,7 +186,7 @@ Color RayTracer::getDiffuseAndSpecularLighting(const Intersection& intersection,
        */
       if (dotProduct >= 0.0f) {
          Ray shadowRay = Ray(intersection.intersection, lightDirection, 1,
-          intersection.ray.refractiveIndex);
+          intersection.ray.material);
 
          if (isInShadow(shadowRay, lightDistance)) {
             /**
@@ -197,7 +207,7 @@ Color RayTracer::getDiffuseAndSpecularLighting(const Intersection& intersection,
 Color RayTracer::getSpecularLighting(const Intersection& intersection,
  Light* light) {
    Color specularColor(0.0, 0.0, 0.0);
-   double shininess = intersection.material->getShininess();
+   double shininess = intersection.endMaterial->getShininess();
 
    if (shininess == NOT_SHINY) {
       /* Don't perform specular lighting on non shiny objects. */
@@ -224,15 +234,16 @@ Color RayTracer::getSpecularLighting(const Intersection& intersection,
 }
 
 Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersection) {
-   double reflectivity = intersection.material->getReflectivity();
-   double refractiveIndex = intersection.material->getRefractiveIndex();
+   double reflectivity = intersection.endMaterial->getReflectivity();
+   double startRefractiveIndex = intersection.startMaterial->getRefractiveIndex();
+   double endRefractiveIndex = intersection.endMaterial->getRefractiveIndex();
    int reflectionsRemaining = intersection.ray.reflectionsRemaining;
 
    /**
     * Don't perform lighting if the object is not reflective or refractive or we have
     * hit our recursion limit.
     */
-   if (reflectivity == NOT_REFLECTIVE && refractiveIndex == NOT_REFRACTIVE ||
+   if (reflectivity == NOT_REFLECTIVE && endRefractiveIndex == NOT_REFRACTIVE ||
     reflectionsRemaining <= 0) {
       return Color();
    }
@@ -242,9 +253,9 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
    double refractivePercentage = 0;
 
    // Refractive index overrides the reflective property.
-   if (refractiveIndex != NOT_REFRACTIVE) {
+   if (endRefractiveIndex != NOT_REFRACTIVE) {
       reflectivePercentage = getReflectance(intersection.normal,
-       intersection.ray.direction, AIR_REFRACTIVE_INDEX, refractiveIndex);
+       intersection.ray.direction, startRefractiveIndex, endRefractiveIndex);
 
       refractivePercentage = 1 - reflectivePercentage;
    }
@@ -261,29 +272,18 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
       Vector reflected = reflectVector(intersection.ray.origin,
        intersection.normal);
       Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1,
-       intersection.ray.refractiveIndex);
-      reflectiveColor = castRay(reflectedRay) * reflectivity;
+       intersection.ray.material);
+
+      reflectiveColor = castRay(reflectedRay) * reflectivePercentage;
    }
 
    if (refractivePercentage > 0) {
-      /* Vector refracted = refractVector(intersection.normal, */
-      /*  intersection.ray.direction, AIR_REFRACTIVE_INDEX, refractiveIndex); */
-      /* Ray refractedRay = Ray(intersection.intersection, refracted, 1); */
+      Vector refracted = refractVector(intersection.normal,
+       intersection.ray.direction, startRefractiveIndex, endRefractiveIndex);
+      Ray refractedRay = Ray(intersection.intersection, refracted, 1,
+       intersection.endMaterial);
 
-      /* // Intersection on the same object but on the way out. */
-      /* Intersection refractedIntersection = object->intersect(refractedRay); */
-
-      /* if (!refractedIntersection.didIntersect) { */
-      /*    cerr << "Ruh roh" << endl; */
-      /*    exit(EXIT_FAILURE); */
-      /* } */
-
-      /* Vector exitRefracted = refractVector(refractedIntersection.normal, */
-      /*  refractedIntersection.ray.direction, refractiveIndex, AIR_REFRACTIVE_INDEX); */
-
-      /* Ray exitRefractedRay = Ray(refractedIntersection.intersection, exitRefracted, */
-      /*  maxReflections); */
-      /* refractiveColor = castRay(exitRefractedRay) * refractivePercentage; */
+      refractiveColor = castRay(refractedRay) * refractivePercentage;
    }
 
    /* return refractiveColor; */

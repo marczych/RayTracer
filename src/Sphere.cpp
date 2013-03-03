@@ -47,5 +47,5 @@ Intersection Sphere::intersect(Ray ray) {
       normal = normal * -1;
    }
 
-   return Intersection(ray, point, distance, normal, material, this);
+   return Intersection(ray, point, distance, normal, ray.material, material, this);
 }

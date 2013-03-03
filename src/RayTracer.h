@@ -26,6 +26,7 @@ public:
    int depthComplexity;
    double dispersion;
    unsigned long long raysCast;
+   Material* airMaterial;
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;
