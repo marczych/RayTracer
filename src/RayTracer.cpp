@@ -286,7 +286,6 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
       refractiveColor = castRay(refractedRay) * refractivePercentage;
    }
 
-   /* return refractiveColor; */
    return reflectiveColor + refractiveColor;
 }
 
