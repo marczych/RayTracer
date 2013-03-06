@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -O2 -Wall -fopenmp
 
-ALL_OBJECT_FILES = main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o Material.o FlatColor.o Checkerboard.o
+ALL_OBJECT_FILES = main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o Material.o FlatColor.o Checkerboard.o PerlinNoise.o
 
 RayTracer: $(ALL_OBJECT_FILES)
 	$(CC) $(CFLAGS) $(ALL_OBJECT_FILES) -o RayTracer
@@ -39,7 +39,7 @@ Light.o: Light.cpp Light.h Vector.h
 Camera.o: Camera.cpp Camera.h
 	$(CC) $(CFLAGS) Camera.cpp -c -o Camera.o
 
-Material.o: Material.cpp Material.h
+Material.o: Material.cpp Material.h PerlinNoise.o
 	$(CC) $(CFLAGS) Material.cpp -c -o Material.o
 
 FlatColor.o: FlatColor.cpp FlatColor.h Material.h Vector.h Color.h
@@ -47,6 +47,9 @@ FlatColor.o: FlatColor.cpp FlatColor.h Material.h Vector.h Color.h
 
 Checkerboard.o: Checkerboard.cpp Checkerboard.h Material.h Vector.h Color.h
 	$(CC) $(CFLAGS) Checkerboard.cpp -c -o Checkerboard.o
+
+PerlinNoise.o: PerlinNoise.h PerlinNoise.cpp
+	$(CC) $(CFLAGS) PerlinNoise.cpp -c -o PerlinNoise.o
 
 clean:
 	rm -rf *.o
