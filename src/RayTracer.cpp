@@ -7,6 +7,7 @@
 #include "Light.h"
 #include "FlatColor.h"
 #include "Checkerboard.h"
+#include "Marble.h"
 
 using namespace std;
 
@@ -396,6 +397,16 @@ Material* RayTracer::readMaterial(istream& in) {
       in >> material->shininess;
       in >> material->reflectivity;
       in >> material->refractiveIndex;
+
+      return material;
+   } else if (type.compare("Marble") == 0) {
+      Marble* material = new Marble();
+
+      in >> material->color1.r >> material->color1.g >> material->color1.b;
+      in >> material->color2.r >> material->color2.g >> material->color2.b;
+      in >> material->scale;
+      in >> material->shininess;
+      in >> material->reflectivity;
 
       return material;
    } else if (type.compare("Checkerboard") == 0) {
