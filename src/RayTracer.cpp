@@ -5,6 +5,8 @@
 #include "Sphere.h"
 #include "Intersection.h"
 #include "Light.h"
+#include "Air.h"
+#include "ShinyColor.h"
 #include "FlatColor.h"
 #include "Checkerboard.h"
 #include "Marble.h"
@@ -14,15 +16,8 @@ using namespace std;
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
  maxReflections(maxReflections_), superSamples(superSamples_), camera(Camera()),
- imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {
-   FlatColor* flatColor = new FlatColor();
-   flatColor->color = Color();
-   flatColor->shininess = NOT_SHINY;
-   flatColor->reflectivity = NOT_REFLECTIVE;
-   flatColor->refractiveIndex = AIR_REFRACTIVE_INDEX;
-
-   airMaterial = flatColor;
-}
+ imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0),
+ airMaterial(new Air()) {}
 
 RayTracer::~RayTracer() {
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
@@ -391,34 +386,11 @@ Material* RayTracer::readMaterial(istream& in) {
    in >> type;
 
    if (type.compare("FlatColor") == 0) {
-      FlatColor* material = new FlatColor();
-
-      in >> material->color.r >> material->color.g >> material->color.b;
-      in >> material->shininess;
-      in >> material->reflectivity;
-      in >> material->refractiveIndex;
-
-      return material;
+      return new FlatColor(in);
    } else if (type.compare("Marble") == 0) {
-      Marble* material = new Marble();
-
-      in >> material->color1.r >> material->color1.g >> material->color1.b;
-      in >> material->color2.r >> material->color2.g >> material->color2.b;
-      in >> material->scale;
-      in >> material->shininess;
-      in >> material->reflectivity;
-
-      return material;
+      return new Marble(in);
    } else if (type.compare("Checkerboard") == 0) {
-      Checkerboard* material = new Checkerboard();
-
-      in >> material->color1.r >> material->color1.g >> material->color1.b;
-      in >> material->color2.r >> material->color2.g >> material->color2.b;
-      in >> material->scale;
-      in >> material->shininess;
-      in >> material->reflectivity;
-
-      return material;
+      return new Checkerboard(in);
    } else if (materials.count(type) > 0) {
       return materials[type];
    } else {

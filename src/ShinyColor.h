@@ -1,23 +1,17 @@
-#ifndef __MARBLE_H__
-#define __MARBLE_H__
+#ifndef __SHINY_COLOR_H__
+#define __SHINY_COLOR_H__
 
 #include <iostream>
 #include "Material.h"
 #include "Color.h"
-#include "PerlinNoise.h"
 
-class Marble : public Material {
-private:
-   PerlinNoise perlin;
-
-   Color color1;
-   Color color2;
-   double scale;
+class ShinyColor : public Material {
+public:
+   Color color;
    double shininess;
    double reflectivity;
 
-public:
-   Marble(std::istream&);
+   ShinyColor(std::istream&);
 
    virtual Color getColor(Vector);
    virtual double getShininess();

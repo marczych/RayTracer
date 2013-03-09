@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -O3 -Wall -fopenmp
 
-ALL_OBJECT_FILES = main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o Material.o FlatColor.o Marble.o Checkerboard.o PerlinNoise.o
+ALL_OBJECT_FILES = main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o Material.o Glass.o Air.o FlatColor.o ShinyColor.o Marble.o Checkerboard.o PerlinNoise.o
 
 RayTracer: $(ALL_OBJECT_FILES)
 	$(CC) $(CFLAGS) $(ALL_OBJECT_FILES) -o RayTracer
@@ -42,8 +42,17 @@ Camera.o: Camera.cpp Camera.h
 Material.o: Material.cpp Material.h PerlinNoise.o
 	$(CC) $(CFLAGS) Material.cpp -c -o Material.o
 
+ShinyColor.o: ShinyColor.cpp ShinyColor.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) ShinyColor.cpp -c -o ShinyColor.o
+
+Glass.o: Glass.cpp Glass.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) Glass.cpp -c -o Glass.o
+
 FlatColor.o: FlatColor.cpp FlatColor.h Material.h Vector.h Color.h
 	$(CC) $(CFLAGS) FlatColor.cpp -c -o FlatColor.o
+
+Air.o: Air.cpp Air.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) Air.cpp -c -o Air.o
 
 Marble.o: Marble.cpp Marble.h Material.h Vector.h Color.h
 	$(CC) $(CFLAGS) Marble.cpp -c -o Marble.o

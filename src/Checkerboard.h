@@ -1,16 +1,20 @@
 #ifndef __CHECKERBOARD_H__
 #define __CHECKERBOARD_H__
 
+#include <iostream>
 #include "Material.h"
 #include "Color.h"
 
 class Checkerboard : public Material {
-public:
+private:
    Color color1;
    Color color2;
    double scale;
    double shininess;
    double reflectivity;
+
+public:
+   Checkerboard(std::istream&);
 
    virtual Color getColor(Vector);
    virtual double getShininess();

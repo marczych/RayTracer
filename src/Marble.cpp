@@ -3,6 +3,14 @@
 #include "Vector.h"
 #include "Color.h"
 
+Marble::Marble(std::istream& in) {
+   in >> color1.r >> color1.g >> color1.b;
+   in >> color2.r >> color2.g >> color2.b;
+   in >> scale;
+   in >> shininess;
+   in >> reflectivity;
+}
+
 Color Marble::getColor(Vector point) {
    double x = point.x * scale;
    double y = point.y * scale;
@@ -26,8 +34,4 @@ double Marble::getShininess() {
 
 double Marble::getReflectivity() {
    return reflectivity;
-}
-
-double Marble::getRefractiveIndex() {
-   return refractiveIndex;
 }
