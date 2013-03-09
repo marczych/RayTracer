@@ -1,0 +1,14 @@
+cameraUp 0.0 1.0 0.0
+cameraPosition 0.0 0.0 1000.0
+cameraLookAt 0.0 0.0 0.0
+
+light 400 100 500 0.9
+
+sphere 0.0 0.0 -9999999.0  9999899.0  Checkerboard 0.1 0.2 0.3  0.9 0.8 0.7  20 -1 -1
+
+sphere -300.0 150.0 0.0  150  FlatColor 0.6 0.2 0.9
+sphere 300.0 150.0 0.0  125  ShinyColor 0.6 0.2 0.9 100 0.9
+sphere 0.0 150.0 0.0  100  Checkerboard 0.3 0.2 0.1  0.7 0.8 0.9  50  50 0.7
+
+sphere -275.0 -100.0 100.0  75  Glass 2.0 50
+sphere 300.0 -150.0 0.0  150  Marble 0.4 0.3 0.2  0.6 0.7 0.8  1  50 0.3

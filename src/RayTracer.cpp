@@ -10,6 +10,7 @@
 #include "FlatColor.h"
 #include "Checkerboard.h"
 #include "Marble.h"
+#include "Glass.h"
 
 using namespace std;
 
@@ -335,7 +336,6 @@ void RayTracer::readScene(istream& in) {
       } else if (type.compare("sphere") == 0) {
          Vector center;
          double radius;
-         Color color;
          Material* material;
 
          in >> center.x >> center.y >> center.z;
@@ -387,10 +387,14 @@ Material* RayTracer::readMaterial(istream& in) {
 
    if (type.compare("FlatColor") == 0) {
       return new FlatColor(in);
-   } else if (type.compare("Marble") == 0) {
-      return new Marble(in);
+   } else if (type.compare("ShinyColor") == 0) {
+      return new ShinyColor(in);
    } else if (type.compare("Checkerboard") == 0) {
       return new Checkerboard(in);
+   } else if (type.compare("Glass") == 0) {
+      return new Glass(in);
+   } else if (type.compare("Marble") == 0) {
+      return new Marble(in);
    } else if (materials.count(type) > 0) {
       return materials[type];
    } else {
