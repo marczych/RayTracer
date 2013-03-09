@@ -1,6 +1,7 @@
 cameraUp 0.0 1.0 0.0
 cameraPosition 0.0 0.0 1000.0
 cameraLookAt 0.0 0.0 0.0
+cameraScreenWidth 1920
 
 light 400 100 500 0.9
 

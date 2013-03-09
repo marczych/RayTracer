@@ -41,6 +41,8 @@ void RayTracer::traceRays(string fileName) {
       depthComplexity = 1;
    }
 
+   imageScale = camera.screenWidth / (float)width;
+
    #pragma omp parallel for
    for (int x = 0; x < width; x++) {
       // Update percent complete.
@@ -367,8 +369,8 @@ void RayTracer::readScene(istream& in) {
          in >> camera.lookAt.x;
          in >> camera.lookAt.y;
          in >> camera.lookAt.z;
-      } else if (type.compare("imageScale") == 0) {
-         in >> imageScale;
+      } else if (type.compare("cameraScreenWidth") == 0) {
+         in >> camera.screenWidth;
       } else {
          cerr << "Type not found: " << type << endl;
          exit(EXIT_FAILURE);
