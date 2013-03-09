@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -O2 -Wall -fopenmp
+CFLAGS = -O3 -Wall -fopenmp
 
 ALL_OBJECT_FILES = main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o Material.o FlatColor.o Marble.o Checkerboard.o PerlinNoise.o
 
