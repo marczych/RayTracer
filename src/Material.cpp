@@ -1,4 +1,5 @@
 #include "Material.h"
+#include "NormalMap.h"
 
 /**
  * Put Material code here!
@@ -14,4 +15,12 @@ double Material::getReflectivity() {
 
 double Material::getRefractiveIndex() {
    return NOT_REFRACTIVE;
+}
+
+Vector Material::modifyNormal(const Vector& normal, const Vector& point) {
+   if (normalMap != NULL) {
+      return normalMap->modifyNormal(normal, point);
+   } else {
+      return normal;
+   }
 }

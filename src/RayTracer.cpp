@@ -12,6 +12,7 @@
 #include "Marble.h"
 #include "Wood.h"
 #include "Glass.h"
+#include "NormalMap.h"
 
 using namespace std;
 
@@ -385,25 +386,44 @@ void RayTracer::readScene(istream& in) {
  * Parses the input stream and makes a new Material.
  */
 Material* RayTracer::readMaterial(istream& in) {
+   Material* material;
    string type;
    in >> type;
 
    if (type.compare("FlatColor") == 0) {
-      return new FlatColor(in);
+      material = new FlatColor(in);
    } else if (type.compare("ShinyColor") == 0) {
-      return new ShinyColor(in);
+      material = new ShinyColor(in);
    } else if (type.compare("Checkerboard") == 0) {
-      return new Checkerboard(in);
+      material = new Checkerboard(in);
    } else if (type.compare("Glass") == 0) {
-      return new Glass(in);
+      material = new Glass(in);
    } else if (type.compare("Marble") == 0) {
-      return new Marble(in);
+      material = new Marble(in);
    } else if (type.compare("Wood") == 0) {
-      return new Wood(in);
+      material = new Wood(in);
    } else if (materials.count(type) > 0) {
-      return materials[type];
+      material = materials[type];
    } else {
-      cerr << "Type not found: " << type << endl;
+      cerr << "Material not found: " << type << endl;
+      exit(EXIT_FAILURE);
+   }
+
+   material->setNormalMap(readNormalMap(in));
+
+   return material;
+}
+
+NormalMap* RayTracer::readNormalMap(istream& in) {
+   string type;
+   in >> type;
+
+   if (type.compare("null") == 0) {
+      return NULL;
+   } else if (type.compare("NormalMap") == 0) {
+      return new NormalMap(in);
+   } else {
+      cerr << "NormalMap not found: " << type << endl;
       exit(EXIT_FAILURE);
    }
 }

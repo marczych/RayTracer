@@ -6,9 +6,14 @@
 #include "Ray.h"
 #include "Intersection.h"
 #include "Object.h"
-#include "Material.h"
+#include "PerlinNoise.h"
+
+class Material;
 
 class Sphere : public Object {
+private:
+   PerlinNoise perlin;
+
 public:
    Vector center;
    double radius;

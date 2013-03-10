@@ -1,4 +1,5 @@
 #include "Sphere.h"
+#include "Material.h"
 #include <math.h>
 
 Intersection Sphere::intersect(Ray ray) {
@@ -41,6 +42,8 @@ Intersection Sphere::intersect(Ray ray) {
 
    Vector point = ray.origin + (ray.direction * distance);
    Vector normal = (point - center).normalize();
+
+   normal = material->modifyNormal(normal, point);
 
    // Normal needs to be flipped if this is a refractive ray.
    if (ray.direction.dot(normal) > 0) {

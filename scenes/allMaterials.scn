@@ -5,12 +5,12 @@ cameraScreenWidth 1920
 
 light 400 100 500 0.9
 
-sphere 0.0 0.0 -9999999.0  9999899.0  Checkerboard 0.1 0.2 0.3  0.9 0.8 0.7  20 -1 -1
+sphere 0.0 0.0 -9999999.0  9999899.0  Checkerboard 0.1 0.2 0.3  0.9 0.8 0.7  20 -1 -1 null
 
-sphere -300.0 150.0 0.0  150  FlatColor 0.6 0.2 0.9
-sphere 300.0 150.0 0.0  125  ShinyColor 0.6 0.2 0.9 100 0.9
-sphere 0.0 150.0 0.0  100  Checkerboard 0.3 0.2 0.1  0.7 0.8 0.9  50  50 0.7
+sphere -300.0 150.0 0.0  150  FlatColor 0.6 0.2 0.9 null
+sphere 300.0 150.0 0.0  125  ShinyColor 0.6 0.2 0.9 100 0.9 null
+sphere 0.0 150.0 0.0  100  Checkerboard 0.3 0.2 0.1  0.7 0.8 0.9  50  50 0.7 null
 
-sphere -275.0 -100.0 100.0  75  Glass 2.0 50
-sphere 0.0 -150.0 0.0  150  Wood  0.1043 0.0737 0.0517  0.5215 0.3686 0.2588  0.01  -1 -1
-sphere 300.0 -150.0 0.0  150  Marble 0.4 0.3 0.2  0.6 0.7 0.8  0.5  50 0.15
+sphere -275.0 -100.0 100.0  75  Glass 2.0 50 null
+sphere 0.0 -150.0 0.0  150  Wood  0.1043 0.0737 0.0517  0.5215 0.3686 0.2588  0.01  -1 -1 null
+sphere 300.0 -150.0 0.0  150  Marble 0.4 0.3 0.2  0.6 0.7 0.8  0.5  50 0.15  NormalMap 25 0.8

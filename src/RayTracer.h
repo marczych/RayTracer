@@ -14,6 +14,7 @@ class Intersection;
 class Object;
 class Light;
 class Material;
+class NormalMap;
 
 class RayTracer {
 public:
@@ -62,6 +63,7 @@ private:
    Vector refractVector(const Vector&, const Vector&, double, double);
    Vector reflectVector(Vector, Vector);
    Material* readMaterial(std::istream&);
+   NormalMap* readNormalMap(std::istream&);
    void addMaterial(std::istream&);
 };
 
