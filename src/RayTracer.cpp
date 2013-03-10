@@ -10,6 +10,7 @@
 #include "FlatColor.h"
 #include "Checkerboard.h"
 #include "Marble.h"
+#include "Wood.h"
 #include "Glass.h"
 
 using namespace std;
@@ -397,6 +398,8 @@ Material* RayTracer::readMaterial(istream& in) {
       return new Glass(in);
    } else if (type.compare("Marble") == 0) {
       return new Marble(in);
+   } else if (type.compare("Wood") == 0) {
+      return new Wood(in);
    } else if (materials.count(type) > 0) {
       return materials[type];
    } else {
