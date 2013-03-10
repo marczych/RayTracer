@@ -22,7 +22,7 @@ RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamp
  int depthComplexity_) : width(width_), height(height_),
  maxReflections(maxReflections_), superSamples(superSamples_), camera(Camera()),
  imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0),
- airMaterial(new Air()) {}
+ startingMaterial(new Air()) {}
 
 RayTracer::~RayTracer() {
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
@@ -33,7 +33,7 @@ RayTracer::~RayTracer() {
       delete *itr;
    }
 
-   delete airMaterial;
+   delete startingMaterial;
 }
 
 void RayTracer::traceRays(string fileName) {
@@ -94,7 +94,7 @@ Color RayTracer::castRayAtPoint(const Vector& point) {
 
    for (int i = 0; i < depthComplexity; i++) {
       Ray viewRay(camera.position, point - camera.position, maxReflections,
-       airMaterial);
+       startingMaterial);
 
       if (depthComplexity > 1) {
          Vector disturbance(
@@ -361,6 +361,8 @@ void RayTracer::readScene(istream& in) {
          in >> dispersion;
       } else if (type.compare("maxReflections") == 0) {
          in >> maxReflections;
+      } else if (type.compare("startingMaterial") == 0) {
+         startingMaterial = readMaterial(in);
       } else if (type.compare("cameraUp") == 0) {
          in >> camera.up.x;
          in >> camera.up.y;
@@ -410,6 +412,10 @@ Material* RayTracer::readMaterial(istream& in) {
       material = new Wood(in);
    } else if (materials.count(type) > 0) {
       material = materials[type];
+
+      // Stored material already has the NormalMap so return here to avoid
+      // scene parsing problems below.
+      return material;
    } else {
       cerr << "Material not found: " << type << endl;
       exit(EXIT_FAILURE);
