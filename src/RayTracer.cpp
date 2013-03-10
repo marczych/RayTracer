@@ -13,6 +13,7 @@
 #include "Wood.h"
 #include "Glass.h"
 #include "NormalMap.h"
+#include "Turbulence.h"
 
 using namespace std;
 
@@ -398,6 +399,8 @@ Material* RayTracer::readMaterial(istream& in) {
       material = new Checkerboard(in);
    } else if (type.compare("Glass") == 0) {
       material = new Glass(in);
+   } else if (type.compare("Turbulence") == 0) {
+      material = new Turbulence(in);
    } else if (type.compare("Marble") == 0) {
       material = new Marble(in);
    } else if (type.compare("Wood") == 0) {
