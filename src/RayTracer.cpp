@@ -14,6 +14,7 @@
 #include "Glass.h"
 #include "NormalMap.h"
 #include "Turbulence.h"
+#include "CrissCross.h"
 
 using namespace std;
 
@@ -403,6 +404,8 @@ Material* RayTracer::readMaterial(istream& in) {
       material = new Turbulence(in);
    } else if (type.compare("Marble") == 0) {
       material = new Marble(in);
+   } else if (type.compare("CrissCross") == 0) {
+      material = new CrissCross(in);
    } else if (type.compare("Wood") == 0) {
       material = new Wood(in);
    } else if (materials.count(type) > 0) {
