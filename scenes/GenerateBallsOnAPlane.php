@@ -6,7 +6,7 @@ class GenerateBallsOnAPlane {
    public static function main() {
       echo <<<EOT
 cameraUp 0 1 0
-cameraPosition 950 300 950
+cameraPosition 995 300 995
 cameraLookAt 300 0 0
 cameraScreenWidth 1500
 
@@ -14,25 +14,32 @@ cameraScreenWidth 1500
 
 light  900 900  900  0.6
 
-sphere  1001000        0        0  1000000  FlatColor  1 0 0  null
-sphere -1001000        0        0  1000000  FlatColor  1 1 0  null
-sphere        0        0  1001000  1000000  FlatColor  0 1 0  null
-sphere        0        0 -1001000  1000000  FlatColor  0 1 1  null
-sphere        0 -1000000        0  1000000  FlatColor  1 1 1  null
-sphere        0  1001000        0  1000000  FlatColor  1 0 1  null
+sphere  1001000        0        0  1000000  FlatColor   1.0000 0.8901 0.8705  null
+sphere -1001000        0        0  1000000  FlatColor   0.6941 0.4980 0.4627  null
+sphere        0        0  1001000  1000000  FlatColor   0.9921 0.7960 0.7647  null
+sphere        0        0 -1001000  1000000  FlatColor   0.3921 0.6941 0.5647  null
+sphere        0 -1000000        0  1000000  FlatColor   0.7647 0.9921 0.8941  null
+sphere        0  1001000        0  1000000  FlatColor   0.7647 0.9921 0.8941  null
+
+sphere 300 100 0  100  Glass 2.0 50 null
 
 
 EOT;
 
       $radius = 0;
 
-      for ($x = -1000; $x < 1000; $x += $radius + rand(10, 50)) {
-         for ($y = -1000; $y < 1000; $y += $radius + rand(10, 50)) {
-            $radius = rand(8, 45);
+      for ($x = -990; $x < 990; $x += $radius + rand(10, 50)) {
+         for ($y = -990; $y < 990; $y += $radius + rand(10, 50)) {
+            if (abs($x - 300) < 80 && abs($y) < 80) {
+               // Leave space for large glass sphere.
+               continue;
+            }
+
+            $radius = rand(20, 45);
 
             self::outputSphere(
-               $x + rand(-5, 5),
-               $y + rand(-5, 5),
+               $x + rand(-15, 15),
+               $y + rand(-15, 15),
                rand(8, 24),
                self::getRandomMaterial()
             );
@@ -46,9 +53,9 @@ EOT;
 
    private static function getRandomMaterial() {
       $materials = array(
-         'FlatColor' => function() {
-            return 'FlatColor ' . GenerateBallsOnAPlane::getRandomColor();
-         },
+         /* 'FlatColor' => function() { */
+         /*    return 'FlatColor ' . GenerateBallsOnAPlane::getRandomColor(); */
+         /* }, */
          'ShinyColor' => function() {
             return 'ShinyColor ' . GenerateBallsOnAPlane::getRandomColor() . ' ' .
              GenerateBallsOnAPlane::getRandomSpecularReflective();
