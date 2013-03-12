@@ -25,7 +25,6 @@ public:
        calculateWUV();
    }
 
-private:
    void calculateWUV();
 };
 

@@ -38,6 +38,7 @@ RayTracer::~RayTracer() {
 
 void RayTracer::traceRays(string fileName) {
    int columnsCompleted = 0;
+   camera.calculateWUV();
    Image image(width, height);
 
    // Reset depthComplexity to avoid unnecessary loops.
