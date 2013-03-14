@@ -1,6 +1,6 @@
 cameraUp 0.0 1.0 0.0
 cameraPosition 0.0 0.0 1000.0
-cameraLookAt 175.0 0.0 0.0
+cameraLookAt 110.0 0.0 0.0
 cameraScreenWidth 2500
 
 light 400 100 500 0.9
