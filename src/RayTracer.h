@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <iostream>
 #include "Vector.h"
 #include "Camera.h"
@@ -12,6 +13,8 @@ class Color;
 class Intersection;
 class Object;
 class Light;
+class Material;
+class NormalMap;
 
 class RayTracer {
 public:
@@ -24,9 +27,11 @@ public:
    int depthComplexity;
    double dispersion;
    unsigned long long raysCast;
+   Material* startingMaterial;
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;
+   std::map<std::string, Material*> materials;
 
    RayTracer(int, int, int, int, int);
 
@@ -41,17 +46,25 @@ public:
    }
 
    void traceRays(std::string);
-   Color castRayForPixel(int, int);
-   Color castRayAtPoint(Vector);
-   Color castRay(Ray);
-   Intersection getClosestIntersection(Ray);
-   Color performLighting(Intersection);
-   Color getAmbientLighting(Intersection);
-   Color getDiffuseAndSpecularLighting(Intersection);
-   Color getSpecularLighting(Intersection, Light*);
-   Color getReflectiveLighting(Intersection);
-   Vector reflectVector(Vector, Vector);
    void readScene(std::istream&);
+
+private:
+   Color castRayForPixel(int, int);
+   Color castRayAtPoint(const Vector&);
+   Color castRay(const Ray&);
+   bool isInShadow(const Ray&, double);
+   Intersection getClosestIntersection(const Ray&);
+   Color performLighting(const Intersection&);
+   Color getAmbientLighting(const Intersection&, const Color&);
+   Color getDiffuseAndSpecularLighting(const Intersection&, const Color&);
+   Color getSpecularLighting(const Intersection&, Light*);
+   Color getReflectiveRefractiveLighting(const Intersection&);
+   double getReflectance(const Vector&, const Vector&, double, double);
+   Vector refractVector(const Vector&, const Vector&, double, double);
+   Vector reflectVector(Vector, Vector);
+   Material* readMaterial(std::istream&);
+   NormalMap* readNormalMap(std::istream&);
+   void addMaterial(std::istream&);
 };
 
 #endif

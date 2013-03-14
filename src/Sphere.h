@@ -6,22 +6,26 @@
 #include "Ray.h"
 #include "Intersection.h"
 #include "Object.h"
+#include "PerlinNoise.h"
+
+class Material;
 
 class Sphere : public Object {
+private:
+   PerlinNoise perlin;
+
 public:
    Vector center;
    double radius;
-   Color color;
-   double shininess;
-   double reflectivity;
+   Material* material;
 
-   Sphere(Vector center_, double radius_, Color color_, double shininess_,
-    double reflectivity_) : center(center_), radius(radius_), color(color_),
-    shininess(shininess_), reflectivity(reflectivity_) {}
+   Sphere(Vector center_, double radius_, Material* material_) : center(center_),
+    radius(radius_), material(material_) {}
 
    virtual Intersection intersect(Ray);
-   virtual double getShininess();
-   virtual double getReflectivity();
+
+private:
+   Color getColor(Vector);
 };
 
 #endif

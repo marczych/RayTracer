@@ -1,5 +1,5 @@
 #include "Intersection.h"
 
-/**
- * Put Intersection code here!
- */
+Color Intersection::getColor() const {
+   return endMaterial->getColor(intersection);
+}

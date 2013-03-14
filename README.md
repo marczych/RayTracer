@@ -1,7 +1,7 @@
 #Ray Tracer!
 
-This is a simple ray tracer developed as a final project for CSC 471 Introduction to Graphics at Cal Poly.
-It currently supports phong lighting, shadows, reflections, super sampling, and depth of field.
+This is a simple ray tracer developed as a final project for CSC 471 Introduction to Graphics at Cal Poly and later extended in CSC 570.
+It currently supports phong lighting, shadows, reflections, refractions, procedural textures, super sampling, and depth of field.
 The only objects supported are spheres.
 
 ## Basic Ray Tracing
@@ -48,6 +48,28 @@ There is an arbitrary limit on how many reflections a ray can perform before sto
 
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/timeline/reflections_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/timeline/reflections.jpeg)
 
+## Refractions
+Refractions occur when rays intersect refractive spheres.
+The light at the intersection point is determined by blending the reflected and refracted light at that point.
+A reflective ray is cast in the same way as described in the previous section.
+The refractive ray is calculated by bending the original ray based on the angle of incidence and the indices of refraction of the two materials.
+The amount of reflective and refractive light at the point is determined by the Fresnel equation.
+
+[<img src="https://raw.github.com/marczych/RayTracer/master/samples/refraction_2_1_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/refraction_2_1.jpg)
+
+## Procedural Textures and Normal Mapping
+Procedural textures are a simple way to texture geometry without generating any texture files by hand.
+They can be used to simulate lots of different materials such as wood, marble, granite, metal, stone, etc.
+Procedural textures are typically generated using a noise function such as Perlin noise which produces coherent noise.
+Given some coordinates in space the noise function will return a number between -1 and 1.
+Noise functions can be used to generate procedural textures by sampling several versions of the function at different resolutions.
+The resulting value is used to blend multiple colors together to get the final color.
+
+Perlin noise can also be used to perform normal mapping in which the normals at an intersection point are modified from their original values.
+This affects lighting computations so the geometry appears to be deformed from its original state.
+
+[<img src="https://raw.github.com/marczych/RayTracer/master/samples/allMaterials_2_1_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/allMaterials_2_1.jpg)
+
 ## Super Sampling (Anti-aliasing)
 Aliasing is an artifact of images that have sharp, jagged edges.
 Super sampling is an anti-aliasing technique to smooth out jagged edges.
@@ -73,6 +95,7 @@ The images below were rendered by casting hundreds of rays per pixel to reduce t
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/lineFar_4_300_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/lineFar_4_300.jpeg)
 
 ## Final Renders
+[<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsInAPit_2_60_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsInAPit_2_60.jpg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlaneClose_3_1_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlaneClose_3_1.jpeg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlane_2_50_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlane_2_50.jpeg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/triangleSpheres_4_300_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/triangleSpheres_4_300.jpeg)

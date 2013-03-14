@@ -1,8 +1,10 @@
 CC = g++
-CFLAGS = -O2 -Wall -fopenmp
+CFLAGS = -O3 -Wall -fopenmp
 
-RayTracer: main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o
-	$(CC) $(CFLAGS) main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o -o RayTracer
+ALL_OBJECT_FILES = main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o Material.o Glass.o Air.o FlatColor.o ShinyColor.o Wood.o Turbulence.o Marble.o CrissCross.o Checkerboard.o PerlinNoise.o NormalMap.o
+
+RayTracer: $(ALL_OBJECT_FILES)
+	$(CC) $(CFLAGS) $(ALL_OBJECT_FILES) -o RayTracer
 
 RayTracer.o: RayTracer.cpp RayTracer.h Vector.h Image.h Object.h Sphere.h Intersection.h Light.h
 	$(CC) $(CFLAGS) RayTracer.cpp -c -o RayTracer.o
@@ -34,8 +36,44 @@ Color.o: Color.cpp Color.h
 Light.o: Light.cpp Light.h Vector.h
 	$(CC) $(CFLAGS) Light.cpp -c -o Light.o
 
-Camera.o: Camera.cpp Camera.h Camera.h
+Camera.o: Camera.cpp Camera.h
 	$(CC) $(CFLAGS) Camera.cpp -c -o Camera.o
+
+Material.o: Material.cpp Material.h PerlinNoise.o
+	$(CC) $(CFLAGS) Material.cpp -c -o Material.o
+
+ShinyColor.o: ShinyColor.cpp ShinyColor.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) ShinyColor.cpp -c -o ShinyColor.o
+
+Glass.o: Glass.cpp Glass.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) Glass.cpp -c -o Glass.o
+
+FlatColor.o: FlatColor.cpp FlatColor.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) FlatColor.cpp -c -o FlatColor.o
+
+Air.o: Air.cpp Air.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) Air.cpp -c -o Air.o
+
+Wood.o: Wood.cpp Wood.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) Wood.cpp -c -o Wood.o
+
+Turbulence.o: Turbulence.cpp Turbulence.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) Turbulence.cpp -c -o Turbulence.o
+
+CrissCross.o: CrissCross.cpp CrissCross.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) CrissCross.cpp -c -o CrissCross.o
+
+Marble.o: Marble.cpp Marble.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) Marble.cpp -c -o Marble.o
+
+Checkerboard.o: Checkerboard.cpp Checkerboard.h Material.h Vector.h Color.h
+	$(CC) $(CFLAGS) Checkerboard.cpp -c -o Checkerboard.o
+
+NormalMap.o: NormalMap.cpp NormalMap.h Vector.h PerlinNoise.h
+	$(CC) $(CFLAGS) NormalMap.cpp -c -o NormalMap.o
+
+PerlinNoise.o: PerlinNoise.h PerlinNoise.cpp
+	$(CC) $(CFLAGS) PerlinNoise.cpp -c -o PerlinNoise.o
 
 clean:
 	rm -rf *.o
