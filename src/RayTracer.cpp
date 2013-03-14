@@ -5,13 +5,24 @@
 #include "Sphere.h"
 #include "Intersection.h"
 #include "Light.h"
+#include "Air.h"
+#include "ShinyColor.h"
+#include "FlatColor.h"
+#include "Checkerboard.h"
+#include "Marble.h"
+#include "Wood.h"
+#include "Glass.h"
+#include "NormalMap.h"
+#include "Turbulence.h"
+#include "CrissCross.h"
 
 using namespace std;
 
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
  maxReflections(maxReflections_), superSamples(superSamples_), camera(Camera()),
- imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0) {}
+ imageScale(1), depthComplexity(depthComplexity_), dispersion(5.0f), raysCast(0),
+ startingMaterial(new Air()) {}
 
 RayTracer::~RayTracer() {
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
@@ -21,16 +32,21 @@ RayTracer::~RayTracer() {
    for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
       delete *itr;
    }
+
+   delete startingMaterial;
 }
 
 void RayTracer::traceRays(string fileName) {
    int columnsCompleted = 0;
+   camera.calculateWUV();
    Image image(width, height);
 
    // Reset depthComplexity to avoid unnecessary loops.
    if (dispersion < 0) {
       depthComplexity = 1;
    }
+
+   imageScale = camera.screenWidth / (float)width;
 
    #pragma omp parallel for
    for (int x = 0; x < width; x++) {
@@ -74,11 +90,12 @@ Color RayTracer::castRayForPixel(int x, int y) {
    return color;
 }
 
-Color RayTracer::castRayAtPoint(Vector point) {
+Color RayTracer::castRayAtPoint(const Vector& point) {
    Color color;
 
    for (int i = 0; i < depthComplexity; i++) {
-      Ray viewRay(camera.position, point - camera.position, maxReflections);
+      Ray viewRay(camera.position, point - camera.position, maxReflections,
+       startingMaterial);
 
       if (depthComplexity > 1) {
          Vector disturbance(
@@ -97,7 +114,7 @@ Color RayTracer::castRayAtPoint(Vector point) {
    return color;
 }
 
-Color RayTracer::castRay(Ray ray) {
+Color RayTracer::castRay(const Ray& ray) {
    raysCast++;
    Intersection intersection = getClosestIntersection(ray);
 
@@ -108,7 +125,23 @@ Color RayTracer::castRay(Ray ray) {
    }
 }
 
-Intersection RayTracer::getClosestIntersection(Ray ray) {
+/**
+ * Basically same code as getClosestIntersection but short circuits if an
+ * intersection closer to the given light distance is found.
+ */
+bool RayTracer::isInShadow(const Ray& ray, double lightDistance) {
+   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
+      Intersection intersection = (*itr)->intersect(ray);
+
+      if (intersection.didIntersect && intersection.distance < lightDistance) {
+         return true;
+      }
+   }
+
+   return false;
+}
+
+Intersection RayTracer::getClosestIntersection(const Ray& ray) {
    Intersection closestIntersection(false);
    closestIntersection.distance = numeric_limits<double>::max();
 
@@ -124,19 +157,21 @@ Intersection RayTracer::getClosestIntersection(Ray ray) {
    return closestIntersection;
 }
 
-Color RayTracer::performLighting(Intersection intersection) {
-   Color ambientColor = getAmbientLighting(intersection);
-   Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection);
-   Color reflectedColor = getReflectiveLighting(intersection);
+Color RayTracer::performLighting(const Intersection& intersection) {
+   Color color = intersection.getColor();
+   Color ambientColor = getAmbientLighting(intersection, color);
+   Color diffuseAndSpecularColor = getDiffuseAndSpecularLighting(intersection, color);
+   Color reflectedColor = getReflectiveRefractiveLighting(intersection);
 
    return ambientColor + diffuseAndSpecularColor + reflectedColor;
 }
 
-Color RayTracer::getAmbientLighting(Intersection intersection) {
-   return intersection.color * 0.2;
+Color RayTracer::getAmbientLighting(const Intersection& intersection, const Color& color) {
+   return color * 0.2;
 }
 
-Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
+Color RayTracer::getDiffuseAndSpecularLighting(const Intersection& intersection,
+ const Color& color) {
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
 
@@ -154,18 +189,17 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
        * Intersection is facing light.
        */
       if (dotProduct >= 0.0f) {
-         Ray shadowRay = Ray(intersection.intersection, lightDirection, 1);
-         Intersection shadowIntersection = getClosestIntersection(shadowRay);
+         Ray shadowRay = Ray(intersection.intersection, lightDirection, 1,
+          intersection.ray.material);
 
-         if (shadowIntersection.didIntersect &&
-          shadowIntersection.distance < lightDistance) {
+         if (isInShadow(shadowRay, lightDistance)) {
             /**
              * Position is in shadow of another object - continue with other lights.
              */
             continue;
          }
 
-         diffuseColor = (diffuseColor + (intersection.color * dotProduct)) *
+         diffuseColor = (diffuseColor + (color * dotProduct)) *
           light->intensity;
          specularColor = specularColor + getSpecularLighting(intersection, light);
       }
@@ -174,9 +208,10 @@ Color RayTracer::getDiffuseAndSpecularLighting(Intersection intersection) {
    return diffuseColor + specularColor;
 }
 
-Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
+Color RayTracer::getSpecularLighting(const Intersection& intersection,
+ Light* light) {
    Color specularColor(0.0, 0.0, 0.0);
-   double shininess = intersection.object->getShininess();
+   double shininess = intersection.endMaterial->getShininess();
 
    if (shininess == NOT_SHINY) {
       /* Don't perform specular lighting on non shiny objects. */
@@ -202,18 +237,92 @@ Color RayTracer::getSpecularLighting(Intersection intersection, Light* light) {
    return specularColor;
 }
 
-Color RayTracer::getReflectiveLighting(Intersection intersection) {
-   double reflectivity = intersection.object->getReflectivity();
+Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersection) {
+   double reflectivity = intersection.endMaterial->getReflectivity();
+   double startRefractiveIndex = intersection.startMaterial->getRefractiveIndex();
+   double endRefractiveIndex = intersection.endMaterial->getRefractiveIndex();
    int reflectionsRemaining = intersection.ray.reflectionsRemaining;
 
-   if (reflectivity == NOT_REFLECTIVE || reflectionsRemaining <= 0) {
+   /**
+    * Don't perform lighting if the object is not reflective or refractive or we have
+    * hit our recursion limit.
+    */
+   if (reflectivity == NOT_REFLECTIVE && endRefractiveIndex == NOT_REFRACTIVE ||
+    reflectionsRemaining <= 0) {
       return Color();
-   } else {
-      Vector reflected = reflectVector(intersection.ray.origin, intersection.normal);
-      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1);
-
-      return castRay(reflectedRay) * reflectivity;
    }
+
+   // Default to exclusively reflective values.
+   double reflectivePercentage = reflectivity;
+   double refractivePercentage = 0;
+
+   // Refractive index overrides the reflective property.
+   if (endRefractiveIndex != NOT_REFRACTIVE) {
+      reflectivePercentage = getReflectance(intersection.normal,
+       intersection.ray.direction, startRefractiveIndex, endRefractiveIndex);
+
+      refractivePercentage = 1 - reflectivePercentage;
+   }
+
+   // No ref{ra,le}ctive properties - bail early.
+   if (refractivePercentage <= 0 && reflectivePercentage <= 0) {
+      return Color();
+   }
+
+   Color reflectiveColor;
+   Color refractiveColor;
+
+   if (reflectivePercentage > 0) {
+      Vector reflected = reflectVector(intersection.ray.origin,
+       intersection.normal);
+      Ray reflectedRay(intersection.intersection, reflected, reflectionsRemaining - 1,
+       intersection.ray.material);
+
+      reflectiveColor = castRay(reflectedRay) * reflectivePercentage;
+   }
+
+   if (refractivePercentage > 0) {
+      Vector refracted = refractVector(intersection.normal,
+       intersection.ray.direction, startRefractiveIndex, endRefractiveIndex);
+      Ray refractedRay = Ray(intersection.intersection, refracted, 1,
+       intersection.endMaterial);
+
+      refractiveColor = castRay(refractedRay) * refractivePercentage;
+   }
+
+   return reflectiveColor + refractiveColor;
+}
+
+double RayTracer::getReflectance(const Vector& normal, const Vector& incident,
+ double n1, double n2) {
+   double n = n1 / n2;
+   double cosI = -normal.dot(incident);
+   double sinT2 = n * n * (1.0 - cosI * cosI);
+
+   if (sinT2 > 1.0) {
+      // Total Internal Reflection.
+      return 1.0;
+   }
+
+   double cosT = sqrt(1.0 - sinT2);
+   double r0rth = (n1 * cosI - n2 * cosT) / (n1 * cosI + n2 * cosT);
+   double rPar = (n2 * cosI - n1 * cosT) / (n2 * cosI + n1 * cosT);
+   return (r0rth * r0rth + rPar * rPar) / 2.0;
+}
+
+Vector RayTracer::refractVector(const Vector& normal, const Vector& incident,
+ double n1, double n2) {
+   double n = n1 / n2;
+   double cosI = -normal.dot(incident);
+   double sinT2 = n * n * (1.0 - cosI * cosI);
+
+   if (sinT2 > 1.0) {
+      cerr << "Bad refraction vector!" << endl;
+      exit(EXIT_FAILURE);
+   }
+
+   double cosT = sqrt(1.0 - sinT2);
+   return incident * n + normal * (n * cosI - cosT);
 }
 
 Vector RayTracer::reflectVector(Vector vector, Vector normal) {
@@ -229,20 +338,18 @@ void RayTracer::readScene(istream& in) {
       if (type[0] == '#') {
          // Ignore comment lines.
          getline(in, type);
+      } else if (type.compare("material") == 0) {
+         addMaterial(in);
       } else if (type.compare("sphere") == 0) {
          Vector center;
          double radius;
-         Color color;
-         double shininess;
-         double reflectivity;
+         Material* material;
 
          in >> center.x >> center.y >> center.z;
          in >> radius;
-         in >> color.r >> color.g >> color.b;
-         in >> shininess;
-         in >> reflectivity;
+         material = readMaterial(in);
 
-         addObject(new Sphere(center, radius, color, shininess, reflectivity));
+         addObject(new Sphere(center, radius, material));
       } else if (type.compare("light") == 0) {
          Vector position;
          double intensity;
@@ -255,6 +362,8 @@ void RayTracer::readScene(istream& in) {
          in >> dispersion;
       } else if (type.compare("maxReflections") == 0) {
          in >> maxReflections;
+      } else if (type.compare("startingMaterial") == 0) {
+         startingMaterial = readMaterial(in);
       } else if (type.compare("cameraUp") == 0) {
          in >> camera.up.x;
          in >> camera.up.y;
@@ -267,8 +376,8 @@ void RayTracer::readScene(istream& in) {
          in >> camera.lookAt.x;
          in >> camera.lookAt.y;
          in >> camera.lookAt.z;
-      } else if (type.compare("imageScale") == 0) {
-         in >> imageScale;
+      } else if (type.compare("cameraScreenWidth") == 0) {
+         in >> camera.screenWidth;
       } else {
          cerr << "Type not found: " << type << endl;
          exit(EXIT_FAILURE);
@@ -278,3 +387,77 @@ void RayTracer::readScene(istream& in) {
    }
 }
 
+/**
+ * Parses the input stream and makes a new Material.
+ */
+Material* RayTracer::readMaterial(istream& in) {
+   Material* material;
+   string type;
+   in >> type;
+
+   if (type.compare("FlatColor") == 0) {
+      material = new FlatColor(in);
+   } else if (type.compare("ShinyColor") == 0) {
+      material = new ShinyColor(in);
+   } else if (type.compare("Checkerboard") == 0) {
+      material = new Checkerboard(in);
+   } else if (type.compare("Glass") == 0) {
+      material = new Glass(in);
+   } else if (type.compare("Turbulence") == 0) {
+      material = new Turbulence(in);
+   } else if (type.compare("Marble") == 0) {
+      material = new Marble(in);
+   } else if (type.compare("CrissCross") == 0) {
+      material = new CrissCross(in);
+   } else if (type.compare("Wood") == 0) {
+      material = new Wood(in);
+   } else if (materials.count(type) > 0) {
+      material = materials[type];
+
+      // Stored material already has the NormalMap so return here to avoid
+      // scene parsing problems below.
+      return material;
+   } else {
+      cerr << "Material not found: " << type << endl;
+      exit(EXIT_FAILURE);
+   }
+
+   material->setNormalMap(readNormalMap(in));
+
+   return material;
+}
+
+NormalMap* RayTracer::readNormalMap(istream& in) {
+   string type;
+   in >> type;
+
+   if (type.compare("null") == 0) {
+      return NULL;
+   } else if (type.compare("NormalMap") == 0) {
+      return new NormalMap(in);
+   } else {
+      cerr << "NormalMap not found: " << type << endl;
+      exit(EXIT_FAILURE);
+   }
+}
+
+void RayTracer::addMaterial(istream& in) {
+   string materialName;
+
+   in >> materialName;
+
+   for (string::iterator itr = materialName.begin(); itr < materialName.end(); itr++) {
+      if (isupper(*itr)) {
+         cerr << "Invalid material name: " << materialName << endl;
+         exit(EXIT_FAILURE);
+      }
+   }
+
+   if (materials.count(materialName) > 0) {
+      cerr << "Duplicate material name: " << materialName << endl;
+      exit(EXIT_FAILURE);
+   }
+
+   Material* material = readMaterial(in);
+   materials.insert(pair<string, Material*>(materialName, material));
+}

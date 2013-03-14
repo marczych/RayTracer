@@ -1,0 +1,18 @@
+cameraUp 0.0 1.0 0.0
+cameraPosition 0.0 0.0 1000.0
+cameraLookAt 110.0 0.0 0.0
+cameraScreenWidth 2500
+
+light 400 100 500 0.9
+
+sphere 0.0 0.0 -9999999.0  9999899.0  CrissCross 1.0 0.0 0.0  0.0 1.0 0.0  0.0 0.0 1.0  0.05  -1 -1  null
+
+sphere -300.0 150.0 0.0  150  FlatColor 0.6 0.2 0.9 null
+sphere 300.0 150.0 0.0  125  ShinyColor 0.6 0.2 0.9 100 0.9 null
+sphere 0.0 150.0 0.0  100  Checkerboard 0.3 0.2 0.1  0.7 0.8 0.9  50  50 0.7 null
+sphere 600.0 125.0 0.0  140  Turbulence 0.0509 0.1803 0.0509  0.1607 0.2784 0.1607  0.75  -1 -1  null
+
+sphere -275.0 -150.0 150.0  125  Glass 2.0 50 null
+sphere 0.0 -150.0 0.0  150  Wood  0.1043 0.0737 0.0517  0.4215 0.2686 0.1888  0.01  -1 -1 null
+sphere 315.0 -150.0 0.0  150  Marble 0.4 0.3 0.2  0.6 0.7 0.8  0.5  50 0.15  NormalMap 0.5 0.25
+sphere 625.0 -175.0 0.0  125  CrissCross 0.3 0.35 0.29  0.25 0.1 0.17  0.75 0.65 0.82  0.1  50 0.15  NormalMap 25 0.9

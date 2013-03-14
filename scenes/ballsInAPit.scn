@@ -1,0 +1,1293 @@
+cameraUp 0 1 0
+cameraPosition 995 400 0
+cameraLookAt 100 0 0
+cameraScreenWidth 1500
+
+#dispersion 5.0
+
+light  900 900 0  0.7
+
+sphere  1001000        0        0  1000000  FlatColor   1.0000 0.8901 0.8705  null
+sphere -1001000        0        0  1000000  FlatColor   0.6941 0.4980 0.4627  null
+sphere        0        0  1001000  1000000  FlatColor   0.9921 0.7960 0.7647  null
+sphere        0        0 -1001000  1000000  FlatColor   0.3921 0.6941 0.5647  null
+sphere        0 -1000000        0  1000000  FlatColor   0.7647 0.9921 0.8941  null
+sphere        0  1001000        0  1000000  FlatColor   0.7647 0.9921 0.8941  null
+
+sphere 0 75 0  75  Glass 2.0 50 null
+
+sphere -998 20 -999  20  Turbulence 0.389 0.159 0.438 0.868 0.038 0.393 18 34 0.64 NormalMap 18.82 0.255
+sphere -995 25 -926  25  Marble 0.928 0.242 0.878 0.455 0.481 0.09 13 116 0.48 null
+sphere -1005 18 -855  18  Glass 3.12 18 NormalMap 16.58 0.5975
+sphere -994 16 -826  16  Glass 4.67 94 NormalMap 16.22 0.09375
+sphere -984 24 -766  24  CrissCross 0.288 0.628 0.613 0.378 0.252 0.719 0.409 0.08 0.196 9 39 0.39 null
+sphere -1003 25 -702  25  Turbulence 0.78 0.66 0.594 0.357 0.25 0.288 16 27 0 NormalMap 15.84 0.775
+sphere -995 15 -644  15  ShinyColor 0.535 0.259 0.372 17 0.15 null
+sphere -998 21 -612  21  Checkerboard 0.558 0.236 0.844 0.151 0.594 0.094 9 56 0.18 NormalMap 8.48 0.06125
+sphere -1003 24 -571  24  CrissCross 0.18 0.097 0.392 0.394 0.674 0.624 0.896 0.13 0.808 10 57 0.46 null
+sphere -995 15 -516  15  Glass 2.78 93 NormalMap 19.22 0.3975
+sphere -997 24 -440  24  Glass 1.66 130 null
+sphere -982 24 -396  24  Turbulence 0.16 0.855 0.504 0.164 0.344 0.252 5 136 0.61 NormalMap 17.22 0.225
+sphere -991 23 -315  23  Turbulence 0.791 0.448 0.988 0.546 0.301 0.751 16 80 0.11 null
+sphere -999 19 -266  19  Marble 0.068 0.523 0.5 0.794 0.285 0.966 10 148 0.63 NormalMap 0.38 0.86
+sphere -998 15 -193  15  CrissCross 0.246 0.974 0.375 0.736 0.738 0.834 0.441 0.4 0.153 11 139 0.46 NormalMap 4.18 0.77375
+sphere -990 17 -133  17  Turbulence 0.437 0.565 0.974 0.424 0.033 0.895 20 33 0.09 null
+sphere -993 22 -90  22  ShinyColor 0.565 0.827 0.012 35 0.09 NormalMap 16.78 1.1325
+sphere -978 18 -24  18  Marble 0.819 0.418 0.094 0.713 0.395 0.297 18 54 0.62 null
+sphere -1002 15 31  15  Checkerboard 0.071 0.002 0.355 0.91 0.909 0.771 6 119 0.28 null
+sphere -995 23 50  23  CrissCross 0.972 0.612 0.358 0.004 0.9 0.403 0.126 0.752 0.275 6 124 0.19 null
+sphere -975 19 129  19  Turbulence 0.631 0.601 0.09 0.863 0.038 0.867 10 117 0.35 NormalMap 7.74 1.0675
+sphere -998 18 171  18  ShinyColor 0.532 0.852 0.861 122 0.33 null
+sphere -975 21 236  21  Turbulence 0.827 0.756 0.901 0.866 0.622 0.389 13 20 0.6 NormalMap 19.42 0.39375
+sphere -977 17 279  17  Glass 2.845 36 null
+sphere -989 19 332  19  CrissCross 0.741 0.454 0.759 0.13 0.095 0.877 0.98 0.122 0.848 6 67 0.05 NormalMap 15.7 1.0425
+sphere -993 25 383  25  Turbulence 0.501 0.981 0.999 0.263 0.361 0.84 18 76 0.41 NormalMap 5.16 0.88875
+sphere -984 16 452  16  Turbulence 0.185 0.742 0.889 0.144 0.737 0.291 7 82 0.18 null
+sphere -983 21 496  21  Marble 0.178 0.691 0.863 0.579 0.824 0.553 3 122 0.38 NormalMap 17.22 0.905
+sphere -979 23 578  23  ShinyColor 0.197 0.075 0.297 120 0.57 NormalMap 7.28 0.6775
+sphere -1002 18 638  18  Glass 2.115 21 null
+sphere -1004 23 674  23  CrissCross 0.208 0.701 0.007 0.284 0.999 0.799 0.093 0.055 0.162 13 22 0.32 null
+sphere -999 15 737  15  ShinyColor 0.923 0.863 0.823 111 0.64 NormalMap 12.08 1.0325
+sphere -990 18 807  18  Checkerboard 0.802 0.767 0.186 0.6 0.861 0.241 16 76 0.26 NormalMap 4.88 0.57375
+sphere -985 17 836  17  Turbulence 0.33 0.809 0.261 0.934 0.635 0.245 5 20 0.02 null
+sphere -990 20 911  20  Glass 4.07 19 NormalMap 1.16 0.715
+sphere -998 18 991  18  Marble 0.581 0.193 0.104 0.215 0.438 0.313 7 73 0 null
+sphere -937 23 -978  23  CrissCross 0.231 0.966 0.809 0.108 0.677 0.65 0.881 0.609 0.82 10 121 0.65 null
+sphere -939 15 -947  15  Checkerboard 0.704 0.803 0.79 0.484 0.682 0.75 2 102 0.09 null
+sphere -960 22 -893  22  CrissCross 0.784 0.442 0.495 0.022 0.679 0.509 0.738 0.921 0.169 16 95 0.68 null
+sphere -956 18 -835  18  CrissCross 0.292 0.989 0.312 0.65 0.97 0.83 0.468 0.754 0.272 20 117 0.67 NormalMap 10.28 1.09
+sphere -946 18 -768  18  Turbulence 0.792 0.596 0.6 0.71 0.163 0.416 7 118 0.5 NormalMap 1.82 0.4475
+sphere -936 25 -738  25  Turbulence 0.261 0.325 0.014 0.903 0.609 0.51 11 69 0.08 null
+sphere -955 19 -647  19  Turbulence 0.329 0.252 0.41 0.687 0.535 0.331 11 87 0.37 NormalMap 7.66 0.83375
+sphere -940 22 -595  22  Checkerboard 0.98 0.768 0.305 0.762 0.373 0.211 3 88 0.58 null
+sphere -945 25 -543  25  CrissCross 0.263 0.027 0.507 0.93 0.589 0.214 0.611 0.053 0.53 17 7 0.21 NormalMap 15.9 0.83875
+sphere -954 25 -483  25  CrissCross 0.021 0.188 0.485 0.761 0.914 0.61 0.023 0.942 0.116 20 81 0.23 null
+sphere -942 19 -412  19  Marble 0.076 0.94 0.957 0.524 0.852 0.569 10 118 0.41 null
+sphere -934 21 -354  21  Turbulence 0.324 0.892 0.656 0.183 0.258 0.272 7 111 0.48 NormalMap 10.52 0.03375
+sphere -931 20 -292  20  Turbulence 0.142 0.955 0.367 0.493 0.555 0.244 18 17 0.16 NormalMap 3.36 0.7025
+sphere -938 24 -261  24  ShinyColor 0.087 0.077 0.78 41 0.42 null
+sphere -953 23 -213  23  Marble 0.852 0.978 0.051 0.095 0.845 0.147 7 8 0.22 null
+sphere -947 22 -168  22  Glass 4.93 25 null
+sphere -938 21 -107  21  Glass 2.21 121 null
+sphere -953 15 -58  15  Turbulence 0.43 0.457 0.906 0.901 0.693 0.635 9 107 0.44 null
+sphere -957 23 9  23  Checkerboard 0.177 0.507 0.543 0.981 0.446 0.963 17 74 0.16 null
+sphere -958 16 71  16  Checkerboard 0.863 0.306 0.655 0.31 0.014 0.275 19 83 0.27 null
+sphere -937 16 100  16  Turbulence 0.295 0.249 0.579 0.523 0.086 0.429 2 38 0.38 NormalMap 17.12 0.705
+sphere -955 16 155  16  Glass 3.61 132 null
+sphere -955 25 208  25  CrissCross 0.293 0.353 0.317 0.722 0.408 0.559 0.265 0.424 0.414 17 47 0.4 NormalMap 9.86 0.93875
+sphere -947 21 266  21  Marble 0.121 0.993 0.618 0.103 0.707 0.447 7 3 0.56 null
+sphere -931 17 321  17  Turbulence 0.866 0.428 0.952 0.407 0.017 0.423 17 66 0.21 NormalMap 16.1 0.4875
+sphere -961 23 373  23  Marble 0.59 0.228 0.463 0.8 0.216 0.094 9 8 0.02 null
+sphere -952 21 427  21  Checkerboard 0.905 0.305 0.515 0.71 0.695 0.017 11 106 0.44 NormalMap 3.16 0.7025
+sphere -957 19 493  19  Marble 0.995 0 0.001 0.894 0.458 0.577 4 141 0.4 NormalMap 16.8 1.1025
+sphere -944 21 561  21  ShinyColor 0.279 0.488 0.066 67 0.03 null
+sphere -939 18 587  18  Turbulence 0.694 0.532 0.174 0.152 0.109 0.374 2 104 0.5 null
+sphere -957 20 652  20  CrissCross 0.18 0.707 0.158 0.507 0.431 0.312 0.794 0.125 0.844 2 124 0.26 NormalMap 19.44 0.60625
+sphere -956 15 709  15  CrissCross 0.994 0.303 0.21 0.592 0.161 0.166 0.772 0.868 0.325 6 47 0.45 NormalMap 8.5 0.60125
+sphere -935 17 752  17  Glass 1.37 79 NormalMap 5.2 0.315
+sphere -957 22 801  22  Turbulence 0.597 0.908 0.078 0.465 0.233 0.357 16 131 0.3 NormalMap 7.06 0.71875
+sphere -931 17 861  17  Turbulence 0.329 0.179 0.317 0.557 0.9 0.45 2 93 0.62 null
+sphere -931 23 923  23  CrissCross 0.192 0.359 0.332 0.402 0.328 0.979 0.954 0.312 0.898 1 97 0.05 NormalMap 3.98 1.22125
+sphere -943 18 981  18  ShinyColor 0.513 0.157 0.853 78 0.07 null
+sphere -880 22 -979  22  ShinyColor 0.05 0.257 0.339 7 0.14 null
+sphere -902 18 -938  18  CrissCross 0.893 0.085 0.184 0.745 0.597 0.289 0.567 0.464 0.107 5 20 0.58 NormalMap 2.58 1.095
+sphere -874 20 -889  20  ShinyColor 0.831 0.785 0.412 126 0.24 null
+sphere -891 22 -822  22  Turbulence 0.068 0.206 0.884 0.533 0.313 0.113 14 23 0.14 null
+sphere -874 17 -783  17  CrissCross 0.681 0.398 0.938 0.36 0.785 0.67 0.933 0.256 0.587 5 51 0.56 NormalMap 17.18 0.13375
+sphere -895 20 -726  20  Marble 0.08 0.901 0.927 0.961 0.679 0.509 4 56 0.64 NormalMap 14.4 0.865
+sphere -873 22 -663  22  Glass 0.17 22 NormalMap 5.58 0.80125
+sphere -874 22 -591  22  Marble 0.897 0.749 0.04 0.406 0.942 0.4 7 13 0.08 NormalMap 17.42 0.96625
+sphere -882 17 -537  17  CrissCross 0.259 0.709 0.93 0.051 0.416 0.392 0.021 0.203 0.755 19 143 0.56 NormalMap 17.88 0.24375
+sphere -893 25 -468  25  Checkerboard 0.595 0.093 0.762 0.823 0.532 0.47 4 41 0.32 NormalMap 10.36 0.20625
+sphere -884 21 -422  21  CrissCross 0.834 0.63 0.249 0.471 0.595 0.564 0.112 0.43 0.652 15 80 0.29 null
+sphere -893 22 -359  22  Turbulence 0.4 0.086 0.511 0.992 0.871 0.77 11 92 0.58 NormalMap 4.76 0.09
+sphere -883 24 -274  24  CrissCross 0.843 0.587 0.868 0.157 0.928 0.764 0.989 0.433 0.771 8 79 0.2 NormalMap 7.8 0.06375
+sphere -875 25 -225  25  Glass 0.33 89 null
+sphere -899 21 -142  21  Glass 2.95 20 NormalMap 7.06 0.12875
+sphere -887 16 -100  16  CrissCross 0.333 0.972 0.662 0.28 0.994 0.728 0.864 0.933 0.056 15 76 0.12 NormalMap 4.4 0.1625
+sphere -895 23 -33  23  ShinyColor 0.349 0.088 0.285 127 0.09 null
+sphere -888 16 41  16  Marble 0.38 0.626 0.367 0.436 0.362 0.866 13 102 0.06 null
+sphere -880 25 75  25  Turbulence 0.934 0.033 0.889 0.495 0.182 0.359 10 101 0.56 NormalMap 8.52 0.29375
+sphere -884 15 165  15  Turbulence 0.554 0.298 0.235 0.449 0.281 0.95 11 93 0.53 null
+sphere -882 24 197  24  ShinyColor 0.035 0.666 0.729 126 0.57 NormalMap 1.44 0.40125
+sphere -894 22 262  22  ShinyColor 0.836 0.705 0.697 22 0.66 NormalMap 8.34 1.1125
+sphere -883 15 320  15  CrissCross 0.527 0.172 0.176 0.363 0.977 0.33 0.434 0.297 0.536 3 87 0.1 NormalMap 8.18 1.075
+sphere -878 20 371  20  Marble 0.246 0.805 0.657 0.629 0.297 0.163 2 125 0.23 NormalMap 3.76 0.39
+sphere -884 21 430  21  Checkerboard 0.274 0.981 0.591 0.133 0.928 0.133 19 6 0.06 null
+sphere -902 25 499  25  Glass 3.875 109 NormalMap 2.22 1.21375
+sphere -885 19 549  19  ShinyColor 0.674 0.547 0.214 143 0.37 null
+sphere -902 25 592  25  ShinyColor 0.638 0.242 0.112 90 0.18 null
+sphere -872 17 669  17  Checkerboard 0.585 0.388 0.512 0.139 0.206 0.544 17 114 0.53 null
+sphere -880 24 720  24  Marble 0.645 0.084 0.709 0.645 0.288 0.605 17 42 0.15 NormalMap 7.12 1.005
+sphere -873 24 781  24  Turbulence 0.515 0.65 0.733 0.355 0.385 0.234 5 91 0.54 null
+sphere -879 23 820  23  ShinyColor 0.366 0.884 0.339 89 0.64 null
+sphere -892 21 901  21  Checkerboard 0.298 0.145 0.602 0.948 0.879 0.957 7 19 0.11 null
+sphere -894 25 961  25  Turbulence 0.229 0.063 0.695 0.133 0.759 0.083 9 50 0.29 NormalMap 5.94 0.62875
+sphere -824 16 -996  16  ShinyColor 0.957 0.433 0.227 134 0.22 NormalMap 17.42 0.75125
+sphere -814 21 -932  21  Checkerboard 0.533 0.418 0.308 0.292 0.502 0.756 13 138 0.09 null
+sphere -827 18 -867  18  Turbulence 0.814 0.278 0.419 0.907 0.148 0.019 14 115 0.68 NormalMap 9.76 0.175
+sphere -830 24 -793  24  Turbulence 0.338 0.471 0.746 0.147 0.824 0.271 12 76 0.6 null
+sphere -843 17 -740  17  Checkerboard 0.229 0.16 0.008 0.351 0.647 0.149 1 84 0.42 null
+sphere -835 20 -691  20  Checkerboard 0.289 0.806 0.303 0.87 0.303 0.16 17 137 0.58 NormalMap 18.62 0.51
+sphere -824 25 -620  25  Turbulence 0.994 0.845 0.73 0.945 0.806 0.532 10 16 0.47 NormalMap 2.5 1.205
+sphere -818 19 -569  19  CrissCross 0.827 0.245 0.359 0.464 0.891 0.341 0.451 0.182 0.473 9 7 0.14 NormalMap 16.68 0.9175
+sphere -831 25 -512  25  ShinyColor 0.371 0.528 0.478 33 0.05 NormalMap 17.54 0.66375
+sphere -815 22 -450  22  CrissCross 0.957 0.089 0.672 0.984 0.291 0.06 0.818 0.025 0.907 15 67 0.13 null
+sphere -843 17 -371  17  CrissCross 0.136 0.406 0.516 0.912 0.18 0.132 0.138 0.136 0.221 17 20 0.36 null
+sphere -822 23 -311  23  CrissCross 0.48 0.086 0.668 0.806 0.91 0.19 0.046 0.045 0.596 12 144 0.55 null
+sphere -815 25 -269  25  CrissCross 0.936 0.522 0.126 0.71 0.207 0.874 0.493 0.688 0.96 4 75 0.61 NormalMap 10.8 1.145
+sphere -816 16 -174  16  CrissCross 0.141 0.653 0.637 0.106 0.207 0.288 0.042 0.729 0.415 16 141 0.2 NormalMap 12.48 0.31125
+sphere -840 16 -124  16  Checkerboard 0.701 0.758 0.908 0.422 0.555 0.878 2 42 0.53 null
+sphere -828 18 -80  18  Turbulence 0.31 0.276 0.351 0.555 0.9 0.601 20 5 0.51 null
+sphere -830 19 -17  19  Marble 0.292 0.616 0.663 0.698 0.975 0.177 7 95 0.52 null
+sphere -842 25 23  25  Marble 0.273 0.518 0.109 0.689 0.949 0.772 11 141 0.22 NormalMap 3.78 0.755
+sphere -834 24 52  24  ShinyColor 0.612 0.631 0.764 41 0.22 null
+sphere -843 19 138  19  Turbulence 0.38 0.451 0.93 0.329 0.222 0.455 6 81 0.62 NormalMap 2.76 1.135
+sphere -815 19 167  19  ShinyColor 0.547 0.096 0.314 130 0.64 null
+sphere -837 20 215  20  CrissCross 0.094 0.212 0.905 0.358 0.746 0.779 0.811 0.884 0.686 3 50 0.42 NormalMap 7.48 0.18625
+sphere -843 22 277  22  Marble 0.041 0.099 0.96 0.562 0.865 0.95 1 144 0.11 null
+sphere -840 22 358  22  Glass 4.925 104 NormalMap 2.7 0.28875
+sphere -822 16 394  16  Glass 3.95 74 NormalMap 14.98 0.05375
+sphere -842 22 422  22  CrissCross 0.557 0.05 0.69 0.669 0.034 0.378 0.155 0.169 0.61 7 49 0.2 null
+sphere -829 23 493  23  CrissCross 0.997 0.777 0.279 0.316 0.543 0.948 0.765 0.099 0.998 10 116 0.02 null
+sphere -836 19 553  19  Glass 2.295 109 null
+sphere -815 24 617  24  CrissCross 0.132 0.451 0.74 0.232 0.449 0.194 0.001 0.481 0.027 19 103 0.33 NormalMap 4 0.25125
+sphere -823 19 672  19  ShinyColor 0.326 0.511 0.967 39 0.12 null
+sphere -813 19 736  19  CrissCross 0.734 0.354 0.769 0.659 0.036 0.238 0.838 0.235 0.44 20 96 0.07 null
+sphere -823 18 784  18  Glass 1.61 124 NormalMap 2.58 0.4
+sphere -842 22 831  22  Turbulence 0.446 0.8 0.423 0.283 0.035 0.863 5 102 0.68 NormalMap 7.54 0.48375
+sphere -842 15 899  15  Checkerboard 0.176 0.319 0.308 0.305 0.64 0.845 20 105 0.18 NormalMap 9.6 0.02125
+sphere -818 25 926  25  CrissCross 0.503 0.899 0.213 0.869 0.948 0.27 0.724 0.448 0.466 18 116 0.54 NormalMap 8.16 0.77375
+sphere -777 24 -988  24  Checkerboard 0.504 0.709 0.163 0.713 0.561 0.027 4 15 0.6 null
+sphere -766 20 -948  20  Turbulence 0.147 0.579 0.365 0.555 0.197 0.549 14 13 0.09 NormalMap 19.24 0.36125
+sphere -780 22 -882  22  Turbulence 0.335 0.285 0.298 0.403 0.823 0.229 15 15 0.43 null
+sphere -776 16 -821  16  Checkerboard 0.965 0.392 0.288 0.198 0.354 0.578 19 6 0.02 NormalMap 5.14 0.6375
+sphere -768 21 -784  21  Glass 0.505 149 NormalMap 14.18 0.66625
+sphere -774 20 -736  20  Glass 3.7 57 NormalMap 18.76 0.905
+sphere -771 24 -690  24  Checkerboard 0.613 0.26 0.577 0.458 0.547 0.447 15 100 0.38 null
+sphere -786 17 -618  17  CrissCross 0.232 0.04 0.172 0.956 0.113 0.045 0.704 0.217 0.304 15 125 0.4 NormalMap 5.78 0.14
+sphere -771 25 -572  25  CrissCross 0.8 0.247 0.751 0.662 0.792 0.986 0.894 0.833 0.157 17 143 0.14 null
+sphere -764 17 -517  17  Glass 1.38 43 null
+sphere -792 21 -426  21  Marble 0.341 0.521 0.081 0.234 0.354 0.239 2 47 0.31 null
+sphere -780 24 -383  24  Glass 3.565 5 NormalMap 5.34 1.22625
+sphere -768 18 -310  18  CrissCross 0.88 0.115 0.819 0.119 0.198 0.118 0.562 0.833 0.582 11 110 0.02 null
+sphere -767 23 -230  23  Checkerboard 0.776 0.631 0.499 0.636 0.845 0.2 4 119 0.7 NormalMap 5.06 1.0975
+sphere -764 15 -193  15  Glass 3.86 13 null
+sphere -776 16 -140  16  Glass 0.565 26 null
+sphere -769 22 -59  22  Glass 3.805 104 NormalMap 16.62 0.855
+sphere -787 15 -5  15  CrissCross 0.189 0.262 0.766 0.574 0.507 0.878 0.733 0.382 0.489 11 18 0.21 NormalMap 12.2 0.13625
+sphere -770 19 45  19  Turbulence 0.723 0.073 0.009 0.035 0.778 0.611 20 87 0.56 NormalMap 6.8 0.46625
+sphere -791 17 87  17  Glass 0.03 22 null
+sphere -766 17 153  17  Marble 0.76 0.614 0.151 0.537 0.224 0.104 3 6 0.22 NormalMap 7.96 0.0525
+sphere -790 20 211  20  ShinyColor 0.353 0.379 0.269 27 0.35 null
+sphere -772 18 277  18  CrissCross 0.296 0.179 0.172 0.407 0.203 0.492 0.858 0.601 0.535 11 18 0.48 null
+sphere -779 18 300  18  Turbulence 0.753 0.293 0.978 0.753 0.634 0.894 11 90 0.68 null
+sphere -764 17 356  17  ShinyColor 0.574 0.16 0.599 103 0.59 NormalMap 18.44 1.0975
+sphere -792 19 414  19  CrissCross 0.377 0.563 0.594 0.89 0.152 0.554 0.699 0.921 0.687 19 135 0.22 null
+sphere -790 21 461  21  ShinyColor 0.066 0.192 0.86 76 0.19 NormalMap 7.42 1.135
+sphere -769 25 523  25  Turbulence 0.552 0.975 0.962 0.473 0.661 0.878 8 146 0.61 null
+sphere -771 25 574  25  ShinyColor 0.952 0.403 0.544 36 0.57 null
+sphere -765 25 655  25  Glass 2.73 138 NormalMap 10.16 0.48875
+sphere -771 19 726  19  Glass 3.55 86 null
+sphere -774 25 764  25  Glass 1.5 61 null
+sphere -775 17 821  17  Turbulence 0.944 0.307 0.702 0.701 0.095 0.955 6 51 0.47 null
+sphere -786 20 893  20  Glass 3.485 111 NormalMap 13.54 0
+sphere -775 25 963  25  Checkerboard 0.414 0.066 0.13 0.721 0.768 0.831 17 109 0.08 NormalMap 7.72 1.22375
+sphere -717 19 -978  19  ShinyColor 0.169 0.907 0.771 136 0.23 NormalMap 18.08 1.155
+sphere -713 20 -949  20  Glass 4.28 148 null
+sphere -714 22 -859  22  ShinyColor 0.786 0.41 0.379 37 0.1 NormalMap 6.2 0.39125
+sphere -733 15 -825  15  Checkerboard 0.419 0.913 0.658 0.265 0.048 0.383 11 40 0.16 null
+sphere -711 18 -755  18  Marble 0.754 0.802 0.623 0.062 0.114 0.782 3 51 0.19 null
+sphere -736 21 -688  21  CrissCross 0.101 0.657 0.298 0.014 0.389 0.545 0.004 0.908 0.202 8 100 0 null
+sphere -713 23 -658  23  ShinyColor 0.533 0.901 0.754 19 0 null
+sphere -720 17 -605  17  CrissCross 0.041 0.744 0.187 0.243 0.118 0.849 0.247 0.116 0.572 8 135 0.31 null
+sphere -718 22 -543  22  Turbulence 0.624 0.45 0.461 0.822 0.175 0.351 7 138 0.44 NormalMap 13.14 1.02375
+sphere -719 23 -458  23  Glass 3.935 103 NormalMap 14.76 0.81
+sphere -717 19 -404  19  Marble 0.157 0.31 0.185 0.509 0.629 0.098 3 149 0.53 null
+sphere -726 21 -349  21  Glass 2.72 105 null
+sphere -711 19 -279  19  Marble 0.76 0.05 0.679 0.269 0.679 0.777 9 101 0.37 NormalMap 5.18 0.0775
+sphere -725 22 -212  22  Turbulence 0.636 0.596 0.484 0.023 0.52 0.39 6 3 0.7 NormalMap 9.96 0.94125
+sphere -739 16 -170  16  CrissCross 0.547 0.792 0.373 0.03 0.652 0.733 0.721 0.056 0.783 8 99 0.18 NormalMap 3.46 0.82125
+sphere -719 16 -116  16  Marble 0.485 0.803 0.854 0.899 0.288 0.651 12 126 0.31 null
+sphere -721 22 -92  22  Marble 0.976 0.383 0.981 0.151 0.032 0.653 17 67 0.27 null
+sphere -717 20 -3  20  CrissCross 0.468 0.899 0.968 0.054 0.049 0.427 0.999 0.853 0.153 7 125 0.38 NormalMap 19.62 0.71
+sphere -739 23 52  23  Glass 4.8 87 NormalMap 14.54 1.16125
+sphere -717 18 116  18  CrissCross 0.849 0.532 0.189 0.17 0.36 0.725 0.473 0.34 0.292 9 24 0.2 null
+sphere -721 15 163  15  ShinyColor 0.313 0.649 0.357 97 0.27 null
+sphere -731 21 199  21  Checkerboard 0.223 0.833 0.307 0.583 0.558 0.78 19 128 0.14 NormalMap 2.88 1.23375
+sphere -709 18 249  18  ShinyColor 0.998 0.597 0.664 55 0.16 NormalMap 7.08 0.84375
+sphere -710 25 305  25  Checkerboard 0.969 0.439 0.405 0.552 0.997 0.185 10 128 0.27 null
+sphere -731 17 351  17  Turbulence 0.966 0.722 0.361 0.009 0.075 0.035 2 8 0.7 null
+sphere -737 23 396  23  Checkerboard 0.685 0.808 0.925 0.079 0.353 0.916 10 91 0.14 null
+sphere -732 17 454  17  CrissCross 0.032 0.639 0.354 0.676 0.734 0.133 0.758 0.234 0.465 17 139 0.19 null
+sphere -725 22 503  22  Marble 0.59 0.851 0.402 0.196 0.329 0.397 17 132 0.3 NormalMap 4.54 0.13
+sphere -713 18 560  18  Turbulence 0.459 0.361 0.722 0.135 0.819 0.944 1 18 0.2 NormalMap 11.78 1.09625
+sphere -737 25 611  25  Marble 0.672 0.921 0.599 0.031 0.783 0.043 18 74 0.28 null
+sphere -737 22 681  22  Checkerboard 0.693 0.907 0.482 0.281 0.784 0.727 6 129 0.21 null
+sphere -735 20 740  20  Turbulence 0.799 0.305 0.66 0.206 0.258 0.599 20 141 0.47 null
+sphere -725 17 799  17  Marble 0.27 0.465 0.868 0.016 0.94 0.024 9 52 0.55 null
+sphere -734 17 871  17  Marble 0.322 0.935 0.208 0.577 0.394 0.451 3 97 0.29 null
+sphere -721 19 927  19  Glass 3.295 63 NormalMap 3.46 1.23125
+sphere -716 18 973  18  ShinyColor 0.53 0.043 0.566 129 0.69 null
+sphere -693 20 -985  20  Marble 0.047 0.169 0.972 0.19 0.828 0.378 5 3 0.25 NormalMap 6.94 0.165
+sphere -673 20 -957  20  ShinyColor 0.515 0.114 0.807 142 0.34 NormalMap 9.74 0.6175
+sphere -686 25 -900  25  Glass 4.81 85 NormalMap 15.8 1.165
+sphere -684 23 -813  23  ShinyColor 0.427 0.996 0.602 16 0.09 null
+sphere -676 19 -766  19  Checkerboard 0.226 0.152 0.983 0.464 0.171 0.775 1 38 0.52 null
+sphere -664 20 -723  20  Turbulence 0.866 0.053 0.344 0.997 0.688 0.949 5 21 0.35 null
+sphere -670 17 -660  17  Marble 0.026 0.312 0.656 0.552 0.845 0.623 18 102 0.35 NormalMap 18.52 0.4475
+sphere -682 17 -625  17  Glass 3.585 87 null
+sphere -670 20 -552  20  Checkerboard 0.149 0.623 0.08 0.461 0.278 0.632 7 136 0.35 null
+sphere -670 24 -495  24  Checkerboard 0.249 0.389 0.707 0.437 0.105 0.278 5 55 0.03 null
+sphere -688 17 -421  17  Glass 0.635 133 NormalMap 0.58 0.48
+sphere -687 19 -382  19  Turbulence 0.642 0.843 0.992 0.078 0.949 0.27 7 47 0.22 NormalMap 8.42 1.01375
+sphere -680 21 -337  21  CrissCross 0.113 0.335 0.715 0.315 0.617 0.891 0.707 0.07 0.176 7 138 0.11 NormalMap 17.24 0.5475
+sphere -670 16 -253  16  Glass 0.89 5 NormalMap 0.46 0.71125
+sphere -677 23 -201  23  Turbulence 0.474 0.381 0.889 0.545 0.557 0.237 10 110 0.47 NormalMap 3.26 0.49125
+sphere -688 25 -164  25  Glass 2.555 75 NormalMap 1.6 1.2175
+sphere -670 21 -92  21  Glass 4.665 94 null
+sphere -664 17 -44  17  Glass 1.275 113 null
+sphere -671 20 -8  20  Turbulence 0.175 0.358 0.668 0.925 0.247 0.126 4 50 0.04 null
+sphere -679 25 62  25  CrissCross 0.913 0.03 0.291 0.389 0.741 0.354 0.377 0.942 0.688 9 20 0.03 NormalMap 0.84 0.3675
+sphere -675 17 110  17  Marble 0.31 0.814 0.7 0.043 0.741 0.289 11 99 0.22 null
+sphere -680 16 141  16  Glass 4.505 147 NormalMap 3.9 0.265
+sphere -678 23 199  23  Turbulence 0.655 0.118 0.762 0.699 0.86 0.051 5 78 0.26 NormalMap 11.14 0.53875
+sphere -680 25 240  25  CrissCross 0.027 0.079 0.953 0.537 0.434 0.65 0.882 0.739 0.712 11 129 0.33 NormalMap 14.34 0.65625
+sphere -666 17 314  17  CrissCross 0.604 0.313 0.685 0.418 0.026 0.831 0.446 0.106 0.783 20 82 0.3 null
+sphere -689 19 361  19  Glass 0.465 15 NormalMap 11.56 1.0875
+sphere -674 17 396  17  CrissCross 0.507 0.101 0.572 0.29 0.084 0.112 0.723 0.95 0.391 18 55 0.37 NormalMap 19.8 0.4775
+sphere -679 15 470  15  Glass 4.595 146 NormalMap 18.24 0.25625
+sphere -667 21 505  21  ShinyColor 0.963 0.632 0.386 9 0.52 NormalMap 19.94 0.1675
+sphere -673 18 589  18  Checkerboard 0.09 0.421 0.511 0.757 0.08 0.847 16 150 0.57 null
+sphere -678 20 642  20  Turbulence 0.98 0.891 0.973 0.088 0.888 0.107 2 37 0.54 null
+sphere -663 21 690  21  Checkerboard 0.173 0.16 0.074 0.989 0.104 0.985 1 98 0.34 null
+sphere -679 23 726  23  Glass 2.57 84 NormalMap 15 0.4
+sphere -689 18 801  18  CrissCross 0.471 0.624 0.994 0.456 0.633 0.636 0.939 0.524 0.876 1 41 0.24 NormalMap 17.72 0.985
+sphere -683 19 850  19  ShinyColor 0.659 0.164 0.474 120 0.36 null
+sphere -666 17 889  17  Glass 0.59 25 null
+sphere -691 22 971  22  Checkerboard 0.819 0.774 0.36 0.218 0.111 0.787 8 116 0.67 null
+sphere -609 24 -980  24  Turbulence 0.981 0.608 0.38 0.744 0.664 0.053 8 111 0.7 NormalMap 17.6 1.00625
+sphere -631 17 -948  17  ShinyColor 0.391 0.023 0.978 37 0.41 NormalMap 17.42 0.5125
+sphere -628 22 -912  22  CrissCross 0.459 0.788 0.123 0.195 0.774 0.493 0.074 0.579 0.635 7 92 0.63 NormalMap 19.88 1.14125
+sphere -616 17 -836  17  ShinyColor 0.911 0.929 0.796 8 0.67 null
+sphere -628 23 -772  23  CrissCross 0.508 0.264 0.934 0.822 0.866 0.822 0.16 0.86 0.735 10 15 0.16 NormalMap 3.72 0.1825
+sphere -626 25 -741  25  Glass 3.73 105 null
+sphere -619 20 -671  20  CrissCross 0.599 0.908 0.281 0.333 0.386 0.369 0.569 0.628 0.554 15 121 0.38 null
+sphere -601 20 -617  20  ShinyColor 0.714 0.23 0.77 41 0.46 NormalMap 2.06 0.7175
+sphere -622 24 -564  24  CrissCross 0.379 0.243 0.242 0.094 0.042 0.778 0.991 0.959 0.279 10 141 0.37 null
+sphere -603 19 -486  19  Checkerboard 0.977 0.066 0.889 0.298 0.104 0.366 11 65 0.12 NormalMap 2.24 0.69375
+sphere -611 18 -433  18  ShinyColor 0.64 0.386 0.41 17 0.22 null
+sphere -628 22 -351  22  ShinyColor 0.558 0.883 0.07 95 0.54 NormalMap 14.6 0.17
+sphere -622 16 -308  16  CrissCross 0.749 0.157 0.234 0.159 0.255 0.553 0.094 0.973 0.52 16 14 0.27 null
+sphere -623 25 -263  25  Glass 1.055 24 NormalMap 4.94 0.51125
+sphere -631 22 -180  22  Glass 3.755 141 NormalMap 6.08 0.035
+sphere -606 24 -146  24  CrissCross 0.536 0.953 0.237 0.718 0.163 0.382 0.213 0.41 0.791 12 14 0.57 NormalMap 11.88 0.74
+sphere -615 18 -72  18  Glass 2.35 57 NormalMap 13.72 0.0725
+sphere -610 16 -26  16  CrissCross 0.643 0.221 0.043 0.22 0.299 0.861 0.679 0.893 0.453 4 38 0.69 null
+sphere -621 15 36  15  Checkerboard 0.963 0.82 0.214 0.659 0.453 0.926 7 51 0.25 NormalMap 11.56 1.2475
+sphere -625 21 73  21  Marble 0.771 0.915 0.042 0.655 0.449 0.069 1 55 0.35 NormalMap 6.32 0.39875
+sphere -608 25 109  25  Checkerboard 0.542 0.401 0.676 0.54 0.743 0.297 16 59 0.55 null
+sphere -610 22 190  22  Glass 4.195 54 NormalMap 6.78 0.49625
+sphere -611 22 258  22  Glass 2.645 60 NormalMap 4.1 1.15875
+sphere -610 20 300  20  Marble 0.133 0.621 0.834 0.475 0.699 0.672 17 22 0 NormalMap 17.5 0.83625
+sphere -628 21 373  21  Glass 5 126 NormalMap 2.9 0.41875
+sphere -612 22 415  22  ShinyColor 0.609 0.124 0.252 37 0.67 null
+sphere -630 21 495  21  CrissCross 0.38 0.123 0.038 0.492 0.122 0.873 0.531 0.267 0.208 6 142 0.58 NormalMap 1.22 0.54125
+sphere -611 18 543  18  ShinyColor 0.593 0.024 0.593 99 0.47 NormalMap 11.66 1.2175
+sphere -620 16 583  16  Marble 0.426 0.623 0.503 0.68 0.564 0.326 20 95 0.53 NormalMap 18.76 0.52875
+sphere -631 25 658  25  Marble 0.487 0.961 0.358 0.87 0.363 0.591 6 41 0.67 null
+sphere -620 15 699  15  Turbulence 0.788 0.695 0.597 0.613 0.672 0.612 10 38 0.19 null
+sphere -627 20 774  20  CrissCross 0.211 0.448 0.99 0.3 0.813 0.123 0.716 0.169 0.881 18 144 0.4 NormalMap 11.42 0.31
+sphere -616 15 802  15  ShinyColor 0.672 0.902 0.473 123 0.55 null
+sphere -629 19 856  19  Marble 0.791 0.66 0.511 0.672 0.55 0.469 5 8 0.02 NormalMap 2.72 0.09125
+sphere -629 20 924  20  Turbulence 0.363 0.789 0.455 0.795 0.87 0.133 9 62 0.56 NormalMap 14.82 0.74
+sphere -623 17 965  17  Marble 0.764 0.833 0.992 0.275 0.916 0.65 14 72 0.08 null
+sphere -559 21 -991  21  ShinyColor 0.178 0.275 0.451 138 0.61 NormalMap 3.4 0.1625
+sphere -564 24 -938  24  CrissCross 0.398 0.287 0.442 0.87 0.408 0.327 0.704 0.316 0.668 7 17 0.1 NormalMap 5.48 0.52
+sphere -575 17 -880  17  Turbulence 0.053 0.145 0.902 0.7 0.624 0.384 7 58 0.55 null
+sphere -579 15 -822  15  CrissCross 0.719 0.371 0.943 0.91 0.654 0.288 0.271 0.066 0.719 11 20 0.61 NormalMap 16.4 0.61
+sphere -557 16 -755  16  Glass 4.085 125 null
+sphere -565 18 -699  18  Turbulence 0.24 0.623 0.608 0.511 0.69 0.327 1 122 0.13 NormalMap 12.6 0.84875
+sphere -567 23 -644  23  Glass 1.935 11 null
+sphere -578 25 -596  25  CrissCross 0.287 0.245 0.583 0.614 0.279 0.393 0.806 0.737 0.022 10 3 0.57 NormalMap 17.2 0.475
+sphere -560 25 -542  25  Glass 3.18 74 NormalMap 19.9 1.2225
+sphere -561 22 -473  22  Glass 2.88 37 NormalMap 7.64 1.21625
+sphere -553 24 -422  24  Turbulence 0.794 0.437 0.467 0.448 0.757 0.484 2 38 0.56 NormalMap 4.36 0.48875
+sphere -556 25 -341  25  Turbulence 0.395 0.671 0.093 0.876 0.537 0.069 4 66 0.64 null
+sphere -582 18 -292  18  ShinyColor 0.534 0.23 0.269 52 0.21 NormalMap 14.56 0.07625
+sphere -559 21 -235  21  Checkerboard 0.422 0.932 0.736 0.515 0.807 0.272 12 146 0.49 NormalMap 16.18 0.3575
+sphere -573 15 -186  15  ShinyColor 0.87 0.567 0.38 33 0.62 null
+sphere -567 18 -110  18  Checkerboard 0.776 0.005 0 0.511 0.52 0.808 16 18 0.55 NormalMap 11.9 0.73625
+sphere -563 23 -67  23  ShinyColor 0.782 0.979 0.687 26 0.13 null
+sphere -574 20 -2  20  CrissCross 0.498 0.421 0.527 0.281 0.526 0.307 0.768 0.12 0.896 11 136 0.4 null
+sphere -561 21 45  21  CrissCross 0.58 0.986 0.745 0.3 0.972 0.646 0.019 0.47 0.066 11 114 0.42 null
+sphere -582 23 112  23  Marble 0.354 0.173 0.15 0.629 0.712 0.079 9 86 0.46 NormalMap 6.14 1.2
+sphere -553 25 173  25  ShinyColor 0.527 0.582 0.612 59 0.07 NormalMap 2.64 0.2025
+sphere -556 19 240  19  ShinyColor 0.211 0.939 0.285 56 0.4 null
+sphere -580 21 302  21  Checkerboard 0.718 0.819 0.04 0.548 0.838 0.567 3 69 0.67 NormalMap 15.48 0.09875
+sphere -567 22 353  22  Turbulence 0.925 0.839 0.807 0.923 0.279 0.777 10 59 0.09 NormalMap 8.82 1.06625
+sphere -571 20 393  20  ShinyColor 0.53 0.453 0.996 115 0.16 NormalMap 3.14 1.17875
+sphere -576 19 459  19  Glass 3.705 45 NormalMap 0.42 0.08
+sphere -577 19 537  19  Checkerboard 0.086 0.321 0.451 0.09 0.369 0.982 11 56 0.52 null
+sphere -582 22 586  22  Glass 2.185 69 null
+sphere -559 25 638  25  Glass 1.145 8 NormalMap 11.02 0.61375
+sphere -569 25 711  25  Marble 0.231 0.766 0.44 0.186 0.05 0.665 13 77 0.44 NormalMap 0.84 0.77375
+sphere -583 16 741  16  Glass 1.52 119 null
+sphere -575 16 826  16  Marble 0.477 0.901 0.199 0.528 0.566 0.822 1 32 0.12 NormalMap 16.34 0.38375
+sphere -570 24 852  24  ShinyColor 0.598 0.714 0.842 40 0.15 null
+sphere -561 20 908  20  Checkerboard 0.281 0.721 0.088 0.481 0.248 0.655 7 44 0.6 NormalMap 6.96 0.83625
+sphere -568 21 970  21  Marble 0.064 0.921 0.935 0.447 0.407 0.467 4 102 0.5 NormalMap 19.16 0.54
+sphere -525 22 -983  22  Glass 1.53 95 null
+sphere -502 17 -938  17  ShinyColor 0.555 0.055 0.08 73 0.7 null
+sphere -511 22 -901  22  ShinyColor 0.516 0.6 0.514 144 0.19 null
+sphere -500 21 -840  21  Turbulence 0.104 0.279 0.99 0.12 0.835 0.045 5 48 0.02 null
+sphere -505 19 -779  19  Turbulence 0.221 0.542 0.625 0.915 0.78 0.203 17 50 0.28 null
+sphere -528 24 -715  24  Turbulence 0.166 0.801 0.875 0.359 0.294 0.303 3 144 0.56 NormalMap 4.38 1
+sphere -515 23 -659  23  Marble 0.058 0.605 0.766 0.886 0.626 0.485 17 74 0.17 null
+sphere -528 24 -618  24  ShinyColor 0.118 0.301 0.951 76 0.36 null
+sphere -509 16 -549  16  Marble 0.287 0.602 0.895 0.914 0.087 0.726 8 52 0.5 NormalMap 7.78 0.69875
+sphere -506 23 -530  23  ShinyColor 0.666 0.665 0.554 64 0.54 null
+sphere -516 22 -470  22  CrissCross 0.538 0.919 0.956 0.933 0.256 0.661 0.976 0.644 0.22 1 58 0.66 NormalMap 8.24 0.7525
+sphere -528 25 -393  25  Marble 0.322 0.79 0.229 0.658 0.415 0.06 18 144 0.69 null
+sphere -502 20 -332  20  Marble 0.668 0.262 0.935 0.633 0.279 0.554 9 134 0.39 null
+sphere -525 22 -276  22  ShinyColor 0.176 0.418 0.042 26 0.18 null
+sphere -520 23 -211  23  Glass 3.765 31 NormalMap 13.74 1.035
+sphere -520 17 -143  17  Checkerboard 0.468 0.663 0.819 0.584 0.193 0.908 16 93 0.67 null
+sphere -509 18 -77  18  Checkerboard 0.343 0.103 0.283 0.095 0.298 0.698 16 21 0.27 NormalMap 7.74 1.215
+sphere -515 20 -20  20  Checkerboard 0.672 0.256 0.785 0.283 0.206 0.701 4 15 0 null
+sphere -526 25 45  25  Checkerboard 0.987 0.908 0.974 0.113 0.298 0.997 10 42 0.57 NormalMap 14.2 0.36125
+sphere -499 23 100  23  Turbulence 0.399 0.926 0.227 0.194 0.677 0.812 3 117 0.35 NormalMap 19.26 0.60875
+sphere -510 25 148  25  Checkerboard 0.806 0.744 0.128 0.515 0.033 0.507 5 150 0.1 null
+sphere -509 25 235  25  Turbulence 0.952 0.357 0.523 0.283 0.32 0.009 11 40 0.43 NormalMap 3.8 0.88625
+sphere -503 25 290  25  Marble 0.393 0.196 0.47 0.377 0.832 0.378 12 101 0.68 null
+sphere -501 16 354  16  ShinyColor 0.419 0.897 0.755 73 0.06 NormalMap 6.82 0.0225
+sphere -498 22 400  22  Glass 3.7 23 null
+sphere -507 25 472  25  Turbulence 0.453 0.147 0.903 0.598 0.567 0.799 8 9 0.62 null
+sphere -525 16 553  16  Marble 0.973 0.494 0.307 0.946 0.473 0.012 12 64 0.23 null
+sphere -511 25 597  25  Marble 0.55 0.973 0.164 0.666 0.076 0.051 9 81 0.62 NormalMap 14.36 1.07
+sphere -504 15 664  15  ShinyColor 0.382 0.703 0.367 34 0.26 NormalMap 3.84 1.19875
+sphere -518 23 716  23  Turbulence 0.762 0.481 0.375 0.814 0.909 0.903 14 36 0.44 null
+sphere -518 18 792  18  Checkerboard 0.048 0.949 0.414 0.199 0.139 0.372 15 132 0.5 null
+sphere -513 23 821  23  Turbulence 0.776 0.58 0.429 0.396 0.132 0.473 1 74 0.57 null
+sphere -523 23 895  23  Marble 0.332 0.695 0.385 0.64 0.507 0.884 15 121 0.53 null
+sphere -515 16 976  16  CrissCross 0.009 0.544 0.459 0.179 0.795 0.428 0.489 0.419 0.126 14 114 0.58 NormalMap 7.82 0.41
+sphere -467 16 -984  16  ShinyColor 0.233 0.861 0.557 26 0.11 NormalMap 2.62 1.19
+sphere -459 24 -942  24  Checkerboard 0.504 0.707 0.63 0.923 0.834 0.304 14 100 0.25 NormalMap 19.7 0.38125
+sphere -488 16 -887  16  Marble 0.877 0.255 0.531 0.829 0.421 0.351 16 22 0.44 null
+sphere -471 21 -861  21  Turbulence 0.292 0.812 0.533 0.456 0.924 0.538 7 27 0.55 NormalMap 19.22 0.22125
+sphere -467 17 -775  17  Checkerboard 0.519 0.766 0.69 0.45 0.399 0.027 1 144 0.14 null
+sphere -474 16 -732  16  Turbulence 0.24 0.927 0.952 0.264 0.887 0.128 4 18 0.59 null
+sphere -473 19 -676  19  CrissCross 0.749 0.04 0.842 0.852 0.515 0.68 0.488 0.447 0.443 14 104 0.26 null
+sphere -485 23 -635  23  Checkerboard 0.097 0.476 0.424 0.603 0.063 0.286 11 103 0.11 NormalMap 9.86 1.13625
+sphere -465 18 -562  18  ShinyColor 0.248 0.368 0.456 137 0.03 null
+sphere -480 15 -547  15  Glass 2.695 50 null
+sphere -468 24 -501  24  ShinyColor 0.013 0.555 0.913 65 0.63 null
+sphere -467 25 -419  25  Glass 1.785 116 NormalMap 12.44 1.1175
+sphere -488 20 -356  20  Turbulence 0.43 0.034 0.233 0.434 0.048 0.789 7 72 0.48 NormalMap 16.16 0.72375
+sphere -459 20 -270  20  Checkerboard 0.132 0.049 0.389 0.754 0.944 0.095 5 146 0.24 NormalMap 11.16 0.9075
+sphere -465 25 -235  25  Glass 3.85 43 null
+sphere -466 20 -180  20  CrissCross 0.907 0.396 0.872 0.002 0.617 0.844 0.342 0.625 0.4 2 121 0.27 null
+sphere -476 21 -116  21  CrissCross 0.593 0.147 0.616 0.472 0.665 0.258 0.4 0.572 0.655 6 87 0.19 NormalMap 18.34 1.12
+sphere -467 25 -48  25  Marble 0.295 0.357 0.627 0.666 0.351 0.379 16 142 0.37 NormalMap 8.34 0.23875
+sphere -465 23 -2  23  ShinyColor 0.337 0.572 0.203 40 0.33 null
+sphere -487 21 40  21  CrissCross 0.299 0.204 0.421 0.07 0.148 0.948 0.458 0.565 0.138 3 59 0.63 NormalMap 9.42 0.2975
+sphere -473 22 122  22  Turbulence 0.777 0.695 0.353 0.272 0.109 0.987 3 25 0.2 NormalMap 11.48 0.44375
+sphere -463 20 167  20  Marble 0.895 0.799 0.299 0.569 0.29 0.744 20 5 0.25 null
+sphere -486 18 213  18  Checkerboard 0.312 0.601 0.523 0.886 0.957 0.001 9 117 0.03 NormalMap 13.78 0.5875
+sphere -477 15 280  15  Turbulence 0.895 0.735 0.411 0.872 0.531 0.461 5 91 0.44 null
+sphere -479 16 356  16  ShinyColor 0.318 0.224 0.848 56 0.2 null
+sphere -482 21 405  21  Checkerboard 0.054 0.913 0.025 0.79 0.324 0.897 7 119 0.07 null
+sphere -478 22 477  22  ShinyColor 0.156 0.815 0.351 59 0.46 null
+sphere -470 21 527  21  CrissCross 0.9 0.768 0.839 0.797 0.088 0.624 0.896 0.009 0.029 11 110 0.26 NormalMap 15.14 0.655
+sphere -460 16 570  16  Marble 0.668 0.112 0.081 0.27 0.988 0.059 16 134 0.58 null
+sphere -471 17 640  17  Checkerboard 0.651 0.646 0.343 0.408 0.17 0.407 11 14 0.09 NormalMap 12.98 0.07125
+sphere -466 23 696  23  CrissCross 0.775 0.406 0.377 0.692 0.655 0.958 0.618 0.933 0.049 6 88 0.27 null
+sphere -463 17 767  17  Turbulence 0.278 0.716 0.052 0.165 0.712 0.859 3 75 0.39 null
+sphere -471 21 831  21  Marble 0.328 0.142 0.812 0.128 0.335 0.635 2 130 0.07 NormalMap 1.98 0.48
+sphere -471 16 883  16  ShinyColor 0.663 0.973 0.56 84 0.61 NormalMap 2.64 0.53
+sphere -460 18 926  18  CrissCross 0.272 0.418 0.83 0.136 0.524 0.883 0.234 0.909 0.652 8 70 0.09 NormalMap 2.44 0.13
+sphere -416 25 -981  25  Glass 1.545 22 null
+sphere -428 24 -920  24  ShinyColor 0.483 0.368 0.275 3 0.17 null
+sphere -418 24 -863  24  Glass 1.22 27 NormalMap 13.76 1.21375
+sphere -426 20 -779  20  Checkerboard 0.105 0.408 0.899 0.169 0.947 0.037 14 49 0.22 null
+sphere -415 21 -717  21  Glass 2.205 98 NormalMap 12.16 0.9525
+sphere -421 21 -656  21  Checkerboard 0.085 0.715 0.206 0.493 0.613 0.376 9 99 0.01 null
+sphere -405 18 -599  18  Glass 1.49 79 null
+sphere -408 17 -524  17  Glass 2.575 15 NormalMap 4.6 0.36
+sphere -409 24 -480  24  Marble 0.249 0.245 0.64 0.041 0.751 0.846 7 42 0.35 NormalMap 0.64 0.935
+sphere -412 23 -382  23  Checkerboard 0.049 0.129 0.324 0.338 0.862 0.166 1 7 0.46 null
+sphere -423 15 -352  15  Glass 2.8 90 NormalMap 1.08 1.0925
+sphere -403 23 -311  23  Glass 2.385 132 NormalMap 16.02 0.2675
+sphere -423 25 -269  25  Glass 3.725 149 NormalMap 2.14 0.875
+sphere -421 17 -207  17  Turbulence 0.114 0.813 0.155 0.496 0.64 0.193 20 79 0.25 null
+sphere -400 23 -145  23  Turbulence 0.848 0.713 0.217 0.548 0.199 0.437 17 44 0.02 NormalMap 4.64 0.05125
+sphere -423 15 -86  15  Turbulence 0.752 0.476 0.933 0.142 0.216 0.882 12 89 0.52 NormalMap 13.92 0.7375
+sphere -425 25 -19  25  Marble 0.496 0.426 0.301 0.54 0.623 0.031 5 4 0.52 NormalMap 15.3 0.2625
+sphere -416 24 15  24  Checkerboard 0.983 0.577 0.706 0.573 0.363 0.619 15 54 0.68 null
+sphere -426 22 88  22  ShinyColor 0.649 0.403 0.054 132 0.29 null
+sphere -409 25 115  25  CrissCross 0.141 0.453 0.53 0.761 0.163 0.879 0.73 0.82 0.492 2 83 0.42 null
+sphere -410 17 170  17  Marble 0.082 0.95 0.83 0.982 0.539 0.264 18 107 0.28 NormalMap 4.72 0.2075
+sphere -402 16 228  16  Turbulence 0.844 0.403 0.459 0.11 0.02 0.584 16 66 0 null
+sphere -409 21 261  21  ShinyColor 0.925 0.935 0.85 51 0.17 NormalMap 9.94 0.91125
+sphere -429 19 331  19  Glass 1.085 42 NormalMap 6.56 0.36125
+sphere -407 16 351  16  Glass 1.905 33 NormalMap 10.5 0.1625
+sphere -415 19 403  19  Glass 3.29 54 NormalMap 9.28 0.90375
+sphere -400 20 442  20  Turbulence 0.386 0.307 0.075 0.162 0.853 0.233 11 11 0.32 NormalMap 3.8 0.785
+sphere -428 22 514  22  Checkerboard 0.558 0.958 0.353 0.021 0.68 0.387 10 94 0.49 NormalMap 17.7 0.3525
+sphere -411 17 560  17  CrissCross 0.042 0.69 0.859 0.483 0.34 0.901 0.383 0.948 0.084 19 136 0.31 null
+sphere -423 20 621  20  Checkerboard 0.797 0.373 0.357 0.385 0.909 0.79 17 103 0.54 NormalMap 18.18 1.00875
+sphere -421 23 659  23  CrissCross 0.188 0.578 0.794 0.012 0.04 0.997 0.527 0.954 0.083 7 51 0.31 null
+sphere -401 20 729  20  CrissCross 0.235 0.254 0.766 0.539 0.006 0.381 0.749 0.194 0.959 11 33 0.7 null
+sphere -428 21 776  21  ShinyColor 0.766 0.514 0.292 47 0.3 NormalMap 3.24 0.3075
+sphere -404 15 818  15  Checkerboard 0.948 0.815 0.094 0.328 0.563 0.289 6 18 0.35 NormalMap 12.86 0.2875
+sphere -421 17 872  17  Checkerboard 0.032 0.618 0.353 0.458 0.906 0.515 15 150 0.39 null
+sphere -426 21 938  21  Glass 0.06 112 NormalMap 10.16 0.03
+sphere -359 17 -1005  17  Glass 4.07 26 NormalMap 5.44 0.08125
+sphere -364 25 -924  25  Turbulence 0.36 0.976 0.866 0.812 0.182 0.877 12 76 0.27 null
+sphere -345 24 -885  24  Glass 2.17 57 null
+sphere -344 21 -816  21  ShinyColor 0.198 0.727 0.437 53 0.06 NormalMap 4.14 1.1225
+sphere -352 15 -769  15  Checkerboard 0.537 0.59 0.863 0.201 0.737 0.483 9 145 0.65 null
+sphere -359 17 -707  17  CrissCross 0.509 0.176 0.05 0.407 0.772 0.134 0.855 0.861 0.602 18 61 0.13 null
+sphere -365 17 -624  17  ShinyColor 0.779 0.511 0.762 148 0.52 NormalMap 13.56 0.07375
+sphere -340 16 -584  16  Turbulence 0.77 0.597 0.87 0.631 0.199 0.749 1 60 0.34 null
+sphere -359 21 -512  21  Marble 0.681 0.07 0.516 0.249 0.17 0.338 14 118 0.23 NormalMap 15.88 0.1325
+sphere -343 22 -447  22  Marble 0.633 0.614 0.023 0.847 0.466 0.433 12 14 0.58 NormalMap 15.22 1.1225
+sphere -363 15 -389  15  Glass 3.98 97 NormalMap 10.34 0.38
+sphere -343 19 -353  19  Glass 1.9 37 NormalMap 4.54 0.8725
+sphere -341 23 -303  23  CrissCross 0.25 0.22 0.315 0.469 0.015 0.956 0.795 0.532 0.26 18 146 0.69 null
+sphere -363 24 -231  24  ShinyColor 0.322 0.524 0.828 20 0.21 NormalMap 18.88 1.05125
+sphere -353 18 -183  18  Turbulence 0.626 0.471 0.826 0.157 0.731 0.684 3 107 0.26 null
+sphere -362 25 -128  25  CrissCross 0.32 0.797 0.319 0.632 0.185 0.519 0.192 0.796 0.034 5 65 0.35 NormalMap 11.58 0.29375
+sphere -336 22 -70  22  Marble 0.811 0.742 0.027 0.067 0.119 0.984 14 68 0.55 null
+sphere -357 20 21  20  Glass 0.165 82 null
+sphere -359 20 58  20  ShinyColor 0.457 0.75 0.493 126 0.39 NormalMap 17.2 0.785
+sphere -357 24 123  24  CrissCross 0.348 0.279 0.614 0.529 0.312 0.148 0.288 0.581 0.414 16 120 0.55 null
+sphere -363 17 162  17  CrissCross 0.638 0.403 0.26 0.503 0.991 0.011 0.631 0.338 0.291 5 131 0.42 NormalMap 3.12 0.23
+sphere -335 24 240  24  Glass 4.64 47 NormalMap 8.36 0.30375
+sphere -365 17 323  17  Glass 2.015 64 NormalMap 0.68 0.945
+sphere -346 18 351  18  CrissCross 0.068 0.359 0.484 0.189 0.286 0.788 0.401 0.704 0.03 7 145 0.03 NormalMap 17.32 0.6025
+sphere -338 17 421  17  Glass 2.91 44 NormalMap 5.08 0.0725
+sphere -342 23 479  23  Checkerboard 0.288 0.991 0.392 0.075 0.392 0.096 3 110 0.04 NormalMap 19.82 1.16
+sphere -359 19 534  19  ShinyColor 0.499 0.2 0.276 14 0.34 null
+sphere -363 15 582  15  Turbulence 0.86 0.783 0.249 0.252 0.879 0.356 20 142 0.36 null
+sphere -363 19 636  19  CrissCross 0.344 0.979 0.923 0.425 0.045 0.207 0.311 0.915 0.599 10 117 0.27 null
+sphere -365 15 669  15  Glass 3.835 60 NormalMap 9.44 1.14875
+sphere -343 19 730  19  Checkerboard 0.321 0.683 0.496 0.366 0.891 0.807 6 75 0.2 NormalMap 17.42 0.03
+sphere -362 16 765  16  Glass 2.02 74 NormalMap 10.78 1.1975
+sphere -355 17 813  17  Checkerboard 0.156 0.901 0.777 0.653 0.266 0.667 10 84 0.11 null
+sphere -344 23 854  23  CrissCross 0.092 0.266 0.434 0.049 0.626 0.671 0.383 0.712 0.25 10 131 0.1 NormalMap 10.42 0.52125
+sphere -336 25 923  25  Glass 2.525 40 NormalMap 7.84 0.03125
+sphere -270 24 -1003  24  ShinyColor 0.086 0.139 0.743 115 0.37 NormalMap 0.16 1.25
+sphere -283 16 -924  16  Checkerboard 0.822 0.54 0.251 0.551 0.108 0.357 2 56 0.44 NormalMap 7.78 0.47125
+sphere -290 17 -884  17  Checkerboard 0.674 0.1 0.874 0.196 0.555 0.881 4 132 0.02 NormalMap 14.4 0.76625
+sphere -286 20 -816  20  ShinyColor 0.261 0.231 0.147 95 0.6 null
+sphere -283 15 -787  15  Turbulence 0.711 0.248 0.442 0.266 0.128 0.637 3 27 0.06 null
+sphere -262 19 -720  19  Checkerboard 0.813 0.642 0.817 0.664 0.236 0.83 18 43 0.05 NormalMap 16.94 0.8675
+sphere -278 16 -658  16  Turbulence 0.813 0.07 0.257 0.675 0.851 0.965 2 118 0.38 null
+sphere -266 17 -634  17  CrissCross 0.572 0.399 0.595 0.664 0.804 0.369 0.199 0.474 0.273 8 45 0.24 null
+sphere -289 21 -560  21  ShinyColor 0.613 0.953 0.499 125 0.52 null
+sphere -290 19 -535  19  Turbulence 0.239 0.278 0.47 0.438 0.752 0.743 17 8 0.06 NormalMap 0.04 0.35
+sphere -283 15 -491  15  CrissCross 0.762 0.325 0.63 0.765 0.4 0.136 0.34 0.875 0.237 12 25 0.5 NormalMap 18.12 0.5625
+sphere -274 25 -428  25  Marble 0.465 0.642 0.284 0.134 0.125 0.24 7 134 0.4 null
+sphere -260 16 -336  16  Turbulence 0.589 0.899 0.486 0.416 0.843 0.022 14 119 0.59 null
+sphere -278 19 -292  19  Marble 0.003 0.855 0.08 0.97 0.946 0.072 17 43 0.45 null
+sphere -266 22 -231  22  Turbulence 0.656 0.303 0.105 0.57 0.743 0.522 16 49 0.04 NormalMap 4.32 0.615
+sphere -273 15 -196  15  ShinyColor 0.644 0.99 0.288 45 0.56 null
+sphere -285 19 -149  19  CrissCross 0.432 0.541 0.997 0.2 0.858 0.059 0.407 0.073 0.552 13 24 0.08 null
+sphere -277 23 -86  23  Checkerboard 0.574 0.072 0.435 0.742 0.108 0.642 5 73 0.35 NormalMap 19.02 1.17125
+sphere -286 25 -13  25  ShinyColor 0.544 0.507 0.558 26 0.46 null
+sphere -267 19 51  19  Turbulence 0.396 0.736 0.821 0.505 0.377 0.057 20 133 0.06 null
+sphere -261 24 107  24  CrissCross 0.126 0.621 0.072 0.576 0.366 0.329 0.08 0.691 0.63 4 15 0.25 null
+sphere -273 15 190  15  ShinyColor 0.506 0.442 0.802 60 0.28 null
+sphere -268 20 251  20  Glass 4.275 64 null
+sphere -265 17 310  17  Checkerboard 0.637 0.917 0.921 0.674 0.49 0.544 17 150 0.7 null
+sphere -270 20 348  20  ShinyColor 0.37 0.844 0.812 34 0.01 null
+sphere -286 24 423  24  Glass 4.205 65 NormalMap 15.22 0.1225
+sphere -263 18 475  18  Marble 0.575 0.96 0.05 0.946 0.803 0.863 4 125 0.37 null
+sphere -284 25 510  25  Turbulence 0.404 0.642 0.229 0.948 0.947 0.131 10 38 0.45 NormalMap 18.3 0.825
+sphere -268 24 612  24  Glass 2.53 18 null
+sphere -287 23 659  23  CrissCross 0.864 0.824 0.99 0.996 0.312 0.227 0.636 0.722 0.142 6 107 0.01 NormalMap 12.76 0.86625
+sphere -284 22 725  22  Checkerboard 0.162 0.398 0.227 0.682 0.902 0.699 2 82 0.4 NormalMap 8 0.49875
+sphere -268 19 761  19  ShinyColor 0.433 0.484 0.328 23 0.35 NormalMap 15.56 0.24
+sphere -278 20 836  20  ShinyColor 0.497 0.76 0.503 110 0.31 NormalMap 8.46 0.65625
+sphere -270 25 897  25  Turbulence 0.106 0.768 0.543 0.591 0.095 0.683 2 66 0.32 NormalMap 6.94 1.20375
+sphere -288 25 958  25  Turbulence 0.974 0.317 0.671 0.914 0.315 0.32 6 108 0.06 null
+sphere -198 19 -979  19  ShinyColor 0.873 0.282 0.509 26 0.44 NormalMap 16.6 0.71625
+sphere -214 15 -946  15  Glass 1.065 16 null
+sphere -215 17 -885  17  Checkerboard 0.69 0.992 0.43 0.472 0.843 0.479 7 21 0.7 NormalMap 15.08 0.5725
+sphere -192 18 -842  18  Checkerboard 0.225 0.027 0.182 0.438 0.121 0.176 20 82 0.29 NormalMap 0.7 0.82125
+sphere -202 22 -784  22  Glass 2.705 94 NormalMap 0.82 0.4625
+sphere -201 19 -724  19  Marble 0.908 0.364 0.449 0.084 0.33 0.985 11 82 0.01 NormalMap 16.2 0.93
+sphere -193 20 -670  20  CrissCross 0.487 0.892 0.987 0.11 0.593 0.286 0.836 0.519 0.614 15 133 0.04 null
+sphere -199 18 -634  18  Turbulence 0.073 0.751 0.612 0.766 0.232 0.532 13 114 0.58 NormalMap 12.92 1.01
+sphere -220 17 -589  17  CrissCross 0.856 0.818 0.964 0.608 0.885 0.46 0.169 0.695 0.769 5 69 0.27 NormalMap 13.58 1.14125
+sphere -200 19 -510  19  ShinyColor 0.541 0.974 0.316 97 0.02 NormalMap 6.88 1.04375
+sphere -208 16 -455  16  Glass 4.09 134 NormalMap 10.26 0.82125
+sphere -221 25 -399  25  Glass 0.345 104 null
+sphere -208 25 -338  25  Glass 4.125 40 NormalMap 5.8 1.03125
+sphere -222 22 -308  22  Turbulence 0.944 0.539 0.3 0.543 0.175 0.25 16 39 0.66 null
+sphere -196 22 -262  22  Glass 2.655 98 null
+sphere -206 23 -191  23  Checkerboard 0.824 0.444 0.405 0.767 0.983 0.705 7 26 0.67 NormalMap 8.06 1.11125
+sphere -221 23 -119  23  Checkerboard 0.27 0.038 0.293 0.801 0.682 0.837 13 25 0.44 NormalMap 12.42 0.61875
+sphere -193 19 -62  19  Marble 0.364 0.605 0.483 0.252 0.451 0.276 7 5 0.65 NormalMap 5.7 1.20375
+sphere -203 15 -8  15  Glass 4.32 64 null
+sphere -196 21 40  21  CrissCross 0.05 0.895 0.641 0.327 0.194 0.656 0.251 0.563 0.94 5 36 0.01 null
+sphere -196 22 120  22  ShinyColor 0.482 0.759 0.919 10 0.44 null
+sphere -219 21 188  21  Checkerboard 0.442 0.398 0.481 0.637 0.053 0.732 4 150 0.67 NormalMap 0.4 1.00375
+sphere -208 23 219  23  Turbulence 0.433 0.534 0.731 0.417 0.069 0.637 20 28 0.13 null
+sphere -197 16 290  16  Turbulence 0.486 0.889 0.209 0.288 0.037 0.96 15 9 0.21 NormalMap 10.56 0.51
+sphere -218 15 342  15  ShinyColor 0.777 0.091 0.305 145 0.59 null
+sphere -196 19 409  19  Marble 0.574 0.755 0.241 0.533 0.495 0.283 17 114 0.57 NormalMap 8.78 1.09125
+sphere -222 20 461  20  Glass 2.36 142 null
+sphere -203 21 520  21  Turbulence 0.561 0.583 0.325 0.094 0.078 0.608 19 125 0.29 NormalMap 5.36 0.36375
+sphere -213 23 590  23  CrissCross 0.369 0.928 0.123 0.993 0.289 0.002 0.981 0.117 0.086 11 106 0.29 null
+sphere -204 21 626  21  Turbulence 0.686 0.023 0.032 0.134 0.628 0.881 2 28 0.31 NormalMap 2.02 0.70375
+sphere -205 19 680  19  Turbulence 0.064 0.572 0.988 0.083 0.14 0.594 11 134 0.33 NormalMap 3.88 0.1925
+sphere -214 17 743  17  ShinyColor 0.342 0.073 0.546 116 0.12 NormalMap 3.6 0.705
+sphere -220 21 784  21  Turbulence 0.267 0.475 0.223 0.861 0.996 0.108 7 39 0.21 NormalMap 10.36 0.65875
+sphere -203 19 842  19  Checkerboard 0.88 0.667 0.287 0.058 0.23 0.963 13 47 0.2 NormalMap 11.64 0.85125
+sphere -218 24 899  24  Checkerboard 0.559 0.039 0.396 0.861 0.523 0.914 8 46 0.23 NormalMap 8.24 1.03
+sphere -207 18 952  18  Marble 0.74 0.125 0.604 0.42 0.352 0.452 12 121 0.11 null
+sphere -157 17 -1004  17  Checkerboard 0.368 0.631 0.432 0.191 0.831 0.723 14 50 0.05 NormalMap 15.38 0.065
+sphere -174 20 -954  20  Marble 0.643 0.23 0.695 0.844 0.353 0.917 12 60 0.37 null
+sphere -150 15 -878  15  Marble 0.074 0.867 0.456 0.582 0.045 0.484 11 88 0.68 NormalMap 18.18 0.75875
+sphere -166 21 -846  21  Checkerboard 0.987 0.044 0.608 0.744 0.201 0.628 14 30 0.26 NormalMap 9.92 0.23125
+sphere -178 21 -786  21  ShinyColor 0.097 0.294 0.66 102 0.18 null
+sphere -174 25 -734  25  CrissCross 0.242 0.95 0.57 0.935 0.138 0.941 0.257 0.634 0.126 13 33 0.12 NormalMap 7.08 0.345
+sphere -150 15 -646  15  CrissCross 0.115 0.417 0.488 0.615 0.165 0.429 0.858 0.114 1 16 40 0.66 NormalMap 17.76 0.0825
+sphere -172 15 -618  15  Marble 0.772 0.144 1 0.611 0.747 0.714 16 130 0.09 NormalMap 9.56 0.37
+sphere -167 18 -543  18  ShinyColor 0.664 0.621 0.176 84 0.48 null
+sphere -177 25 -484  25  CrissCross 0.102 0.435 0.633 0.867 0.297 0.764 0.119 0.775 0.06 17 19 0.33 NormalMap 4.74 0.16875
+sphere -158 19 -424  19  Turbulence 0.414 0.172 0.893 0.958 0.093 0.385 13 4 0.34 NormalMap 12.94 0.4425
+sphere -165 19 -393  19  CrissCross 0.077 0.861 0.913 0.765 0.651 0.164 0.093 0.372 0.337 11 83 0.16 NormalMap 12.76 0.77
+sphere -176 22 -348  22  CrissCross 0.179 0.205 0.984 0.122 0.963 0.482 0.199 0.824 0.395 20 73 0.39 NormalMap 16.92 1.1225
+sphere -176 19 -293  19  ShinyColor 0.744 0.14 0.68 128 0.23 null
+sphere -172 22 -207  22  Marble 0.086 0.187 0.225 0.482 0.151 0.699 1 33 0.38 null
+sphere -155 15 -126  15  Marble 0.621 0.959 0.176 0.307 0.192 0.798 4 96 0.28 NormalMap 0.66 0.61
+sphere -149 17 -93  17  Checkerboard 0.71 0.502 0.949 0.484 0.438 0.015 6 62 0.58 NormalMap 0.92 0.6
+sphere -166 22 -34  22  Turbulence 0.261 0.888 0.307 0.293 0.375 0.656 12 54 0.11 null
+sphere -170 15 24  15  Marble 0.873 0.896 0.624 0.384 0.562 0.061 2 82 0.49 null
+sphere -149 19 85  19  Turbulence 0.801 0.306 0.522 0.666 0.316 0.827 1 116 0.1 null
+sphere -164 20 155  20  Checkerboard 0.975 0.984 0.609 0.667 0.543 0.291 13 149 0.19 null
+sphere -149 22 217  22  Turbulence 0.328 0.408 0.05 0.474 0.06 0.666 16 89 0.12 null
+sphere -165 22 272  22  Checkerboard 0.149 0.937 0.011 0.431 0.802 0.823 8 71 0.56 NormalMap 8.66 0.37875
+sphere -160 22 330  22  Checkerboard 0.947 0.434 0.869 0.532 0.61 0.544 1 130 0.13 null
+sphere -153 20 374  20  Glass 1.82 99 null
+sphere -165 16 430  16  Checkerboard 0.102 0.633 0.204 0.048 0.066 0.072 12 103 0.43 null
+sphere -172 16 495  16  Checkerboard 0.773 0.186 0.42 0.022 0.549 0.074 15 108 0.57 null
+sphere -171 23 527  23  Glass 2.245 85 null
+sphere -159 19 603  19  Turbulence 0.038 0.083 0.321 0.458 0.106 0.871 11 127 0.41 NormalMap 14.54 0.95875
+sphere -178 20 639  20  Turbulence 0.09 0.454 0.431 0.265 0.827 0.092 6 49 0 null
+sphere -156 22 682  22  Glass 2.975 36 NormalMap 6.42 1.24125
+sphere -178 23 741  23  CrissCross 0.388 0.929 0.241 0.48 0.18 0.557 0.489 0.743 0.008 11 60 0.55 NormalMap 2.8 0.5275
+sphere -159 23 794  23  ShinyColor 0.642 0.219 0.85 103 0.34 null
+sphere -151 20 864  20  Glass 1.64 7 null
+sphere -169 22 906  22  Marble 0.03 0.523 0.932 0.085 0.164 0.151 19 128 0.45 NormalMap 2.06 0.11125
+sphere -150 15 994  15  Checkerboard 0.071 0.896 0.722 0.889 0.666 0.393 5 124 0.59 null
+sphere -132 16 -1004  16  Glass 0.855 40 null
+sphere -124 25 -946  25  Glass 4.665 50 NormalMap 13.08 0.26
+sphere -126 15 -868  15  Checkerboard 0.749 0.608 0.195 0.9 0.848 0.235 3 40 0.3 NormalMap 10.1 0.3225
+sphere -134 24 -812  24  Checkerboard 0.667 0.478 0.985 0.987 0.618 0.638 4 65 0.48 null
+sphere -115 23 -757  23  Glass 0.81 126 NormalMap 11.78 0.17625
+sphere -138 24 -675  24  ShinyColor 0.474 0.881 0.077 23 0.25 NormalMap 2.54 1.22125
+sphere -127 18 -618  18  Marble 0.138 0.623 0.95 0.167 0.784 0.784 9 58 0.65 NormalMap 4.38 1.225
+sphere -125 17 -541  17  Glass 1.91 109 NormalMap 1.62 0.0525
+sphere -139 20 -482  20  Glass 2.79 51 NormalMap 14.52 0.1375
+sphere -125 16 -416  16  Turbulence 0.946 0.291 0.056 0.267 0.887 0.178 13 92 0.19 null
+sphere -119 17 -360  17  Turbulence 0.688 0.075 0.895 0.799 0.008 0.069 6 131 0.34 null
+sphere -109 25 -296  25  Glass 4.23 75 NormalMap 11.5 0.17375
+sphere -115 23 -249  23  Checkerboard 0.716 0.548 0.847 0.791 0.443 0.645 16 78 0.65 null
+sphere -116 19 -176  19  Glass 1.23 93 null
+sphere -112 20 -107  20  CrissCross 0.153 0.675 0.255 0.597 0.32 0.055 0.109 0.247 0.72 3 26 0.06 null
+sphere -138 20 -60  20  ShinyColor 0.926 0.432 0.975 60 0.21 null
+sphere -133 22 13  22  ShinyColor 0.37 0.478 0.402 146 0.56 NormalMap 1.54 0.05625
+sphere -133 16 46  16  ShinyColor 0.205 0.719 0.521 39 0.29 null
+sphere -122 21 104  21  Checkerboard 0.129 0.189 0.386 0.933 0.336 0.757 9 112 0.51 NormalMap 3.92 1
+sphere -109 19 164  19  Checkerboard 0.664 0.358 0.551 0.91 0.775 0.151 2 95 0.51 null
+sphere -111 23 210  23  Marble 0.496 0.674 0.458 0.692 0.473 0.713 2 69 0.12 null
+sphere -138 15 289  15  Checkerboard 0.825 0.461 0.909 0.463 0.238 0.141 6 24 0.39 NormalMap 19.66 0.4
+sphere -114 17 317  17  CrissCross 0.574 0.276 0.496 0.408 0.339 0.529 0.151 0.176 0.713 20 97 0.44 NormalMap 17.52 0.95375
+sphere -129 15 379  15  ShinyColor 0.646 0.59 0.234 71 0.48 null
+sphere -123 18 424  18  Turbulence 0.158 0.281 0.461 0.334 0.995 0.437 20 94 0.62 null
+sphere -118 24 497  24  Turbulence 0.812 0.03 0.029 0.782 0.271 0.358 7 81 0.18 NormalMap 5.6 0.71375
+sphere -139 21 547  21  Turbulence 0.345 0.456 0.548 0.932 0.322 0.252 14 31 0.42 NormalMap 5.92 0.5175
+sphere -133 18 583  18  CrissCross 0.514 0.967 0.713 0.546 0.603 0.267 0.014 0.211 0.437 8 101 0.69 NormalMap 19.78 0.29625
+sphere -113 16 641  16  Glass 4 69 NormalMap 9.66 1.21125
+sphere -120 19 702  19  Glass 2.43 32 NormalMap 10 0.51625
+sphere -137 24 781  24  ShinyColor 0.068 0.115 0.136 39 0.67 NormalMap 14.48 0.2575
+sphere -119 20 829  20  ShinyColor 0.624 0.042 0.43 41 0.36 NormalMap 17.14 0.8825
+sphere -134 15 883  15  Checkerboard 0.214 0.551 0.932 0.366 0.619 0.046 11 131 0 null
+sphere -136 25 942  25  Checkerboard 0.485 0.701 0.548 0.743 0.218 0.918 12 139 0.54 null
+sphere -135 16 976  16  Checkerboard 0.707 0.298 0.118 0.21 0.165 0.119 18 114 0.23 null
+sphere -68 25 -1000  25  Marble 0.321 0.223 0.671 0.407 0.349 0.8 11 105 0.34 null
+sphere -70 23 -907  23  Turbulence 0.306 0.566 0.372 0.783 0.552 0.045 20 15 0.32 NormalMap 10.76 0.59375
+sphere -84 23 -870  23  ShinyColor 0.947 0.632 0.801 65 0.17 NormalMap 4.06 1.2375
+sphere -62 16 -795  16  Checkerboard 0.601 0.408 0.403 0.384 0.961 0.448 7 9 0.64 null
+sphere -78 19 -739  19  Turbulence 0.258 0.902 0.346 0.457 0.103 0.336 6 39 0.13 null
+sphere -73 16 -689  16  Glass 4.44 77 null
+sphere -59 18 -655  18  CrissCross 0.265 0.87 0.609 0.369 0.205 0.873 0.617 0.389 0.431 15 92 0.41 NormalMap 4.42 0.16625
+sphere -88 18 -604  18  CrissCross 0.504 0.002 0.588 0.869 0.526 0.739 0.134 0.395 0.348 11 91 0.15 NormalMap 19.8 0.81375
+sphere -81 21 -546  21  Turbulence 0.394 0.859 0.358 0.002 0.116 0.975 12 122 0.34 null
+sphere -84 16 -479  16  Turbulence 0.705 0.104 0.092 0.356 0.93 0.685 12 145 0.35 null
+sphere -73 19 -409  19  Marble 0.408 0.527 0.835 0.755 0.633 0.973 5 23 0.32 NormalMap 4.76 0.2025
+sphere -72 18 -381  18  ShinyColor 0.116 0.215 0.513 16 0.61 NormalMap 9.1 0.47125
+sphere -88 24 -317  24  Turbulence 0.276 0.155 0.93 0.248 0.392 0.064 15 93 0.21 null
+sphere -82 19 -263  19  Glass 2.96 43 NormalMap 0.92 0.815
+sphere -68 24 -223  24  Checkerboard 0.727 0.935 0.373 0.883 0.865 0.622 6 140 0.23 null
+sphere -62 24 -164  24  ShinyColor 0.512 0.085 0.428 102 0.48 null
+sphere -80 18 -98  18  ShinyColor 0.604 0.228 0.108 52 0.11 NormalMap 4.28 0.03375
+sphere -83 19 118  19  Checkerboard 0.208 0.22 0.566 0.294 0.648 0.238 20 55 0.12 null
+sphere -66 18 154  18  Marble 0.608 0.703 0.41 0.096 0.66 0.84 10 128 0.33 null
+sphere -74 24 242  24  CrissCross 0.599 0.347 0.917 0.316 0.41 0.429 0.142 0.805 0.104 9 64 0.57 null
+sphere -58 22 280  22  ShinyColor 0.654 0.218 0.839 83 0.48 null
+sphere -58 23 334  23  Turbulence 0.896 0.035 0.725 0.037 0.841 0.829 10 40 0.45 NormalMap 15.28 0.13
+sphere -75 23 378  23  Glass 4.725 50 null
+sphere -88 21 467  21  Turbulence 0.487 0.655 0.001 0.525 0.495 0.831 1 113 0.33 NormalMap 10.24 0.715
+sphere -58 17 509  17  CrissCross 0.632 0.669 0.106 0.644 0.662 0.086 0.235 0.281 0.363 15 141 0.25 NormalMap 8.64 0.24375
+sphere -68 16 556  16  Glass 4.745 36 null
+sphere -82 17 624  17  Marble 0.14 0.965 0.713 0.422 0.327 0.435 8 105 0.48 null
+sphere -71 25 682  25  Marble 0.181 0.211 0.864 0.448 0.413 0.673 5 39 0.1 NormalMap 14.46 0.36375
+sphere -66 19 725  19  Checkerboard 0.08 0.554 0.862 0.968 0.495 0.831 11 10 0.34 NormalMap 12.3 0.12625
+sphere -79 23 767  23  CrissCross 0.56 0.695 0.285 0.622 0.129 1 0.01 0 0.071 2 84 0.66 NormalMap 0.98 0.95375
+sphere -81 16 850  16  Glass 2.545 102 NormalMap 15.06 0.495
+sphere -77 17 871  17  Checkerboard 0.471 0.397 0.192 0.47 0.408 0.193 11 76 0.52 NormalMap 11.14 0.99375
+sphere -61 16 926  16  ShinyColor 0.606 0.85 0.18 20 0.36 null
+sphere -22 15 -977  15  Turbulence 0.541 0.846 0.664 0.734 0.387 0.162 10 130 0.51 NormalMap 1.96 1.0625
+sphere -4 21 -941  21  Checkerboard 0.889 0.959 0.561 0.756 0.875 0.281 17 26 0.13 null
+sphere -29 25 -893  25  Marble 0.656 0.501 0.535 0.754 0.35 0.703 7 32 0.33 null
+sphere -6 23 -845  23  Checkerboard 0.961 0.775 0.263 0.659 0.281 0.826 13 51 0.16 NormalMap 2.2 0.03625
+sphere -9 19 -788  19  CrissCross 0.083 0.566 0.299 0.449 0.307 0.094 0.57 0.923 0.17 11 106 0.3 NormalMap 19.58 0.32375
+sphere -15 18 -738  18  Glass 3.93 33 null
+sphere -21 19 -668  19  CrissCross 0.884 0.399 0.226 0.054 0.93 0.925 0.489 0.118 0.903 15 139 0.14 NormalMap 19.08 0.78375
+sphere -18 15 -588  15  Checkerboard 0.621 0.989 0.399 0.051 0.479 0.78 1 42 0.43 NormalMap 3.08 0.01
+sphere -1 17 -550  17  Checkerboard 0.406 0.445 0.977 0.616 0.687 0.931 5 69 0.66 null
+sphere -29 23 -498  23  ShinyColor 0.098 0.963 0.937 24 0.16 null
+sphere -28 21 -438  21  CrissCross 0.525 0.602 0.421 0.455 0.844 0.873 0.387 0.499 0.298 18 40 0.24 NormalMap 8.24 0.5525
+sphere -12 18 -387  18  Checkerboard 0.945 0.448 0.164 0.537 0.941 0.744 17 75 0.51 null
+sphere -16 25 -350  25  Turbulence 0.739 0.93 0.496 0.103 0.341 0.939 9 105 0.37 null
+sphere -30 25 -267  25  Turbulence 0.461 0.252 0.858 0.476 0.584 0.84 19 115 0.49 null
+sphere -19 20 -210  20  Turbulence 0.394 0.807 0.065 0.978 0.42 1 1 32 0.33 null
+sphere 0 19 -137  19  Marble 0.159 0.666 0.749 0.004 0.207 0.112 7 129 0.58 null
+sphere 0 19 -104  19  Glass 0.265 71 NormalMap 15.46 0.28875
+sphere -21 20 86  20  Turbulence 0.366 0.487 0.27 0.479 0.834 0.122 6 71 0.03 null
+sphere -7 22 120  22  Turbulence 0.572 0.732 0.686 0.317 0.589 0.22 13 138 0.43 NormalMap 7.9 0.85125
+sphere -1 24 182  24  Checkerboard 0.377 0.174 0.125 0.884 0.067 0.169 12 123 0.14 NormalMap 12.28 0.8825
+sphere -17 17 247  17  Checkerboard 0.444 0.121 0.94 0.061 0.357 0.333 15 145 0.15 null
+sphere -18 23 309  23  Glass 0.32 133 null
+sphere 0 21 388  21  Glass 1.45 68 null
+sphere -7 21 436  21  Turbulence 0.769 0.857 0.823 0.186 0.961 0.717 10 22 0.55 NormalMap 2.4 0.06125
+sphere -30 22 495  22  CrissCross 0.206 0.254 0.889 0.975 0.967 0.248 0.702 0.894 0.302 10 113 0.08 null
+sphere -4 16 564  16  Turbulence 0.682 0.696 0.831 0.188 0.132 0.547 20 4 0.58 NormalMap 5.24 0.885
+sphere -1 17 613  17  ShinyColor 0.258 0.336 0.872 59 0.7 null
+sphere -4 19 649  19  Turbulence 0.215 0.704 0.255 0.347 0.25 0.238 8 13 0.3 null
+sphere -8 24 701  24  Marble 0.787 0.42 0.599 0.924 0.845 0.447 12 37 0.68 NormalMap 5.96 0.2275
+sphere -14 21 749  21  Turbulence 0.501 0.244 0.811 0.346 0.976 0.267 7 145 0.04 NormalMap 6.8 1.06125
+sphere -7 25 808  25  CrissCross 0.533 0.935 0.497 0.062 0.333 0.288 0.947 0.8 0.507 9 9 0.22 null
+sphere 0 16 879  16  Marble 0.267 0.248 0.647 0.61 0.896 0.998 8 127 0.37 NormalMap 6.74 0.74125
+sphere -14 21 930  21  ShinyColor 0.988 0.509 0.449 118 0.37 NormalMap 17.8 0.64375
+sphere 22 24 -975  24  ShinyColor 0.442 0.229 0.749 10 0.08 null
+sphere 41 18 -923  18  CrissCross 0.399 0.421 0.507 0.181 0.95 0.542 0.07 0.465 0.221 5 48 0.28 NormalMap 8.14 1.0475
+sphere 44 16 -863  16  Turbulence 0.121 0.822 0.052 0.568 0.748 0.464 10 122 0.61 null
+sphere 43 24 -838  24  Checkerboard 0.335 0.62 0.473 0.536 0.026 0.311 20 29 0.14 null
+sphere 25 15 -760  15  Glass 3.065 118 null
+sphere 39 21 -704  21  CrissCross 0.4 0.138 0.673 0.427 0.45 0.639 0.609 0.652 0.161 14 31 0.14 null
+sphere 19 18 -660  18  ShinyColor 0.8 0.097 0.7 64 0.58 NormalMap 17.56 0.5225
+sphere 19 22 -626  22  ShinyColor 0.221 0.002 0.485 102 0.45 NormalMap 6.46 1.00375
+sphere 17 20 -547  20  Checkerboard 0.02 0.459 0.752 0.076 0.258 0.85 16 102 0.48 NormalMap 10.98 0.12125
+sphere 22 17 -497  17  Marble 0.328 0.842 0.395 0.13 0.628 0.911 3 58 0.2 NormalMap 7.86 0.9275
+sphere 17 20 -427  20  Marble 0.587 0.767 0.426 0.768 0.451 0.689 4 23 0.31 NormalMap 9.34 0.34875
+sphere 45 21 -375  21  CrissCross 0.901 0.141 0.573 0.71 0.387 0.244 0.199 0.797 0.465 16 86 0.63 null
+sphere 21 22 -333  22  Marble 0.203 0.151 0.948 0.482 0.982 0.889 4 85 0.56 NormalMap 2.56 0.62375
+sphere 38 19 -256  19  Glass 3.64 8 NormalMap 6.16 0.95
+sphere 39 18 -198  18  Glass 4.12 73 null
+sphere 31 24 -170  24  Glass 0.835 67 null
+sphere 27 18 -69  18  ShinyColor 0.386 0.014 0.385 24 0.15 null
+sphere 37 16 81  16  Checkerboard 0.962 0.92 0.149 0.629 0.675 0.291 16 19 0.57 null
+sphere 47 15 128  15  Checkerboard 0.618 0.542 0.224 0.328 0.413 0.275 14 93 0.26 null
+sphere 30 17 183  17  Glass 4.335 130 null
+sphere 17 20 254  20  Glass 4.505 150 null
+sphere 43 25 292  25  CrissCross 0.743 0.173 0.727 0.935 0.744 0.768 0.802 0.605 0.604 16 42 0.07 null
+sphere 21 23 356  23  CrissCross 0.487 0.472 0.268 0.35 0.943 0.019 0.665 0.686 0.193 8 94 0.66 NormalMap 8.46 0.67625
+sphere 42 17 434  17  Marble 0.973 0.543 0.861 0.92 0.536 0.675 15 6 0.1 null
+sphere 18 15 473  15  Turbulence 0.589 0.819 0.68 0.352 0.02 0.491 5 4 0.27 null
+sphere 26 22 507  22  Turbulence 0.881 0.12 0.288 0.254 0.21 0.299 6 148 0.35 null
+sphere 23 18 569  18  Marble 0.205 0.562 0.01 0.644 0.218 0.332 19 120 0.13 null
+sphere 28 15 612  15  Turbulence 0.18 0.338 0.615 0.822 0.65 0.816 3 49 0.02 null
+sphere 40 16 654  16  CrissCross 0.665 0.859 0.873 0.702 0.239 0.197 0.949 0.918 0.814 4 17 0.1 null
+sphere 18 21 710  21  Checkerboard 0.307 0.92 0.18 0.062 0.2 0.987 1 123 0.52 null
+sphere 32 22 764  22  Glass 4.09 76 NormalMap 18.32 0.81375
+sphere 31 24 824  24  CrissCross 0.099 0.938 0.41 0.085 0.974 0.223 0.821 0.776 0.84 5 67 0.23 NormalMap 6.74 0.0175
+sphere 32 16 879  16  ShinyColor 0.165 0.633 0.907 94 0.19 null
+sphere 18 22 938  22  Glass 4.545 146 NormalMap 14.6 0.935
+sphere 22 25 983  25  CrissCross 0.251 0.745 0.268 0.885 0.652 0.886 0.157 0.457 0.07 15 29 0.09 NormalMap 0.1 0.16
+sphere 92 16 -986  16  Turbulence 0.905 0.867 0.553 0.494 0.513 0.228 12 116 0.69 null
+sphere 115 23 -947  23  Marble 0.268 0.082 0.697 0.181 0.182 0.78 17 7 0.07 NormalMap 1.24 0.01625
+sphere 105 21 -872  21  Checkerboard 0.563 0.817 0.972 0.212 0.441 0.723 1 80 0.38 null
+sphere 91 21 -821  21  Turbulence 0.06 0.793 0.154 0.478 0.855 0.168 16 72 0.48 null
+sphere 93 16 -751  16  Marble 0.022 0.905 0.88 0.521 0.472 0.934 3 112 0.12 null
+sphere 119 22 -709  22  Checkerboard 0.472 0.982 0.783 0.032 0.294 0.565 4 65 0.22 NormalMap 19.88 0.99625
+sphere 115 15 -639  15  Glass 4.495 68 null
+sphere 99 23 -588  23  Checkerboard 0.478 0.792 0.479 0.46 0.574 0.511 16 23 0.47 NormalMap 9.18 0.20125
+sphere 90 17 -561  17  ShinyColor 0.766 0.221 0.415 149 0.08 null
+sphere 111 16 -509  16  ShinyColor 0.39 0.493 0.608 29 0.69 NormalMap 15.14 0.60375
+sphere 94 24 -433  24  Glass 3.05 51 NormalMap 13.7 0.1125
+sphere 92 16 -376  16  Checkerboard 0.956 0.122 0.746 0.442 0.253 0.135 19 130 0.22 null
+sphere 113 19 -329  19  CrissCross 0.179 0.347 0.619 0.27 0.995 0.718 0.354 0.762 0.675 8 109 0.56 NormalMap 3.2 0.0625
+sphere 118 16 -292  16  ShinyColor 0.841 0.667 0.392 90 0.45 null
+sphere 98 23 -218  23  Turbulence 0.605 0.23 0.593 0.366 0.906 0.988 2 107 0.09 NormalMap 15.08 0.505
+sphere 120 22 -181  22  Turbulence 0.301 0.666 0.442 0.261 0.455 0.706 4 65 0.22 null
+sphere 97 24 -113  24  Marble 0.613 0.261 0.775 0.951 0.927 0.772 6 67 0.3 NormalMap 10.66 0.92125
+sphere 120 25 -52  25  Checkerboard 0.566 0.996 0.822 0.229 0.917 0.721 10 33 0.37 null
+sphere 95 16 0  16  Checkerboard 0.22 0.644 0.426 0.654 0.08 0.448 4 124 0.09 NormalMap 16.34 0.3475
+sphere 116 25 78  25  Checkerboard 0.753 0.512 0.558 0.957 0.036 0.285 11 13 0.27 null
+sphere 108 24 134  24  Marble 0.799 0.862 0.585 0.615 0.14 0.426 12 148 0.18 NormalMap 1.16 0.02
+sphere 120 21 206  21  Turbulence 0.217 0.356 0.539 0.069 0.94 0.438 7 29 0.29 NormalMap 12.02 0.27125
+sphere 115 17 250  17  Glass 4.38 120 NormalMap 17.84 0.85125
+sphere 108 24 327  24  CrissCross 0.653 0.895 0.896 0.001 0.07 0.314 0.076 0.672 0.532 1 129 0.25 NormalMap 9.42 0.975
+sphere 107 18 366  18  Glass 0.51 129 null
+sphere 91 21 423  21  ShinyColor 0.703 0.306 0.915 107 0.26 NormalMap 15.62 0.06
+sphere 118 23 479  23  Turbulence 0.723 0.475 0.315 0.961 0.728 0.323 2 89 0.68 null
+sphere 104 21 552  21  Marble 0.692 0.768 0.184 0.452 0.563 0.09 12 69 0.33 NormalMap 9.84 0.23625
+sphere 94 23 627  23  ShinyColor 0.212 0.268 0.095 112 0.22 null
+sphere 108 16 689  16  Turbulence 0.358 0.845 0.777 0.922 0.935 0.353 8 62 0.59 null
+sphere 112 22 747  22  CrissCross 0.518 0.018 0.813 0.689 0.623 0.336 0.323 0.214 0.997 13 87 0.59 NormalMap 9.88 0.96875
+sphere 95 24 817  24  CrissCross 0.195 0.463 0.606 0.088 0.159 0.654 0.606 0.177 0.467 6 121 0.57 null
+sphere 108 17 887  17  Checkerboard 0.415 0.469 0.947 0.592 0.079 0.674 8 73 0.05 null
+sphere 119 18 924  18  Marble 0.256 0.468 0.874 0.875 0.483 0.674 3 13 0.22 null
+sphere 147 16 -994  16  CrissCross 0.108 0.878 0.152 0.462 0.368 0.756 0.423 0.034 0.827 14 77 0.49 null
+sphere 139 22 -936  22  Marble 0.738 0.208 0.076 0.418 0.065 0.919 20 42 0.01 null
+sphere 143 17 -871  17  Checkerboard 0.591 0.749 0.703 0.144 0.735 0.077 17 120 0.54 NormalMap 19.98 0.22875
+sphere 166 18 -843  18  Turbulence 0.305 0.733 0.325 0.149 0.152 0.815 8 51 0.51 null
+sphere 139 18 -792  18  ShinyColor 0.111 0.3 0.883 132 0.47 null
+sphere 168 17 -735  17  CrissCross 0.189 0.778 0.608 0.003 0.138 0.937 0.73 0.746 0.267 1 18 0.21 null
+sphere 140 23 -683  23  Turbulence 0.142 0.335 0.586 0.708 0.658 0.308 12 45 0.54 null
+sphere 144 23 -628  23  Marble 0.876 0.047 0.243 0.288 0.856 0.319 12 51 0.19 null
+sphere 145 17 -577  17  Turbulence 0.314 0.459 0.273 0.686 0.223 0.475 20 109 0.3 null
+sphere 147 19 -506  19  Checkerboard 0.034 0.31 0.488 0.311 0.241 0.145 15 78 0.27 null
+sphere 157 21 -453  21  ShinyColor 0.913 0.94 0.237 60 0.66 null
+sphere 146 17 -374  17  Marble 0.985 0.161 0.343 0.225 0.306 0.073 15 105 0.66 NormalMap 12.7 0.60625
+sphere 153 24 -319  24  Glass 3.81 105 null
+sphere 144 17 -257  17  Glass 1.125 130 NormalMap 11.36 0.11
+sphere 163 22 -207  22  Turbulence 0.787 0.774 0.555 0.503 0.603 0.291 13 56 0.69 null
+sphere 163 22 -136  22  Turbulence 0.573 0.628 0.7 0.662 0.182 0.341 10 66 0.64 NormalMap 6.34 1.21
+sphere 154 15 -71  15  Turbulence 0.795 0.882 0.683 0.675 0.596 0.513 20 77 0.15 NormalMap 12.72 0.995
+sphere 152 18 -25  18  Marble 0.906 0.555 0.662 0.996 0.078 0.419 14 135 0.55 null
+sphere 149 19 38  19  Turbulence 0.677 0.398 0.96 0.652 0.733 0.417 17 63 0.25 NormalMap 19.94 0.95625
+sphere 151 21 88  21  CrissCross 0.209 0.293 0.16 0.572 0.552 0.102 0.902 0.315 0.267 12 108 0.16 NormalMap 8.92 0.805
+sphere 138 24 136  24  Marble 0.036 0.032 0.038 0.022 0.554 0.667 16 116 0.68 null
+sphere 145 15 208  15  Marble 0.986 0.155 0.085 0.841 0.156 0.521 14 139 0.18 NormalMap 2.26 0.36875
+sphere 147 16 244  16  Checkerboard 0.444 0.778 0.989 0.78 0.29 0.006 1 20 0.2 null
+sphere 157 24 313  24  Glass 2.43 28 NormalMap 14.9 0.335
+sphere 150 15 343  15  Checkerboard 0.118 0.431 0.518 0.897 0.42 0.297 4 66 0.22 NormalMap 14.38 0.1825
+sphere 138 20 416  20  Glass 2.98 73 NormalMap 12.62 0.275
+sphere 146 23 483  23  ShinyColor 0.619 0.002 0.196 10 0.36 NormalMap 9.42 1.02125
+sphere 142 24 526  24  Turbulence 0.301 0.151 0.619 0.292 0.242 0.214 16 78 0.59 null
+sphere 168 17 593  17  Marble 0.991 0.388 0.308 0.269 0.285 0.438 18 136 0.5 NormalMap 0.82 0.01875
+sphere 147 22 650  22  Checkerboard 0.3 0.718 0.063 0.342 0.341 0.312 7 9 0.12 NormalMap 18.82 0.12125
+sphere 153 25 694  25  Turbulence 0.672 0.236 0.45 0.713 0.251 0 8 85 0.56 NormalMap 12.7 0.11375
+sphere 151 22 775  22  ShinyColor 0.746 0.346 0.189 7 0.2 NormalMap 16.12 0.27125
+sphere 150 24 848  24  Glass 3.245 139 null
+sphere 152 18 926  18  Checkerboard 0.804 0.507 0.791 0.237 0.811 0.801 20 26 0.7 NormalMap 8.88 0.34625
+sphere 139 22 988  22  ShinyColor 0.594 0.12 0.549 122 0.54 NormalMap 14.74 0.83625
+sphere 186 16 -988  16  Glass 0.07 24 null
+sphere 207 15 -960  15  Checkerboard 0.956 0.159 0.132 0.664 0.238 0.726 16 119 0.37 null
+sphere 203 17 -911  17  CrissCross 0.586 0.797 0.871 0.4 0.923 0.925 0.204 0.06 0.422 6 5 0.41 NormalMap 13.62 1.025
+sphere 201 20 -856  20  ShinyColor 0.863 0.949 0.239 78 0.18 null
+sphere 211 16 -828  16  Turbulence 0.629 0.914 0.353 0.69 0.335 0.639 15 138 0.04 NormalMap 14.74 0.25
+sphere 210 18 -743  18  Glass 3.57 15 null
+sphere 210 24 -713  24  Marble 0.245 0.114 0.905 0.581 0.753 0.61 10 122 0.7 NormalMap 0.2 1.06
+sphere 205 24 -637  24  CrissCross 0.022 0.385 0.345 0.365 0.997 0.931 0.698 0.757 0.145 19 131 0.03 null
+sphere 196 15 -576  15  Marble 0.221 0.613 0.045 0.045 0.107 0.842 12 87 0.61 null
+sphere 209 25 -525  25  Marble 0.393 0.2 0.702 0.414 0.634 0.359 14 14 0.61 NormalMap 8.18 0.105
+sphere 187 19 -497  19  Turbulence 0.652 0.71 0.389 0.601 0.557 0.316 7 84 0.13 null
+sphere 192 15 -416  15  CrissCross 0.203 0.601 0.274 0.658 0.731 0.494 0.954 0.429 0.286 3 14 0.7 null
+sphere 213 24 -390  24  ShinyColor 0.872 0.695 0.585 144 0.7 null
+sphere 197 17 -325  17  Marble 0.49 0.169 0.281 0.92 0.455 0.394 1 69 0.63 null
+sphere 186 22 -248  22  CrissCross 0.167 0.433 0.123 0.634 0.592 0.525 0.303 0.351 0.2 13 127 0.26 null
+sphere 206 18 -195  18  Marble 0.384 0.642 0.654 0.185 0.949 0.149 20 126 0.22 NormalMap 19.12 1.1875
+sphere 190 20 -153  20  Glass 0.255 120 null
+sphere 187 22 -109  22  ShinyColor 0.429 0.229 0.272 123 0.61 null
+sphere 213 15 -31  15  Marble 0.088 0.594 0.733 0.77 0.478 0.927 17 43 0.62 null
+sphere 204 24 26  24  Glass 0.435 119 null
+sphere 184 15 74  15  CrissCross 0.356 0.552 0.729 0.835 0.479 0.549 0.109 0.36 0.243 10 144 0.06 NormalMap 14.32 0.4525
+sphere 196 23 132  23  CrissCross 0.153 0.027 0.63 0.916 0.847 0.59 0.271 0.399 0.319 3 132 0.61 NormalMap 4.76 0.13875
+sphere 189 17 197  17  Marble 0.867 0.356 0.542 0.363 0.086 0.131 3 38 0.11 null
+sphere 196 18 221  18  CrissCross 0.641 0.453 0.715 0.841 0.337 0.626 0.402 0.317 0.281 9 30 0.45 null
+sphere 203 15 298  15  Glass 1.24 116 null
+sphere 211 15 347  15  Turbulence 0.167 0.435 0.617 0.794 0.837 0.934 2 39 0.08 null
+sphere 191 19 384  19  CrissCross 0.064 0.43 0.941 0.143 0.363 0.896 0.97 0.816 0.49 5 148 0.65 null
+sphere 209 23 437  23  Glass 2.895 150 null
+sphere 203 15 521  15  Checkerboard 0.983 0.24 0.118 0.126 0.603 0.013 2 64 0.35 NormalMap 8.04 0.535
+sphere 188 16 536  16  ShinyColor 0.2 0.927 0.594 64 0.35 null
+sphere 212 25 588  25  CrissCross 0.019 0.601 0.385 0.115 0.019 0.889 0.461 0.421 0.317 14 91 0.35 null
+sphere 189 21 656  21  ShinyColor 0.818 0.036 0.529 122 0.69 null
+sphere 202 24 739  24  CrissCross 0.504 0.212 0.778 0.821 0.886 0.377 0.327 0.569 0.007 1 29 0.16 NormalMap 5.9 0.06125
+sphere 209 24 773  24  Turbulence 0.197 0.655 0.516 0.833 0.993 0.131 12 54 0.45 null
+sphere 198 22 851  22  CrissCross 0.726 0.795 0.165 0.55 0.654 0.341 0.979 0.236 0.258 6 67 0.64 null
+sphere 209 25 904  25  Turbulence 0.328 0.89 0.787 0.58 0.403 0.604 1 24 0.4 null
+sphere 201 18 967  18  Marble 0.254 0.313 0.533 0.159 0.226 0.383 9 117 0.02 null
+sphere 271 21 -1003  21  Glass 3.73 104 NormalMap 9.76 1.21375
+sphere 249 21 -922  21  Turbulence 0.078 0.411 0.327 0.305 0.794 0.742 2 124 0.38 null
+sphere 245 19 -882  19  Checkerboard 0.559 0.336 0.75 0.741 0.824 0.72 11 61 0.67 NormalMap 6.2 0.90125
+sphere 266 20 -837  20  Checkerboard 0.214 0.546 0.184 0.036 0.086 0.042 5 49 0.32 NormalMap 12.68 0.06875
+sphere 254 17 -793  17  CrissCross 0.585 0.92 0.548 0.594 0.397 0.348 0.014 0.201 0.453 5 113 0.45 NormalMap 16.68 0.85
+sphere 246 16 -719  16  Checkerboard 0.221 0.975 0.591 0.373 0.909 0.806 5 56 0.29 NormalMap 18.94 0.42
+sphere 264 20 -659  20  CrissCross 0.048 0.514 0.739 0.532 0.662 0.884 0.351 0.444 0.083 12 64 0.47 null
+sphere 263 17 -607  17  Glass 4.42 28 null
+sphere 250 24 -559  24  Turbulence 0.072 0.094 0.758 0.956 0.446 0.201 1 5 0.43 null
+sphere 246 17 -482  17  ShinyColor 0.417 0.268 0.325 47 0.31 NormalMap 3.06 0.215
+sphere 263 19 -434  19  Marble 0.626 0.787 0.789 0.827 0.827 0.807 9 83 0.54 NormalMap 14.72 1.15625
+sphere 252 24 -407  24  ShinyColor 0.642 0.737 0.445 120 0.64 null
+sphere 272 19 -327  19  Glass 4.515 91 null
+sphere 247 23 -271  23  CrissCross 0.818 0.889 0.682 0.46 0.626 0.127 0.253 0.535 0.764 10 22 0.12 NormalMap 19.52 0.5625
+sphere 252 16 -222  16  ShinyColor 0.082 0.282 0.919 41 0.17 NormalMap 16.54 1.18375
+sphere 256 19 -160  19  Checkerboard 0.225 0.935 0.284 0.478 0.47 0.047 20 91 0.15 NormalMap 11.52 0.83875
+sphere 242 23 -107  23  Checkerboard 0.805 0.794 0.364 0.051 0.265 0.19 20 34 0.43 NormalMap 19.56 1.15
+sphere 268 17 -32  17  CrissCross 0.035 0.5 0.854 0.701 0.237 0.878 0.224 0.112 0.984 1 137 0.24 NormalMap 3.44 0.6725
+sphere 246 19 -2  19  Checkerboard 0.18 0.563 0.922 0.094 0.244 0.244 2 132 0.11 NormalMap 18.26 0.83625
+sphere 270 21 54  21  Checkerboard 0.955 0.867 0.926 0.302 0.947 0.096 17 6 0.34 null
+sphere 265 15 103  15  Turbulence 0.908 0.526 0.389 0.146 0.438 0.057 5 10 0.68 NormalMap 17.78 1.2275
+sphere 270 23 146  23  Checkerboard 0.306 0.727 0.484 0.293 0.303 0.325 7 11 0.51 NormalMap 18.24 0.47375
+sphere 270 24 220  24  Turbulence 0.394 0.955 0.415 0.283 0.937 0.58 1 127 0.03 null
+sphere 252 20 268  20  Marble 0.317 0.742 0.767 0.863 0.56 0.672 16 80 0.01 null
+sphere 246 23 322  23  CrissCross 0.37 0.124 0.939 0.702 0.77 0.709 0.358 0.764 0.539 15 14 0.19 null
+sphere 264 17 381  17  Glass 3.04 42 NormalMap 6 1.18375
+sphere 256 15 460  15  CrissCross 0.148 0.899 0.402 0.688 0.645 0.483 0.969 0.157 0.425 17 53 0.11 NormalMap 10.82 0.86375
+sphere 271 16 497  16  Marble 0.234 0.98 0.211 0.102 0.419 0.752 15 87 0.46 NormalMap 5.12 0.3675
+sphere 256 17 538  17  ShinyColor 0.794 0.215 0.211 52 0.64 NormalMap 9.66 1.08125
+sphere 265 25 591  25  Checkerboard 0.732 0.39 0.354 0.835 0.81 0.105 12 58 0.53 null
+sphere 268 18 639  18  Marble 0.63 0.516 0.592 0.113 0.38 0.598 1 25 0.06 NormalMap 5.84 1.03375
+sphere 262 22 708  22  Glass 2.54 144 null
+sphere 243 20 761  20  CrissCross 0.112 0.099 0.199 0.711 0.143 0.348 0.806 0.597 0.64 13 68 0.2 NormalMap 1.9 0.04625
+sphere 258 16 812  16  Checkerboard 0.783 0.314 0.162 0.475 0.731 0.518 16 40 0.35 null
+sphere 244 23 875  23  ShinyColor 0.882 0.343 0.785 79 0.55 NormalMap 16.16 1.1
+sphere 242 18 920  18  Marble 0.918 0.08 0.842 0.436 0.859 0.093 19 70 0.32 null
+sphere 254 18 967  18  Checkerboard 0.928 0.417 0.251 0.736 0.296 0.36 2 47 0 null
+sphere 317 17 -988  17  ShinyColor 0.122 0.438 0.143 12 0.63 null
+sphere 323 16 -946  16  CrissCross 0.21 0.24 0.333 0.283 0.542 0.346 0.177 0.64 0.115 14 128 0.56 NormalMap 18 1.15625
+sphere 326 15 -886  15  Marble 0.276 0.324 0.015 0.999 0.799 0.96 20 4 0.14 NormalMap 5.86 0.92875
+sphere 307 20 -826  20  ShinyColor 0.232 0.569 0.404 22 0.35 NormalMap 3.5 0.60125
+sphere 298 23 -775  23  CrissCross 0.718 0.539 0.671 0.727 0.739 0.976 0.019 0.481 0.628 10 130 0.28 null
+sphere 303 15 -702  15  ShinyColor 0.402 0.94 0.831 35 0 NormalMap 16.32 0.72125
+sphere 300 23 -632  23  Turbulence 0.433 0.3 0.199 0.915 0.928 0.688 16 50 0.23 null
+sphere 319 16 -582  16  CrissCross 0.541 0.274 0.546 0.276 0.43 0.2 0.729 0.124 0.524 19 85 0.58 NormalMap 9.46 0.94
+sphere 298 17 -533  17  ShinyColor 0.36 0.486 0.231 18 0.7 null
+sphere 310 20 -460  20  ShinyColor 0.758 0.466 0.28 30 0.47 NormalMap 6.26 0.2375
+sphere 296 24 -420  24  CrissCross 0.723 0.2 0.424 0.954 0.304 0.416 0.691 0.09 0.746 4 88 0.47 NormalMap 6.66 0.16375
+sphere 320 20 -349  20  Marble 0.384 0.045 0.77 0.203 0.64 0.61 3 56 0.57 null
+sphere 296 25 -311  25  Checkerboard 0.78 0.393 0.317 0.112 0.525 0.755 13 50 0.14 NormalMap 6.22 0.70125
+sphere 325 18 -260  18  ShinyColor 0.148 0.853 0.692 45 0.15 null
+sphere 322 21 -195  21  CrissCross 0.716 0.485 0.772 0.348 0.808 0.971 0.813 0.118 0.532 20 66 0.33 NormalMap 10.28 0.7825
+sphere 324 17 -159  17  Turbulence 0.612 0.332 0.149 0.178 0.031 0.753 3 10 0.33 null
+sphere 320 19 -86  19  CrissCross 0.495 0.426 0.845 0.701 0.342 0.105 0.41 0.114 0.898 15 110 0.16 null
+sphere 297 22 -48  22  ShinyColor 0.667 0.128 0.922 17 0.65 null
+sphere 315 16 -5  16  Checkerboard 0.468 0.804 0.826 0.81 0.909 0.235 19 122 0.68 null
+sphere 305 21 71  21  Turbulence 0.732 0.521 0.362 0.651 0.07 0.01 18 36 0.45 null
+sphere 326 19 139  19  Turbulence 0.704 0.798 0.787 0.738 0.655 0.34 1 25 0.66 null
+sphere 304 19 184  19  ShinyColor 0.34 0.573 0.911 87 0.15 null
+sphere 319 17 253  17  Marble 0.195 0.384 0.087 0.85 0.724 0.119 20 100 0.53 null
+sphere 309 15 282  15  Glass 4.635 34 null
+sphere 309 16 343  16  Checkerboard 0.157 0.204 0.423 0.352 0.588 0.511 5 49 0.44 NormalMap 19.46 0.4825
+sphere 311 24 414  24  Turbulence 0.701 0.248 0.465 0.597 0.931 0.655 15 56 0.29 NormalMap 8.68 0.71375
+sphere 324 24 451  24  Checkerboard 0.453 0.998 0.325 0.426 0.384 0.273 6 135 0.16 null
+sphere 303 23 534  23  CrissCross 0.306 0.931 0.531 0.878 0.484 0.387 0.801 0.625 0.755 19 14 0.53 NormalMap 10.1 0.17
+sphere 296 23 592  23  Turbulence 0.812 0.13 0.291 0.651 0.869 0.182 5 145 0.34 NormalMap 9.94 0.45625
+sphere 301 24 640  24  Checkerboard 0.349 0.391 0.343 0.854 0.527 0.868 13 85 0.44 null
+sphere 325 25 707  25  CrissCross 0.916 0.984 0.414 0.281 0.63 0.298 0.447 0.902 0.937 11 40 0.23 null
+sphere 318 23 788  23  Turbulence 0.575 0.473 0.417 0.821 0.06 0.369 5 133 0.2 NormalMap 17.3 0.8775
+sphere 296 20 860  20  Marble 0.312 0.75 0.118 0.061 0.471 0.528 9 16 0.04 null
+sphere 311 17 908  17  CrissCross 0.551 0.345 0.837 0.551 0.236 0.232 0.488 0.667 0.879 16 147 0.44 null
+sphere 310 19 936  19  Marble 0.347 0.591 0.007 0.082 0.068 0.856 20 63 0.28 NormalMap 4.96 1.1975
+sphere 357 19 -994  19  Turbulence 0.251 0.086 0.465 0.732 0.277 0.925 20 23 0.65 NormalMap 9.68 0.63875
+sphere 367 21 -943  21  Marble 0.661 0.44 0.719 0.106 0.671 0.077 7 133 0.04 NormalMap 2.66 0.1875
+sphere 363 24 -862  24  Turbulence 0.047 0.192 0.727 0.614 0.772 0.023 4 115 0.51 NormalMap 0.04 0.485
+sphere 365 22 -822  22  Glass 4.315 28 NormalMap 0.28 0.00625
+sphere 373 19 -755  19  ShinyColor 0.447 0.165 0.054 97 0.63 null
+sphere 355 24 -696  24  Checkerboard 0.03 0.344 0.896 0.525 0.493 0.694 7 80 0.39 NormalMap 13.72 0.7125
+sphere 350 22 -647  22  Checkerboard 0.713 0.758 0.071 0.352 0.65 0.74 16 86 0.4 null
+sphere 357 16 -575  16  ShinyColor 0.764 0.274 0.703 15 0.56 NormalMap 11.64 0.60375
+sphere 356 15 -511  15  Turbulence 0.546 0.93 0.413 0.196 0.669 0.176 16 38 0.08 null
+sphere 364 17 -487  17  Turbulence 0.526 0.198 0.643 0.008 0.026 0.724 5 131 0.05 null
+sphere 370 20 -436  20  CrissCross 0.466 0.234 0.061 0.676 0.69 0.297 0.649 0.419 0.235 15 142 0.3 NormalMap 19.08 0.575
+sphere 360 16 -404  16  ShinyColor 0.05 0.28 0.69 107 0.58 NormalMap 0.5 0.68125
+sphere 361 21 -332  21  Glass 2.54 112 null
+sphere 377 19 -261  19  CrissCross 0 0.135 0.242 0.281 0.826 0.946 0.105 0.25 0.97 14 28 0.39 NormalMap 11.18 0.465
+sphere 377 21 -213  21  Glass 3.78 103 null
+sphere 361 19 -147  19  CrissCross 0.833 0.771 0.7 0.802 0.421 0.871 0.356 0.451 0.428 15 139 0.03 null
+sphere 359 19 -106  19  ShinyColor 0.898 0.669 0.598 54 0.03 NormalMap 19.92 0.545
+sphere 353 24 -45  24  Marble 0.729 0.874 0.745 0.157 0.601 0.667 5 34 0.56 null
+sphere 372 22 0  22  Marble 0.351 0.882 0.111 0.234 0.984 0.271 19 129 0.09 NormalMap 2.98 1.0725
+sphere 350 24 82  24  Glass 1.79 122 null
+sphere 364 20 142  20  Turbulence 0.179 0.257 0.323 0.414 0.24 0.594 8 17 0.51 null
+sphere 354 16 190  16  ShinyColor 0.699 0.818 0.263 11 0.44 NormalMap 10.48 0.2025
+sphere 352 25 235  25  Turbulence 0.723 0.879 0.416 0.964 0.472 0.779 2 31 0.43 NormalMap 15.56 0.975
+sphere 377 19 288  19  Checkerboard 0.199 0.819 0.194 0.723 0.981 0.728 15 13 0.05 null
+sphere 358 20 358  20  Marble 0.172 0.346 0.588 0.95 0.126 0.03 7 5 0.12 null
+sphere 361 18 397  18  Checkerboard 0.813 0.385 0.168 0.353 0.924 0.794 18 30 0.21 null
+sphere 371 21 455  21  Turbulence 0.309 0.719 0.082 0.482 0.233 0.257 18 86 0.44 null
+sphere 358 23 532  23  ShinyColor 0.189 0.686 0.009 58 0.69 null
+sphere 364 19 578  19  Glass 2.265 11 null
+sphere 374 15 625  15  Marble 0.107 0.763 0.032 0.221 0.952 0.718 5 50 0.49 NormalMap 2.1 1.19875
+sphere 370 21 693  21  CrissCross 0.929 0.627 0.713 0.325 0.243 0.13 0.671 0.74 0.271 16 77 0.21 NormalMap 9.08 0.0275
+sphere 372 23 724  23  Marble 0.806 0.784 0.104 0.192 0.169 0.681 3 17 0.21 null
+sphere 352 25 782  25  CrissCross 0.555 0.106 0.022 0.278 0.431 0.904 0.961 0.302 0.36 7 18 0.1 NormalMap 6 0.39125
+sphere 362 19 835  19  Turbulence 0.932 0.239 0.424 0.806 0.031 0.957 14 43 0.36 null
+sphere 356 17 909  17  Glass 3.135 107 NormalMap 18.54 0.02375
+sphere 363 18 970  18  Marble 0.138 0.199 0.004 0.169 0.155 0.685 9 101 0.33 null
+sphere 423 17 -990  17  Glass 3.615 115 NormalMap 5.52 0.125
+sphere 438 17 -919  17  ShinyColor 0.454 0.129 0.263 99 0.09 NormalMap 16.18 1.025
+sphere 426 20 -864  20  Turbulence 0.187 0.074 0.395 0.022 0.287 0.117 16 79 0.27 null
+sphere 420 21 -801  21  ShinyColor 0.242 0.006 0.669 58 0.31 NormalMap 3.94 0.39625
+sphere 446 20 -727  20  Glass 3.27 88 NormalMap 13.5 1.08625
+sphere 429 20 -669  20  CrissCross 0.92 0.925 0.29 0.589 0.301 0.73 0.066 0.498 0.046 1 148 0.69 null
+sphere 420 25 -639  25  Marble 0.329 0.789 0.577 0.899 0.33 0.48 12 93 0.28 null
+sphere 436 23 -565  23  Glass 1.445 101 null
+sphere 443 24 -510  24  Glass 0.475 129 null
+sphere 423 19 -431  19  CrissCross 0.293 0.365 0.354 0.597 0.045 0.427 0.886 0.711 0.401 13 131 0.21 NormalMap 2.04 0.6575
+sphere 436 18 -387  18  Turbulence 0.718 0.281 0.158 0.546 0.592 0.645 6 134 0.66 null
+sphere 437 22 -348  22  Checkerboard 0.044 0.268 0.369 0.509 0.369 0.896 12 98 0.36 null
+sphere 435 24 -295  24  Marble 0.563 0.663 0.339 0.205 0.908 0.875 18 88 0.2 NormalMap 13.06 0.42375
+sphere 443 15 -227  15  CrissCross 0.456 0.869 0.593 0.195 0.048 0.349 0.481 0.821 0.751 1 74 0.06 NormalMap 7.84 1.2075
+sphere 425 25 -201  25  Marble 0.925 0.564 0.89 0.499 0.999 0.86 10 70 0.51 NormalMap 13 0.97125
+sphere 435 16 -150  16  Checkerboard 0.278 0.422 0.473 0.243 0.563 0.444 11 150 0.04 NormalMap 19.82 0.8925
+sphere 425 25 -88  25  CrissCross 0.995 0.38 0.807 0.431 0.511 0.405 0.619 0.685 0.486 18 18 0.68 NormalMap 13.4 0.50375
+sphere 431 22 -13  22  Checkerboard 0.301 0.571 0.464 0.744 0.986 0.74 1 135 0.33 NormalMap 17.78 1.065
+sphere 428 18 41  18  Checkerboard 0.774 0.835 0.153 0.733 0.975 0.823 3 94 0.34 null
+sphere 437 23 99  23  Marble 0.594 0.468 0.534 0.482 0.319 0.417 17 103 0.5 null
+sphere 444 21 141  21  Turbulence 0.193 0.956 0.533 0.338 0.749 0.2 2 3 0.43 null
+sphere 431 18 198  18  Glass 3.16 72 null
+sphere 446 17 227  17  CrissCross 0.724 0.192 0.321 0.473 0.393 0.374 0.478 0.005 0.128 10 14 0.33 null
+sphere 438 23 301  23  CrissCross 0.501 0.058 0.745 0.291 0.827 0.404 0.275 0.55 0.596 12 6 0.7 null
+sphere 447 16 347  16  CrissCross 0.817 0.89 0.892 0.124 0.305 0.531 0.376 0.806 0.59 3 17 0.29 null
+sphere 447 16 441  16  ShinyColor 0.939 0.489 0.106 8 0.33 NormalMap 12.26 0.505
+sphere 419 20 488  20  Marble 0.815 0.81 0.079 0.404 0.931 0.176 17 70 0.38 null
+sphere 438 23 546  23  CrissCross 0.135 0.908 0.599 0.214 0.299 0.908 0.182 0.582 0.341 10 61 0.1 null
+sphere 436 22 595  22  Glass 3.885 29 null
+sphere 439 21 640  21  Marble 0.522 0.786 0.339 0.704 0.368 0.681 4 116 0.59 null
+sphere 422 19 718  19  CrissCross 0.676 0.207 0.983 0.402 0.378 0.562 0.234 0.686 0.048 14 33 0.59 NormalMap 18.24 0.25375
+sphere 447 15 780  15  Turbulence 0.719 0.883 0.84 0.309 0.452 0.282 2 125 0.68 NormalMap 16.26 0.45
+sphere 435 19 830  19  Turbulence 0.264 0.466 0.462 0.95 0.538 0.431 10 47 0.68 null
+sphere 426 23 910  23  Glass 0.305 85 NormalMap 17.48 1.14625
+sphere 432 17 936  17  Marble 0.383 0.392 0.985 0.921 0.823 0.451 5 119 0.24 null
+sphere 431 15 978  15  Turbulence 0.884 0.289 0.087 0.898 0.537 0.598 6 33 0.26 NormalMap 2.78 0.50625
+sphere 483 19 -995  19  Glass 0.94 62 null
+sphere 489 15 -951  15  Checkerboard 0.203 0.488 0.371 0.29 0.385 0.908 18 98 0.08 NormalMap 16.42 0.3175
+sphere 493 19 -895  19  Checkerboard 0.893 0.56 0.278 0.079 0.963 0.889 8 59 0.68 NormalMap 8.3 0.70875
+sphere 470 21 -836  21  Marble 0.536 0.052 0.905 0.791 0.715 0.283 12 116 0.1 null
+sphere 491 25 -768  25  Checkerboard 0.045 0.842 0.189 0.46 0.408 0.33 2 71 0.59 null
+sphere 499 23 -710  23  Marble 0.164 0.313 0.318 0.878 0.974 0.018 18 108 0.48 null
+sphere 470 21 -663  21  Marble 0.249 0.364 0.468 0.028 0.353 0.266 18 39 0.6 NormalMap 8.46 0.02375
+sphere 496 23 -584  23  CrissCross 0.169 0.104 0.284 0.357 0.102 0.647 0.622 0.564 0.853 18 140 0.22 null
+sphere 485 23 -530  23  CrissCross 0.583 0.45 0.125 0.991 0.892 0.64 0.241 0.06 0.745 11 64 0.6 NormalMap 0.8 0.51375
+sphere 479 25 -488  25  Marble 0.373 0.741 0.099 0.835 0.629 0.791 4 34 0.17 NormalMap 4.06 0.16375
+sphere 474 19 -403  19  Turbulence 0.65 0.963 0.164 0.561 0.302 0.509 8 139 0.31 null
+sphere 474 22 -340  22  Marble 0.161 0.73 0.333 0.121 0.173 0.526 17 23 0.09 NormalMap 5.64 0.9825
+sphere 479 19 -288  19  CrissCross 0.206 0.348 0.807 0.855 0.663 0.768 0.696 0.19 0.97 18 139 0.21 null
+sphere 476 23 -213  23  CrissCross 0.16 0.916 0.818 0.724 0.31 0.481 0.359 0.517 0.83 4 57 0.34 null
+sphere 497 24 -160  24  Turbulence 0.709 0.929 0.001 0.89 0.444 0.754 9 62 0.6 null
+sphere 488 18 -109  18  Checkerboard 0.98 0.819 0.518 0.472 0.753 0.585 4 100 0.36 null
+sphere 496 19 -58  19  Glass 4.115 99 NormalMap 4.56 0.63375
+sphere 474 21 16  21  Turbulence 0.304 0.757 0.845 0.776 0.509 0.429 19 27 0.66 null
+sphere 497 16 75  16  Marble 0.913 0.566 0.993 0.905 0.114 0.168 4 46 0.35 NormalMap 12.4 0.99625
+sphere 486 20 136  20  Marble 0.59 0.186 0.325 0.519 0.663 0.841 8 25 0.12 null
+sphere 499 24 213  24  Checkerboard 0.151 0.49 0.289 0.771 0.287 0.175 5 130 0.4 NormalMap 7.26 0.16375
+sphere 491 21 264  21  CrissCross 0.896 0.427 0.028 0.639 0.256 0.999 0.497 0.253 0.159 13 112 0.31 NormalMap 0.6 0.78
+sphere 475 24 345  24  Marble 0.886 0.681 0.289 0.696 0.398 0.881 14 46 0.21 null
+sphere 482 22 408  22  Checkerboard 0.56 0.293 0.496 0.59 0.917 0.148 10 19 0.65 null
+sphere 484 20 463  20  Glass 3.075 100 null
+sphere 495 21 532  21  Turbulence 0.348 0.907 0.414 0.844 0.496 0.331 20 147 0.31 null
+sphere 476 21 595  21  ShinyColor 0.459 0.146 0.386 13 0.57 NormalMap 19.66 0.9625
+sphere 478 24 657  24  ShinyColor 0.647 0.284 0.442 84 0.49 NormalMap 1 0.0375
+sphere 483 15 712  15  CrissCross 0.432 0.872 0.307 0.505 0.676 0.6 0.487 0.446 0.485 7 113 0.46 NormalMap 7.86 1.16625
+sphere 488 25 771  25  Turbulence 0.134 0.606 0.75 0.49 0.388 0.723 5 48 0.1 NormalMap 12.34 0.82625
+sphere 473 17 842  17  CrissCross 0.283 0.709 0.293 0.915 0.84 0.288 0.576 0.249 0.308 15 129 0.04 NormalMap 4.86 0.9775
+sphere 498 21 902  21  CrissCross 0.087 0.203 0.426 0.438 0.065 0.774 0.721 0.774 0.066 13 93 0.25 NormalMap 17.28 0.82875
+sphere 491 22 959  22  Marble 0.037 0.681 0.035 0.302 0.066 0.781 16 25 0.69 NormalMap 11.84 0.06
+sphere 523 24 -976  24  Glass 1.505 11 NormalMap 0.38 0.975
+sphere 530 25 -932  25  Turbulence 0.758 0.075 0.239 0.538 0.849 0.393 11 10 0.69 null
+sphere 523 19 -892  19  Turbulence 0.517 0.48 0.148 0.297 0.68 0.127 12 64 0.43 NormalMap 3.78 0.99
+sphere 522 17 -839  17  ShinyColor 0.424 0.119 0.161 63 0.48 NormalMap 14.1 0.10375
+sphere 550 25 -790  25  Checkerboard 0.223 0.831 0.193 0.52 0.511 0.32 2 140 0.66 NormalMap 2.3 0.915
+sphere 545 19 -750  19  Checkerboard 0.177 0.652 0.595 0.867 0.836 0.3 20 15 0.17 null
+sphere 522 24 -680  24  ShinyColor 0.534 0.941 0.421 96 0.61 NormalMap 0.7 1.22625
+sphere 533 20 -619  20  Glass 3.65 76 null
+sphere 538 25 -582  25  Glass 3.93 50 NormalMap 4.32 0.52375
+sphere 548 16 -514  16  ShinyColor 0.201 0.424 0.002 46 0.65 NormalMap 3.04 0.58875
+sphere 528 17 -461  17  Glass 3.87 53 NormalMap 19.22 0.94375
+sphere 524 23 -397  23  Turbulence 0.332 0.04 0.14 0.534 0.464 0.143 17 59 0.35 null
+sphere 523 16 -346  16  ShinyColor 0.852 0.468 0.785 32 0.66 null
+sphere 522 20 -289  20  Glass 2.87 128 NormalMap 14.28 0.47625
+sphere 528 24 -242  24  Checkerboard 0.892 0.076 0.367 0.947 0.5 0.379 16 146 0.11 null
+sphere 537 25 -159  25  Checkerboard 0.857 0.484 0.153 0.429 0.33 0.344 3 108 0 NormalMap 18.44 0.0475
+sphere 550 16 -101  16  CrissCross 0.021 0.668 0.805 0.931 0.613 0.307 0.332 0.581 0.31 4 12 0.32 null
+sphere 525 23 -28  23  Checkerboard 0.846 0.124 0.139 0.776 0.564 0.619 14 77 0.33 NormalMap 8.2 0.62125
+sphere 535 17 38  17  Glass 4.165 143 NormalMap 5.92 0.7075
+sphere 532 16 100  16  Checkerboard 0.783 0.757 0.212 0.923 0.533 0.777 11 30 0.19 NormalMap 10.18 0.8625
+sphere 550 20 158  20  ShinyColor 0.427 0.703 0.295 41 0.46 null
+sphere 542 17 193  17  Marble 0.843 0.654 0.859 0.62 0.195 0.043 19 34 0.39 null
+sphere 542 20 222  20  Turbulence 0.023 0.003 0.738 0.239 0.197 0.396 16 24 0.68 NormalMap 17.58 0.365
+sphere 526 20 293  20  Checkerboard 0.776 0.941 0.746 0.366 0.668 0.8 18 53 0.68 null
+sphere 544 25 333  25  Turbulence 0.755 0.765 0.065 0.168 0.644 0.357 9 29 0.36 NormalMap 18.12 0.87875
+sphere 535 24 382  24  Marble 0.086 0.563 0.627 0.052 0.296 0.046 16 42 0.47 null
+sphere 527 25 429  25  Glass 3.935 138 NormalMap 9.78 1.2375
+sphere 535 25 489  25  CrissCross 0.022 0.872 0.227 0.069 0.627 0.496 0.734 0.483 0.52 4 62 0.5 NormalMap 13.62 0.40875
+sphere 529 20 554  20  CrissCross 0.079 0.396 0.527 0.475 0.214 0.458 0.497 0.085 0.685 12 108 0.12 NormalMap 3.92 0.87625
+sphere 534 21 611  21  Glass 3.735 148 null
+sphere 540 20 666  20  Turbulence 0.15 0.487 0.612 0.647 0.573 0.296 5 45 0.33 null
+sphere 524 25 704  25  Marble 0.311 0.687 0.809 0.525 0.156 0.404 9 118 0.05 null
+sphere 539 16 766  16  Glass 0.1 51 null
+sphere 539 21 793  21  Turbulence 0.045 0.732 0.799 0.854 0.257 0.955 6 100 0.52 NormalMap 6.68 0.84625
+sphere 529 20 863  20  Checkerboard 0.533 0.247 0.399 0.135 0.748 0.901 15 51 0.7 null
+sphere 531 15 907  15  Checkerboard 0.403 0.832 0.425 0.062 0.57 0.763 8 39 0.23 null
+sphere 538 16 971  16  Turbulence 0.848 0.156 0.442 0.84 0.122 0.71 6 32 0.01 NormalMap 1.54 0.23875
+sphere 612 21 -991  21  Marble 0.197 0.482 0.267 0.745 0.789 0.633 14 37 0.52 null
+sphere 601 19 -930  19  Turbulence 0.787 0.112 0.833 0.695 0.728 0.697 4 18 0.67 null
+sphere 595 16 -902  16  Checkerboard 0.005 0.53 0.318 0.751 0.069 0.706 19 69 0.15 null
+sphere 589 23 -827  23  CrissCross 0.705 0.596 0.475 0.52 0.702 0.569 0.818 0.073 0.407 19 14 0.66 NormalMap 16.62 0.0075
+sphere 600 23 -774  23  Glass 1.82 98 null
+sphere 611 17 -709  17  Turbulence 0.055 0.53 0.812 0.874 0.604 0.218 16 104 0.11 NormalMap 10.28 0.2025
+sphere 605 18 -649  18  Checkerboard 0.14 0.251 0.802 0.922 0.484 0.393 3 49 0.44 null
+sphere 614 16 -568  16  Turbulence 0.555 0.271 0.306 0.556 0.785 0.468 10 12 0.06 null
+sphere 592 22 -553  22  Marble 0.059 0.605 0.854 0.514 0.725 0.758 10 100 0.37 NormalMap 16.14 0.1125
+sphere 606 16 -496  16  Checkerboard 0.211 0.666 0.686 0.166 0.906 0.382 8 143 0 NormalMap 7.62 0.91125
+sphere 596 19 -433  19  Checkerboard 0.678 0.453 0.716 0.213 0.54 0.522 7 136 0.45 null
+sphere 593 15 -387  15  Turbulence 0.794 0.732 0.148 0.857 0.112 0.878 19 84 0.15 null
+sphere 615 20 -340  20  Turbulence 0.399 0.143 0.987 0.442 0.357 0.065 14 38 0.58 NormalMap 0.46 1.22375
+sphere 589 23 -279  23  Checkerboard 0.691 0.419 0.216 0.535 0.925 0.488 2 133 0.33 null
+sphere 610 24 -226  24  CrissCross 0.712 0.037 0.745 0.691 0.949 0.5 0.817 0.716 0.366 17 63 0.55 NormalMap 18.86 0.8875
+sphere 604 25 -168  25  CrissCross 0.435 0.985 0.598 0.317 0.906 0.32 0.029 0.944 0.065 15 134 0.4 null
+sphere 586 18 -72  18  CrissCross 0.923 0.747 0 0.909 0.366 0.761 0.022 0.801 0.746 13 20 0.46 null
+sphere 612 15 -22  15  Glass 2.52 115 NormalMap 4.42 0.195
+sphere 588 22 1  22  Checkerboard 0.769 0.67 0.91 0.134 0.431 0.932 19 29 0.39 NormalMap 16.56 0.61625
+sphere 601 19 52  19  Checkerboard 0.469 0.003 0.575 0.229 0.112 0.796 8 29 0.31 NormalMap 4.04 0.14
+sphere 610 25 115  25  ShinyColor 0.213 0.306 0.039 60 0.6 NormalMap 4.36 0.43875
+sphere 612 22 170  22  Marble 0.057 0.665 0.291 0.443 0.844 0.735 19 9 0.6 NormalMap 0.3 0.7875
+sphere 612 16 225  16  ShinyColor 0.233 0.911 0.25 69 0.18 null
+sphere 605 24 266  24  Checkerboard 0.53 0.787 0.858 0.822 0.23 0.702 12 23 0.52 NormalMap 10.2 0.95125
+sphere 613 17 338  17  Checkerboard 0.109 0.22 0.288 0.56 0.482 0.832 14 91 0.52 NormalMap 12.6 0.5775
+sphere 593 16 374  16  Glass 2.69 94 null
+sphere 616 21 416  21  CrissCross 0.757 0.519 0.394 0.589 0.169 0.99 0.321 0.461 0.618 16 142 0.55 NormalMap 5.76 0.94875
+sphere 595 18 465  18  ShinyColor 0.237 0.253 0.671 34 0.45 NormalMap 1.22 0.40875
+sphere 593 15 528  15  CrissCross 0.169 0.241 0.021 0.114 0.018 0.053 0.401 0.778 0.564 15 13 0.49 null
+sphere 602 20 599  20  Turbulence 0.601 0.146 0.523 0.139 0.78 0.439 17 62 0.48 NormalMap 12.88 0.8725
+sphere 609 22 643  22  Marble 0.117 0.826 0.951 0.641 0.346 0.531 6 140 0.31 NormalMap 10.6 0.73125
+sphere 597 22 712  22  Glass 2.665 63 null
+sphere 592 21 760  21  Glass 4.34 88 null
+sphere 596 17 808  17  ShinyColor 0.787 0.945 0.659 58 0.65 NormalMap 14.74 0.43875
+sphere 599 20 868  20  Glass 4.96 120 NormalMap 10.14 0.82125
+sphere 602 20 927  20  CrissCross 0.723 0.479 0.918 0.382 0.852 0.846 0.71 0.588 0.197 12 16 0.46 null
+sphere 677 15 -999  15  Turbulence 0.874 0.167 0.433 0.217 0.657 0.026 19 96 0.53 NormalMap 10.94 0.1625
+sphere 682 19 -937  19  Turbulence 0.323 0.931 0.133 0.29 0.931 0.825 10 67 0.12 NormalMap 9.6 0.0575
+sphere 664 25 -899  25  Checkerboard 0.842 0.688 0.562 0.388 0.819 0.803 16 100 0.44 NormalMap 1.06 0.69
+sphere 670 19 -819  19  Turbulence 0.85 0.74 0.547 0.329 0.787 0.102 5 10 0.22 NormalMap 4.48 0.19625
+sphere 672 23 -754  23  Turbulence 0.697 0.399 0.77 0.304 0.775 0.251 1 68 0.47 null
+sphere 660 18 -690  18  ShinyColor 0.248 0.085 0.188 86 0.18 NormalMap 14.44 0.1675
+sphere 681 17 -647  17  Checkerboard 0.002 0.291 0.567 0.773 0.595 0.342 1 97 0.55 null
+sphere 674 17 -605  17  ShinyColor 0.743 0.776 0.13 140 0.24 NormalMap 6.86 0.0775
+sphere 666 20 -557  20  Turbulence 0.215 0.087 0.099 0.81 0.429 0.123 10 34 0.57 null
+sphere 659 18 -524  18  ShinyColor 0.898 0.189 0.982 38 0.41 NormalMap 6.02 0.14625
+sphere 670 21 -455  21  Marble 0.615 0.58 0.507 0.738 0.03 0.719 11 111 0.22 null
+sphere 658 21 -395  21  Checkerboard 0.571 0.397 0.399 0.871 0.515 0.264 11 148 0.32 NormalMap 19.5 1.21125
+sphere 674 15 -327  15  Turbulence 0.87 0.169 0.592 0.433 0.211 0.026 2 48 0.25 null
+sphere 680 17 -252  17  Checkerboard 0.302 0.763 0.495 0.357 0.738 0.463 4 119 0.03 null
+sphere 675 15 -220  15  Marble 0.724 0.708 0.608 0.59 0.086 0.538 18 131 0.24 null
+sphere 668 19 -142  19  ShinyColor 0.867 0.181 0.922 138 0.54 NormalMap 5.6 0.99
+sphere 686 20 -102  20  Marble 0.981 0.499 0.181 0.518 0.351 0.046 18 148 0.67 NormalMap 7.52 0.4475
+sphere 662 20 -28  20  Checkerboard 0.449 0.701 0.416 0.24 0.603 0.933 5 110 0.08 null
+sphere 658 22 9  22  Marble 0.859 0.888 0.954 0.234 0.246 0.452 15 72 0.09 NormalMap 12.14 0.72625
+sphere 681 15 76  15  Checkerboard 0.199 0.072 0.655 0.297 0.099 0.36 8 95 0.17 null
+sphere 667 19 106  19  Marble 0.784 0.964 0.506 0.391 0.544 0.376 9 56 0.6 NormalMap 8.2 0.06125
+sphere 666 15 173  15  Glass 3.36 105 null
+sphere 684 15 212  15  Marble 0.297 0.462 0.408 0.841 0.839 0.823 5 105 0.13 null
+sphere 658 22 257  22  ShinyColor 0.81 0.343 0.776 77 0 null
+sphere 659 21 317  21  CrissCross 0.206 0.6 0.918 0.029 0.805 0.607 0.221 0.42 0.346 18 17 0.3 NormalMap 4.1 0.3025
+sphere 679 25 361  25  Turbulence 0.502 0.084 0.936 0.965 0.701 0.734 15 118 0.66 NormalMap 13.96 1.2125
+sphere 661 18 416  18  Checkerboard 0.647 0.084 0.079 0.852 0.326 0.455 17 13 0.59 NormalMap 8.98 0.33125
+sphere 666 25 473  25  Checkerboard 0.264 0.638 0.83 0.204 0.96 0.527 4 15 0.59 NormalMap 12.7 0.60375
+sphere 673 18 530  18  ShinyColor 0.894 0.947 0.966 146 0.55 NormalMap 8.34 0.06625
+sphere 668 19 571  19  Marble 1 0.88 0.811 0.174 0.968 0.643 11 92 0.08 null
+sphere 656 19 634  19  Turbulence 0.389 0.971 0.231 0.389 0.338 0.635 19 94 0.06 null
+sphere 669 22 672  22  CrissCross 0.38 0.874 0.645 0.824 0.892 0.231 0.213 0.875 0.786 8 41 0.53 null
+sphere 673 17 735  17  Marble 0.674 0.899 0.894 0.061 0.725 0.322 2 103 0.49 null
+sphere 673 23 789  23  Glass 4.77 16 null
+sphere 661 15 844  15  Glass 0.34 72 null
+sphere 677 24 885  24  CrissCross 0.683 0.241 0.651 0.373 0.579 0.78 0.327 0.673 0.531 19 130 0.38 NormalMap 15.22 1.1125
+sphere 685 25 927  25  CrissCross 0.578 0.983 0.486 0.445 0.672 0.399 0.128 0.913 0.05 11 75 0.58 null
+sphere 752 15 -978  15  CrissCross 0.445 0.669 0.915 0.08 0.284 0.013 0.659 0.267 0.5 3 141 0.63 NormalMap 17.04 1.18625
+sphere 749 18 -930  18  Checkerboard 0.327 0.532 0.038 0.201 0.316 0.827 14 5 0.4 NormalMap 9.24 0.30125
+sphere 741 20 -903  20  Turbulence 0.731 0.483 0.539 0.582 0.432 0.274 19 34 0.59 NormalMap 7.02 0.2075
+sphere 736 19 -828  19  Checkerboard 0.298 0.788 0.178 0.759 0.029 0.249 7 85 0.23 null
+sphere 727 23 -757  23  CrissCross 0.461 0.019 0.395 0.628 0.985 0.785 0.997 0.265 1 1 86 0.55 NormalMap 6.46 1.02125
+sphere 736 21 -688  21  ShinyColor 0.72 0.699 0.935 121 0.07 NormalMap 9.18 1.1675
+sphere 755 15 -632  15  ShinyColor 0.374 0.995 0.047 26 0.7 NormalMap 3.18 0.01
+sphere 731 25 -575  25  Turbulence 0.431 0.95 0.854 0.129 0.885 0.652 5 27 0.07 NormalMap 1.44 0.1925
+sphere 731 19 -515  19  CrissCross 0.43 0.456 0.778 0.635 0.655 0.541 0.286 0.478 0.675 15 66 0.37 null
+sphere 739 15 -476  15  CrissCross 0.898 0.418 0.929 0.572 0.84 0.509 0.404 0.269 0.965 4 136 0.43 null
+sphere 753 19 -429  19  Turbulence 0.833 0.313 0.397 0.072 0.863 0.842 10 128 0.35 NormalMap 5.36 0.54125
+sphere 754 16 -368  16  Turbulence 0.526 0.233 0.472 0.623 0.631 0.38 3 85 0.09 null
+sphere 726 18 -311  18  ShinyColor 0.903 0.495 0.007 63 0.6 NormalMap 16.82 0.96375
+sphere 728 23 -238  23  Glass 1.08 127 null
+sphere 755 24 -203  24  ShinyColor 0.969 0.696 0.994 42 0.53 NormalMap 8.48 0.825
+sphere 727 19 -131  19  Glass 0.435 105 NormalMap 16.9 0.475
+sphere 743 24 -56  24  Glass 1.42 65 NormalMap 6.2 0.48625
+sphere 745 18 15  18  Checkerboard 0.32 0.866 0.508 0.387 0.241 0.213 6 60 0.21 null
+sphere 740 19 39  19  Checkerboard 0.422 0.394 0.365 0.706 0.815 0.572 1 33 0.33 NormalMap 17.14 0.16875
+sphere 739 25 114  25  Marble 0.148 0.955 0.124 0.783 0.099 0.489 6 21 0.31 NormalMap 11 1.05625
+sphere 745 17 181  17  CrissCross 0.242 0.653 0.466 0.763 0.094 0.309 0.523 0.749 0.447 14 107 0.4 NormalMap 16.06 0.075
+sphere 740 25 234  25  Glass 3.675 5 NormalMap 0.1 1.095
+sphere 743 21 293  21  Marble 0.082 0.119 0.089 0.53 0.791 0.793 3 39 0.42 NormalMap 19.46 0.6575
+sphere 725 16 346  16  Glass 3.02 113 null
+sphere 731 20 398  20  Turbulence 0.062 0.886 0.192 0.592 0.677 0.986 14 139 0.41 null
+sphere 726 20 441  20  CrissCross 0.517 0.744 0.933 0.03 0.951 0.102 0.791 0.931 0.869 18 149 0.53 NormalMap 11.7 0.53875
+sphere 735 18 502  18  ShinyColor 0.247 0.758 0.659 48 0.61 NormalMap 10.92 0.905
+sphere 734 19 555  19  ShinyColor 0.252 0.36 0.083 55 0.1 NormalMap 4.48 0.055
+sphere 728 25 604  25  Checkerboard 0.868 0.763 0.85 0.999 0.009 0.608 14 49 0.33 null
+sphere 732 22 654  22  ShinyColor 0.381 0.775 0.374 71 0.09 null
+sphere 740 21 702  21  Checkerboard 0.741 0.897 0.944 0.503 0.747 0.942 11 55 0.42 null
+sphere 726 22 752  22  Glass 1.585 52 null
+sphere 733 15 830  15  Glass 1.685 124 null
+sphere 755 19 885  19  Marble 0.778 0.417 0.205 0.934 0.352 0.764 3 101 0.06 null
+sphere 747 22 932  22  Marble 0.407 0.927 0.043 0.797 0.907 0.751 14 38 0.04 NormalMap 8.26 1.045
+sphere 792 23 -994  23  Marble 0.036 0.24 0.027 0.409 0.597 0.484 19 45 0.54 NormalMap 4.34 1.0075
+sphere 803 16 -932  16  Marble 0.108 0.396 0.218 0.307 0.779 0.092 4 40 0.43 NormalMap 5.86 1.06875
+sphere 800 22 -904  22  CrissCross 0.099 0.081 0.125 0.932 0.447 0.739 0.194 0.225 0.188 7 95 0.28 null
+sphere 806 23 -843  23  CrissCross 0.792 0.283 0.162 0.555 0.25 0.12 0.124 0.35 0.201 5 44 0.46 null
+sphere 810 16 -761  16  Turbulence 0.172 0.554 0.196 0.446 0.503 0.165 5 26 0.41 NormalMap 8.8 0.93625
+sphere 812 22 -701  22  ShinyColor 0.07 0.958 0.322 109 0.67 null
+sphere 788 21 -654  21  Turbulence 0.539 0.988 0.583 0.042 0.152 0.82 4 112 0.6 null
+sphere 797 18 -616  18  Glass 3.455 24 NormalMap 9.78 0.92375
+sphere 811 15 -549  15  ShinyColor 0.815 0.668 0.167 55 0.46 null
+sphere 804 21 -500  21  Glass 4.265 85 NormalMap 19.88 1.16
+sphere 805 16 -421  16  ShinyColor 0.105 0.702 0.309 28 0.37 NormalMap 4.02 0.43125
+sphere 807 19 -373  19  ShinyColor 0.094 0.318 0.689 104 0.61 NormalMap 18.42 1.12375
+sphere 794 20 -291  20  Checkerboard 0.047 0.025 0.069 0.186 0.131 0.771 10 47 0.21 null
+sphere 813 20 -250  20  ShinyColor 0.99 0.438 0.363 103 0.09 NormalMap 15.74 0.06
+sphere 802 23 -203  23  CrissCross 0.935 0.093 0.362 0.429 0.395 0.663 0.11 0.899 0.309 13 116 0.46 null
+sphere 799 15 -162  15  CrissCross 0.824 0.673 0.733 0.346 0.42 0.696 0.938 0.354 0.789 6 119 0.13 null
+sphere 802 17 -103  17  Turbulence 0.285 0.049 0.234 0.567 0.273 0.502 20 39 0.21 null
+sphere 796 16 -68  16  ShinyColor 0.693 0.516 0.382 73 0.49 NormalMap 7.42 0.97875
+sphere 805 25 -19  25  ShinyColor 0.246 0.556 0.427 46 0.56 null
+sphere 811 25 38  25  Marble 0.349 0.995 0.763 0.866 0.377 0.239 12 109 0.43 NormalMap 6.74 0.65125
+sphere 806 24 102  24  Checkerboard 0.526 0.222 0.083 0.094 0.514 0.052 19 18 0.58 null
+sphere 788 22 184  22  Glass 3.565 78 null
+sphere 812 16 256  16  ShinyColor 0.507 0.071 0.469 91 0.42 null
+sphere 808 17 306  17  Glass 0.195 45 null
+sphere 787 19 330  19  ShinyColor 0.564 0.939 0.457 65 0.07 NormalMap 5.22 0.17125
+sphere 804 18 403  18  Glass 3.1 77 null
+sphere 800 19 480  19  CrissCross 0.78 0.966 0.589 0.719 0.423 0.008 0.82 0.725 0.269 20 81 0.42 null
+sphere 786 24 514  24  Turbulence 0.212 0.826 0.037 0.867 0.233 0.006 11 12 0.02 NormalMap 0.62 0.775
+sphere 805 19 582  19  Marble 0.373 0.648 0.029 0.236 0.671 0.178 13 78 0.38 null
+sphere 804 24 625  24  Checkerboard 0.67 0.863 0.436 0.7 0.483 0.468 4 19 0.22 NormalMap 0.18 0.15875
+sphere 801 20 675  20  Marble 0.873 0.261 0.13 0.596 0.633 0.956 4 38 0.55 NormalMap 18.16 0.81375
+sphere 790 21 723  21  Turbulence 0.253 0.661 0.137 0.762 0.162 0.828 6 136 0.13 NormalMap 4.82 0.0775
+sphere 806 19 795  19  Glass 0.575 26 NormalMap 15.32 1.1275
+sphere 789 24 840  24  ShinyColor 0.65 0.519 0.397 49 0.46 NormalMap 9.48 0.605
+sphere 806 19 900  19  Marble 0.656 0.31 0.239 0.803 0.425 0.394 18 31 0.21 null
+sphere 793 25 939  25  Turbulence 0.79 0.847 0.603 0.247 0.219 0.276 15 126 0 NormalMap 16.32 0.50625
+sphere 864 22 -988  22  ShinyColor 0.782 0.742 0.335 47 0.59 null
+sphere 857 23 -939  23  Turbulence 0.428 0.735 0.249 0.705 0.454 0.08 15 139 0.63 NormalMap 0.86 0.0275
+sphere 853 25 -869  25  Glass 0.245 24 null
+sphere 836 22 -812  22  Marble 0.133 0.156 0.96 0.587 0.237 0.675 11 22 0.56 null
+sphere 858 20 -769  20  Checkerboard 0.499 0.313 0.191 0.384 0.607 0.404 2 92 0.22 null
+sphere 857 24 -692  24  ShinyColor 0.648 0.433 0.259 50 0.66 NormalMap 2.38 0.61125
+sphere 836 22 -649  22  ShinyColor 0.269 0.324 0.54 89 0.36 null
+sphere 860 15 -580  15  CrissCross 0.848 0.567 0.224 0.107 0.891 0.163 0.501 0.008 0.653 2 104 0.46 NormalMap 14.54 1.16
+sphere 851 17 -527  17  Glass 0.97 76 NormalMap 3.08 0.905
+sphere 855 25 -485  25  Marble 0.446 0.435 0.108 0.098 0.486 0.795 16 123 0.37 null
+sphere 855 17 -387  17  Glass 1.935 10 NormalMap 2.2 0.3925
+sphere 847 23 -366  23  Glass 0.305 17 null
+sphere 865 25 -291  25  Turbulence 0.274 0.835 0.914 0.252 0.727 0.64 9 19 0.48 null
+sphere 866 15 -262  15  Glass 1.28 150 NormalMap 15.18 0.20875
+sphere 840 23 -219  23  CrissCross 0.74 0.142 0.484 0.379 0.567 0.598 0.066 0.317 0.822 2 58 0.56 NormalMap 11.22 0.9175
+sphere 858 23 -151  23  Turbulence 0.029 0.205 0.873 0.646 0.128 0.699 11 134 0.31 null
+sphere 865 17 -74  17  CrissCross 0.495 0.319 0.864 0.311 0.05 0.461 0.886 0.95 0.385 5 147 0.41 NormalMap 12.5 0.89875
+sphere 854 16 -34  16  Glass 0.425 142 null
+sphere 853 24 28  24  Checkerboard 0.634 0.125 0.387 0.685 0.586 0.273 13 146 0.34 null
+sphere 844 17 91  17  Turbulence 0.857 0.587 0.32 0.797 0.503 0.967 11 57 0.38 null
+sphere 859 20 138  20  ShinyColor 0.344 0.283 0.794 49 0.54 NormalMap 17.54 0.4025
+sphere 856 16 199  16  ShinyColor 0.213 0.277 0.895 121 0.42 null
+sphere 856 17 255  17  ShinyColor 0.307 0.735 0.534 12 0.52 null
+sphere 858 20 315  20  Glass 2.685 114 null
+sphere 862 25 377  25  Turbulence 0.017 0.6 0.762 0.128 0.659 0.068 18 31 0.09 null
+sphere 847 21 426  21  CrissCross 0.313 0.378 0.418 0.298 0.233 0.108 0.083 0.686 0.49 4 107 0.06 null
+sphere 857 15 511  15  ShinyColor 0.303 0.825 0.677 142 0.13 null
+sphere 864 23 540  23  CrissCross 0.961 0.602 0.56 0.451 0.773 0.263 0.54 0.705 0.095 6 107 0.56 NormalMap 16.78 0.1175
+sphere 837 20 585  20  Turbulence 0.308 0.974 0.705 0.529 0.614 0.558 1 75 0.36 null
+sphere 845 19 663  19  ShinyColor 0.408 0.797 0.832 32 0.01 null
+sphere 846 17 701  17  Glass 4.575 8 NormalMap 12.4 0.70625
+sphere 855 16 751  16  Glass 3.34 104 NormalMap 3.54 1.01625
+sphere 855 25 813  25  Turbulence 0.499 0.699 0.399 0.143 0.426 0.434 2 71 0.31 null
+sphere 855 24 864  24  Turbulence 0.59 0.811 0.397 0.403 0.692 0.371 1 117 0.26 NormalMap 2.88 0.55375
+sphere 862 24 929  24  Glass 3.655 109 null
+sphere 928 19 -1001  19  Marble 0.768 0.297 0.802 0.139 0.344 0.573 11 107 0.5 null
+sphere 916 23 -923  23  ShinyColor 0.632 0.557 0.789 58 0.22 null
+sphere 902 20 -883  20  Marble 0.209 0.749 0.397 0.553 0.322 0.905 6 8 0.6 null
+sphere 912 19 -801  19  ShinyColor 0.981 0.506 0.398 46 0.05 NormalMap 0.22 0.77125
+sphere 913 15 -738  15  Glass 0.755 24 null
+sphere 928 20 -703  20  Glass 0.195 29 null
+sphere 907 20 -653  20  CrissCross 0.846 0.411 0.434 0.787 0.81 0.668 0.938 0.958 0.299 13 66 0.59 null
+sphere 900 19 -615  19  Glass 3.87 14 NormalMap 7.56 1.105
+sphere 920 18 -547  18  Turbulence 0.332 0.801 0.909 0.269 0.758 0.207 19 30 0.02 null
+sphere 903 24 -501  24  Turbulence 0.806 0.827 0.62 0.689 0.448 0.969 8 7 0.55 null
+sphere 924 17 -443  17  Glass 2.24 115 NormalMap 19.22 1.10125
+sphere 900 24 -391  24  CrissCross 0.194 0.262 0.788 0.163 0.652 0.816 0.939 0.587 0.834 20 129 0.46 null
+sphere 925 15 -338  15  CrissCross 0.585 0.994 0.68 0.098 0.568 0.252 0.438 0.763 0.515 5 140 0.11 NormalMap 17.3 0.9425
+sphere 917 23 -290  23  CrissCross 0.882 0.639 0.62 0.499 0.301 0.532 0.084 0.294 0.211 4 130 0.32 null
+sphere 916 24 -229  24  Marble 0.506 0.293 0.927 0.506 0.05 0.628 7 121 0.36 null
+sphere 928 18 -185  18  Checkerboard 0.275 0.442 0.625 0.896 0.067 0.603 15 94 0.53 null
+sphere 907 19 -125  19  Checkerboard 0.659 0.739 0.823 0.003 0.537 0.332 20 144 0.24 NormalMap 18.12 0.5425
+sphere 920 15 -55  15  Turbulence 0.347 0.98 0.043 0.979 0.013 0.691 8 44 0.59 NormalMap 9.54 0.62625
+sphere 914 18 6  18  CrissCross 0.407 0.613 0.267 0.116 0.906 0.96 0.722 0.265 0.255 2 39 0.21 NormalMap 5.18 1.2375
+sphere 924 20 63  20  ShinyColor 0.333 0.286 0.315 127 0.44 null
+sphere 901 25 119  25  CrissCross 0.165 0.875 0.602 0.234 0.119 0.901 0.282 0.377 0.891 15 138 0.51 NormalMap 18.66 0.06875
+sphere 926 17 179  17  Glass 0.57 49 NormalMap 8.82 0.0225
+sphere 918 24 257  24  ShinyColor 0.502 0.479 0.283 94 0.26 null
+sphere 927 17 313  17  Glass 4.67 17 null
+sphere 900 16 342  16  Checkerboard 0.845 0.497 0.728 0.729 0.124 0.604 16 95 0.05 NormalMap 4.96 0.57875
+sphere 921 17 413  17  ShinyColor 0.725 0.352 0.008 117 0.2 NormalMap 14.32 0.40125
+sphere 910 24 460  24  Marble 0.37 0.98 0.908 0.147 0.606 0.991 5 129 0.32 null
+sphere 907 23 515  23  ShinyColor 0.27 0.685 0.366 58 0.28 null
+sphere 916 15 559  15  CrissCross 0.854 0.724 0.079 0.845 0.933 0.934 0.298 0.767 0.033 10 76 0.2 NormalMap 11.5 0.70625
+sphere 928 25 593  25  Marble 0.4 0.336 0.478 0.894 0.282 0.054 8 23 0.55 NormalMap 19.62 0.89
+sphere 913 18 649  18  Turbulence 0.547 0.272 0.239 0.488 0.211 0.721 3 138 0.34 null
+sphere 919 16 726  16  Glass 2.83 77 null
+sphere 924 25 767  25  Turbulence 0.744 0.21 0.362 0.984 0.698 0.574 15 123 0.34 NormalMap 12.5 0.85375
+sphere 909 23 820  23  Checkerboard 0.987 0.768 0.577 0.576 0.313 0.791 11 23 0.34 null
+sphere 913 15 854  15  Glass 4.77 25 null
+sphere 902 20 901  20  CrissCross 0.234 0.13 0.816 0.547 0.922 0.36 0.684 0.403 0.286 9 84 0.21 null
+sphere 928 18 969  18  Glass 4.07 50 NormalMap 4.46 0.73
+sphere 959 15 -983  15  Marble 0.89 0.515 0.699 0.176 0.921 0.247 10 120 0.1 NormalMap 2.26 0.135
+sphere 980 21 -918  21  Glass 3.12 126 null
+sphere 977 15 -872  15  Glass 3.47 37 null
+sphere 971 19 -802  19  Glass 1.725 136 null
+sphere 962 22 -762  22  Marble 0.811 0.616 0.866 0.983 0.013 0.208 20 107 0.31 null
+sphere 974 25 -674  25  Marble 0.635 0.452 0.267 0.361 0.784 0.355 4 112 0.19 null
+sphere 972 19 -645  19  Glass 0.525 48 null
+sphere 981 20 -575  20  Turbulence 0.909 0.316 0.655 0.176 0.677 0.439 11 129 0.12 null
+sphere 952 24 -513  24  Turbulence 0.506 0.806 0.594 0.711 0.962 0.101 14 129 0.55 NormalMap 10.74 1.23625
+sphere 971 24 -479  24  Checkerboard 0.748 0.381 0.261 0.558 0.001 0.233 10 3 0.61 NormalMap 8.16 0.45375
+sphere 957 25 -425  25  Checkerboard 0.154 0.278 0.987 0.939 0.411 0.522 19 69 0.26 null
+sphere 964 22 -345  22  Turbulence 0.432 0.291 0.01 0.861 0.698 0.374 7 93 0.38 NormalMap 4.7 0.8425
+sphere 972 20 -280  20  Checkerboard 0.391 0.376 0.557 0.961 0.045 0.459 13 71 0.52 null
+sphere 979 22 -243  22  Glass 0.28 10 null
+sphere 960 24 -167  24  Turbulence 0.113 0.807 0.677 0.67 0.768 0.723 3 59 0.13 null
+sphere 969 24 -117  24  Glass 1.2 49 NormalMap 17.38 1.14125
+sphere 957 23 -46  23  ShinyColor 0.116 0.068 0.408 37 0.62 NormalMap 18.02 0.80375
+sphere 952 15 32  15  CrissCross 0.026 0.765 0.341 0.266 0.078 0.621 0.134 0.992 0.325 18 29 0.69 null
+sphere 968 19 68  19  Turbulence 0.451 0.588 0.265 0.354 0.516 0.883 4 6 0.7 NormalMap 15.74 0.4225
+sphere 981 24 112  24  Turbulence 0.262 0.424 0.324 0.31 0.805 0.846 5 42 0.19 null
+sphere 977 19 162  19  Glass 4.625 104 NormalMap 14.22 0.03125
+sphere 982 21 240  21  CrissCross 0.79 0.841 0.135 0.636 0.073 0.405 0.904 0.871 0.948 13 40 0.53 null
+sphere 954 25 285  25  Glass 1.105 57 NormalMap 13.54 1.00375
+sphere 960 21 368  21  Checkerboard 0.784 0.05 0.694 0.858 0.456 0.598 15 62 0.15 null
+sphere 970 16 434  16  Glass 0.105 136 NormalMap 7.82 0.055
+sphere 966 17 469  17  Marble 0.644 0.213 0.042 0.099 0.811 0.77 11 7 0.53 null
+sphere 976 17 516  17  ShinyColor 0.996 0.145 0.908 64 0.38 null
+sphere 957 19 578  19  Marble 0.921 0.036 0.524 0.732 0.807 0.027 16 86 0.48 null
+sphere 970 20 670  20  Marble 0.826 0.43 0.994 0.235 0.617 0.182 1 61 0.63 NormalMap 16.44 1.0125
+sphere 968 18 712  18  Turbulence 0.019 0.904 0.02 0.532 0.488 0.987 1 35 0.61 null
+sphere 966 19 772  19  ShinyColor 0.66 0.967 0.407 84 0 NormalMap 7.18 0.1
+sphere 981 24 830  24  Glass 1.12 48 NormalMap 15.12 0.99875
+sphere 952 23 874  23  Turbulence 0.979 0.485 0.162 0.638 0.451 0.57 4 70 0.56 null
+sphere 967 19 911  19  Marble 0.358 0.63 0.016 0.374 0.426 0.033 6 30 0.37 null
+sphere 967 18 961  18  Checkerboard 0.337 0.207 0.868 0.883 0.745 0.239 7 39 0.39 null
