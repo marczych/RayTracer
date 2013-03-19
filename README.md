@@ -96,6 +96,8 @@ The images below were rendered by casting hundreds of rays per pixel to reduce t
 
 ## Final Renders
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsInAPit_2_60_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsInAPit_2_60.jpg)
+[<img src="https://raw.github.com/marczych/RayTracer/master/samples/texturesInYoFace_3_1_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/texturesInYoFace_3_1.jpg)
+[<img src="https://raw.github.com/marczych/RayTracer/master/samples/tumbledStones_3_1_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/tumbledStones_3_1.jpg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlaneClose_3_1_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlaneClose_3_1.jpeg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlane_2_50_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlane_2_50.jpeg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/triangleSpheres_4_300_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/triangleSpheres_4_300.jpeg)
