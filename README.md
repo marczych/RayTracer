@@ -95,9 +95,20 @@ The images below were rendered by casting hundreds of rays per pixel to reduce t
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/lineFar_4_300_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/lineFar_4_300.jpeg)
 
 ## Final Renders
+__Note:__ Images rendered on a 4-core machine using OpenMP.
+
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsInAPit_2_60_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsInAPit_2_60.jpg)
+
+1,665,574,078 rays in 1121m33.392s (2x super sampling and 60 rays per pixel for depth of field)
+
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/texturesInYoFace_3_1_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/texturesInYoFace_3_1.jpg)
+
+66,818,420 rays in 8m14.464s (3x super sampling)
+
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/tumbledStones_3_1_thumb.jpg" />](https://raw.github.com/marczych/RayTracer/master/samples/tumbledStones_3_1.jpg)
+
+104,733,878 rays in 11m58.162s (3x super sampling)
+
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlaneClose_3_1_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlaneClose_3_1.jpeg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlane_2_50_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/ballsOnAPlane_2_50.jpeg)
 [<img src="https://raw.github.com/marczych/RayTracer/master/samples/triangleSpheres_4_300_thumb.jpeg" />](https://raw.github.com/marczych/RayTracer/master/samples/triangleSpheres_4_300.jpeg)
