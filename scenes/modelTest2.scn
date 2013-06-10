@@ -1,0 +1,15 @@
+dispersion 5.0
+maxReflections 20
+
+cameraPosition 0 0 700.0
+cameraUp 0 1 0
+cameraLookAt 0 0 0
+cameraScreenWidth 1920
+
+light 0 100 100 .5
+
+sphere -200 -25  0  100  ShinyColor 1 0 0  100  0.75 null
+sphere  200 -25  0  100  ShinyColor 0 1 0  100  0.75 null
+sphere  0   300  0  100  ShinyColor 0 0 1  100  0.75 null
+sphere 0 0 0 125
+        ShinyColor .8 .8 .8 50  0.75 null

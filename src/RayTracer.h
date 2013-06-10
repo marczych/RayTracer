@@ -8,6 +8,10 @@
 #include "Vector.h"
 #include "Camera.h"
 
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+
 class Ray;
 class Color;
 class Intersection;
@@ -47,6 +51,7 @@ public:
 
    void traceRays(std::string);
    void readScene(std::istream&);
+   void readModel(std::string, int size, Vector translate, Material* material);
 
 private:
    Color castRayForPixel(int, int);
