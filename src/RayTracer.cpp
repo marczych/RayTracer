@@ -132,18 +132,14 @@ Color RayTracer::castRay(const Ray& ray) {
  * intersection closer to the given light distance is found.
  */
 bool RayTracer::isInShadow(const Ray& ray, double lightDistance) {
-   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
-      Intersection intersection = (*itr)->intersect(ray);
+   Intersection intersection = getClosestIntersection(ray);
 
-      if (intersection.didIntersect && intersection.distance < lightDistance) {
-         return true;
-      }
-   }
-
-   return false;
+   return (intersection.didIntersect && intersection.distance < lightDistance);
 }
 
 Intersection RayTracer::getClosestIntersection(const Ray& ray) {
+   return bsp->getClosestIntersection(ray);
+/*
    Intersection closestIntersection(false);
    closestIntersection.distance = numeric_limits<double>::max();
 
@@ -157,6 +153,7 @@ Intersection RayTracer::getClosestIntersection(const Ray& ray) {
    }
 
    return closestIntersection;
+*/
 }
 
 Color RayTracer::performLighting(const Intersection& intersection) {

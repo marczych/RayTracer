@@ -2,6 +2,7 @@
 #define __BSP_H__
 
 #include <math.h>
+#include <limits>
 #include "Vector.h"
 #include <vector>
 #include "Ray.h"
@@ -39,7 +40,8 @@ public:
    }
 
    void build();
-   Intersection getClosestIntersection(Ray ray);
+   bool intersectAABB(const Ray&, Boundaries, double*);
+   Intersection getClosestIntersection(const Ray&);
 };
 
 #endif

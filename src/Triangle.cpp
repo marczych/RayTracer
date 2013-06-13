@@ -40,7 +40,7 @@ Intersection Triangle::intersect(Ray ray) {
     return Intersection(ray, point, distance, normal, ray.material, material, this);
   }
 
-  //Line Intersection, Not Ray
+  // Line Intersection, Not Ray
   else
      return Intersection(false);
 }
