@@ -2,6 +2,7 @@
 #define __OBJECT_H__
 
 class Intersection;
+class Boundaries;
 class Ray;
 
 /**
@@ -10,6 +11,7 @@ class Ray;
 class Object {
 public:
    virtual Intersection intersect(Ray) = 0;
+   virtual Boundaries getBounds() = 0;
 };
 
 #endif

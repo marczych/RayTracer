@@ -19,6 +19,7 @@ class Object;
 class Light;
 class Material;
 class NormalMap;
+class BSP;
 
 class RayTracer {
 public:
@@ -32,6 +33,7 @@ public:
    double dispersion;
    unsigned long long raysCast;
    Material* startingMaterial;
+   BSP* bsp;
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;

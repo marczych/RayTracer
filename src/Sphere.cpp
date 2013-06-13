@@ -52,3 +52,7 @@ Intersection Sphere::intersect(Ray ray) {
 
    return Intersection(ray, point, distance, normal, ray.material, material, this);
 }
+
+Boundaries Sphere::getBounds() {
+   return bounds;
+}

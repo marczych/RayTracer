@@ -44,3 +44,7 @@ Intersection Triangle::intersect(Ray ray) {
   else
      return Intersection(false);
 }
+
+Boundaries Triangle::getBounds() {
+   return bounds;
+}

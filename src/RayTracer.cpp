@@ -16,6 +16,7 @@
 #include "NormalMap.h"
 #include "Turbulence.h"
 #include "CrissCross.h"
+#include "BSP.h"
 
 using namespace std;
 
@@ -408,6 +409,9 @@ void RayTracer::readScene(istream& in) {
 
       in >> type;
    }
+
+   bsp = new BSP(0, 'x', objects);
+   cout << "\nDONE\n";
 }
 
 void RayTracer::readModel(string model, int size, Vector translate, Material* material) {
