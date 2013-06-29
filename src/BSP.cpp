@@ -3,15 +3,10 @@
 using namespace std;
 
 void BSP::build() {
-   // Wraps bound around current objects
-   // Always wrap = tighter fits
-   printf("Depth:%d------", depth);
-   for (int i = 0; i < depth; i++)
-      printf("------");
-   printf("Objects = %d\n\n", (int)objects.size());
-
-   if (objects.size() <= 20)
+   // We're hit our limit. This is a leaf node.
+   if (objects.size() <= MIN_OBJECT_COUNT) {
       return;
+   }
 
    // Make sure all objects are properly wrapped
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
@@ -61,19 +56,22 @@ void BSP::build() {
 
    int newAxis = axis == 'x' ? 'y' : (axis == 'y' ? 'z' : 'x');
 
-   // Murder the children who don't have healthy siblings.
    if (leftObjects.size() != objects.size() &&
        rightObjects.size() != objects.size()) {
-      Left = new BSP(depth + 1, newAxis, leftObjects);
-      Right = new BSP(depth + 1, newAxis, rightObjects);
+      // Since this split separated geometry a little bit, make children to
+      // split up geometry further.
+      left = new BSP(depth + 1, newAxis, leftObjects);
+      right = new BSP(depth + 1, newAxis, rightObjects);
    } else {
-      // To indicate dead end and use parents' objects
-      Left = Right = NULL;
+      // Splitting objects on this axis didn't achieve anything.
+      // TODO: Try another dimension.
+      left = right = NULL;
    }
 }
 
-// Given a ray a bounding box, determine whether the ray intersects
-// Fuck all this logic, visit Graveyard.cpp to see some of my agony
+/**
+ * Given a ray and an axis aligned bounding box, determine whether the ray intersects.
+ */
 bool BSP::intersectAABB(const Ray& ray, Boundaries bounds, double* dist) {
    double txmin = (bounds.min.x - ray.origin.x) / ray.direction.x;
    double txmax = (bounds.max.x - ray.origin.x) / ray.direction.x;
@@ -96,7 +94,6 @@ bool BSP::intersectAABB(const Ray& ray, Boundaries bounds, double* dist) {
 
    double tzmin = (bounds.min.z - ray.origin.z) / ray.direction.z;
    double tzmax = (bounds.max.z - ray.origin.z) / ray.direction.z;
-
    if (tzmin > tzmax)
       swap(tzmin, tzmax);
 
@@ -114,9 +111,9 @@ bool BSP::intersectAABB(const Ray& ray, Boundaries bounds, double* dist) {
 
    // Return distance to intersection for tie-breakers
    Vector distV = Vector(txmin, tymin, tzmin) - ray.origin;
-   double newDist = sqrt(pow(distV.x, 2) +
-                         pow(distV.y, 2) +
-                         pow(distV.z, 2));
+   double newDist = sqrt(distV.x * distV.x +
+                         distV.y * distV.y +
+                         distV.z * distV.z);
    *dist = newDist;
    return true;
 }
@@ -125,32 +122,29 @@ Intersection BSP::getClosestIntersection(const Ray& ray) {
    double distL, distR;
    bool intersectL = false, intersectR = false;
 
-   if (Left && Right) {
+   if (left && right) {
       // There are children! See if they block the ray
-      intersectL = intersectAABB(ray, Left->bounds, &distL);
-      intersectR = intersectAABB(ray, Right->bounds, &distR);
-
+      intersectL = intersectAABB(ray, left->bounds, &distL);
+      intersectR = intersectAABB(ray, right->bounds, &distR);
 
       // If both hit, follow nearest match
       if (intersectL && intersectR) {
          if (distL < distR) {
-            return (*Left).getClosestIntersection(ray);
+            return (*left).getClosestIntersection(ray);
          }
-         return (*Right).getClosestIntersection(ray);
+         return (*right).getClosestIntersection(ray);
       }
 
       if (intersectL) {
-         return (*Left).getClosestIntersection(ray);
+         return (*left).getClosestIntersection(ray);
       }
 
       if (intersectR) {
-         return (*Right).getClosestIntersection(ray);
+         return (*right).getClosestIntersection(ray);
       }
    }
 
-   // No Children. Objects were not divided
-   // if (depth > 1)
-   //    printf("Done At level: %d, Size: %d\n", depth, (int)objects.size());
+   // No children so just go through current objects like normal.
    Intersection closestIntersection(false);
    closestIntersection.distance = numeric_limits<double>::max();
 
@@ -158,9 +152,10 @@ Intersection BSP::getClosestIntersection(const Ray& ray) {
       Intersection intersection = (*itr)->intersect(ray);
 
       if (intersection.didIntersect && intersection.distance <
-            closestIntersection.distance) {
+       closestIntersection.distance) {
          closestIntersection = intersection;
       }
    }
+
    return closestIntersection;
 }

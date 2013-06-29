@@ -10,17 +10,21 @@
 #include "Intersection.h"
 #include "Boundaries.h"
 
-using namespace std;
+#define MIN_OBJECT_COUNT 20
 
 class BSP {
-
-public:
+private:
    int depth;
    char axis;
    Boundaries bounds;
    vector<Object*> objects;
-   BSP* Left;
-   BSP* Right;
+   BSP* left;
+   BSP* right;
+
+   bool intersectAABB(const Ray&, Boundaries, double*);
+   void build();
+
+public:
 
    BSP(vector<Object*> objects_) : objects(objects_) { }
 
@@ -29,18 +33,15 @@ public:
       build();
    }
 
-
    virtual ~BSP() {
-      if (Left) {
-         delete Left;
+      if (left) {
+         delete left;
       }
-      if (Right) {
-         delete Right;
+      if (right) {
+         delete right;
       }
    }
 
-   void build();
-   bool intersectAABB(const Ray&, Boundaries, double*);
    Intersection getClosestIntersection(const Ray&);
 };
 
