@@ -127,33 +127,15 @@ Color RayTracer::castRay(const Ray& ray) {
    }
 }
 
-/**
- * Basically same code as getClosestIntersection but short circuits if an
- * intersection closer to the given light distance is found.
- */
 bool RayTracer::isInShadow(const Ray& ray, double lightDistance) {
    Intersection intersection = getClosestIntersection(ray);
 
-   return (intersection.didIntersect && intersection.distance < lightDistance);
+   return intersection.didIntersect && intersection.distance < lightDistance;
 }
 
 Intersection RayTracer::getClosestIntersection(const Ray& ray) {
+   // Merely use the BSP for intersections.
    return bsp->getClosestIntersection(ray);
-/*
-   Intersection closestIntersection(false);
-   closestIntersection.distance = numeric_limits<double>::max();
-
-   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
-      Intersection intersection = (*itr)->intersect(ray);
-
-      if (intersection.didIntersect && intersection.distance <
-       closestIntersection.distance) {
-         closestIntersection = intersection;
-      }
-   }
-
-   return closestIntersection;
-*/
 }
 
 Color RayTracer::performLighting(const Intersection& intersection) {
@@ -407,8 +389,8 @@ void RayTracer::readScene(istream& in) {
       in >> type;
    }
 
+   // Construct the top level BSP that contains all the objects..
    bsp = new BSP(0, 'x', objects);
-   cout << "\nDONE\n";
 }
 
 void RayTracer::readModel(string model, int size, Vector translate, Material* material) {
@@ -424,7 +406,7 @@ void RayTracer::readModel(string model, int size, Vector translate, Material* ma
    in.open(model.c_str(), ifstream::in);
 
    if (in.fail()) {
-      cerr << "Failed opening file" << endl;
+      cerr << "Failed opening model file" << endl;
       exit(EXIT_FAILURE);
    }
 
@@ -447,25 +429,22 @@ void RayTracer::readModel(string model, int size, Vector translate, Material* ma
 
          vertices.push_back(v);
       } else if (type.compare("Face") == 0) {
+         // We are guaranteed to have all Vertices before Faces so we set this
+         // once for the first Face.
          if (scale == 0.0) {
             offX = (maxX + minX) / 2;
             offY = (maxY + minY) / 2;
             offZ = (maxZ + minZ) / 2;
             centerOffset = Vector(offX, offY, offZ);
 
-            double distance = sqrt(pow((maxX - minX), 2) +
-                                   pow((maxY - minY), 2) +
-                                   pow((maxZ - minZ), 2));
+            double distance = sqrt((maxX - minX) * (maxX - minX) +
+                                   (maxY - minY) * (maxY - minY) +
+                                   (maxZ - minZ) * (maxZ - minZ));
 
             if (distance == 0.0)
                exit(EXIT_FAILURE);
 
             scale = size / distance;
-
-            printf("\n\nMin X: %f, Y: %f, Z: %f\n", minX, minY, minZ);
-            printf("Max X: %f, Y: %f, Z: %f\n", maxX, maxY, maxZ);
-            printf("Diff (%f, %f, %f) Scale %f\n", offX, offY, offZ, scale);
-            printf("Distance: %f\n", distance);
          }
 
          int face, v0, v1, v2;
@@ -484,8 +463,6 @@ void RayTracer::readModel(string model, int size, Vector translate, Material* ma
 
    in.close();
 }
-
-
 
 /**
  * Parses the input stream and makes a new Material.

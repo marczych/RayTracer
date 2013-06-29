@@ -5,12 +5,9 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <fstream>
 #include "Vector.h"
 #include "Camera.h"
-
-#include <iostream>
-#include <fstream>
-#include <algorithm>
 
 class Ray;
 class Color;
