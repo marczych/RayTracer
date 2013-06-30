@@ -7,15 +7,11 @@
 #include "Ray.h"
 #include "Intersection.h"
 #include "Object.h"
-#include "PerlinNoise.h"
 #include "Boundaries.h"
 
 class Material;
 
 class Triangle : public Object {
-private:
-   PerlinNoise perlin;
-
 public:
    Vector v0, v1, v2;
    Material* material;
