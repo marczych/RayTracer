@@ -1,4 +1,7 @@
 #include "BSP.h"
+#include <limits>
+#include "Object.h"
+#include "Intersection.h"
 
 using namespace std;
 

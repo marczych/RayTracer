@@ -1,10 +1,7 @@
 #ifndef __BOUNDARIES_H__
 #define __BOUNDARIES_H__
 
-#include <math.h>
 #include "Vector.h"
-
-using namespace std;
 
 class Boundaries {
 public:

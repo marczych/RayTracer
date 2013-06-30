@@ -1,9 +1,10 @@
 #ifndef __RAY_H__
 #define __RAY_H__
 
+#include <stdlib.h>
 #include "Vector.h"
-#include "Material.h"
-#include <cstddef>
+
+class Material;
 
 class Ray {
 public:

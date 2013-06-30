@@ -1,7 +1,6 @@
 #ifndef __INTERSECTION_H__
 #define __INTERSECTION_H__
 
-#include <stdlib.h>
 #include "Vector.h"
 #include "Object.h"
 #include "Color.h"

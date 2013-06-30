@@ -7,6 +7,9 @@
 #define AIR_REFRACTIVE_INDEX 1
 
 #include <stdlib.h>
+#include <iostream>
+#include "Color.h"
+#include "PerlinNoise.h"
 
 class Vector;
 class Color;

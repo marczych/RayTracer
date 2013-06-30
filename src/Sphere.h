@@ -18,7 +18,7 @@ public:
    Boundaries bounds;
 
    Sphere(Vector center_, double radius_, Material* material_) : center(center_),
-    radius(radius_), material(material_)  {
+    radius(radius_), material(material_) {
       bounds.min = center - Vector(radius, radius, radius);
       bounds.max = center + Vector(radius, radius, radius);
    }

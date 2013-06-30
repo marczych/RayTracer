@@ -1,9 +1,7 @@
 #ifndef __SHINY_COLOR_H__
 #define __SHINY_COLOR_H__
 
-#include <iostream>
 #include "Material.h"
-#include "Color.h"
 
 class ShinyColor : public Material {
 public:

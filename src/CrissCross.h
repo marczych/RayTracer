@@ -1,10 +1,7 @@
 #ifndef __CRISS_CROSS_H__
 #define __CRISS_CROSS_H__
 
-#include <iostream>
 #include "Material.h"
-#include "Color.h"
-#include "PerlinNoise.h"
 
 class CrissCross : public Material {
 private:
