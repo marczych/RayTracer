@@ -10,7 +10,7 @@ Intersection Sphere::intersect(Ray ray) {
 
    double disc = b * b - 4 * a * c;
    if (disc < 0) {
-      return Intersection(false); // No intersection.
+      return Intersection(); // No intersection.
    }
 
    disc = sqrt(disc);
@@ -37,7 +37,7 @@ Intersection Sphere::intersect(Ray ray) {
    }
 
    if (distance < 0 || isnan(distance)) {
-      return Intersection(false); // No intersection.
+      return Intersection(); // No intersection.
    }
 
    Vector point = ray.origin + (ray.direction * distance);

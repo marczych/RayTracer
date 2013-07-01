@@ -16,7 +16,7 @@ Intersection Triangle::intersect(Ray ray) {
   a = e1.dot(h);
 
   if (a > -0.00001 && a < 0.00001)
-     return Intersection(false);
+     return Intersection();
 
   f = 1 / a;
   s = Vector(ray.origin.x - v0.x,
@@ -25,13 +25,13 @@ Intersection Triangle::intersect(Ray ray) {
   u = f * s.dot(h);
 
   if (u < 0.0 || u > 1.0)
-     return Intersection(false);
+     return Intersection();
 
   q = s.cross(e1);
   v = f * ray.direction.dot(q);
 
   if (v < 0.0 || u + v > 1.0)
-     return Intersection(false);
+     return Intersection();
 
   distance = f * e2.dot(q);
 
@@ -41,7 +41,7 @@ Intersection Triangle::intersect(Ray ray) {
      return Intersection(ray, point, distance, normal, ray.material, material, this);
   }
 
-  return Intersection(false);
+  return Intersection();
 }
 
 Boundaries Triangle::getBounds() {

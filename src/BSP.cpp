@@ -148,7 +148,7 @@ Intersection BSP::getClosestIntersection(const Ray& ray) {
    }
 
    // No children so just go through current objects like normal.
-   Intersection closestIntersection(false);
+   Intersection closestIntersection;
    closestIntersection.distance = numeric_limits<double>::max();
 
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {

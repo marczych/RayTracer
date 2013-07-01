@@ -1,6 +1,7 @@
 #ifndef __INTERSECTION_H__
 #define __INTERSECTION_H__
 
+#include <limits>
 #include "Vector.h"
 #include "Object.h"
 #include "Color.h"
@@ -24,9 +25,9 @@ public:
     normal(normal_), startMaterial(startMaterial_), endMaterial(endMaterial_),
     object(object_) {}
 
-   Intersection(bool didIntersect_) : ray(Ray()), didIntersect(didIntersect_),
-    intersection(Vector()), distance(0.0), normal(Vector()), startMaterial(NULL),
-    endMaterial(NULL), object(NULL) {}
+   Intersection() : ray(Ray()), didIntersect(false),
+    intersection(Vector()), distance(std::numeric_limits<double>::max()),
+     normal(Vector()), startMaterial(NULL), endMaterial(NULL), object(NULL) {}
 
    Color getColor() const;
 };
