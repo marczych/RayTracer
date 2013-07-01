@@ -27,8 +27,6 @@ private:
 
 public:
 
-   BSP(std::vector<Object*> objects_) : objects(objects_) { }
-
    BSP(int depth_, char axis_, std::vector<Object*> objects_) :
     depth(depth_), axis(axis_), objects(objects_) {
       axisRetries = 0;

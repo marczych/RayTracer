@@ -6,15 +6,6 @@
 using namespace std;
 
 void BSP::build(bool increment) {
-   // We've hit our limit. This is a leaf node.
-   if (objects.size() <= MIN_OBJECT_COUNT) {
-      return;
-   }
-   for (int i = 0; i < depth; i++) {
-     cout << "\t";
-   }
-   cout << objects.size() << endl;
-
    // Make sure all objects are properly wrapped
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
      Boundaries curr = (*itr)->getBounds();
@@ -24,6 +15,22 @@ void BSP::build(bool increment) {
      bounds.max = Vector(max(bounds.max.x, curr.max.x),
                          max(bounds.max.y, curr.max.y),
                          max(bounds.max.z, curr.max.z));
+   }
+
+   // For debugging.
+   if (true) {
+      for (int i = 0; i < depth; i++) {
+        cout << "\t";
+      }
+      cout << objects.size() << " | " <<
+         bounds.min.x << ", " << bounds.min.y << ", " << bounds.min.z << " || " <<
+         bounds.max.x << ", " << bounds.max.y << ", " << bounds.max.z <<
+         " % " << axis << " X " << axisRetries << endl;
+   }
+
+   // We've hit our limit. This is a leaf node.
+   if (objects.size() <= MIN_OBJECT_COUNT) {
+      return;
    }
 
    // Where to split the bounds
@@ -136,31 +143,25 @@ Intersection BSP::getClosestIntersection(const Ray& ray) {
    double distL, distR;
    bool intersectL = false, intersectR = false;
 
-   if (left && right) {
-      // There are children! See if they block the ray
+   // We have children so delegate to them appropriately.
+   if (left != NULL || right != NULL) {
+      Intersection l, r;
       intersectL = intersectAABB(ray, left->bounds, &distL);
       intersectR = intersectAABB(ray, right->bounds, &distR);
 
-      // If both hit, follow nearest match
-      if (intersectL && intersectR) {
-         if (distL < distR) {
-            return (*left).getClosestIntersection(ray);
-         }
-         return (*right).getClosestIntersection(ray);
-      }
-
       if (intersectL) {
-         return (*left).getClosestIntersection(ray);
+         l = left->getClosestIntersection(ray);
       }
 
       if (intersectR) {
-         return (*right).getClosestIntersection(ray);
+         r = right->getClosestIntersection(ray);
       }
+
+      return l.distance < r.distance ? l : r;
    }
 
    // No children so just go through current objects like normal.
    Intersection closestIntersection;
-   closestIntersection.distance = numeric_limits<double>::max();
 
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
       Intersection intersection = (*itr)->intersect(ray);
