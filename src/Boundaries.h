@@ -2,6 +2,7 @@
 #define __BOUNDARIES_H__
 
 #include "Vector.h"
+#include "Ray.h"
 
 class Boundaries {
 public:
@@ -12,6 +13,7 @@ public:
    Boundaries(const Boundaries& other) : min(other.min), max(other.max) {}
 
    double splitValue(char axis);
+   bool intersect(const Ray&, double* dist);
 };
 
 #endif

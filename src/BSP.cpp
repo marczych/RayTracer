@@ -28,7 +28,7 @@ void BSP::build(bool increment) {
          " % " << axis << " X " << axisRetries << endl;
    }
 
-   // We've hit our limit. This is a leaf node.
+   // We've hit our limit so this is a leaf node. No need to split again.
    if (objects.size() <= MIN_OBJECT_COUNT) {
       return;
    }
@@ -88,55 +88,6 @@ void BSP::build(bool increment) {
 
 char BSP::toggleAxis() {
    return axis == 'x' ? 'y' : (axis == 'y' ? 'z' : 'x');
-}
-
-/**
- * Given a ray and an axis aligned bounding box, determine whether the ray intersects.
- */
-bool BSP::intersectAABB(const Ray& ray, Boundaries bounds, double* dist) {
-   double txmin = (bounds.min.x - ray.origin.x) / ray.direction.x;
-   double txmax = (bounds.max.x - ray.origin.x) / ray.direction.x;
-   if (txmin > txmax)
-      swap(txmin, txmax);
-
-   double tymin = (bounds.min.y - ray.origin.y) / ray.direction.y;
-   double tymax = (bounds.max.y - ray.origin.y) / ray.direction.y;
-   if (tymin > tymax)
-      swap(tymin, tymax);
-
-   if ((txmin > tymax) || (tymin > txmax))
-      return false;
-
-   if (tymin > txmin)
-      txmin = tymin;
-
-   if (tymax < txmax)
-      txmax = tymax;
-
-   double tzmin = (bounds.min.z - ray.origin.z) / ray.direction.z;
-   double tzmax = (bounds.max.z - ray.origin.z) / ray.direction.z;
-   if (tzmin > tzmax)
-      swap(tzmin, tzmax);
-
-   if ((txmin > tzmax) || (tzmin > txmax))
-      return false;
-
-   if (tzmin > txmin)
-      txmin = tzmin;
-
-   if (tzmax < txmax)
-      txmax = tzmax;
-
-   if ((txmin > bounds.max.x) || (txmax < bounds.min.x))
-      return false;
-
-   // Return distance to intersection for tie-breakers
-   Vector distV = Vector(txmin, tymin, tzmin) - ray.origin;
-   double newDist = sqrt(distV.x * distV.x +
-                         distV.y * distV.y +
-                         distV.z * distV.z);
-   *dist = newDist;
-   return true;
 }
 
 Intersection BSP::getClosestIntersection(const Ray& ray) {

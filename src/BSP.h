@@ -21,7 +21,6 @@ private:
    BSP* left;
    BSP* right;
 
-   bool intersectAABB(const Ray&, Boundaries, double*);
    void build(bool increment);
    char toggleAxis();
 
@@ -43,6 +42,7 @@ public:
    }
 
    Intersection getClosestIntersection(const Ray&);
+   Intersection getClosestObjectIntersection(const Ray&);
 };
 
 #endif
