@@ -5,7 +5,7 @@
 
 Intersection Triangle::intersect(Ray ray) {
   Vector e1, e2, h, s, q, normal;
-  float a, f, u, v, distance;
+  double a, f, u, v, distance;
 
   e1 = Vector(v1.x - v0.x, v1.y - v0.y, v1.z - v0.z);
   e2 = Vector(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z);

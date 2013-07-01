@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void BSP::build(bool increment) {
+void BSP::build() {
    // Make sure all objects are properly wrapped
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
      Boundaries curr = (*itr)->getBounds();
@@ -76,13 +76,12 @@ void BSP::build(bool increment) {
       // split up geometry further.
       left = new BSP(depth + 1, newAxis, leftObjects);
       right = new BSP(depth + 1, newAxis, rightObjects);
-   } else if (axisRetries == 2) {
-      // Splitting objects on this axis didn't achieve anything.
-      left = right = NULL;
-   } else {
+   } else if (axisRetries < 2) {
       axis = toggleAxis();
       axisRetries++;
-      build(true);
+      build();
+   } else {
+      // Do nothing since we're out of axis retries.
    }
 }
 
@@ -91,26 +90,23 @@ char BSP::toggleAxis() {
 }
 
 Intersection BSP::getClosestIntersection(const Ray& ray) {
-   double distL, distR;
-   bool intersectL = false, intersectR = false;
-
-   // We have children so delegate to them appropriately.
-   if (left != NULL || right != NULL) {
-      Intersection l, r;
-      intersectL = intersectAABB(ray, left->bounds, &distL);
-      intersectR = intersectAABB(ray, right->bounds, &distR);
-
-      if (intersectL) {
-         l = left->getClosestIntersection(ray);
-      }
-
-      if (intersectR) {
-         r = right->getClosestIntersection(ray);
-      }
-
-      return l.distance < r.distance ? l : r;
+   double distance;
+   if (!bounds.intersect(ray, &distance)) {
+      return Intersection();
    }
 
+   if (left != NULL && right != NULL) {
+      Intersection leftIntersection = left->getClosestIntersection(ray);
+      Intersection rightIntersection = right->getClosestIntersection(ray);
+
+      return leftIntersection.distance < rightIntersection.distance ?
+       leftIntersection : rightIntersection;
+   } else {
+      return getClosestObjectIntersection(ray);
+   }
+}
+
+Intersection BSP::getClosestObjectIntersection(const Ray& ray) {
    // No children so just go through current objects like normal.
    Intersection closestIntersection;
 

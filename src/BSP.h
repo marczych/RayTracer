@@ -21,7 +21,7 @@ private:
    BSP* left;
    BSP* right;
 
-   void build(bool increment);
+   void build();
    char toggleAxis();
 
 public:
@@ -29,16 +29,8 @@ public:
    BSP(int depth_, char axis_, std::vector<Object*> objects_) :
     depth(depth_), axis(axis_), objects(objects_) {
       axisRetries = 0;
-      build(false);
-   }
-
-   virtual ~BSP() {
-      if (left) {
-         delete left;
-      }
-      if (right) {
-         delete right;
-      }
+      left = right = NULL;
+      build();
    }
 
    Intersection getClosestIntersection(const Ray&);
