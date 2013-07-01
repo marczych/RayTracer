@@ -14,6 +14,7 @@ class Intersection;
 class BSP {
 private:
    int depth;
+   int axisRetries;
    char axis;
    Boundaries bounds;
    std::vector<Object*> objects;
@@ -21,15 +22,17 @@ private:
    BSP* right;
 
    bool intersectAABB(const Ray&, Boundaries, double*);
-   void build();
+   void build(bool increment);
+   char toggleAxis();
 
 public:
 
    BSP(std::vector<Object*> objects_) : objects(objects_) { }
 
    BSP(int depth_, char axis_, std::vector<Object*> objects_) :
-      depth(depth_), axis(axis_), objects(objects_) {
-      build();
+    depth(depth_), axis(axis_), objects(objects_) {
+      axisRetries = 0;
+      build(false);
    }
 
    virtual ~BSP() {

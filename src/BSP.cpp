@@ -5,11 +5,15 @@
 
 using namespace std;
 
-void BSP::build() {
-   // We're hit our limit. This is a leaf node.
+void BSP::build(bool increment) {
+   // We've hit our limit. This is a leaf node.
    if (objects.size() <= MIN_OBJECT_COUNT) {
       return;
    }
+   for (int i = 0; i < depth; i++) {
+     cout << "\t";
+   }
+   cout << objects.size() << endl;
 
    // Make sure all objects are properly wrapped
    for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
@@ -57,7 +61,7 @@ void BSP::build() {
       }
    }
 
-   int newAxis = axis == 'x' ? 'y' : (axis == 'y' ? 'z' : 'x');
+   int newAxis = toggleAxis();
 
    if (leftObjects.size() != objects.size() &&
        rightObjects.size() != objects.size()) {
@@ -65,11 +69,18 @@ void BSP::build() {
       // split up geometry further.
       left = new BSP(depth + 1, newAxis, leftObjects);
       right = new BSP(depth + 1, newAxis, rightObjects);
-   } else {
+   } else if (axisRetries == 2) {
       // Splitting objects on this axis didn't achieve anything.
-      // TODO: Try another dimension.
       left = right = NULL;
+   } else {
+      axis = toggleAxis();
+      axisRetries++;
+      build(true);
    }
+}
+
+char BSP::toggleAxis() {
+   return axis == 'x' ? 'y' : (axis == 'y' ? 'z' : 'x');
 }
 
 /**
