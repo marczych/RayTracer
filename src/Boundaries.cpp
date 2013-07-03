@@ -1,8 +1,5 @@
 #include "Boundaries.h"
-#include <math.h>
 #include <algorithm>
-
-using namespace std;
 
 // Returns the center value for the given axis.
 double Boundaries::splitValue(char axis) {
@@ -16,49 +13,35 @@ double Boundaries::splitValue(char axis) {
 
 /**
  * Ray axis aligned bounding box intersection.
+ * Adapted from: http://gamedev.stackexchange.com/a/18459
  */
 bool Boundaries::intersect(const Ray& ray, double* dist) {
-   double txmin = (min.x - ray.origin.x) / ray.direction.x;
-   double txmax = (max.x - ray.origin.x) / ray.direction.x;
-   if (txmin > txmax)
-      swap(txmin, txmax);
+   // TODO: Put this into the ray so it's only calculated once per ray.
+   double fracx = 1.0f / ray.direction.x;
+   double fracy = 1.0f / ray.direction.y;
+   double fracz = 1.0f / ray.direction.z;
 
-   double tymin = (min.y - ray.origin.y) / ray.direction.y;
-   double tymax = (max.y - ray.origin.y) / ray.direction.y;
-   if (tymin > tymax)
-      swap(tymin, tymax);
+   // lb is the corner of AABB with minimal coordinates - left bottom, rt is maximal corner
+   // r.org is origin of ray
+   double t1 = (min.x - ray.origin.x) * fracx;
+   double t2 = (max.x - ray.origin.x) * fracx;
+   double t3 = (min.y - ray.origin.y) * fracy;
+   double t4 = (max.y - ray.origin.y) * fracy;
+   double t5 = (min.z - ray.origin.z) * fracz;
+   double t6 = (max.z - ray.origin.z) * fracz;
 
-   if ((txmin > tymax) || (tymin > txmax))
+   double tmin = std::max(std::max(std::min(t1, t2), std::min(t3, t4)), std::min(t5, t6));
+   double tmax = std::min(std::min(std::max(t1, t2), std::max(t3, t4)), std::max(t5, t6));
+
+   // If tmax < 0, ray is intersecting AABB, but whole AABB is behind us.
+   if (tmax < 0) {
       return false;
+   }
 
-   if (tymin > txmin)
-      txmin = tymin;
-
-   if (tymax < txmax)
-      txmax = tymax;
-
-   double tzmin = (min.z - ray.origin.z) / ray.direction.z;
-   double tzmax = (max.z - ray.origin.z) / ray.direction.z;
-   if (tzmin > tzmax)
-      swap(tzmin, tzmax);
-
-   if ((txmin > tzmax) || (tzmin > txmax))
+   // If tmin > tmax, ray doesn't intersect AABB.
+   if (tmin > tmax) {
       return false;
+   }
 
-   if (tzmin > txmin)
-      txmin = tzmin;
-
-   if (tzmax < txmax)
-      txmax = tzmax;
-
-   if ((txmin > max.x) || (txmax < min.x))
-      return false;
-
-   // Return distance to intersection for tie-breakers
-   Vector distV = Vector(txmin, tymin, tzmin) - ray.origin;
-   double newDist = sqrt(distV.x * distV.x +
-                         distV.y * distV.y +
-                         distV.z * distV.z);
-   *dist = newDist;
    return true;
 }
