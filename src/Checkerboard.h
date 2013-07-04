@@ -1,9 +1,7 @@
 #ifndef __CHECKERBOARD_H__
 #define __CHECKERBOARD_H__
 
-#include <iostream>
 #include "Material.h"
-#include "Color.h"
 
 class Checkerboard : public Material {
 private:

@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <fstream>
 #include "Vector.h"
 #include "Camera.h"
 
@@ -15,6 +16,7 @@ class Object;
 class Light;
 class Material;
 class NormalMap;
+class BSP;
 
 class RayTracer {
 public:
@@ -28,6 +30,7 @@ public:
    double dispersion;
    unsigned long long raysCast;
    Material* startingMaterial;
+   BSP* bsp;
 
    std::vector<Object*> objects;
    std::vector<Light*> lights;
@@ -47,6 +50,7 @@ public:
 
    void traceRays(std::string);
    void readScene(std::istream&);
+   void readModel(std::string, int size, Vector translate, Material* material);
 
 private:
    Color castRayForPixel(int, int);

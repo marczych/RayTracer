@@ -1,10 +1,7 @@
 #ifndef __MARBLE_H__
 #define __MARBLE_H__
 
-#include <iostream>
 #include "Material.h"
-#include "Color.h"
-#include "PerlinNoise.h"
 
 class Marble : public Material {
 private:

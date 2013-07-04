@@ -3,6 +3,7 @@
 #include "Image.h"
 #include "Object.h"
 #include "Sphere.h"
+#include "Triangle.h"
 #include "Intersection.h"
 #include "Light.h"
 #include "Air.h"
@@ -15,6 +16,7 @@
 #include "NormalMap.h"
 #include "Turbulence.h"
 #include "CrissCross.h"
+#include "BSP.h"
 
 using namespace std;
 
@@ -125,36 +127,15 @@ Color RayTracer::castRay(const Ray& ray) {
    }
 }
 
-/**
- * Basically same code as getClosestIntersection but short circuits if an
- * intersection closer to the given light distance is found.
- */
 bool RayTracer::isInShadow(const Ray& ray, double lightDistance) {
-   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
-      Intersection intersection = (*itr)->intersect(ray);
+   Intersection intersection = getClosestIntersection(ray);
 
-      if (intersection.didIntersect && intersection.distance < lightDistance) {
-         return true;
-      }
-   }
-
-   return false;
+   return intersection.didIntersect && intersection.distance < lightDistance;
 }
 
 Intersection RayTracer::getClosestIntersection(const Ray& ray) {
-   Intersection closestIntersection(false);
-   closestIntersection.distance = numeric_limits<double>::max();
-
-   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
-      Intersection intersection = (*itr)->intersect(ray);
-
-      if (intersection.didIntersect && intersection.distance <
-       closestIntersection.distance) {
-         closestIntersection = intersection;
-      }
-   }
-
-   return closestIntersection;
+   // Merely use the BSP for intersections.
+   return bsp->getClosestIntersection(ray);
 }
 
 Color RayTracer::performLighting(const Intersection& intersection) {
@@ -338,8 +319,30 @@ void RayTracer::readScene(istream& in) {
       if (type[0] == '#') {
          // Ignore comment lines.
          getline(in, type);
+      } else if (type.compare("model") == 0) {
+         string model;
+         int size;
+         Vector translate;
+         Material* material;
+
+         in >> model;
+         in >> size;
+         in >> translate.x >> translate.y >> translate.z;
+
+         material = readMaterial(in);
+         readModel(model, size, translate, material);
       } else if (type.compare("material") == 0) {
          addMaterial(in);
+      } else if (type.compare("triangle") == 0) {
+         Vector v0, v1, v2;
+         Material* material;
+
+         in >> v0.x >> v0.y >> v0.z;
+         in >> v1.x >> v1.y >> v1.z;
+         in >> v2.x >> v2.y >> v2.z;
+         material = readMaterial(in);
+
+         addObject(new Triangle(v0, v1, v2, material));
       } else if (type.compare("sphere") == 0) {
          Vector center;
          double radius;
@@ -385,6 +388,80 @@ void RayTracer::readScene(istream& in) {
 
       in >> type;
    }
+
+   // Construct the top level BSP that contains all the objects..
+   bsp = new BSP(0, 'x', objects);
+}
+
+void RayTracer::readModel(string model, int size, Vector translate, Material* material) {
+   string type;
+   vector<Vector> vertices;
+   Vector centerOffset;
+   double minX, maxX, minY, maxY, minZ, maxZ;
+   double offX = 0.0, offY = 0.0, offZ = 0.0, scale = 0.0;
+
+   cout << model;
+
+   ifstream in;
+   in.open(model.c_str(), ifstream::in);
+
+   if (in.fail()) {
+      cerr << "Failed opening model file" << endl;
+      exit(EXIT_FAILURE);
+   }
+
+   in >> type;
+   while (in.good()) {
+      if (type.compare("Vertex") == 0) {
+         int index;
+         Vector v;
+
+         in >> index;
+         in >> v.x >> v.y >> v.z;
+
+         minX = min(minX, v.x);
+         minY = min(minY, v.y);
+         minZ = min(minZ, v.z);
+
+         maxX = max(maxX, v.x);
+         maxY = max(maxY, v.y);
+         maxZ = max(maxZ, v.z);
+
+         vertices.push_back(v);
+      } else if (type.compare("Face") == 0) {
+         // We are guaranteed to have all Vertices before Faces so we set this
+         // once for the first Face.
+         if (scale == 0.0) {
+            offX = (maxX + minX) / 2;
+            offY = (maxY + minY) / 2;
+            offZ = (maxZ + minZ) / 2;
+            centerOffset = Vector(offX, offY, offZ);
+
+            double distance = sqrt((maxX - minX) * (maxX - minX) +
+                                   (maxY - minY) * (maxY - minY) +
+                                   (maxZ - minZ) * (maxZ - minZ));
+
+            if (distance == 0.0)
+               exit(EXIT_FAILURE);
+
+            scale = size / distance;
+         }
+
+         int face, v0, v1, v2;
+
+         in >> face >> v0 >> v1 >> v2;
+
+         Vector a = (vertices[v0 - 1] - centerOffset) * scale + translate;
+         Vector b = (vertices[v1 - 1] - centerOffset) * scale + translate;
+         Vector c = (vertices[v2 - 1] - centerOffset) * scale + translate;
+
+         addObject(new Triangle(a, b, c, material));
+      }
+
+      in >> type;
+   }
+
+   in.close();
 }
 
 /**

@@ -1,0 +1,17 @@
+dispersion 5.0
+maxReflections 20
+
+cameraPosition 0 50 500.0
+cameraUp 0 1 0
+cameraLookAt 0 50 0
+cameraScreenWidth 1920
+
+light 0 100 200 .5
+
+sphere -200 -25  0  100  ShinyColor 1 0 0  100  0.75 null
+sphere  200 -25  0  100  ShinyColor 0 1 0  100  0.75 null
+sphere  0   325  0  100  ShinyColor 0 0 1  100  0.75 null
+model ../models/gameguy1k.m
+        400
+        0 0 0
+        Marble 0.4 0.3 0.2  0.6 0.7 0.8  0.5  500 0.35  NormalMap 0.5 0.25
