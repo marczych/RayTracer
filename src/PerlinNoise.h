@@ -1,9 +1,9 @@
+#ifndef __PERLIN_NOISE_H__
+#define __PERLIN_NOISE_H__
+
 /**
  * Taken from: http://www.codermind.com/articles/Raytracer-in-C++-Part-III-Textures.html
  */
-
-#ifndef __PERLIN_NOISE_H__
-#define __PERLIN_NOISE_H__
 
 class PerlinNoise {
 private:

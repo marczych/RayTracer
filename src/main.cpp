@@ -39,9 +39,8 @@ int main(int argc, char** argv) {
       inFileStream.close();
    }
 
-
-
    string outFile;
+
    if (argc > 4) {
       outFile = argv[4];
    } else {

@@ -1,0 +1,15 @@
+dispersion 5.0
+maxReflections 20
+
+cameraPosition 0.0 0.0 700.0
+cameraUp 0.0 1.0 0.0
+cameraLookAt 0.0 0.0 0.0
+cameraScreenWidth 1920
+
+light 0 100 350 0.9
+
+triangle 0 0 0 0 100 0 200 200 0 Checkerboard 0.3 0.2 0.1  1 1 1  50  50 0.7 null
+
+sphere -105 -75 500  100  ShinyColor 0.619 0.745 0.650  100  0.5 null
+sphere 105 -75 500  100  ShinyColor 0.200 0.364 0.415  5  0.8 null
+sphere 0 150 500  100  ShinyColor 0.839 0.309 0.164  100  0.5 null

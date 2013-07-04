@@ -1,12 +1,12 @@
 CC = g++
 CFLAGS = -O3 -Wall -fopenmp
 
-ALL_OBJECT_FILES = main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Intersection.o Object.o Color.o Light.o Camera.o Material.o Glass.o Air.o FlatColor.o ShinyColor.o Wood.o Turbulence.o Marble.o CrissCross.o Checkerboard.o PerlinNoise.o NormalMap.o
+ALL_OBJECT_FILES = main.o RayTracer.o Image.o Ray.o Vector.o Sphere.o Triangle.o Intersection.o Object.o Color.o Light.o Camera.o Material.o Glass.o Air.o FlatColor.o ShinyColor.o Wood.o Turbulence.o Marble.o CrissCross.o Checkerboard.o PerlinNoise.o NormalMap.o Boundaries.o BSP.o
 
 RayTracer: $(ALL_OBJECT_FILES)
 	$(CC) $(CFLAGS) $(ALL_OBJECT_FILES) -o RayTracer
 
-RayTracer.o: RayTracer.cpp RayTracer.h Vector.h Image.h Object.h Sphere.h Intersection.h Light.h
+RayTracer.o: RayTracer.cpp RayTracer.h Vector.h Image.h Object.h Sphere.h Triangle.h Intersection.h Light.h
 	$(CC) $(CFLAGS) RayTracer.cpp -c -o RayTracer.o
 
 main.o: main.cpp RayTracer.h
@@ -23,6 +23,9 @@ Vector.o: Vector.cpp Vector.h
 
 Sphere.o: Sphere.cpp Sphere.h Ray.h Vector.h Object.h Intersection.h
 	$(CC) $(CFLAGS) Sphere.cpp -c -o Sphere.o
+
+Triangle.o: Triangle.cpp Triangle.h Ray.h Vector.h Object.h Intersection.h
+	$(CC) $(CFLAGS) Triangle.cpp -c -o Triangle.o
 
 Intersection.o: Intersection.cpp Intersection.h Vector.h
 	$(CC) $(CFLAGS) Intersection.cpp -c -o Intersection.o
@@ -74,6 +77,12 @@ NormalMap.o: NormalMap.cpp NormalMap.h Vector.h PerlinNoise.h
 
 PerlinNoise.o: PerlinNoise.h PerlinNoise.cpp
 	$(CC) $(CFLAGS) PerlinNoise.cpp -c -o PerlinNoise.o
+
+Boundaries.o: Boundaries.h Boundaries.cpp
+	$(CC) $(CFLAGS) Boundaries.cpp -c -o Boundaries.o
+
+BSP.o: BSP.h BSP.cpp
+	$(CC) $(CFLAGS) BSP.cpp -c -o BSP.o
 
 clean:
 	rm -rf *.o

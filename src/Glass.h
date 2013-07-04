@@ -1,9 +1,7 @@
 #ifndef __GLASS_H__
 #define __GLASS_H__
 
-#include <iostream>
 #include "Material.h"
-#include "Color.h"
 
 class Glass : public Material {
 private:

@@ -1,10 +1,7 @@
 #ifndef __TURBULENCE_H__
 #define __TURBULENCE_H__
 
-#include <iostream>
 #include "Material.h"
-#include "Color.h"
-#include "PerlinNoise.h"
 
 class Turbulence : public Material {
 private:

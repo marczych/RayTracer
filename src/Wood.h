@@ -1,10 +1,7 @@
 #ifndef __WOOD_H__
 #define __WOOD_H__
 
-#include <iostream>
 #include "Material.h"
-#include "Color.h"
-#include "PerlinNoise.h"
 
 class Wood : public Material {
 private:
