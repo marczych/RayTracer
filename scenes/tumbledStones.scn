@@ -5,12 +5,14 @@ cameraScreenWidth 1500
 
 light  100 1500 100 0.6
 
-sphere  1001000        0        0  1000000  FlatColor   1.0000 0.8901 0.8705  null
-sphere -1001000        0        0  1000000  FlatColor   0.6941 0.4980 0.4627  null
-sphere        0        0  1001000  1000000  FlatColor   0.9921 0.7960 0.7647  null
-sphere        0        0 -1001000  1000000  FlatColor   0.3921 0.6941 0.5647  null
-sphere        0 -1000000        0  1000000  FlatColor   0.7647 0.9921 0.8941  null
-sphere        0  1003000        0  1000000  FlatColor   0.7647 0.9921 0.8941  null
+triangle 1000 10000 10000  1000 -10000 0  1000 0 -10000  FlatColor   1.0000 0.8901 0.8705  null
+triangle -1000 10000 10000  -1000 0 -10000   -1000 -10000 0  FlatColor   0.6941 0.4980 0.4627  null
+
+triangle 10000 10000 1000   -10000 0 1000  0 -100000 1000  FlatColor   0.9921 0.7960 0.7647  null
+triangle 10000 10000 -1000  0 -100000 -1000  -10000 0 -1000  FlatColor   0.9921 0.7960 0.7647  null
+
+triangle 10000 0 10000  0 0 -10000  -10000 0 10000  FlatColor   0.7647 0.9921 0.8941  null
+triangle 10000 3000 10000  -10000 3000 10000  0 3000 -10000  FlatColor   0.7647 0.9921 0.8941  null
 
 sphere 0 2000 0  250  Glass 1.5 50  NormalMap 5 0.025
 sphere -500 20 -350  20  CrissCross 0.961 0.948 0.236 0.332 0.195 0.888 0.38 0.136 0.739 1 72 0.29 null
