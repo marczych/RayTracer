@@ -19,8 +19,6 @@
 #include "objects/Sphere.h"
 #include "objects/Triangle.h"
 
-using namespace std;
-
 RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamples_,
  int depthComplexity_) : width(width_), height(height_),
  maxReflections(maxReflections_), superSamples(superSamples_), camera(Camera()),
@@ -28,18 +26,18 @@ RayTracer::RayTracer(int width_, int height_, int maxReflections_, int superSamp
  startingMaterial(new Air()) {}
 
 RayTracer::~RayTracer() {
-   for (vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
+   for (std::vector<Object*>::iterator itr = objects.begin(); itr < objects.end(); itr++) {
       delete *itr;
    }
 
-   for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
+   for (std::vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
       delete *itr;
    }
 
    delete startingMaterial;
 }
 
-void RayTracer::traceRays(string fileName) {
+void RayTracer::traceRays(std::string fileName) {
    int columnsCompleted = 0;
    camera.calculateWUV();
    Image image(width, height);
@@ -56,7 +54,7 @@ void RayTracer::traceRays(string fileName) {
       // Update percent complete.
       columnsCompleted++;
       float percentage = columnsCompleted/(float)width * 100;
-      cout << '\r' << (int)percentage << '%';
+      std::cout << '\r' << (int)percentage << '%';
       fflush(stdout);
 
       for (int y = 0; y < height; y++) {
@@ -64,8 +62,8 @@ void RayTracer::traceRays(string fileName) {
       }
    }
 
-   cout << "\rDone!" << endl;
-   cout << "Rays cast: " << raysCast << endl;
+   std::cout << "\rDone!" << std::endl;
+   std::cout << "Rays cast: " << raysCast << std::endl;
 
    image.WriteTga(fileName.c_str(), false);
 }
@@ -157,7 +155,7 @@ Color RayTracer::getDiffuseAndSpecularLighting(const Intersection& intersection,
    Color diffuseColor(0.0, 0.0, 0.0);
    Color specularColor(0.0, 0.0, 0.0);
 
-   for (vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
+   for (std::vector<Light*>::iterator itr = lights.begin(); itr < lights.end(); itr++) {
       Light* light = *itr;
       Vector lightOffset = light->position - intersection.intersection;
       double lightDistance = lightOffset.length();
@@ -299,7 +297,7 @@ Vector RayTracer::refractVector(const Vector& normal, const Vector& incident,
    double sinT2 = n * n * (1.0 - cosI * cosI);
 
    if (sinT2 > 1.0) {
-      cerr << "Bad refraction vector!" << endl;
+      std::cerr << "Bad refraction vector!" << std::endl;
       exit(EXIT_FAILURE);
    }
 
@@ -311,8 +309,8 @@ Vector RayTracer::reflectVector(Vector vector, Vector normal) {
    return normal * 2 * vector.dot(normal) - vector;
 }
 
-void RayTracer::readScene(istream& in) {
-   string type;
+void RayTracer::readScene(std::istream& in) {
+   std::string type;
 
    in >> type;
 
@@ -321,7 +319,7 @@ void RayTracer::readScene(istream& in) {
          // Ignore comment lines.
          getline(in, type);
       } else if (type.compare("model") == 0) {
-         string model;
+         std::string model;
          int size;
          Vector translate;
          Material* material;
@@ -383,7 +381,7 @@ void RayTracer::readScene(istream& in) {
       } else if (type.compare("cameraScreenWidth") == 0) {
          in >> camera.screenWidth;
       } else {
-         cerr << "Type not found: " << type << endl;
+         std::cerr << "Type not found: " << type << std::endl;
          exit(EXIT_FAILURE);
       }
 
@@ -394,20 +392,20 @@ void RayTracer::readScene(istream& in) {
    bsp = new BSP(0, 'x', objects);
 }
 
-void RayTracer::readModel(string model, int size, Vector translate, Material* material) {
-   string type;
-   vector<Vector> vertices;
+void RayTracer::readModel(std::string model, int size, Vector translate, Material* material) {
+   std::string type;
+   std::vector<Vector> vertices;
    Vector centerOffset;
    double minX, maxX, minY, maxY, minZ, maxZ;
    double offX = 0.0, offY = 0.0, offZ = 0.0, scale = 0.0;
 
-   cout << model;
+   std::cout << model;
 
-   ifstream in;
-   in.open(model.c_str(), ifstream::in);
+   std::ifstream in;
+   in.open(model.c_str(), std::ifstream::in);
 
    if (in.fail()) {
-      cerr << "Failed opening model file" << endl;
+      std::cerr << "Failed opening model file" << std::endl;
       exit(EXIT_FAILURE);
    }
 
@@ -420,13 +418,13 @@ void RayTracer::readModel(string model, int size, Vector translate, Material* ma
          in >> index;
          in >> v.x >> v.y >> v.z;
 
-         minX = min(minX, v.x);
-         minY = min(minY, v.y);
-         minZ = min(minZ, v.z);
+         minX = std::min(minX, v.x);
+         minY = std::min(minY, v.y);
+         minZ = std::min(minZ, v.z);
 
-         maxX = max(maxX, v.x);
-         maxY = max(maxY, v.y);
-         maxZ = max(maxZ, v.z);
+         maxX = std::max(maxX, v.x);
+         maxY = std::max(maxY, v.y);
+         maxZ = std::max(maxZ, v.z);
 
          vertices.push_back(v);
       } else if (type.compare("Face") == 0) {
@@ -468,9 +466,9 @@ void RayTracer::readModel(string model, int size, Vector translate, Material* ma
 /**
  * Parses the input stream and makes a new Material.
  */
-Material* RayTracer::readMaterial(istream& in) {
+Material* RayTracer::readMaterial(std::istream& in) {
    Material* material;
-   string type;
+   std::string type;
    in >> type;
 
    if (type.compare("FlatColor") == 0) {
@@ -496,7 +494,7 @@ Material* RayTracer::readMaterial(istream& in) {
       // scene parsing problems below.
       return material;
    } else {
-      cerr << "Material not found: " << type << endl;
+      std::cerr << "Material not found: " << type << std::endl;
       exit(EXIT_FAILURE);
    }
 
@@ -505,8 +503,8 @@ Material* RayTracer::readMaterial(istream& in) {
    return material;
 }
 
-NormalMap* RayTracer::readNormalMap(istream& in) {
-   string type;
+NormalMap* RayTracer::readNormalMap(std::istream& in) {
+   std::string type;
    in >> type;
 
    if (type.compare("null") == 0) {
@@ -514,28 +512,28 @@ NormalMap* RayTracer::readNormalMap(istream& in) {
    } else if (type.compare("NormalMap") == 0) {
       return new NormalMap(in);
    } else {
-      cerr << "NormalMap not found: " << type << endl;
+      std::cerr << "NormalMap not found: " << type << std::endl;
       exit(EXIT_FAILURE);
    }
 }
 
-void RayTracer::addMaterial(istream& in) {
-   string materialName;
+void RayTracer::addMaterial(std::istream& in) {
+   std::string materialName;
 
    in >> materialName;
 
-   for (string::iterator itr = materialName.begin(); itr < materialName.end(); itr++) {
+   for (std::string::iterator itr = materialName.begin(); itr < materialName.end(); itr++) {
       if (isupper(*itr)) {
-         cerr << "Invalid material name: " << materialName << endl;
+         std::cerr << "Invalid material name: " << materialName << std::endl;
          exit(EXIT_FAILURE);
       }
    }
 
    if (materials.count(materialName) > 0) {
-      cerr << "Duplicate material name: " << materialName << endl;
+      std::cerr << "Duplicate material name: " << materialName << std::endl;
       exit(EXIT_FAILURE);
    }
 
    Material* material = readMaterial(in);
-   materials.insert(pair<string, Material*>(materialName, material));
+   materials.insert(std::pair<std::string, Material*>(materialName, material));
 }
