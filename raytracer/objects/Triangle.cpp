@@ -1,7 +1,8 @@
 #include <algorithm>
 #include <math.h>
+
 #include "Triangle.h"
-#include "Material.h"
+#include "raytracer/materials/Material.h"
 
 Intersection Triangle::intersect(Ray ray) {
   Vector e1, e2, h, s, q, normal;

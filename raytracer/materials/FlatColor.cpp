@@ -1,7 +1,7 @@
 #include "FlatColor.h"
 
-#include "Vector.h"
-#include "Color.h"
+#include "raytracer/Vector.h"
+#include "raytracer/Color.h"
 
 FlatColor::FlatColor(std::istream& in) {
    in >> color.r >> color.g >> color.b;

@@ -2,6 +2,7 @@
 #define __SHINY_COLOR_H__
 
 #include "Material.h"
+#include "raytracer/Color.h"
 
 class ShinyColor : public Material {
 public:

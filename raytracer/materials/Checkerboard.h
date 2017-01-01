@@ -1,12 +1,11 @@
-#ifndef __TURBULENCE_H__
-#define __TURBULENCE_H__
+#ifndef __CHECKERBOARD_H__
+#define __CHECKERBOARD_H__
 
 #include "Material.h"
+#include "raytracer/Color.h"
 
-class Turbulence : public Material {
+class Checkerboard : public Material {
 private:
-   PerlinNoise perlin;
-
    Color color1;
    Color color2;
    double scale;
@@ -14,7 +13,7 @@ private:
    double reflectivity;
 
 public:
-   Turbulence(std::istream&);
+   Checkerboard(std::istream&);
 
    virtual Color getColor(Vector);
    virtual double getShininess();

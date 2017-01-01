@@ -8,8 +8,6 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include "Color.h"
-#include "PerlinNoise.h"
 
 class Vector;
 class Color;
@@ -20,6 +18,8 @@ private:
    NormalMap* normalMap;
 
 public:
+   virtual ~Material() = 0;
+
    void setNormalMap(NormalMap* normalMap_) { normalMap = normalMap_; }
 
    virtual Color getColor(Vector) = 0;

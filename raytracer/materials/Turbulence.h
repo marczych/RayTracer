@@ -1,9 +1,11 @@
-#ifndef __MARBLE_H__
-#define __MARBLE_H__
+#ifndef __TURBULENCE_H__
+#define __TURBULENCE_H__
 
 #include "Material.h"
+#include "PerlinNoise.h"
+#include "raytracer/Color.h"
 
-class Marble : public Material {
+class Turbulence : public Material {
 private:
    PerlinNoise perlin;
 
@@ -14,7 +16,7 @@ private:
    double reflectivity;
 
 public:
-   Marble(std::istream&);
+   Turbulence(std::istream&);
 
    virtual Color getColor(Vector);
    virtual double getShininess();

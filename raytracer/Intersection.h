@@ -2,11 +2,11 @@
 #define __INTERSECTION_H__
 
 #include <limits>
-#include "Vector.h"
-#include "Object.h"
 #include "Color.h"
 #include "Ray.h"
-#include "Material.h"
+#include "Vector.h"
+#include "materials/Material.h"
+#include "objects/Object.h"
 
 class Intersection {
 public:

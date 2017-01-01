@@ -1,6 +1,6 @@
 #include "Checkerboard.h"
 
-#include "Vector.h"
+#include "raytracer/Vector.h"
 
 // Offset points to move the origin which makes an ugly seam.
 #define POINT_OFFSET 3893343

@@ -2,6 +2,7 @@
 #define __FLAT_COLOR_H__
 
 #include "Material.h"
+#include "raytracer/Color.h"
 
 class FlatColor : public Material {
 private:

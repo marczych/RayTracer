@@ -10,6 +10,7 @@ class Ray;
  */
 class Object {
 public:
+   virtual ~Object() = 0;
    virtual Intersection intersect(Ray) = 0;
    virtual Boundaries getBounds() = 0;
 };

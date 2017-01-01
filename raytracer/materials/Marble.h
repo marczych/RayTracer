@@ -1,9 +1,11 @@
-#ifndef __WOOD_H__
-#define __WOOD_H__
+#ifndef __MARBLE_H__
+#define __MARBLE_H__
 
 #include "Material.h"
+#include "PerlinNoise.h"
+#include "raytracer/Color.h"
 
-class Wood : public Material {
+class Marble : public Material {
 private:
    PerlinNoise perlin;
 
@@ -14,7 +16,7 @@ private:
    double reflectivity;
 
 public:
-   Wood(std::istream&);
+   Marble(std::istream&);
 
    virtual Color getColor(Vector);
    virtual double getShininess();

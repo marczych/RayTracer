@@ -1,7 +1,8 @@
-#include "BSP.h"
 #include <limits>
-#include "Object.h"
+
+#include "BSP.h"
 #include "Intersection.h"
+#include "objects/Object.h"
 
 using namespace std;
 

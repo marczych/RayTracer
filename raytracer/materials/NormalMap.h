@@ -2,8 +2,9 @@
 #define __NORMAL_MAP_H__
 
 #include <iostream>
-#include "Vector.h"
+
 #include "PerlinNoise.h"
+#include "raytracer/Vector.h"
 
 class NormalMap {
 private:

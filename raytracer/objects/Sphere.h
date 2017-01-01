@@ -2,11 +2,11 @@
 #define __SPHERE_H__
 
 #include <math.h>
-#include "Vector.h"
-#include "Ray.h"
-#include "Intersection.h"
 #include "Object.h"
-#include "Boundaries.h"
+#include "raytracer/Boundaries.h"
+#include "raytracer/Intersection.h"
+#include "raytracer/Ray.h"
+#include "raytracer/Vector.h"
 
 class Material;
 

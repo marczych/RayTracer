@@ -1,7 +1,7 @@
 #include "Wood.h"
 
-#include "Vector.h"
-#include "Color.h"
+#include "raytracer/Vector.h"
+#include "raytracer/Color.h"
 
 Wood::Wood(std::istream& in) {
    in >> color1.r >> color1.g >> color1.b;

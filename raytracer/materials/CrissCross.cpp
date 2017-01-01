@@ -1,7 +1,8 @@
-#include "CrissCross.h"
+#include <cmath>
 
-#include "Vector.h"
-#include "Color.h"
+#include "CrissCross.h"
+#include "raytracer/Vector.h"
+#include "raytracer/Color.h"
 
 CrissCross::CrissCross(std::istream& in) {
    in >> color1.r >> color1.g >> color1.b;

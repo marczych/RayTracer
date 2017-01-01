@@ -1,7 +1,7 @@
 #include "Air.h"
 
-#include "Vector.h"
-#include "Color.h"
+#include "raytracer/Vector.h"
+#include "raytracer/Color.h"
 
 Color Air::getColor(Vector point) {
    return Color(0.0, 0.0, 0.0);

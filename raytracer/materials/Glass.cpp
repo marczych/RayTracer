@@ -1,7 +1,7 @@
 #include "Glass.h"
 
-#include "Vector.h"
-#include "Color.h"
+#include "raytracer/Vector.h"
+#include "raytracer/Color.h"
 
 Glass::Glass(std::istream& in) {
    in >> refractiveIndex;

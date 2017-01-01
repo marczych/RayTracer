@@ -1,6 +1,7 @@
-#include "Sphere.h"
-#include "Material.h"
 #include <math.h>
+
+#include "Sphere.h"
+#include "raytracer/materials/Material.h"
 
 Intersection Sphere::intersect(Ray ray) {
    Vector deltap = ray.origin - center;

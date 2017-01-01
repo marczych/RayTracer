@@ -1,9 +1,10 @@
-#include "Marble.h"
+#include <cmath>
 
-#include "Vector.h"
-#include "Color.h"
+#include "Turbulence.h"
+#include "raytracer/Color.h"
+#include "raytracer/Vector.h"
 
-Marble::Marble(std::istream& in) {
+Turbulence::Turbulence(std::istream& in) {
    in >> color1.r >> color1.g >> color1.b;
    in >> color2.r >> color2.g >> color2.b;
    in >> scale;
@@ -11,28 +12,27 @@ Marble::Marble(std::istream& in) {
    in >> reflectivity;
 }
 
-Color Marble::getColor(Vector point) {
+Color Turbulence::getColor(Vector point) {
    double x = point.x * scale;
    double y = point.y * scale;
    double z = point.z * scale;
    double noiseCoef = 0;
 
    for (int level = 1; level < 10; level ++) {
-      noiseCoef +=  (1.0f / level) * fabsf(perlin.noise(
+      noiseCoef += (1.0f / level) * fabsf(perlin.noise(
          level * 0.05 * x,
-         level * 0.15 * y,
+         level * 0.05 * y,
          level * 0.05 * z
       ));
    }
-   noiseCoef = 0.5f * sinf((x + y) * 0.05f + noiseCoef) + 0.5f;
 
    return color1 * noiseCoef + color2 * (1.0f - noiseCoef);
 }
 
-double Marble::getShininess() {
+double Turbulence::getShininess() {
    return shininess;
 }
 
-double Marble::getReflectivity() {
+double Turbulence::getReflectivity() {
    return reflectivity;
 }
