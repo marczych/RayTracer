@@ -1,7 +1,8 @@
-#include "Marble.h"
+#include <cmath>
 
-#include "raytracer/Vector.h"
+#include "Marble.h"
 #include "raytracer/Color.h"
+#include "raytracer/Vector.h"
 
 Marble::Marble(std::istream& in) {
    in >> color1.r >> color1.g >> color1.b;
@@ -18,7 +19,7 @@ Color Marble::getColor(Vector point) {
    double noiseCoef = 0;
 
    for (int level = 1; level < 10; level ++) {
-      noiseCoef +=  (1.0f / level) * fabsf(perlin.noise(
+      noiseCoef +=  (1.0f / level) * std::abs(perlin.noise(
          level * 0.05 * x,
          level * 0.15 * y,
          level * 0.05 * z

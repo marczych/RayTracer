@@ -22,19 +22,19 @@ Color CrissCross::getColor(Vector point) {
    double noiseCoefC = 0;
 
    for (int level = 1; level < 10; level++) {
-      noiseCoefA += (1.0f / level) * fabsf(perlin.noise(
+      noiseCoefA += (1.0f / level) * std::abs(perlin.noise(
          level * 0.35 * x,
          level * 0.05 * y,
          level * z
       ));
 
-      noiseCoefB += (1.0f / level) * fabsf(perlin.noise(
+      noiseCoefB += (1.0f / level) * std::abs(perlin.noise(
          level * x,
          level * 0.35 * y,
          level * 0.05 * z
       ));
 
-      noiseCoefC += (1.0f / level) * fabsf(perlin.noise(
+      noiseCoefC += (1.0f / level) * std::abs(perlin.noise(
          level * 0.05 * x,
          level * y,
          level * 0.35 * z

@@ -19,7 +19,7 @@ Color Turbulence::getColor(Vector point) {
    double noiseCoef = 0;
 
    for (int level = 1; level < 10; level ++) {
-      noiseCoef += (1.0f / level) * fabsf(perlin.noise(
+      noiseCoef += (1.0f / level) * std::abs(perlin.noise(
          level * 0.05 * x,
          level * 0.05 * y,
          level * 0.05 * z

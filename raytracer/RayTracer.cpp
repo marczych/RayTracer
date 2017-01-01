@@ -227,7 +227,7 @@ Color RayTracer::getReflectiveRefractiveLighting(const Intersection& intersectio
     * Don't perform lighting if the object is not reflective or refractive or we have
     * hit our recursion limit.
     */
-   if (reflectivity == NOT_REFLECTIVE && endRefractiveIndex == NOT_REFRACTIVE ||
+   if ((reflectivity == NOT_REFLECTIVE && endRefractiveIndex == NOT_REFRACTIVE) ||
     reflectionsRemaining <= 0) {
       return Color();
    }
