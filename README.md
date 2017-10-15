@@ -1,4 +1,4 @@
-#Ray Tracer!
+# Ray Tracer!
 
 This is a simple ray tracer developed as a final project for CSC 471 Introduction to Graphics at Cal Poly and later extended in CSC 570.
 It currently supports phong lighting, shadows, reflections, refractions, procedural textures, super sampling, and depth of field.
