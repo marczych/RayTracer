@@ -1,5 +1,6 @@
-RayTracer
 *.tga
 *.gch
 *.out
 *.o
+
+/bazel-*

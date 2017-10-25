@@ -1,0 +1,4 @@
+# In lieu of a proper CROSSTOOL, specify some default cflags.
+build --copt -O3
+build --copt -Wall
+build --copt -Werror
